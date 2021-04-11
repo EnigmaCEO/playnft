@@ -2371,6 +2371,7 @@ button[type="submit"]:hover {
 
 .list-group{
   max-height: 300px;
+  min-height: 200px;
   margin-bottom: 10px;
   overflow-y:auto;
   -webkit-overflow-scrolling: touch;
@@ -2378,4 +2379,21 @@ button[type="submit"]:hover {
 
 .game-icon img {
   width: 128px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #012970;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+div.spacer
+{
+    font-size: 0; 
+    height: 80px;
+    line-height: 0;
 }

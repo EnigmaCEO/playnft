@@ -1209,12 +1209,12 @@
             </div>
           </form>
         </div>
-
-        <div class="row gy-4">
+        <div class="row spacer">&nbsp;</div>
+        <div class="row">
           <div class="col-md-6">
             <div class="panel panel-primary" id="gamers-nft-panel">
               <div class="panel-heading">
-                <header class="section-header"><h2> </h2></header>
+                <h4>Select a Token</h4>
               </div>
               <div class="panel-body">
                   <ul class="list-group" id='gamers-nfts'>
@@ -1229,7 +1229,7 @@
           <div class="col-md-6">
             <div class="panel panel-primary" id="gamers-games-panel">
               <div class="panel-heading">
-                <header class="section-header"><h2> </h2></header>
+                <h4>Select a Game</h4>
               </div>
               <div class="panel-body">
                   <ul class="list-group" id='gamers-games'>
@@ -1371,7 +1371,7 @@
   <script src="assets/js/main.js"></script>
 
   <script id="token-template" type="text/x-jquery-tmpl">
-    <li class="list-group-item">
+    <li class="list-group-item list-group-item-action gamers-nft-item">
       Token ID: ${tokenId}
     </li>
   </script>
@@ -1434,9 +1434,19 @@
                 }
               });
           }
+        });
       });
-       
-      });
+
+    });
+
+  $(document).on("click","li", function () {
+
+    if($(this).hasClass('gamers-nft-item')) {
+
+      $('.gamers-nft-item').removeClass('active')
+      $(this).addClass('active')
+    }
+
   });
   </script>
 </body>
