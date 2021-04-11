@@ -35,6 +35,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
 </head>
 
 <body>
@@ -1186,7 +1187,7 @@
 
         <header class="section-header">
           <h2>NFT Gamers</h2>
-          <p>Enter your ETH address to load your NFTs</p>
+          <p>Enter your Wallet address to load your NFTs</p>
         </header>
 
         <div class="col-lg-12">
@@ -1194,7 +1195,7 @@
             <div class="row gy-4">
 
               <div class="col-md-6">
-                <input type="text" name="ethAddress" class="form-control" placeholder="ETH Address" required>
+                <input type="text" name="wallet-address" class="form-control" placeholder="Wallet Address" required>
               </div>
               <div class="col-md-6 ">
                 <select name='wallet-platform' class="form-control" required>
@@ -1207,6 +1208,71 @@
               </div>
             </div>
           </form>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-md-6">
+            <div class="panel panel-primary" id="gamers-nft-panel">
+              <div class="panel-heading">
+                <header class="section-header"><h2> </h2></header>
+              </div>
+              <div class="panel-body">
+                  <ul class="list-group" id='gamers-nfts'>
+                    <li class="list-group-item">
+                      Awaiting results...
+                    </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-md-6">
+            <div class="panel panel-primary" id="gamers-games-panel">
+              <div class="panel-heading">
+                <header class="section-header"><h2> </h2></header>
+              </div>
+              <div class="panel-body">
+                  <ul class="list-group" id='gamers-games'>
+                    <li class="list-group-item d-flex active">
+                      <div class="flex-shrink-0 game-icon"><img src="assets/img/clients/enigma-minmins.png" alt="Min-Mins"></div>
+                      <div class="flex-grow-1 ms-3">
+                        <strong>Min-Mins</strong>
+                        <p>Status: Live</p>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                      <div class="flex-shrink-0 game-icon"><img src="assets/img/clients/enigma-shalwend.png" alt="Shield of Shalwend"></div>
+                      <div class="flex-grow-1 ms-3">
+                        <strong>Shield of Shalwend</strong>
+                        <p>Status: Live</p>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                      <div class="flex-shrink-0 game-icon"><img src="assets/img/clients/enigma-wgo2.png" class="img-fluid" alt="Wargods Online 2"></div>
+                      <div class="flex-grow-1 ms-3">
+                        <strong>Wargods Online 2</strong>
+                        <p>Status: Development</p>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                      <div class="flex-shrink-0 game-icon"><img src="assets/img/clients/enigma-theta.png" class="img-fluid" alt="Theta Warriors Defense"></div>
+                      <div class="flex-grow-1 ms-3">
+                        <strong>Theta Warriors Defense</strong>
+                        <p>Status: Development</p>
+                      </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                      <div class="flex-shrink-0 game-icon"><img src="assets/img/clients/enigma-k9.png" class="img-fluid" alt="K9 Empire"></div>
+                      <div class="flex-grow-1 ms-3">
+                        <strong>K9 Empire</strong>
+                        <p>Status: Development</p>
+                      </div>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section><!-- End Clients Section -->
@@ -1272,10 +1338,10 @@
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>Donations</h4>
             <p>
-              <strong>Ethereum:</strong> 0x9A5e4aD75D29830D8bca2Ed7A5dA33Cab63DC415<br>
+              <strong>Ethereum:</strong><br/>0x9A5e4aD75D29830D8bca2Ed7A5dA33Cab63DC415<br>
             </p>
             <p>
-              <strong>Bitcoin:</strong> 1CLWMx5WE5UtxUav3USyLNdN2gh84ScBcC<br>
+              <strong>Bitcoin:</strong><br/>1CLWMx5WE5UtxUav3USyLNdN2gh84ScBcC<br>
             </p>
           </div>
 
@@ -1303,6 +1369,13 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script id="token-template" type="text/x-jquery-tmpl">
+    <li class="list-group-item">
+      Token ID: ${tokenId}
+    </li>
+  </script>
+
   <script>
     function hideSections() {
       $("section").hide();
@@ -1314,6 +1387,7 @@
       $("section").show();
       $(".hero").height('100vh');
       $(".hero .container").show();
+      $('#section-gamers').hide();
     }
 
     $(function() {
@@ -1337,8 +1411,31 @@
 
       $('#gamers-scan-form').on('submit', function(e) { 
         e.preventDefault(); 
-        var data = $("#gamers-scan-form :input").serializeArray();
-        console.log(data); 
+        let formData = $("#gamers-scan-form :input").serializeArray();
+        console.log(formData); 
+
+        $.ajax({
+          url: "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/gettokens",
+          type: 'POST',
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: 'json',
+          contentType: "application/json",
+          success: function (data) {
+              console.info(data);
+              let response = jQuery.parseJSON(data);
+              
+              $('#gamers-nfts').empty();
+              
+              response.forEach(function(item) {
+                if(item.value > 0) {
+                  let token_content = { tokenId: item.token.id };
+                  $("#token-template").tmpl(token_content).appendTo("#gamers-nfts");
+                }
+              });
+          }
+      });
+       
       });
   });
   </script>
