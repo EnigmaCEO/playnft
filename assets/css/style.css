@@ -2539,3 +2539,23 @@ span.round-tab:hover {
 .nav {
   flex-wrap: nowrap;
 }
+
+.cost {
+  font-size: 36px;
+  color: #444444;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  float:right;
+}
+
+.cost sup {
+  font-size: 20px;
+  top: -15px;
+  left: -3px;
+}
+
+.cost span {
+  color: #bababa;
+  font-size: 16px;
+  font-weight: 300;
+}

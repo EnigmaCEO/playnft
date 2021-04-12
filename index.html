@@ -221,7 +221,7 @@
                   enable NFT gameplay.
                 </p>
                 <div class="pricing">
-                  <div class="price"><sup>$</sup>25</div>
+                  <div class="price"><sup>$</sup>50</div>
 
                   <br /><a href="#" class="btn-buy" id="service-developers"
                     >Start Now</a
@@ -532,69 +532,7 @@
                       </div>
                       <div class="panel-body">
                         <ul class="list-group" id="gamers-games">
-                          <li class="list-group-item d-flex active">
-                            <div class="flex-shrink-0 game-icon">
-                              <img
-                                src="assets/img/clients/enigma-minmins.png"
-                                alt="Min-Mins"
-                              />
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <strong>Min-Mins</strong>
-                              <p>Status: Live</p>
-                            </div>
-                          </li>
-                          <li class="list-group-item d-flex">
-                            <div class="flex-shrink-0 game-icon">
-                              <img
-                                src="assets/img/clients/enigma-shalwend.png"
-                                alt="Shield of Shalwend"
-                              />
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <strong>Shield of Shalwend</strong>
-                              <p>Status: Live</p>
-                            </div>
-                          </li>
-                          <li class="list-group-item d-flex">
-                            <div class="flex-shrink-0 game-icon">
-                              <img
-                                src="assets/img/clients/enigma-wgo2.png"
-                                class="img-fluid"
-                                alt="Wargods Online 2"
-                              />
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <strong>Wargods Online 2</strong>
-                              <p>Status: Development</p>
-                            </div>
-                          </li>
-                          <li class="list-group-item d-flex">
-                            <div class="flex-shrink-0 game-icon">
-                              <img
-                                src="assets/img/clients/enigma-theta.png"
-                                class="img-fluid"
-                                alt="Theta Warriors Defense"
-                              />
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <strong>Theta Warriors Defense</strong>
-                              <p>Status: Development</p>
-                            </div>
-                          </li>
-                          <li class="list-group-item d-flex">
-                            <div class="flex-shrink-0 game-icon">
-                              <img
-                                src="assets/img/clients/enigma-k9.png"
-                                class="img-fluid"
-                                alt="K9 Empire"
-                              />
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <strong>K9 Empire</strong>
-                              <p>Status: Development</p>
-                            </div>
-                          </li>
+                          
                         </ul>
                       </div>
                     </div>
@@ -745,10 +683,30 @@
     <script src="assets/js/main.js"></script>
 
     <script id="token-template" type="text/x-jquery-tmpl">
-      <li class="list-group-item list-group-item-action gamers-nft-item">
+      <li id="gamers_nft_${tokenId}" class="list-group-item list-group-item-action gamers-nft-item">
         Token ID: ${tokenId}
       </li>
     </script>
+
+    <script id="games-template" type="text/x-jquery-tmpl">
+      <li id="gamers_game_${gameId}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="assets/img/clients/${gameIcon}"
+            class="img-fluid"
+            alt="${gameName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${gameCost}</div>
+          <strong>${gameName}</strong>
+          <p>Status: ${gameStatus}</p>
+          <p>{{html gamePlatforms}}</p>
+          
+        </div>
+      </li>
+    </script>
+
 
     <script>
       function hideSections() {
@@ -828,7 +786,59 @@
           $(".gamers-nft-item").removeClass("active");
           $(this).addClass("active");
 
-          openTab("#nav-gamers-games");
+          let formData = [tokenId => $(this).attr('id')];
+
+          $.ajax({
+            url:
+              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getgames",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+              console.info(data);
+              let response = jQuery.parseJSON(data);
+
+              $("#gamers-games").empty();
+
+              response.forEach(function (item) {
+                let status
+                let cost
+                if(item.status == 0) {
+                  status = "Development"
+                  cost = 10
+                }
+                if(item.status == 1) {
+                  status = "Live"
+                  cost = 25
+                }
+
+                let platforms = ''
+                if(item.platform_steam == 1) platforms += '<i class="fab fa-steam-symbol" style="font-size: 3.7vh; color: #4154f1;"></i> '
+                if(item.platform_apple == 1) platforms += '<i class="fab fa-app-store-ios" style="font-size: 3.7vh; color: #4154f1;"></i> '
+                if(item.platform_google == 1) platforms += '<i class="fab fa-google-play" style="font-size: 3.7vh; color: #4154f1;"></i> '
+
+                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameStatus: status, gamePlatforms: platforms, gameCost: cost };
+                $("#games-template")
+                  .tmpl(game_content)
+                  .appendTo("#gamers-games");
+                
+              });
+
+
+              openTab("#nav-gamers-games");
+            },
+          });
+
+          
+        }
+
+        if ($(this).hasClass("gamers-games-item")) {
+          $(".gamers-games-item").removeClass("active");
+          $(this).addClass("active");
+
+          openTab("#nav-gamers-content");
         }
       });
 
