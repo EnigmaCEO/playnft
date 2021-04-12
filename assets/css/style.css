@@ -2384,11 +2384,10 @@ button[type="submit"]:hover {
 h4 {
   font-size: 16px;
   font-weight: bold;
-  color: inherit;
+  color: #4154f1;
   text-transform: uppercase;
   position: relative;
-  padding-top: 18px;
-  padding-bottom: 10px;
+  text-align: center;
 }
 
 h4 i{
@@ -2400,4 +2399,143 @@ div.spacer
     font-size: 0; 
     height: 80px;
     line-height: 0;
+}
+
+
+.wizard {
+  /*margin: 20px auto;*/
+  background: #fff;
+}
+
+  .wizard .nav-tabs {
+      position: relative;
+      /*margin: 40px auto;*/
+      margin-bottom: 0;
+      border-bottom-color: #fff;
+  }
+
+  .wizard > div.wizard-inner {
+      position: relative;
+  }
+
+.connecting-line {
+  height: 4px;
+  background: #e0e0e0;
+  position: absolute;
+  width: 80%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 0;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+  color: #555555;
+  cursor: default;
+  border: 0;
+  border-bottom-color: transparent;
+}
+
+span.round-tab {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  display: inline-block;
+  border-radius: 100px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  z-index: 2;
+  /*position: absolute;*/
+  left: 0;
+  text-align: center;
+  font-size: 25px;
+}
+span.round-tab i{
+  color:#555555;
+}
+.wizard li.active span.round-tab {
+  background: #fff;
+  border: 2px solid #4154f1;
+  
+}
+.wizard li.active span.round-tab i{
+  color: #4154f1;
+}
+
+.wizard .nav-tabs > li.active > a {
+  cursor: pointer;
+}
+
+.wizard li.completed span.round-tab {
+  background: #fff;
+  border: 2px solid green;
+}
+
+.wizard li.completed span.round-tab i{
+  color: green;
+}
+
+span.round-tab:hover {
+  color: #333;
+  border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+  width: 25%;
+}
+
+
+.wizard .nav-tabs > li a {
+  width: 70px;
+  height: 70px;
+  margin: 20px auto;
+  border-radius: 100%;
+  padding: 0;
+}
+
+  .wizard .nav-tabs > li a:hover {
+      background: transparent;
+  }
+
+.wizard .tab-pane {
+  position: relative;
+  padding-top: 50px;
+}
+
+.wizard h3 {
+  margin-top: 0;
+}
+
+@media( max-width : 585px ) {
+
+  .wizard {
+      width: 90%;
+      height: auto !important;
+  }
+
+  span.round-tab {
+      font-size: 16px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+  }
+
+  .wizard .nav-tabs > li a {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+  }
+
+  .wizard li.active:after {
+      content: " ";
+      /*position: absolute;*/
+      left: 35%;
+  }
+
+  
+}
+
+.nav {
+  flex-wrap: nowrap;
 }
