@@ -177,7 +177,7 @@
                   rewards and bonuses.
                 </p>
                 <div class="pricing">
-                  <div class="price"><sup>$</sup>10-25</div>
+                  <div class="price"><sup>From $</sup>10</div>
 
                   <br /><a href="#" class="btn-buy" id="service-gamers"
                     >Start Now</a
@@ -427,7 +427,7 @@
                     href="#list-gamers-content"
                   >
                     <span class="round-tab"
-                      ><i class="fas fa-hammer" style="font-size: 3.7vh"></i
+                      ><i class="fas fa-link" style="font-size: 3.7vh"></i
                     ></span>
                   </a>
                 </li>
@@ -540,15 +540,22 @@
                 </div>
                 <div
                   class="tab-pane fade"
-                  id="list-messages"
+                  id="list-gamers-content"
                   role="tabpanel"
-                  aria-labelledby="list-messages-list"
+                  aria-labelledby="nav-gamers-content"
                 >
-                  Some placeholder content in a paragraph relating to "Home".
-                  And some more content, used here just to pad out and fill this
-                  tab panel. In production, you would obviously have more real
-                  content here. And not just text. It could be anything, really.
-                  Text, images, forms.
+                  <div class="col-md-12">
+                    <div class="panel panel-primary" id="gamers-games-panel">
+                      <div class="panel-heading">
+                        <h4>Link your NFT</h4>
+                      </div>
+                      <div class="panel-body">
+                        <ul class="list-group" id="gamers-content">
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div
                   class="tab-pane fade"
@@ -689,7 +696,7 @@
     </script>
 
     <script id="games-template" type="text/x-jquery-tmpl">
-      <li id="gamers_game_${gameId}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
+      <li id="gamers_game_${gameId}" class="list-group-item d-flex list-group-item-action gamers-games-item">
         <div class="flex-shrink-0 game-icon">
           <img
             src="assets/img/clients/${gameIcon}"
@@ -703,6 +710,23 @@
           <p>Status: ${gameStatus}</p>
           <p>{{html gamePlatforms}}</p>
           
+        </div>
+      </li>
+    </script>
+
+    <script id="content-template" type="text/x-jquery-tmpl">
+      <li id="gamers_content_${gameId}" class="list-group-item d-flex list-group-item-action gamers-content-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="assets/img/content/${id}/${image}"
+            class="img-fluid"
+            alt="${title}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${title}</strong>
+          <p>Type: ${type}</p>
         </div>
       </li>
     </script>
@@ -782,6 +806,7 @@
       });
 
       $(document).on("click", "li", function () {
+
         if ($(this).hasClass("gamers-nft-item")) {
           $(".gamers-nft-item").removeClass("active");
           $(this).addClass("active");
@@ -815,9 +840,9 @@
                 }
 
                 let platforms = ''
-                if(item.platform_steam == 1) platforms += '<i class="fab fa-steam-symbol" style="font-size: 3.7vh; color: #4154f1;"></i> '
-                if(item.platform_apple == 1) platforms += '<i class="fab fa-app-store-ios" style="font-size: 3.7vh; color: #4154f1;"></i> '
-                if(item.platform_google == 1) platforms += '<i class="fab fa-google-play" style="font-size: 3.7vh; color: #4154f1;"></i> '
+                if(item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol" style="font-size: 3.7vh; color: #4154f1;"></i> '
+                if(item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios" style="font-size: 3.7vh; color: #4154f1;"></i> '
+                if(item.platform_google != 0) platforms += '<i class="fab fa-google-play" style="font-size: 3.7vh; color: #4154f1;"></i> '
 
                 let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameStatus: status, gamePlatforms: platforms, gameCost: cost };
                 $("#games-template")
@@ -826,19 +851,59 @@
                 
               });
 
-
               openTab("#nav-gamers-games");
             },
           });
-
-          
         }
 
         if ($(this).hasClass("gamers-games-item")) {
           $(".gamers-games-item").removeClass("active");
           $(this).addClass("active");
 
-          openTab("#nav-gamers-content");
+          let id = $(this).attr('id').replace('gamers_game_','');
+          let formData = {gameId: id};
+          console.log(formData)
+
+          $.ajax({
+            url:
+              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getcontent",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+              console.info(data);
+              let response = jQuery.parseJSON(data);
+
+              $("#gamers-content").empty();
+
+              response.forEach(function (item) {
+                let type =''
+
+                if(item.type == 0) {
+                  type = "Unlockable Item"
+                }
+                if(item.type == 1) {
+                  type = "Modifier"
+                }
+                if(item.type == 2) {
+                  type = "Consummable"
+                }
+                
+                item.cost += 10
+
+                let game_content = { id: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, description: item.description };
+                $("#content-template")
+                  .tmpl(game_content)
+                  .appendTo("#gamers-content");
+                
+              });
+
+              openTab("#nav-gamers-content");
+            },
+          });
+          
         }
       });
 
