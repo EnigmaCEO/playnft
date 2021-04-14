@@ -2260,6 +2260,11 @@ button[type="submit"]:hover {
   .footer .footer-top {
     background-position: center bottom;
   }
+
+  .game-icon {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
 }
 
 .footer .footer-top .footer-info {
@@ -2370,7 +2375,7 @@ button[type="submit"]:hover {
 }
 
 .list-group{
-  max-height: 300px;
+  max-height: 500px;
   min-height: 200px;
   margin-bottom: 10px;
   overflow-y:auto;
@@ -2558,4 +2563,32 @@ span.round-tab:hover {
   color: #bababa;
   font-size: 16px;
   font-weight: 300;
+}
+
+.cost .btn-details {
+  display: inline-block;
+  padding: 8px 20px 10px 20px;
+  border-radius: 50px;
+  color: #4154f1;
+  transition: none;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid #4154f1;
+}
+
+.cost .btn-buy:hover {
+  background: #4154f1;
+  color: #fff;
+}
+
+.fab {
+  font-size: 3.7vh; 
+  color: #4154f1;
+}
+
+h3 {
+  font-weight:bold
 }

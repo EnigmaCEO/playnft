@@ -655,7 +655,7 @@
               </p>
               <p>
                 <strong>Bitcoin:</strong
-                ><br />1CLWMx5WE5UtxUav3USyLNdN2gh84ScBcC<br />
+                ><br />1ADPinDUh7eHraZB83kzfraD2J8PZVWvrz<br />
               </p>
             </div>
           </div>
@@ -705,14 +705,60 @@
           />
         </div>
         <div class="flex-grow-1 ms-3">
-          <div class="cost"><sup>$</sup>${gameCost}</div>
+          
           <strong>${gameName}</strong>
           <p>Status: ${gameStatus}</p>
           <p>{{html gamePlatforms}}</p>
-          
+          <div class="cost">
+            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-bs-toggle="modal" data-bs-target="#gamers-game-modal">View Details</a>
+          </div>
         </div>
       </li>
     </script>
+
+    <div class="modal" tabindex="-1" id="gamers-game-modal">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="gamers-game-name"></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="flex-shrink-0 game-icon">
+                    <span id="gamers-game-icon"></span>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <p><strong>Publisher:</strong> <span id="gamers-game-publisher"></span></p>
+                  <p><strong>Website:</strong> <span id="gamers-game-website"></span></p>
+                  <p>
+                    <span id="gamers-game-platforms"></span>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div><hr></div>
+                  <div>
+                    <header>
+                      <h4>Game Info</h4>
+                      <p><span id="gamers-game-info"></span></p>
+                    </header>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="gamers-games-select">Select Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script id="content-template" type="text/x-jquery-tmpl">
       <li id="gamers_content_${gameId}" class="list-group-item d-flex list-group-item-action gamers-content-item">
@@ -727,6 +773,9 @@
           <div class="cost"><sup>$</sup>${cost}</div>
           <strong>${title}</strong>
           <p>Type: ${type}</p>
+          <div class="cost">
+            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-bs-toggle="modal" data-bs-target="#gamers-game-modal">View Details</a>
+          </div>
         </div>
       </li>
     </script>
@@ -803,6 +852,8 @@
             return false;
           }
         });
+
+        
       });
 
       $(document).on("click", "li", function () {
@@ -840,11 +891,11 @@
                 }
 
                 let platforms = ''
-                if(item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol" style="font-size: 3.7vh; color: #4154f1;"></i> '
-                if(item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios" style="font-size: 3.7vh; color: #4154f1;"></i> '
-                if(item.platform_google != 0) platforms += '<i class="fab fa-google-play" style="font-size: 3.7vh; color: #4154f1;"></i> '
+                if(item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+                if(item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+                if(item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
 
-                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameStatus: status, gamePlatforms: platforms, gameCost: cost };
+                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo };
                 $("#games-template")
                   .tmpl(game_content)
                   .appendTo("#gamers-games");
@@ -856,56 +907,86 @@
           });
         }
 
-        if ($(this).hasClass("gamers-games-item")) {
-          $(".gamers-games-item").removeClass("active");
-          $(this).addClass("active");
-
-          let id = $(this).attr('id').replace('gamers_game_','');
-          let formData = {gameId: id};
-          console.log(formData)
-
-          $.ajax({
-            url:
-              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getcontent",
-            type: "POST",
-            crossDomain: true,
-            data: JSON.stringify(formData),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (data) {
-              console.info(data);
-              let response = jQuery.parseJSON(data);
-
-              $("#gamers-content").empty();
-
-              response.forEach(function (item) {
-                let type =''
-
-                if(item.type == 0) {
-                  type = "Unlockable Item"
-                }
-                if(item.type == 1) {
-                  type = "Modifier"
-                }
-                if(item.type == 2) {
-                  type = "Consummable"
-                }
-                
-                item.cost += 10
-
-                let game_content = { id: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, description: item.description };
-                $("#content-template")
-                  .tmpl(game_content)
-                  .appendTo("#gamers-content");
-                
-              });
-
-              openTab("#nav-gamers-content");
-            },
-          });
-          
+        if ($(this).hasClass("nav-item completed")) {
+          let $active = $(".wizard .nav-tabs li.active");
+          $active.removeClass('active')
+          $(this).addClass('active')
         }
+
       });
+
+      $(document).on("click", "#gamers-games-select", function () {
+      
+        let id = $(this).data('id');
+        let formData = {gameId: id};
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getcontent",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#gamers-content").empty();
+
+            response.forEach(function (item) {
+              let type =''
+
+              if(item.type == 0) {
+                type = "Unlockable Item"
+              }
+              if(item.type == 1) {
+                type = "Modifier"
+              }
+              if(item.type == 2) {
+                type = "Consummable"
+              }
+              
+              item.cost += 10
+
+              let game_content = { id: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, description: item.description };
+              $("#content-template")
+                .tmpl(game_content)
+                .appendTo("#gamers-content");
+              
+            });
+
+            var myModalEl = document.getElementById('gamers-game-modal')
+            var modal = bootstrap.Modal.getInstance(myModalEl)
+            modal.hide();
+            openTab("#nav-gamers-content");
+          },
+        });
+        
+      });
+
+      $(document).on('show.bs.modal', '#gamers-game-modal',function(event){
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var gameId = button.data('game-id') 
+        var gameName = button.data('game-name') 
+        var gameIcon = button.data('game-icon') 
+        var gamePlatforms = button.data('game-platforms') 
+        var gameInfo = button.data('game-info') 
+        var publisherName = button.data('game-publisher') 
+        var publisherWebsite = button.data('game-website')
+
+        var modal = $(this)
+        
+        modal.find('#gamers-game-name').text(gameName)
+        modal.find('#gamers-game-icon').html('<img src="assets/img/clients/'+ gameIcon +'"/>')
+        modal.find('#gamers-game-info').html(gameInfo)
+        modal.find('#gamers-game-platforms').html(gamePlatforms)
+        modal.find('#gamers-games-select').data('id', gameId)
+        modal.find('#gamers-game-publisher').text(publisherName)
+        modal.find('#gamers-game-website').text(publisherWebsite)
+        
+      })
 
       function openTab(tabId) {
         let $active = $(".wizard .nav-tabs li.active");
