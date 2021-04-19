@@ -472,6 +472,7 @@
                           <input
                             type="text"
                             name="wallet-address"
+                            id="wallet-address"
                             class="form-control"
                             placeholder="Wallet Address"
                             required
@@ -559,15 +560,42 @@
                 </div>
                 <div
                   class="tab-pane fade"
-                  id="list-settings"
+                  id="list-gamers-review"
                   role="tabpanel"
-                  aria-labelledby="list-settings-list"
+                  aria-labelledby="nav-gamers-review"
                 >
-                  Some placeholder content in a paragraph relating to "Home".
-                  And some more content, used here just to pad out and fill this
-                  tab panel. In production, you would obviously have more real
-                  content here. And not just text. It could be anything, really.
-                  Text, images, forms.
+                  <div class="col-md-12">
+                    <div class="panel panel-primary" id="gamers-review-panel">
+                      <div class="panel-heading">
+                        <h4>Review your Order</h4>
+                        <p class="section-header">Complete your purchase to link your NFT to this content. Enjoy!</p>
+                      </div>
+                      <div class="panel-body">
+                        <div class="flex-shrink-0 text-center">
+                          <p class="game-icon">
+                            <span id="gamers-review-token"><img src="assets/img/content/1/maxim.png"/></span> <i class="fas fa-link" style="font-size: 3.7vh"></i> <span id="gamers-review-icon"></span>
+                          </p>
+                          <p>
+                            <strong id="gamers-review-name"></strong>
+                          </p>
+                          <p>
+                            <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
+                              <input type="hidden" name="cmd" value="_pay_simple">
+                              <input type="hidden" name="reset" value="1">
+                              <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
+                              <input type="hidden" name="currency" value="USD">
+                              <input type="hidden" name="amountf" value="20.00">
+                              <input type="hidden" name="item_name" value="Test NFT Item">	
+                              <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png" alt="Buy Now with CoinPayments.net">
+                            </form>
+                            <span id="gamers-review-cost"></span>
+                          </p>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -744,7 +772,7 @@
                   <div><hr></div>
                   <div>
                     <header>
-                      <h4>Game Info</h4>
+                      <h4>Game Description</h4>
                       <p><span id="gamers-game-info"></span></p>
                     </header>
                   </div>
@@ -761,10 +789,10 @@
     </div>
 
     <script id="content-template" type="text/x-jquery-tmpl">
-      <li id="gamers_content_${gameId}" class="list-group-item d-flex list-group-item-action gamers-content-item">
+      <li id="gamers_content_${id}" class="list-group-item d-flex list-group-item-action gamers-content-item">
         <div class="flex-shrink-0 game-icon">
           <img
-            src="assets/img/content/${id}/${image}"
+            src="assets/img/content/${gameId}/${image}"
             class="img-fluid"
             alt="${title}"
           />
@@ -774,14 +802,48 @@
           <strong>${title}</strong>
           <p>Type: ${type}</p>
           <div class="cost">
-            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-bs-toggle="modal" data-bs-target="#gamers-game-modal">View Details</a>
+            <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#gamers-content-modal">View Details</a>
           </div>
         </div>
       </li>
     </script>
 
+    <div class="modal" tabindex="-1" id="gamers-content-modal">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="gamers-content-title"></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="flex-shrink-0 content-icon">
+                    <span id="gamers-content-icon"></span>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <header>
+                    <h4>Description</h4>
+                    <p><span id="gamers-content-info"></span></p>
+                  </header>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="gamers-content-select">Select Content</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script>
+      var tokenID = "";
+
       function hideSections() {
         $("section").hide();
         $(".hero .container").hide();
@@ -861,6 +923,7 @@
         if ($(this).hasClass("gamers-nft-item")) {
           $(".gamers-nft-item").removeClass("active");
           $(this).addClass("active");
+          tokenID = $(this).attr('id');
 
           let formData = [tokenId => $(this).attr('id')];
 
@@ -950,7 +1013,7 @@
               
               item.cost += 10
 
-              let game_content = { id: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, description: item.description };
+              let game_content = { id: item.gameId, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
               $("#content-template")
                 .tmpl(game_content)
                 .appendTo("#gamers-content");
@@ -961,6 +1024,50 @@
             var modal = bootstrap.Modal.getInstance(myModalEl)
             modal.hide();
             openTab("#nav-gamers-content");
+          },
+        });
+        
+      });
+
+      $(document).on("click", "#gamers-content-select", function () {
+      
+        let _contentId = $(this).data('id');
+        let _gameId = $(this).data('game');
+        let _tokenId = tokenID.replace('gamers_nft_', '');
+        let _walletId = $(this).data('wallet');
+        let _icon = $(this).data('icon');
+        let _name = $(this).data('name');
+
+        let formData = {contentId: _contentId, gameId : _gameId, wallet : _walletId, token : _tokenId};
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/createorder",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#gamers-review").empty();
+
+            response.forEach(function (item) {
+                           
+              item.cost += 10
+
+              $("#gamers-review-cost").html("Total: $" + item.cost)
+              $('#gamers-review-icon').html('<img src="assets/img/content/'+ _gameId +'/'+ _icon +'"/>')
+              $("#gamers-review-name").html(_name)
+            });
+
+            var myModalEl = document.getElementById('gamers-content-modal')
+            var modal = bootstrap.Modal.getInstance(myModalEl)
+            modal.hide();
+            openTab("#nav-gamers-review");
           },
         });
         
@@ -986,6 +1093,28 @@
         modal.find('#gamers-game-publisher').text(publisherName)
         modal.find('#gamers-game-website').text(publisherWebsite)
         
+      })
+
+      $(document).on('show.bs.modal', '#gamers-content-modal',function(event){
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var id = button.data('content-id')
+        var gameId = button.data('content-gameid') 
+        var gameName = button.data('content-title') 
+        var gameIcon = button.data('content-icon') 
+        var gameInfo = button.data('content-info') 
+        var walletId = $('#wallet-address').val()
+
+        var modal = $(this)
+        
+        modal.find('#gamers-content-title').text(gameName)
+        modal.find('#gamers-content-icon').html('<img src="assets/img/content/'+ gameId +'/'+ gameIcon +'"/>')
+        modal.find('#gamers-content-info').html(gameInfo)
+        modal.find('#gamers-content-select').data('id', id)
+        modal.find('#gamers-content-select').data('name', gameName)
+        modal.find('#gamers-content-select').data('game', gameId)
+        modal.find('#gamers-content-select').data('wallet', walletId)
+        modal.find('#gamers-content-select').data('token', gameId)
+        modal.find('#gamers-content-select').data('icon', gameIcon)
       })
 
       function openTab(tabId) {

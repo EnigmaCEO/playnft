@@ -2265,6 +2265,11 @@ button[type="submit"]:hover {
     margin-right: 10px;
     margin-bottom: 20px;
   }
+
+  .content-icon {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
 }
 
 .footer .footer-top .footer-info {
@@ -2384,6 +2389,14 @@ button[type="submit"]:hover {
 
 .game-icon img {
   width: 128px;
+}
+
+.content-icon {
+  text-align:center;
+}
+
+.content-icon img {
+  width: 200px;
 }
 
 h4 {
@@ -2591,4 +2604,9 @@ span.round-tab:hover {
 
 h3 {
   font-weight:bold
+}
+
+#gamers-review-cost {
+  float:right;
+  font-weight: bold;
 }
