@@ -177,7 +177,7 @@
                   rewards and bonuses.
                 </p>
                 <div class="pricing">
-                  <div class="price"><sup>From $</sup>10</div>
+                  <div class="price"><sup>From $</sup>1</div>
 
                   <br /><a href="#" class="btn-buy" id="service-gamers"
                     >Start Now</a
@@ -584,8 +584,11 @@
                               <input type="hidden" name="reset" value="1">
                               <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
                               <input type="hidden" name="currency" value="USD">
-                              <input type="hidden" name="amountf" value="20.00">
-                              <input type="hidden" name="item_name" value="Test NFT Item">	
+                              <input type="hidden" name="amountf" id="amountf" value="5.00">
+                              <input type="hidden" name="item_number" id="item_number" value="2">
+                              <input type="hidden" name="invoice" id="invoice" value="7">
+                              <input type="hidden" name="custom" id="custom" value="7">
+                              <input type="hidden" name="item_name" id="item_name"  value="Test NFT Item">	
                               <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png" alt="Buy Now with CoinPayments.net">
                             </form>
                             <span id="gamers-review-cost"></span>
@@ -1011,8 +1014,6 @@
                 type = "Consummable"
               }
               
-              item.cost += 10
-
               let game_content = { id: item.gameId, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
               $("#content-template")
                 .tmpl(game_content)
@@ -1057,8 +1058,7 @@
 
             response.forEach(function (item) {
                            
-              item.cost += 10
-
+              
               $("#gamers-review-cost").html("Total: $" + item.cost)
               $('#gamers-review-icon').html('<img src="assets/img/content/'+ _gameId +'/'+ _icon +'"/>')
               $("#gamers-review-name").html(_name)
