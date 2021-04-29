@@ -474,19 +474,20 @@
                             name="wallet-address"
                             id="wallet-address"
                             class="form-control"
-                            placeholder="Wallet Address"
+                            placeholder="Ethereum Wallet Address"
                             required
                           />
                         </div>
-                        <div class="col-md-6">
-                          <select
+                        <div class="col-md-6 text-end">
+                          <!-- <select
                             name="wallet-platform"
                             class="form-control"
                             required
                           >
                             <option value="">Select Wallet Platform</option>
-                            <option valid="enjin">Enjin</option>
-                          </select>
+                            <option valid="enjin" selected>Enjin</option>
+                          </select> -->
+                          <a href="https://enjin.io/software/wallet" target="_blank">Download the Enjin Wallet</a>
                         </div>
                         <div class="col-md-12 text-center">
                           <button
@@ -573,7 +574,7 @@
                       <div class="panel-body">
                         <div class="flex-shrink-0 text-center">
                           <p class="game-icon">
-                            <span id="gamers-review-token"><img src="assets/img/content/1/maxim.png"/></span> <i class="fas fa-link" style="font-size: 3.7vh"></i> <span id="gamers-review-icon"></span>
+                            <span id="gamers-review-token"></span> <i class="fas fa-link" style="font-size: 3.7vh"></i> <span id="gamers-review-icon"></span>
                           </p>
                           <p>
                             <strong id="gamers-review-name"></strong>
@@ -721,8 +722,20 @@
     <script src="assets/js/main.js"></script>
 
     <script id="token-template" type="text/x-jquery-tmpl">
-      <li id="gamers_nft_${tokenId}" class="list-group-item list-group-item-action gamers-nft-item">
-        Token ID: ${tokenId}
+      <li id="gamers_nft_${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="${tokenImage}"
+            class="img-fluid"
+            alt="${tokenName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <strong>${tokenName}</strong>
+          <p>ID: ${tokenId}</p>
+          <div class="cost">
+          </div>
+        </div>
       </li>
     </script>
 
@@ -846,6 +859,7 @@
 
     <script>
       var tokenID = "";
+      var tokenImage = "";
 
       function hideSections() {
         $("section").hide();
@@ -896,7 +910,7 @@
 
               response.forEach(function (item) {
                 if (item.value > 0) {
-                  let token_content = { tokenId: item.token.id };
+                  let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: item.token.meta.image };
                   $("#token-template")
                     .tmpl(token_content)
                     .appendTo("#gamers-nfts");
@@ -927,6 +941,7 @@
           $(".gamers-nft-item").removeClass("active");
           $(this).addClass("active");
           tokenID = $(this).attr('id');
+          tokenImage = $(this).data('image');
 
           let formData = [tokenId => $(this).attr('id')];
 
@@ -1014,7 +1029,7 @@
                 type = "Consummable"
               }
               
-              let game_content = { id: item.gameId, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
+              let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
               $("#content-template")
                 .tmpl(game_content)
                 .appendTo("#gamers-content");
@@ -1060,8 +1075,15 @@
                            
               
               $("#gamers-review-cost").html("Total: $" + item.cost)
+              $('#gamers-review-token').html('<img src="'+ tokenImage +'"/>')
               $('#gamers-review-icon').html('<img src="assets/img/content/'+ _gameId +'/'+ _icon +'"/>')
               $("#gamers-review-name").html(_name)
+
+              $('#amountf').val(item.cost)
+              $('#item_number').val(_contentId)
+              $('#invoice').val(item.orderId)
+              $('#custom').val(item.code)
+              $('#item_name').val(_name)
             });
 
             var myModalEl = document.getElementById('gamers-content-modal')
