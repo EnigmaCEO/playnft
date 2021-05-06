@@ -467,6 +467,11 @@
                   <div class="col-lg-12">
                     <h4>Input your Wallet address</h4>
                     <form id="gamers-scan-form" action="#" method="post">
+                      <input
+                        type="hidden"
+                        name="walletMode"
+                        value="gamers"
+                      />
                       <div class="row gy-4">
                         <div class="col-md-6">
                           <input
@@ -606,7 +611,255 @@
           </div>
         </div>
       </section>
-      <!-- End Clients Section -->
+      <!-- ======= End Gamers Section ======= -->
+
+
+      <!-- ======= Creators Section ======= -->
+      <section id="section-creators" class="gamers">
+        <div class="container">
+          <header class="section-header">
+            <h2>NFT Creators</h2>
+            <p>Add value to your NFTs</p>
+          </header>
+
+          <div class="wizard">
+            <div class="wizard-inner">
+              <div class="connecting-line"></div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="nav-item active">
+                  <a
+                    title="1. Scan Wallet"
+                    class="nav-link"
+                    id="nav-creators-wallet"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    aria-controls="creators-wallet"
+                    href="#list-creators-wallet"
+                  >
+                    <span class="round-tab">
+                      <i class="fas fa-wallet" style="font-size: 3.7vh"></i>
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" class="nav-item disabled">
+                  <a
+                    title="2. Select Token"
+                    class="nav-link"
+                    id="nav-creators-nfts"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    aria-controls="creators-nfts"
+                    href="#list-creators-nfts"
+                  >
+                    <span class="round-tab"
+                      ><i class="fas fa-sd-card" style="font-size: 3.7vh"></i
+                    ></span>
+                  </a>
+                </li>
+                <li role="presentation" class="nav-item disabled">
+                  <a
+                    title="3. Select Game"
+                    class="nav-link"
+                    id="nav-creators-games"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    aria-controls="creators-games"
+                    href="#list-creators-games"
+                  >
+                    <span class="round-tab"
+                      ><i class="fas fa-gamepad" style="font-size: 3.7vh"></i
+                    ></span>
+                  </a>
+                </li>
+                <li role="presentation" class="nav-item disabled">
+                  <a
+                    title="4. Select Content"
+                    class="nav-link"
+                    id="nav-creators-content"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    aria-controls="creators-content"
+                    href="#list-creators-content"
+                  >
+                    <span class="round-tab"
+                      ><i class="fas fa-link" style="font-size: 3.7vh"></i
+                    ></span>
+                  </a>
+                </li>
+                <li role="presentation" class="nav-item disabled">
+                  <a
+                    title="5. Review Order"
+                    class="nav-link"
+                    id="nav-creators-review"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    aria-controls="creators-review"
+                    href="#list-creators-review"
+                  >
+                    <span class="round-tab"
+                      ><i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 3.7vh"
+                      ></i
+                    ></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row spacer">&nbsp;</div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="tab-content" id="nav-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="list-creators-wallet"
+                  role="tabpanel"
+                  aria-labelledby="nav-creators-wallet"
+                >
+                  <div class="col-lg-12">
+                    <h4>Input your Wallet address</h4>
+                    <form id="creators-scan-form" action="#" method="post">
+                      <input
+                        type="hidden"
+                        name="walletMode"
+                        value="creators"
+                      />
+                      <div class="row gy-4">
+                        <div class="col-md-12 text-center">
+                          <input
+                            type="text"
+                            name="wallet-address"
+                            id="creators-wallet-address"
+                            class="form-control"
+                            placeholder="Ethereum Wallet Address"
+                            required
+                          />
+                        </div>
+                        
+                        <div class="col-md-12 text-center">
+                          <button
+                            id="creators-scan-wallet"
+                            class="btn-read-more"
+                            type="submit"
+                          >
+                            Scan Wallet
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="list-creators-nfts"
+                  role="tabpanel"
+                  aria-labelledby="nav-creators-nfts"
+                >
+                  <div class="col-md-12">
+                    <div class="panel panel-primary" id="creators-nft-panel">
+                      <div class="panel-heading">
+                        <h4>Select a Token</h4>
+                      </div>
+                      <div class="panel-body">
+                        <ul class="list-group" id="creators-nfts">
+                          <li class="list-group-item">Awaiting results...</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="list-creators-games"
+                  role="tabpanel"
+                  aria-labelledby="nav-creators-games"
+                >
+                  <div class="col-md-12">
+                    <div class="panel panel-primary" id="creators-games-panel">
+                      <div class="panel-heading">
+                        <h4>Select a Game</h4>
+                      </div>
+                      <div class="panel-body">
+                        <ul class="list-group" id="creators-games">
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="list-creators-content"
+                  role="tabpanel"
+                  aria-labelledby="nav-creators-content"
+                >
+                  <div class="col-md-12">
+                    <div class="panel panel-primary" id="creators-games-panel">
+                      <div class="panel-heading">
+                        <h4>Link your NFT</h4>
+                      </div>
+                      <div class="panel-body">
+                        <ul class="list-group" id="creators-content">
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="list-creators-review"
+                  role="tabpanel"
+                  aria-labelledby="nav-creators-review"
+                >
+                  <div class="col-md-12">
+                    <div class="panel panel-primary" id="creators-review-panel">
+                      <div class="panel-heading">
+                        <h4>Review your Order</h4>
+                        <p class="section-header">Complete your purchase to link your NFT to this content. Enjoy!</p>
+                      </div>
+                      <div class="panel-body">
+                        <div class="flex-shrink-0 text-center">
+                          <p class="game-icon">
+                            <span id="creators-review-token"></span> <i class="fas fa-link" style="font-size: 3.7vh"></i> <span id="creators-review-icon"></span>
+                          </p>
+                          <p>
+                            <strong id="creators-review-name"></strong>
+                          </p>
+                          <p>
+                            <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
+                              <input type="hidden" name="cmd" value="_pay_simple">
+                              <input type="hidden" name="reset" value="1">
+                              <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
+                              <input type="hidden" name="currency" value="USD">
+                              <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
+                              <input type="hidden" name="item_number" id="creators-item_number" value="2">
+                              <input type="hidden" name="invoice" id="creators-invoice" value="7">
+                              <input type="hidden" name="custom" id="creators-custom" value="7">
+                              <input type="hidden" name="item_name" id="creators-item_name"  value="Test NFT Item">	
+                              <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png" alt="Buy Now with CoinPayments.net">
+                            </form>
+                            <span id="creators-review-cost"></span>
+                          </p>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======= End Creators Section ======= -->
+
+
+
     </main>
     <!-- End #main -->
 
@@ -722,7 +975,7 @@
     <script src="assets/js/main.js"></script>
 
     <script id="token-template" type="text/x-jquery-tmpl">
-      <li id="gamers_nft_${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
+      <li id="${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
         <div class="flex-shrink-0 game-icon">
           <img
             src="${tokenImage}"
@@ -733,6 +986,25 @@
         <div class="flex-grow-1 ms-3">
           <strong>${tokenName}</strong>
           <p>ID: ${tokenId}</p>
+          <div class="cost">
+          </div>
+        </div>
+      </li>
+    </script>
+
+    <script id="creators-token-template" type="text/x-jquery-tmpl">
+      <li id="${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action creators-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="${tokenImage}"
+            class="img-fluid"
+            alt="${tokenName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <strong>${tokenName}</strong>
+          <p>ID: ${tokenId}</p>
+          <p>Total Supply: ${tokenSupply}</p>
           <div class="cost">
           </div>
         </div>
@@ -755,6 +1027,27 @@
           <p>{{html gamePlatforms}}</p>
           <div class="cost">
             <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-bs-toggle="modal" data-bs-target="#gamers-game-modal">View Details</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+    <script id="creators-games-template" type="text/x-jquery-tmpl">
+      <li id="creators_game_${gameId}" class="list-group-item d-flex list-group-item-action creators-games-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="assets/img/clients/${gameIcon}"
+            class="img-fluid"
+            alt="${gameName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          
+          <strong>${gameName}</strong>
+          <p>Status: ${gameStatus}</p>
+          <p>{{html gamePlatforms}}</p>
+          <div class="cost">
+            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-bs-toggle="modal" data-bs-target="#creators-game-modal">View Details</a>
           </div>
         </div>
       </li>
@@ -804,6 +1097,50 @@
       </div>
     </div>
 
+    <div class="modal" tabindex="-1" id="creators-game-modal">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="creators-game-name"></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="flex-shrink-0 game-icon">
+                    <span id="creators-game-icon"></span>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <p><strong>Publisher:</strong> <span id="creators-game-publisher"></span></p>
+                  <p><strong>Website:</strong> <span id="creators-game-website"></span></p>
+                  <p>
+                    <span id="creators-game-platforms"></span>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div><hr></div>
+                  <div>
+                    <header>
+                      <h4>Game Description</h4>
+                      <p><span id="creators-game-info"></span></p>
+                    </header>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="creators-games-select">Select Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script id="content-template" type="text/x-jquery-tmpl">
       <li id="gamers_content_${id}" class="list-group-item d-flex list-group-item-action gamers-content-item">
         <div class="flex-shrink-0 game-icon">
@@ -819,6 +1156,26 @@
           <p>Type: ${type}</p>
           <div class="cost">
             <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#gamers-content-modal">View Details</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+    <script id="creators-content-template" type="text/x-jquery-tmpl">
+      <li id="creators_content_${id}" class="list-group-item d-flex list-group-item-action creators-content-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="assets/img/content/${gameId}/${image}"
+            class="img-fluid"
+            alt="${title}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${title}</strong>
+          <p>Type: ${type}</p>
+          <div class="cost">
+            <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#creators-content-modal">View Details</a>
           </div>
         </div>
       </li>
@@ -856,6 +1213,38 @@
       </div>
     </div>
 
+    <div class="modal" tabindex="-1" id="creators-content-modal">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="creators-content-title"></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="flex-shrink-0 content-icon">
+                    <span id="creators-content-icon"></span>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <header>
+                    <h4>Description</h4>
+                    <p><span id="creators-content-info"></span></p>
+                  </header>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="creators-content-select">Select Content</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script>
       var tokenID = "";
@@ -872,14 +1261,20 @@
         $(".hero").height("100vh");
         $(".hero .container").show();
         $("#section-gamers").hide();
+        $("#section-creators").hide();
       }
 
       $(document).ready(function () {
-        $("#section-gamers").hide();
+        showSections() 
 
         $("#service-gamers").click(function () {
           hideSections();
           $("#section-gamers").show();
+        });
+
+        $("#service-creators").click(function () {
+          hideSections();
+          $("#section-creators").show();
         });
 
         $(".nav-link").click(function () {
@@ -918,6 +1313,45 @@
               });
 
               openTab("#nav-gamers-nfts");
+            },
+          });
+        });
+
+        $("#creators-scan-form").on("submit", function (e) {
+          e.preventDefault();
+          let formData = $("#creators-scan-form :input").serializeArray();
+          console.log(formData);
+
+          $.ajax({
+            url:
+              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/gettokens",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+              console.info(data);
+              let response = jQuery.parseJSON(data);
+
+              $("#creators-nfts").empty();
+
+              response.forEach(function (item) {
+                if (item.value > 0) {
+                  if(item.token.meta.image == "") return;
+
+                  if(item.token.totalSupply == 18446744073709551615) {
+                    item.token.totalSupply = "Infinite";
+                  }
+
+                  let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: item.token.meta.image, tokenSupply:item.token.totalSupply };
+                  $("#creators-token-template")
+                    .tmpl(token_content)
+                    .appendTo("#creators-nfts");
+                }
+              });
+
+              openTab("#nav-creators-nfts");
             },
           });
         });
@@ -988,6 +1422,57 @@
           });
         }
 
+        if ($(this).hasClass("creators-nft-item")) {
+          $(".creators-nft-item").removeClass("active");
+          $(this).addClass("active");
+          tokenID = $(this).attr('id');
+          tokenImage = $(this).data('image');
+
+          let formData = [tokenId => $(this).attr('id')];
+
+          $.ajax({
+            url:
+              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getgames",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+              console.info(data);
+              let response = jQuery.parseJSON(data);
+
+              $("#creators-games").empty();
+
+              response.forEach(function (item) {
+                let status
+                let cost
+                if(item.status == 0) {
+                  status = "Development"
+                  cost = 10
+                }
+                if(item.status == 1) {
+                  status = "Live"
+                  cost = 25
+                }
+
+                let platforms = ''
+                if(item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+                if(item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+                if(item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo };
+                $("#creators-games-template")
+                  .tmpl(game_content)
+                  .appendTo("#creators-games");
+                
+              });
+
+              openTab("#nav-creators-games");
+            },
+          });
+        }
+
         if ($(this).hasClass("nav-item completed")) {
           let $active = $(".wizard .nav-tabs li.active");
           $active.removeClass('active')
@@ -999,7 +1484,7 @@
       $(document).on("click", "#gamers-games-select", function () {
       
         let id = $(this).data('id');
-        let formData = {gameId: id};
+        let formData = {gameId: id, tokenId:0};
         console.log(formData)
 
         $.ajax({
@@ -1045,6 +1530,58 @@
         
       });
 
+      $(document).on("click", "#creators-games-select", function () {
+      
+      let id = $(this).data('id');
+      let formData = {gameId: id, tokenId: tokenID};
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getcontent",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#creators-content").empty();
+
+          response.forEach(function (item) {
+            let type =''
+
+            if(item.type == 0) {
+              type = "Unlockable Item"
+            }
+            if(item.type == 1) {
+              type = "Modifier"
+            }
+            if(item.type == 2) {
+              type = "Consummable"
+            }
+            if(item.type == 3) {
+              type = "Event"
+            }
+            
+            let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.adjCost, type: type, info: item.description };
+            $("#creators-content-template")
+              .tmpl(game_content)
+              .appendTo("#creators-content");
+            
+          });
+
+          var myModalEl = document.getElementById('creators-game-modal')
+          var modal = bootstrap.Modal.getInstance(myModalEl)
+          modal.hide();
+          openTab("#nav-creators-content");
+        },
+      });
+      
+    });
+
       $(document).on("click", "#gamers-content-select", function () {
       
         let _contentId = $(this).data('id');
@@ -1053,8 +1590,9 @@
         let _walletId = $(this).data('wallet');
         let _icon = $(this).data('icon');
         let _name = $(this).data('name');
+        let _mode = "gamers";
 
-        let formData = {contentId: _contentId, gameId : _gameId, wallet : _walletId, token : _tokenId};
+        let formData = {contentId: _contentId, gameId : _gameId, wallet : _walletId, token : _tokenId, mode: _mode};
         console.log(formData)
 
         $.ajax({
@@ -1095,6 +1633,57 @@
         
       });
 
+      $(document).on("click", "#creators-content-select", function () {
+      
+      let _contentId = $(this).data('id');
+      let _gameId = $(this).data('game');
+      let _tokenId = tokenID;
+      let _walletId = $(this).data('wallet');
+      let _icon = $(this).data('icon');
+      let _name = $(this).data('name');
+      let _mode = "creators";
+
+      let formData = {contentId: _contentId, gameId : _gameId, wallet : _walletId, token : _tokenId, mode: _mode};
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/createorder",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#creators-review").empty();
+
+          response.forEach(function (item) {
+                         
+            
+            $("#creators-review-cost").html("Total: $" + item.cost)
+            $('#creators-review-token').html('<img src="'+ tokenImage +'"/>')
+            $('#creators-review-icon').html('<img src="assets/img/content/'+ _gameId +'/'+ _icon +'"/>')
+            $("#creators-review-name").html(_name)
+
+            $('#creators-amountf').val(item.cost)
+            $('#creators-item_number').val(_contentId)
+            $('#creators-invoice').val(item.orderId)
+            $('#creators-custom').val(item.code)
+            $('#creators-item_name').val(_name)
+          });
+
+          var myModalEl = document.getElementById('creators-content-modal')
+          var modal = bootstrap.Modal.getInstance(myModalEl)
+          modal.hide();
+          openTab("#nav-creators-review");
+        },
+      });
+      
+    });
+
       $(document).on('show.bs.modal', '#gamers-game-modal',function(event){
         var button = $(event.relatedTarget) // Button that triggered the modal
         var gameId = button.data('game-id') 
@@ -1114,6 +1703,28 @@
         modal.find('#gamers-games-select').data('id', gameId)
         modal.find('#gamers-game-publisher').text(publisherName)
         modal.find('#gamers-game-website').text(publisherWebsite)
+        
+      })
+
+      $(document).on('show.bs.modal', '#creators-game-modal',function(event){
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var gameId = button.data('game-id') 
+        var gameName = button.data('game-name') 
+        var gameIcon = button.data('game-icon') 
+        var gamePlatforms = button.data('game-platforms') 
+        var gameInfo = button.data('game-info') 
+        var publisherName = button.data('game-publisher') 
+        var publisherWebsite = button.data('game-website')
+
+        var modal = $(this)
+        
+        modal.find('#creators-game-name').text(gameName)
+        modal.find('#creators-game-icon').html('<img src="assets/img/clients/'+ gameIcon +'"/>')
+        modal.find('#creators-game-info').html(gameInfo)
+        modal.find('#creators-game-platforms').html(gamePlatforms)
+        modal.find('#creators-games-select').data('id', gameId)
+        modal.find('#creators-game-publisher').text(publisherName)
+        modal.find('#creators-game-website').text(publisherWebsite)
         
       })
 
@@ -1137,6 +1748,28 @@
         modal.find('#gamers-content-select').data('wallet', walletId)
         modal.find('#gamers-content-select').data('token', gameId)
         modal.find('#gamers-content-select').data('icon', gameIcon)
+      })
+
+      $(document).on('show.bs.modal', '#creators-content-modal',function(event){
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var id = button.data('content-id')
+        var gameId = button.data('content-gameid') 
+        var gameName = button.data('content-title') 
+        var gameIcon = button.data('content-icon') 
+        var gameInfo = button.data('content-info') 
+        var walletId = $('#creators-wallet-address').val()
+
+        var modal = $(this)
+        
+        modal.find('#creators-content-title').text(gameName)
+        modal.find('#creators-content-icon').html('<img src="assets/img/content/'+ gameId +'/'+ gameIcon +'"/>')
+        modal.find('#creators-content-info').html(gameInfo)
+        modal.find('#creators-content-select').data('id', id)
+        modal.find('#creators-content-select').data('name', gameName)
+        modal.find('#creators-content-select').data('game', gameId)
+        modal.find('#creators-content-select').data('wallet', walletId)
+        modal.find('#creators-content-select').data('token', gameId)
+        modal.find('#creators-content-select').data('icon', gameIcon)
       })
 
       function openTab(tabId) {
