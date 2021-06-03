@@ -870,20 +870,20 @@ section {
 }
 
 .services .service-box.purple {
-  border-bottom: 3px solid #b50edf;
+  border-bottom: 3px solid #6441A4;
 }
 
 .services .service-box.purple .icon {
-  color: #b50edf;
+  color: #6441A4;
   background: #f8e4fd;
 }
 
 .services .service-box.purple .read-more {
-  color: #b50edf;
+  color: #6441A4;
 }
 
 .services .service-box.purple:hover {
-  background: #b50edf;
+  background: #6441A4;
 }
 
 .services .service-box.pink {
@@ -2590,6 +2590,34 @@ span.round-tab:hover {
   font-weight: 600;
   transition: 0.3s;
   border: 1px solid #4154f1;
+}
+
+.cost .btn-details-select {
+  display: inline-block;
+  padding: 8px 20px 10px 20px;
+  border-radius: 50px;
+  color: green;
+  transition: none;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid green;
+}
+
+.cost .btn-details-delete {
+  display: inline-block;
+  padding: 8px 20px 10px 20px;
+  border-radius: 50px;
+  color: red;
+  transition: none;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid red;
 }
 
 .cost .btn-buy:hover {
