@@ -2558,12 +2558,18 @@ span.round-tab:hover {
   flex-wrap: nowrap;
 }
 
+.actions {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+}
+
 .cost {
   font-size: 36px;
   color: #444444;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  float:right;
+  float: right;
 }
 
 .cost sup {
@@ -2578,7 +2584,7 @@ span.round-tab:hover {
   font-weight: 300;
 }
 
-.cost .btn-details {
+.actions .btn-details {
   display: inline-block;
   padding: 8px 20px 10px 20px;
   border-radius: 50px;
@@ -2592,7 +2598,7 @@ span.round-tab:hover {
   border: 1px solid #4154f1;
 }
 
-.cost .btn-details-select {
+.actions .btn-details-select {
   display: inline-block;
   padding: 8px 20px 10px 20px;
   border-radius: 50px;
@@ -2606,7 +2612,7 @@ span.round-tab:hover {
   border: 1px solid green;
 }
 
-.cost .btn-details-delete {
+.actions .btn-details-delete {
   display: inline-block;
   padding: 8px 20px 10px 20px;
   border-radius: 50px;
@@ -2620,7 +2626,7 @@ span.round-tab:hover {
   border: 1px solid red;
 }
 
-.cost .btn-buy:hover {
+.actions .btn-buy:hover {
   background: #4154f1;
   color: #fff;
 }

@@ -33,6 +33,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
   <script src="https://kit.fontawesome.com/0a0492e97d.js" crossorigin="anonymous"></script>
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AVNlOUZPkk6p-la2kYB5ehQBcTI6F2TxUYr5ROlJzVDkPqefC2R1K5yQrLYRTx9h1h0yWGv1JEYC-eys"></script>
 </head>
 
 <body>
@@ -651,8 +653,8 @@
                 </a>
               </li>
               <li role="presentation" class="nav-item disabled">
-                <a title="4. Review Submission" class="nav-link" id="nav-developers-review" role="tab" data-bs-toggle="tab"
-                  aria-controls="developers-review" href="#list-developers-review">
+                <a title="4. Review Submission" class="nav-link" id="nav-developers-review" role="tab"
+                  data-bs-toggle="tab" aria-controls="developers-review" href="#list-developers-review">
                   <span class="round-tab"><i class="fas fa-check" style="font-size: 3.7vh"></i></span>
                 </a>
               </li>
@@ -735,7 +737,7 @@
                         data-bs-target="#developers-content-modal">
                         New Content
                       </button>&nbsp;&nbsp;&nbsp;
- 
+
                       <button id="developers-purchase-content" type="button" class="btn btn-success">
                         Submit Content
                       </button>
@@ -758,7 +760,7 @@
                     </div>
                     <div class="panel-body">
                       <div class="flex-shrink-0 text-center">
-                        
+
 
                       </div>
 
@@ -772,6 +774,138 @@
       </div>
     </section>
     <!-- ======= End Developers Section ======= -->
+
+
+
+    <!-- ======= Streamers Section ======= -->
+    <section id="section-streamers" class="gamers">
+      <div class="container">
+        <header class="section-header">
+          <h2>Twitch Streamers</h2>
+          <p>Create NFTs for the Playground</p>
+        </header>
+
+        <div class="wizard">
+          <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item active">
+                <a title="1. Twitch Login" class="nav-link" id="nav-streamers-login" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-login" href="#list-streamers-login">
+                  <span class="round-tab">
+                    <i class="fas fa-user-tie" style="font-size: 3.7vh"></i>
+                  </span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="2. Create NFTs" class="nav-link" id="nav-streamers-nfts" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-nfts" href="#list-streamers-nfts">
+                  <span class="round-tab"><i class="fas fa-sd-card" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="3. NFT Package" class="nav-link" id="nav-streamers-packages" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-packages" href="#list-streamers-packages">
+                  <span class="round-tab"><i class="fas fa-box" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="4. Review Order" class="nav-link" id="nav-streamers-review" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-review" href="#list-streamers-review">
+                  <span class="round-tab"><i class="fas fa-puzzle-piece" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row spacer">&nbsp;</div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-streamers-login" role="tabpanel"
+                aria-labelledby="nav-streamers-login">
+                <div class="col-lg-12">
+                  <h4>Streamer Login</h4>
+
+                  <div class="row gy-4 text-center">
+                    <div class="pricing">
+                      <div class="price"></div>
+
+                      <br /><a href="#" class="btn-buy" id="login-streamers">Authenticate Twitch Account</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-streamers-nfts" role="tabpanel" aria-labelledby="nav-streamers-nfts">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="streamers-nfts-panel">
+                    <div class="panel-heading">
+                      <h4>Create NFTs</h4>
+                    </div>
+                    <div style="text-align: end; padding-bottom: 20px;">
+                      <button id="streamers-new-nfts" type="submit" data-bs-toggle="modal"
+                        data-bs-target="#streamers-nfts-modal">
+                        New NFT
+                      </button>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="streamers-nfts">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-streamers-packages" role="tabpanel"
+                aria-labelledby="nav-streamers-packages">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="streamers-packages-panel">
+                    <div class="panel-heading">
+                      <h4>Add NFT Supply</h4>
+                    </div>
+                    <div style="text-align: end; padding-bottom: 20px;">
+                      <button id="streamers-extension-btn" type="button" class="btn btn-success">
+                        Continue to Extension
+                      </button>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="streamers-packages">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-streamers-review" role="tabpanel"
+                aria-labelledby="nav-streamers-review">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="streamers-review-panel">
+                    <div class="panel-heading">
+                      <h4>Twitch Extension Integration</h4>
+                      <p class="section-header">Add the PlayNFT Extension to your channel Bio to start distribution.</p>
+                    </div>
+                    <div class="panel-body">
+                      <div class="flex-shrink-0 text-center">
+                        <p class="game-icon">
+                          <img src="assets/img/extensions.png" class="img-fluid" alt="Twitch Extensions" />
+                        </p>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ======= End Streamers Section ======= -->
+
+
 
   </main>
   <!-- End #main -->
@@ -864,8 +998,12 @@
       class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+    crossorigin="anonymous"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
@@ -888,7 +1026,7 @@
         <div class="flex-grow-1 ms-3">
           <strong>${tokenName}</strong>
           <p>ID: ${tokenId}</p>
-          <div class="cost">
+          <div class="actions">
           </div>
         </div>
       </li>
@@ -907,7 +1045,7 @@
           <strong>${tokenName}</strong>
           <p>ID: ${tokenId}</p>
           <p>Total Supply: ${tokenSupply}</p>
-          <div class="cost">
+          <div class="actions">
           </div>
         </div>
       </li>
@@ -927,7 +1065,7 @@
           <strong>${gameName}</strong>
           <p>Status: ${gameStatus}</p>
           <p>{{html gamePlatforms}}</p>
-          <div class="cost">
+          <div class="actions">
             <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-game-publisherId="${publisherId}" data-bs-toggle="modal" data-bs-target="#gamers-game-modal">View Details</a>
           </div>
         </div>
@@ -948,7 +1086,7 @@
           <strong>${gameName}</strong>
           <p>Status: ${gameStatus}</p>
           <p>{{html gamePlatforms}}</p>
-          <div class="cost">
+          <div class="actions">
             <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-game-publisherId="${publisherId}" data-bs-toggle="modal" data-bs-target="#creators-game-modal">View Details</a>
           </div>
         </div>
@@ -969,7 +1107,7 @@
           <strong>${gameName} ${gameReview}</strong>
           <p>Status: ${gameStatus}</p>
           <p>{{html gamePlatforms}}</p>
-          <div class="cost">
+          <div class="actions">
             <a href="#" onclick="deleteGame(event, this)" class="btn-details-delete" data-game-id="${gameId}" data-game-info="${gameInfo}">Delete</a>
             <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-status="${gameStatusValue}" data-game-icon="${gameIcon}" data-game-platformSteam="${gamePlatformSteam}" data-game-platformGoogle="${gamePlatformGoogle}" data-game-platformApple="${gamePlatformApple}" data-bs-toggle="modal" data-bs-target="#developers-game-modal">Edit</a>
             <a href="#" id="developers-games-select" class="btn-details-select" data-game-id="${gameId}">Select</a>
@@ -1083,7 +1221,7 @@
           <div class="cost"><sup>$</sup>${cost}</div>
           <strong>${title}</strong>
           <p>Type: ${type}</p>
-          <div class="cost">
+          <div class="actions">
             <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#gamers-content-modal">View Details</a>
           </div>
         </div>
@@ -1103,14 +1241,14 @@
           <div class="cost"><sup>$</sup>${cost}</div>
           <strong>${title}</strong>
           <p>Type: ${type}</p>
-          <div class="cost">
+          <div class="actions">
             <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#creators-content-modal">View Details</a>
           </div>
         </div>
       </li>
     </script>
 
-    <script id="developers-content-template" type="text/x-jquery-tmpl">
+  <script id="developers-content-template" type="text/x-jquery-tmpl">
       <li id="developers_content_${id}" class="list-group-item d-flex list-group-item-action developers-content-item">
         <div class="flex-shrink-0 game-icon">
           <img
@@ -1125,11 +1263,57 @@
           <p>Type: ${typetext}</p>
           <p>Status: ${status}</p>
           <p>Code: ${code}</p>
-          <div class="cost">
+          <div class="actions">
             {{if locked == 0 }}
             <a href="#" onclick="deleteContent(event, this)" id="developers-content-delete" class="btn-details-delete" data-content-id="${id}" data-content-gameid="${gameId}" data-content-info="${info}">Delete</a>
             {{/if}}
             <a href="#" class="btn-details" data-content-id="${id}" data-content-title="${title}" data-content-gameid="${gameId}" data-content-target="${target}" data-content-exclusive="${exclusive}" data-content-icon="${image}" data-content-info="${info}" data-content-type="${type}" data-content-cost="${cost}" data-content-code="${code}" data-bs-toggle="modal" data-bs-target="#developers-content-modal">Edit</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="streamers-nfts-template" type="text/x-jquery-tmpl">
+      <li id="streamers_nft_${id}" class="list-group-item d-flex list-group-item-action streamers-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/nfts/${streamerId}/${id}/icon.png"
+            class="img-fluid"
+            alt="${name}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${name}</strong>
+          <p>Status: ${status_text}<br/>
+          Supply: ${supply}</p>
+          <div class="actions">
+            {{if minted == 0 }}
+            <a href="#" onclick="deleteNFT(event, this)" id="streamers-nfts-delete" class="btn-details-delete" data-nft-id="${id}" data-nft-description="${description}">Delete</a>
+            {{/if}}
+            <a href="#" class="btn-details" data-nft-id="${id}" data-nft-name="${name}" data-nft-description="${description}" data-nft-cost="${cost}" data-nft-status="${status}"  data-bs-toggle="modal" data-bs-target="#streamers-nfts-modal">Edit</a>
+            <a href="#" id="streamers-nfts-select" class="btn-details-select" data-id="${id}">Select</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="streamers-packages-template" type="text/x-jquery-tmpl">
+      <li id="streamers_packages_${id}" class="list-group-item d-flex list-group-item-action streamers-packages-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="assets/img/package-${id}.png"
+            class="img-fluid"
+            alt="${name}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${name}</strong>
+          <p>Added Supply: ${supply}</p>
+          <div class="actions" id="streamers-packages-purchase-${id}">
+
+            <!-- <a href="#"  class="btn-details-select" data-packages-id="${id}" data-nft-id="${nftid}">Select</a> -->
           </div>
         </div>
       </li>
@@ -1458,8 +1642,9 @@
                   <input type="text" name="developers_content_code" id="developers_content_code" class="form-control"
                     placeholder="Content Code" required />
                   <label for="developers_content_code">Content Code</label>
-                  This code will be returned when a user's token has been linked with this content. (Example: unlock_quest1)<br/>
-                  
+                  This code will be returned when a user's token has been linked with this content. (Example:
+                  unlock_quest1)<br />
+
                 </div>
 
                 <div class="col-md-6 form-floating mb-3">
@@ -1486,7 +1671,7 @@
                 </div>
 
                 <div class="form-check form-switch mb-3">
-                  if selected, this exclusive content is only able to be linked to one NFT.<br/>
+                  if selected, this exclusive content is only able to be linked to one NFT.<br />
                   <input class="form-check-input" type="checkbox" id="developers_content_exclusive"
                     name="developers_content_exclusive">
                   <label class="form-check-label" for="developers_content_exclusive">Exclusive?</label>
@@ -1504,7 +1689,7 @@
                 </div>
 
                 <div class="col-md-12 mb-3">
-                  Provide detailed instructions on how this content is accessed in the game.<br/>
+                  Provide detailed instructions on how this content is accessed in the game.<br />
                   <textarea class="form-control" name="developers_content_info" id="developers_content_info" rows="6"
                     placeholder="Content Instructions" style="height: max-content;" required></textarea>
                 </div>
@@ -1522,6 +1707,68 @@
   </div>
 
 
+  <div class="modal" tabindex="-1" id="streamers-nfts-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Streamer NFT</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="streamers-nfts-form" action="#" method="post">
+          <input type="hidden" name="streamers_nft_id" id="streamers_nft_id" class="form-control" />
+          <input type="hidden" name="streamer_id" id="streamer_id" class="form-control" />
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="streamers_nft_name" id="streamers_nft_name" class="form-control"
+                    placeholder="NFT Name" required />
+                  <label for="streamers_nft_name">NFT Name</label>
+                  <div id="StreamerNFTFeedback" class="invalid-feedback">
+                    NFT not found.
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="streamers_nft_icon" class="form-label">Upload square image</label>
+                  <input class="form-control" type="file" name="streamers_nft_icon" id="streamers_nft_icon"
+                    accept=".png">
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <select class="form-select" id="streamers_nft_status" name="streamers_nft_status"
+                    aria-label="Visibility Status">
+                    <option value="0">Offline</option>
+                    <option value="1">Live</option>
+                  </select>
+                  <label for="streamers_nft_status">Visibility Status</label>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="number" name="streamers_nft_cost" id="streamers_nft_cost" class="form-control"
+                    placeholder="0" min="0" step="any" required />
+                  <label for="streamers_nft_cost">NFT Cost</label>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  <textarea class="form-control" name="streamers_nft_description" id="streamers_nft_description"
+                    rows="6" placeholder="Description" style="height: max-content;" required></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="streamers-edit-nft">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
   <script>
     var tokenID = "";
     var tokenImage = "";
@@ -1529,6 +1776,7 @@
     var publisherID = "";
     var gameID = "";
     var contentID = "";
+    var streamerID = "";
 
     function hideSections() {
       $("section").hide();
@@ -1543,10 +1791,83 @@
       $("#section-gamers").hide();
       $("#section-creators").hide();
       $("#section-developers").hide();
+      $("#section-streamers").hide();
     }
 
     $(document).ready(function () {
       showSections()
+
+      var hash = window.location.hash.substring(1);
+      var params = {}
+      hash.split('&').map(hk => {
+        let temp = hk.split('=');
+        params[temp[0]] = temp[1]
+      });
+
+      console.log(params)
+      if (params.access_token && params.token_type && params.state && params.id_token) {
+        var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+        let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+        if (params.state == state) {
+          hideSections();
+          $("#section-streamers").show();
+
+          $.ajax({
+            url: 'https://id.twitch.tv/oauth2/userinfo',
+            type: 'GET',
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+            },
+            data: {},
+            success: function (data) {
+              console.info(data);
+
+              if (data.aud != clientID) return;
+              if (data.email_verified == false) {
+                alert("Twitch Email must be verified!");
+                return;
+              }
+
+              streamerID = data.sub;
+
+              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture };
+
+              $.ajax({
+                url:
+                  "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getnfts",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify(formData),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                  console.info(data);
+                  let response = jQuery.parseJSON(data);
+
+                  $("#streamers-nfts").empty();
+
+                  response.forEach(function (item) {
+                    var status = "Offline"
+                    if(item.status == "1") status = "Live"
+
+                    let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                    $("#streamers-nfts-template")
+                      .tmpl(game_content)
+                      .appendTo("#streamers-nfts");
+                  });
+
+                  openTab("#nav-streamers-nfts");
+                },
+              });
+
+
+            },
+            error: function (error) {
+              console.info(error);
+            },
+          });
+        }
+      }
 
       $("#service-gamers").click(function () {
         hideSections();
@@ -1561,6 +1882,11 @@
       $("#service-developers").click(function () {
         hideSections();
         $("#section-developers").show();
+      });
+
+      $("#service-streamers").click(function () {
+        hideSections();
+        $("#section-streamers").show();
       });
 
       $(".nav-link").click(function () {
@@ -1806,7 +2132,7 @@
       $("#developers-game-form").on("submit", function (e) {
         e.preventDefault();
         var file = $('#developers_game_icon')[0].files[0];
-        if(file) {
+        if (file) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
 
@@ -1833,61 +2159,61 @@
       });
 
       function updateGame(formData) {
-        
+
         $.ajax({
-            url:
-              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/updategame",
-            type: "POST",
-            crossDomain: true,
-            data: JSON.stringify(formData),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (data) {
-              console.info(data);
-              var response = jQuery.parseJSON(data);
+          url:
+            "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/updategame",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
 
-              setTimeout(function(){
-                $("#developers-games").empty();
+            setTimeout(function () {
+              $("#developers-games").empty();
 
-                response.forEach(function (item) {
-                  let status
-                  let cost
-                  let review = ''
-                  if (item.status == 0) {
-                    status = "Development"
-                  }
-                  if (item.status == 1) {
-                    status = "Live"
-                  }
-                  if (item.approved == 0) {
-                    review = "(In Review)"
-                  }
+              response.forEach(function (item) {
+                let status
+                let cost
+                let review = ''
+                if (item.status == 0) {
+                  status = "Development"
+                }
+                if (item.status == 1) {
+                  status = "Live"
+                }
+                if (item.approved == 0) {
+                  review = "(In Review)"
+                }
 
-                  let platforms = ''
-                  if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
-                  if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
-                  if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+                let platforms = ''
+                if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+                if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+                if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
 
-                  let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
-                  $("#developers-games-template")
-                    .tmpl(game_content)
-                    .appendTo("#developers-games");
+                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
+                $("#developers-games-template")
+                  .tmpl(game_content)
+                  .appendTo("#developers-games");
 
-                });
+              });
 
-                var myModalEl = document.getElementById('developers-game-modal')
-                var modal = bootstrap.Modal.getInstance(myModalEl)
-                modal.hide();
+              var myModalEl = document.getElementById('developers-game-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
 
-              },2000);
-            },
-          });
+            }, 2000);
+          },
+        });
       }
 
       $("#developers-content-form").on("submit", function (e) {
         e.preventDefault();
         var file = $('#developers_content_icon')[0].files[0];
-        if(file) {
+        if (file) {
           var reader = new FileReader();
           reader.readAsDataURL(file);
 
@@ -1914,54 +2240,123 @@
       });
 
       function updateContent(formData) {
-        
+
         $.ajax({
-            url:
-              "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/updatecontent",
-            type: "POST",
-            crossDomain: true,
-            data: JSON.stringify(formData),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (data) {
-              console.info(data);
-              var response = jQuery.parseJSON(data);
+          url:
+            "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/updatecontent",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
 
-              setTimeout(function(){
-                $("#developers-content").empty();
+            setTimeout(function () {
+              $("#developers-content").empty();
 
-                response.forEach(function (item) {
-                  let type = ''
+              response.forEach(function (item) {
+                let type = ''
 
-                  if (item.type == 0) {
-                    type = "Unlockable Item"
-                  }
-                  if (item.type == 1) {
-                    type = "Modifier"
-                  }
-                  if (item.type == 2) {
-                    type = "Consummable"
-                  }
-                  if (item.type == 3) {
-                    type = "Event"
-                  }
+                if (item.type == 0) {
+                  type = "Unlockable Item"
+                }
+                if (item.type == 1) {
+                  type = "Modifier"
+                }
+                if (item.type == 2) {
+                  type = "Consummable"
+                }
+                if (item.type == 3) {
+                  type = "Event"
+                }
 
-                  let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, info: item.description };
-                  $("#developers-content-template")
-                    .tmpl(game_content)
-                    .appendTo("#developers-content");
+                let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, info: item.description };
+                $("#developers-content-template")
+                  .tmpl(game_content)
+                  .appendTo("#developers-content");
 
-                });
+              });
 
-                $("#developers-content-form")[0].reset();
+              $("#developers-content-form")[0].reset();
 
-                var myModalEl = document.getElementById('developers-content-modal')
-                var modal = bootstrap.Modal.getInstance(myModalEl)
-                modal.hide();
+              var myModalEl = document.getElementById('developers-content-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
 
-              },2000);
-            },
-          });
+            }, 2000);
+          },
+        });
+      }
+
+      $("#streamers-nfts-form").on("submit", function (e) {
+        e.preventDefault();
+        var file = $('#streamers_nft_icon')[0].files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+
+          // when image data was read
+          reader.onload = function (event) {
+            // I usually remove the prefix to only keep data, but it depends on your server
+            var fileData = event.target.result.replace("data:" + file.type + ";base64,", '');
+
+            const data = new FormData(e.target);
+            data.append("icon", fileData);
+            data.append("icon_type", file.type);
+            const formData = Object.fromEntries(data.entries());
+            console.log(JSON.stringify(formData));
+
+            updateNFT(formData);
+          }
+        } else {
+          const data = new FormData(e.target);
+          const formData = Object.fromEntries(data.entries());
+          console.log(JSON.stringify(formData));
+
+          updateNFT(formData);
+        }
+      });
+
+      function updateNFT(formData) {
+
+        $.ajax({
+          url:
+            "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/updatenft",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+            setTimeout(function () {
+              $("#streamers-nfts").empty();
+
+              response.forEach(function (item) {
+
+                var status = "Offline"
+                if(item.status == "1") status = "Live"
+
+                let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                $("#streamers-nfts-template")
+                  .tmpl(game_content)
+                  .appendTo("#streamers-nfts");
+
+              });
+
+              $("#streamers-nfts-form")[0].reset();
+
+              var myModalEl = document.getElementById('streamers-nfts-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
+
+            }, 2000);
+          },
+        });
       }
 
       //Wizard
@@ -2019,7 +2414,7 @@
               if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
               if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
 
-              
+
               let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo, publisherId: item.publisherId, };
               $("#games-template")
                 .tmpl(game_content)
@@ -2128,8 +2523,8 @@
               type = "Event"
             }
 
-            if(item.status < 2) return;
-            if(item.locked != 0) return;
+            if (item.status < 2) return;
+            if (item.locked != 0) return;
 
             let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
             $("#content-template")
@@ -2183,8 +2578,8 @@
               type = "Event"
             }
 
-            if(item.status < 2) return;
-            if(item.locked != 0) return;
+            if (item.status < 2) return;
+            if (item.locked != 0) return;
 
             let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.adjCost, type: type, info: item.description };
             $("#creators-content-template")
@@ -2234,7 +2629,7 @@
 
             $("#gamers-review-cost").html("Total: $" + item.cost)
             $('#gamers-review-token').html('<img src="' + tokenImage + '"/>')
-            $('#gamers-review-icon').html('<img src="https://playnft.s3.amazonaws.com/'+ publisherID +'/'+ _gameId +'/'+ _contentId +'/icon.png"/>')
+            $('#gamers-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
             $("#gamers-review-name").html(_name)
 
             $('#amountf').val(item.cost)
@@ -2350,7 +2745,7 @@
 
             $("#creators-review-cost").html("Total: $" + item.cost)
             $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
-            $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/'+ publisherID +'/'+ _gameId +'/'+ _contentId +'/icon.png"/>')
+            $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
             $("#creators-review-name").html(_name)
 
             $('#creators-amountf').val(item.cost)
@@ -2384,12 +2779,80 @@
         contentType: "application/json",
         success: function (data) {
           console.info(data);
-          
+
           $("#developers-review").empty();
 
           openTab("#nav-developers-review");
         },
       });
+
+    });
+
+    $(document).on("click", "#streamers-nfts-select", function () {
+
+      let id = $(this).data('id');
+      let formData = { nftId: id, streamerId: streamerID };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/getpackages",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#streamers-packages").empty();
+
+          response.forEach(function (item) {
+
+            if(item.supply == -1) item.supply = "Infinite"
+
+            let game_content = { id: item.id, name: item.name, cost: item.cost, supply: item.supply, nftid: id };
+            $("#streamers-packages-template")
+              .tmpl(game_content)
+              .appendTo("#streamers-packages");
+
+            RenderPayPal(item, "#streamers-packages-purchase-" + item.id);
+
+          });
+
+          openTab("#nav-streamers-packages");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#streamers-packages-select", function () {
+
+      let id = $(this).data('packages-id');
+      let nftid = $(this).data('nft-id');
+
+      openTab("#nav-streamers-review");
+
+    });
+
+    $(document).on("click", "#streamers-extension-btn", function () {
+
+      openTab("#nav-streamers-review");
+
+    })
+
+
+
+
+
+    $(document).on("click", "#login-streamers", function () {
+      let clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+      let redirectSite = location.protocol + "//" + location.host
+      let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+
+
+      location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
 
     });
 
@@ -2410,7 +2873,7 @@
       var modal = $(this)
 
       modal.find('#gamers-game-name').text(gameName)
-      modal.find('#gamers-game-icon').html('<img src="https://playnft.s3.amazonaws.com/'+ publisherId +'/'+ gameId +'/icon.png"/>')
+      modal.find('#gamers-game-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherId + '/' + gameId + '/icon.png"/>')
       modal.find('#gamers-game-info').html(gameInfo)
       modal.find('#gamers-game-platforms').html(gamePlatforms)
       modal.find('#gamers-games-select').data('id', gameId)
@@ -2435,7 +2898,7 @@
       var modal = $(this)
 
       modal.find('#creators-game-name').text(gameName)
-      modal.find('#creators-game-icon').html('<img src="https://playnft.s3.amazonaws.com/'+ publisherId +'/'+ gameId +'/icon.png"/>')
+      modal.find('#creators-game-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherId + '/' + gameId + '/icon.png"/>')
       modal.find('#creators-game-info').html(gameInfo)
       modal.find('#creators-game-platforms').html(gamePlatforms)
       modal.find('#creators-games-select').data('id', gameId)
@@ -2456,7 +2919,7 @@
       var modal = $(this)
 
       modal.find('#gamers-content-title').text(gameName)
-      modal.find('#gamers-content-icon').html('<img src="https://playnft.s3.amazonaws.com/'+ publisherID +'/'+ gameId +'/'+ id +'/icon.png"/>')
+      modal.find('#gamers-content-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + gameId + '/' + id + '/icon.png"/>')
       modal.find('#gamers-content-info').html(gameInfo)
       modal.find('#gamers-content-select').data('id', id)
       modal.find('#gamers-content-select').data('name', gameName)
@@ -2478,7 +2941,7 @@
       var modal = $(this)
 
       modal.find('#creators-content-title').text(gameName)
-      modal.find('#creators-content-icon').html('<img src="https://playnft.s3.amazonaws.com/'+ publisherID +'/'+ gameId +'/'+ id +'/icon.png"/>')
+      modal.find('#creators-content-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + gameId + '/' + id + '/icon.png"/>')
       modal.find('#creators-content-info').html(gameInfo)
       modal.find('#creators-content-select').data('id', id)
       modal.find('#creators-content-select').data('name', gameName)
@@ -2526,10 +2989,10 @@
       var type = button.data('content-type')
       var target = button.data('content-target')
 
-      if(!gameId) gameId = gameID;
-      if(!Id) Id = 0;
+      if (!gameId) gameId = gameID;
+      if (!Id) Id = 0;
       console.log(exclusive)
-      if(exclusive == 0) exclusive = false;
+      if (exclusive == 0) exclusive = false;
 
       var modal = $(this)
       modal.find('#developers_content_name').val(gameName)
@@ -2544,6 +3007,26 @@
       modal.find('#developers_content_type').val(type)
       modal.find('#developers_content_target').val(target)
 
+    })
+
+    $(document).on('show.bs.modal', '#streamers-nfts-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var Id = button.data('nft-id')
+      var gameName = button.data('nft-name')
+      var gameIcon = button.data('nft-image')
+      var gameInfo = button.data('nft-description')
+      var gameStatus = button.data('nft-status')
+      var gameCost = button.data('nft-cost')
+
+      if (!Id) Id = 0;
+
+      var modal = $(this)
+      modal.find('#streamers_nft_name').val(gameName)
+      modal.find('#streamers_nft_description').val(gameInfo)
+      modal.find('#streamers_nft_status').val(gameStatus)
+      modal.find('#streamers_nft_id').val(Id)
+      modal.find('#streamer_id').val(streamerID)
+      modal.find('#streamers_nft_cost').val(gameCost)
     })
 
     function openTab(tabId) {
@@ -2561,13 +3044,17 @@
       tab.show();
     }
 
+    function resetTabs() {
+
+    }
+
     function deleteGame(event, elem) {
       event.preventDefault();
-       
-      if(window.confirm('Are you sure?')){
+
+      if (window.confirm('Are you sure?')) {
         let id = $(elem).data('game-id');
         let info = $(elem).data('game-info');
-        let formData = { developers_game_id: id, developers_game_status: -1, developers_publisher_id: publisherID,  developers_game_info: info};
+        let formData = { developers_game_id: id, developers_game_status: -1, developers_publisher_id: publisherID, developers_game_info: info };
         console.log(formData)
 
         $.ajax({
@@ -2579,46 +3066,46 @@
           dataType: "json",
           contentType: "application/json",
           success: function (data) {
-              console.info(data);
-              let response = jQuery.parseJSON(data);
+            console.info(data);
+            let response = jQuery.parseJSON(data);
 
-              $("#developers-games").empty();
+            $("#developers-games").empty();
 
-              response.forEach(function (item) {
-                let status
-                let cost
-                if (item.status == 0) {
-                  status = "Development"
-                }
-                if (item.status == 1) {
-                  status = "Live"
-                }
+            response.forEach(function (item) {
+              let status
+              let cost
+              if (item.status == 0) {
+                status = "Development"
+              }
+              if (item.status == 1) {
+                status = "Live"
+              }
 
-                let platforms = ''
-                if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
-                if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
-                if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+              let platforms = ''
+              if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+              if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+              if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
 
-                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
-                $("#developers-games-template")
-                  .tmpl(game_content)
-                  .appendTo("#developers-games");
+              let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
+              $("#developers-games-template")
+                .tmpl(game_content)
+                .appendTo("#developers-games");
 
-              });
-            },
+            });
+          },
         });
       }
     }
 
     function deleteContent(event, elem) {
       event.preventDefault();
-       
-      if(window.confirm('Are you sure?')){
+
+      if (window.confirm('Are you sure?')) {
         let id = $(elem).data('content-id');
         let info = $(elem).data('content-info');
         let gameid = $(elem).data('content-gameid');
 
-        let formData = { developers_content_id: id, developers_content_status: -1, developers_publisher_id: publisherID,  developers_content_info: info,  developers_game_id: gameid};
+        let formData = { developers_content_id: id, developers_content_status: -1, developers_publisher_id: publisherID, developers_content_info: info, developers_game_id: gameid };
         console.log(formData)
 
         $.ajax({
@@ -2630,49 +3117,82 @@
           dataType: "json",
           contentType: "application/json",
           success: function (data) {
-              console.info(data);
-              var response = jQuery.parseJSON(data);
+            console.info(data);
+            var response = jQuery.parseJSON(data);
 
-            
-              $("#developers-content").empty();
 
-              response.forEach(function (item) {
-                let type = ''
-                let status = ''
+            $("#developers-content").empty();
 
-                if (item.type == 0) {
-                  type = "Unlockable Item"
-                }
-                if (item.type == 1) {
-                  type = "Modifier"
-                }
-                if (item.type == 2) {
-                  type = "Consummable"
-                }
-                if (item.type == 3) {
-                  type = "Event"
-                }
+            response.forEach(function (item) {
+              let type = ''
+              let status = ''
 
-                if (item.status == 0) {
-                  status = "New"
-                }
-                if (item.status == 1) {
-                  status = "Submitted"
-                }
-                if (item.status == 2) {
-                  status = "Approved"
-                }
+              if (item.type == 0) {
+                type = "Unlockable Item"
+              }
+              if (item.type == 1) {
+                type = "Modifier"
+              }
+              if (item.type == 2) {
+                type = "Consummable"
+              }
+              if (item.type == 3) {
+                type = "Event"
+              }
 
-                let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, status: status, info: item.description };
-                $("#developers-content-template")
-                  .tmpl(game_content)
-                  .appendTo("#developers-content");
+              if (item.status == 0) {
+                status = "New"
+              }
+              if (item.status == 1) {
+                status = "Submitted"
+              }
+              if (item.status == 2) {
+                status = "Approved"
+              }
 
-              });
+              let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, status: status, info: item.description };
+              $("#developers-content-template")
+                .tmpl(game_content)
+                .appendTo("#developers-content");
 
-            },
+            });
+
+          },
         });
       }
+    }
+
+    function RenderPayPal(item, elem) {
+      console.log(item)
+      console.log(elem)
+      paypal.Buttons({
+        style: {
+          layout: 'horizontal',
+          color: 'blue',
+          shape: 'pill',
+          label: 'pay',
+          tagline: 'false',
+          height: 45
+        },
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                currency_code: "USD",
+                value: item.cost
+              },
+              description: item.name,
+              custom_id: item.id,
+              reference_id: streamerID
+            }]
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }
+      }).render(elem);
     }
   </script>
 </body>
