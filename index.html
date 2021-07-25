@@ -35,6 +35,16 @@
   <script src="https://kit.fontawesome.com/0a0492e97d.js" crossorigin="anonymous"></script>
   <script
     src="https://www.paypal.com/sdk/js?client-id=AVNlOUZPkk6p-la2kYB5ehQBcTI6F2TxUYr5ROlJzVDkPqefC2R1K5yQrLYRTx9h1h0yWGv1JEYC-eys"></script>
+
+  <script src="https://cdn.tiny.cloud/1/doicvbneaya0gerwmrc6gn0ei4uw3vsk4znmslowgfwri44v/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      menubar: false
+    });
+  </script>
 </head>
 
 <body>
@@ -1020,33 +1030,6 @@
             </div>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Navigation</h4>
-            <ul>
-              <li>
-                <i class="bi bi-chevron-right"></i> <a href="#">Home</a>
-              </li>
-              <li>
-                <i class="bi bi-chevron-right"></i>
-                <a href="#">About PlayNFT</a>
-              </li>
-              <li>
-                <i class="bi bi-chevron-right"></i> <a href="#">Services</a>
-              </li>
-              <li>
-                <i class="bi bi-chevron-right"></i>
-                <a href="#">Terms of service</a>
-              </li>
-              <li>
-                <i class="bi bi-chevron-right"></i>
-                <a href="#">Privacy policy</a>
-              </li>
-            </ul>
-          </div>
-
-
-
-
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>Donations</h4>
             <p>
@@ -1808,13 +1791,13 @@
                 <div class="col-md-6 mb-3">
                   <label for="streamers_nft_icon" class="form-label">Upload square image</label>
                   <input class="form-control" type="file" name="streamers_nft_icon" id="streamers_nft_icon"
-                    accept=".png" required >
+                    accept=".png" required>
                 </div>
 
                 <div class="col-md-6 form-floating mb-3">
                   <select class="form-select" id="streamers_nft_status" name="streamers_nft_status"
                     aria-label="Visibility Status">
-                    <option value="0">Offline</option>
+                    <option value="0" selected="selected">Offline</option>
                     <option value="1">Live</option>
                   </select>
                   <label for="streamers_nft_status">Visibility Status</label>
@@ -1822,7 +1805,7 @@
 
                 <div class="col-md-6 form-floating mb-3">
                   <input type="number" name="streamers_nft_cost" id="streamers_nft_cost" class="form-control"
-                    placeholder="0" min="0" step="any" required />
+                    placeholder="0" min="1" step="0.01" required />
                   <label for="streamers_nft_cost">NFT Cost</label>
                 </div>
 
@@ -2958,7 +2941,7 @@
         },
       });
 
-      
+
 
     });
 
@@ -3092,6 +3075,7 @@
       modal.find('#developers_game_name').val(gameName)
       //modal.find('#developers-game-icon').html('<img src="assets/img/clients/' + gameIcon + '"/>')
       modal.find('#developers_game_info').val(gameInfo)
+      tinymce.get('developers_game_info').setContent(gameInfo)
       modal.find('#developers_game_status').val(gameStatus)
       modal.find('#developers_game_steam').attr("checked", gamePlatformSteam)
       modal.find('#developers_game_apple').attr("checked", gamePlatformApple)
@@ -3123,6 +3107,7 @@
       var modal = $(this)
       modal.find('#developers_content_name').val(gameName)
       modal.find('#developers_content_info').val(gameInfo)
+      tinymce.get('developers_content_info').setContent(gameInfo)
       modal.find('#developers_content_status').val(gameStatus)
       modal.find('#developers_content_id').val(Id)
       modal.find('#developers_game_id').val(gameId)
@@ -3149,6 +3134,7 @@
       var modal = $(this)
       modal.find('#streamers_nft_name').val(gameName)
       modal.find('#streamers_nft_description').val(gameInfo)
+      tinymce.get('streamers_nft_description').setContent(gameInfo)
       modal.find('#streamers_nft_status').val(gameStatus)
       modal.find('#streamers_nft_id').val(Id)
       modal.find('#streamer_id').val(streamerID)
@@ -3286,6 +3272,48 @@
 
             });
 
+          },
+        });
+      }
+    }
+
+    function deleteNFT(event, elem) {
+      event.preventDefault();
+
+      if (window.confirm('Are you sure?')) {
+        let id = $(elem).data('nft-id');
+        let info = $(elem).data('nft-description');
+        let formData = { streamers_nft_id: id, streamers_nft_status: -1, streamers_nft_description: info, streamer_id: streamerID };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://tn8wa4zqy8.execute-api.us-east-1.amazonaws.com/dev/updatenft",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+            setTimeout(function () {
+              $("#streamers-nfts").empty();
+
+              response.forEach(function (item) {
+
+                var status = "Offline"
+                if (item.status == "1") status = "Live"
+
+                let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                $("#streamers-nfts-template")
+                  .tmpl(game_content)
+                  .appendTo("#streamers-nfts");
+
+              });
+
+            }, 2000);
           },
         });
       }
