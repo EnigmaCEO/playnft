@@ -517,6 +517,7 @@ section {
 .about .content {
   background-color: #f6f9ff;
   padding: 40px;
+  min-height: -webkit-fill-available;
 }
 
 .about h3 {
@@ -870,20 +871,20 @@ section {
 }
 
 .services .service-box.purple {
-  border-bottom: 3px solid #b50edf;
+  border-bottom: 3px solid #6441A4;
 }
 
 .services .service-box.purple .icon {
-  color: #b50edf;
+  color: #6441A4;
   background: #f8e4fd;
 }
 
 .services .service-box.purple .read-more {
-  color: #b50edf;
+  color: #6441A4;
 }
 
 .services .service-box.purple:hover {
-  background: #b50edf;
+  background: #6441A4;
 }
 
 .services .service-box.pink {
@@ -1288,7 +1289,7 @@ section {
   margin: 40px 30px;
   box-shadow: 0px 0 20px rgba(1, 41, 112, 0.1);
   background: #fff;
-  min-height: 320px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -1305,7 +1306,7 @@ section {
 }
 
 .testimonials .testimonial-item .testimonial-img {
-  width: 90px;
+  width: 150px;
   border-radius: 50%;
   border: 4px solid #fff;
   margin: 0 auto;
@@ -1652,7 +1653,7 @@ section {
   padding: 12px 15px;
 }
 
-.contact .php-email-form button[type="submit"] {
+button[type="submit"] {
   background: #4154f1;
   border: 0;
   padding: 10px 30px;
@@ -1661,7 +1662,7 @@ section {
   border-radius: 4px;
 }
 
-.contact .php-email-form button[type="submit"]:hover {
+button[type="submit"]:hover {
   background: #5969f3;
 }
 
@@ -2260,6 +2261,16 @@ section {
   .footer .footer-top {
     background-position: center bottom;
   }
+
+  .game-icon {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+
+  .content-icon {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
 }
 
 .footer .footer-top .footer-info {
@@ -2367,4 +2378,277 @@ section {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+.list-group{
+  max-height: 500px;
+  min-height: 200px;
+  margin-bottom: 10px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.game-icon img {
+  width: 128px;
+}
+
+.content-icon {
+  text-align:center;
+}
+
+.content-icon img {
+  width: 200px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4154f1;
+  text-transform: uppercase;
+  position: relative;
+  text-align: center;
+}
+
+h4 i{
+  float:right;
+}
+
+div.spacer
+{
+    font-size: 0; 
+    height: 80px;
+    line-height: 0;
+}
+
+
+.wizard {
+  /*margin: 20px auto;*/
+  background: #fff;
+}
+
+  .wizard .nav-tabs {
+      position: relative;
+      /*margin: 40px auto;*/
+      margin-bottom: 0;
+      border-bottom-color: #fff;
+  }
+
+  .wizard > div.wizard-inner {
+      position: relative;
+  }
+
+.connecting-line {
+  height: 4px;
+  background: #e0e0e0;
+  position: absolute;
+  width: 80%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 0;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+  color: #555555;
+  cursor: default;
+  border: 0;
+  border-bottom-color: transparent;
+}
+
+span.round-tab {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  display: inline-block;
+  border-radius: 100px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  z-index: 2;
+  /*position: absolute;*/
+  left: 0;
+  text-align: center;
+  font-size: 25px;
+}
+span.round-tab i{
+  color:#555555;
+}
+.wizard li.active span.round-tab {
+  background: #fff;
+  border: 2px solid #4154f1;
+  
+}
+.wizard li.active span.round-tab i{
+  color: #4154f1;
+}
+
+.wizard .nav-tabs > li.active > a {
+  cursor: pointer;
+}
+
+.wizard li.completed span.round-tab {
+  background: #fff;
+  border: 2px solid green;
+}
+
+.wizard li.completed span.round-tab i{
+  color: green;
+}
+
+span.round-tab:hover {
+  color: #333;
+  border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+  width: 25%;
+}
+
+
+.wizard .nav-tabs > li a {
+  width: 70px;
+  height: 70px;
+  margin: 20px auto;
+  border-radius: 100%;
+  padding: 0;
+}
+
+  .wizard .nav-tabs > li a:hover {
+      background: transparent;
+  }
+
+.wizard .tab-pane {
+  position: relative;
+  padding-top: 50px;
+}
+
+.wizard h3 {
+  margin-top: 0;
+}
+
+@media( max-width : 585px ) {
+
+  .wizard {
+      width: 90%;
+      height: auto !important;
+  }
+
+  span.round-tab {
+      font-size: 16px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+  }
+
+  .wizard .nav-tabs > li a {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+  }
+
+  .wizard li.active:after {
+      content: " ";
+      /*position: absolute;*/
+      left: 35%;
+  }
+
+  
+}
+
+.nav {
+  flex-wrap: nowrap;
+}
+
+.actions {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+}
+
+.cost {
+  font-size: 36px;
+  color: #444444;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  float: right;
+}
+
+.cost sup {
+  font-size: 20px;
+  top: -15px;
+  left: -3px;
+}
+
+.cost span {
+  color: #bababa;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.actions .btn-details {
+  display: inline-block;
+  padding: 8px 20px 10px 20px;
+  border-radius: 50px;
+  color: #4154f1;
+  transition: none;
+  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid #4154f1;
+}
+
+.actions .btn-details-select {
+  display: inline-block;
+  padding: 8px 20px 10px 20px;
+  border-radius: 50px;
+  color: green;
+  transition: none;
+  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid green;
+}
+
+.actions .btn-details-delete {
+  display: inline-block;
+  padding: 8px 20px 10px 20px;
+  border-radius: 50px;
+  color: red;
+  transition: none;
+  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+  border: 1px solid red;
+}
+
+.actions .btn-buy:hover {
+  background: #4154f1;
+  color: #fff;
+}
+
+.fab {
+  font-size: 3.7vh; 
+  color: #4154f1;
+}
+
+h3 {
+  font-weight:bold
+}
+
+#gamers-review-cost {
+  float:right;
+  font-weight: bold;
+}
+
+#gamers-content-info {
+  white-space: pre;
+  white-space: pre-line;
+}
+
+#creators-content-info {
+  white-space: pre;
+  white-space: pre-line;
 }

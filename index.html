@@ -2,96 +2,91 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>FlexStart Bootstrap Template - Index</title>
-  <meta content="" name="description">
+  <title>PlayNFT - The Playground for your NFTs</title>
+  <meta content="" name="description" />
 
-  <meta content="" name="keywords">
+  <meta content="nft" name="keywords" />
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" />
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet" />
 
-  <!-- =======================================================
-  * Template Name: FlexStart - v1.2.0
-  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+  <script src="https://kit.fontawesome.com/0a0492e97d.js" crossorigin="anonymous"></script>
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=Afublr47iUx9od__o9lROJup9U0wx74gtOgqlGi-xPG8hGRUggDp1497DSQTMaAN9hP5FspYXTg9bZu0"></script>
+
+  <script src="https://cdn.tiny.cloud/1/doicvbneaya0gerwmrc6gn0ei4uw3vsk4znmslowgfwri44v/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      menubar: false
+    });
+  </script>
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span>FlexStart</span>
+        <img src="assets/img/logo.png" alt="PlayNFT" />
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#streamers">Streamers</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
+          <li><a class="nav-link scrollto" href="#clients">Games</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li>
+            <a class="getstarted scrollto" href="#services">Get Started</a>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+      </nav>
+      <!-- .navbar -->
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center">
-
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+          <h1 data-aos="fade-up">The playground for NFTs</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">
+            Collect, Connect, and Play!
+          </h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
-              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <a href="#services"
+                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Get Started</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -99,29 +94,106 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+          <img src="assets/img/values-2.png" class="img-fluid" alt="" />
         </div>
       </div>
     </div>
+  </section>
+  <!-- End Hero -->
 
-  </section><!-- End Hero -->
+  <!-- ======= Streamers Section ======= -->
+  <section id="streamers" class="testimonials">
+
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h2>Streamers</h2>
+        <p>Collect NFTs of your favorite Streamers.</p>
+      </header>
+
+      <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="200">
+        <div id="streamer_list" class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <div class="profile mt-auto">
+                <img
+                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/enigmagamesinc-profile_image-6e13de0cbab10c1c-150x150.png"
+                  class="testimonial-img" alt="">
+                <h3>EnigmaGamesInc</h3>
+                <h4>13 NFTs</h4>
+
+              </div>
+              <p>
+                <button type="submit">Visit Channel</button>
+              </p>
+
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <div class="profile mt-auto">
+                <img
+                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/eebbe7fc-7859-4917-825b-34e2e63ded6d-profile_image-150x150.png"
+                  class="testimonial-img" alt="">
+                <h3>DenkOps</h3>
+                <h4>2 NFTs</h4>
+
+              </div>
+              <p>
+                <button type="submit">Visit Channel</button>
+              </p>
+
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <div class="profile mt-auto">
+                <img
+                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/293af7b9-814a-4b46-ae97-d55879f2e6a4-profile_image-150x150.png"
+                  class="testimonial-img" alt="">
+                <h3>Ziggy</h3>
+                <h4>3 NFTs</h4>
+
+              </div>
+              <p>
+                <button type="submit">Visit Channel</button>
+              </p>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    </div>
+
+  </section><!-- End Testimonials Section -->
 
   <main id="main">
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
-
       <div class="container" data-aos="fade-up">
         <div class="row gx-0">
-
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
               <h3>Who We Are</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <h2>
+                We are building an ecosystem to extend the utility and value
+                of NFTs.
+              </h2>
               <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                This platform was created to allow NFT holders and creators to
+                add value to their tokens by using them in blockchain enabled
+                games. Game developers can use this platform to fundraise or
+                create unique experiences for their blockchain communities.
               </p>
               <div class="text-center text-lg-start">
-                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                <a href="#"
+                  class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                   <span>Read More</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
@@ -130,1120 +202,826 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <div class="content">
+              <img src="assets/img/feature.png" class="img-fluid" alt="" />
+            </div>
           </div>
-
         </div>
       </div>
-
-    </section><!-- End About Section -->
-
-    <!-- ======= Values Section ======= -->
-    <section id="values" class="values">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Our Values</h2>
-          <p>Odit est perspiciatis laborum et dicta</p>
-        </header>
-
-        <div class="row">
-
-          <div class="col-lg-4">
-            <div class="box" data-aos="fade-up" data-aos-delay="200">
-              <img src="assets/img/values-1.png" class="img-fluid" alt="">
-              <h3>Ad cupiditate sed est odio</h3>
-              <p>Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit. Et veritatis id.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="400">
-              <img src="assets/img/values-2.png" class="img-fluid" alt="">
-              <h3>Voluptatem voluptatum alias</h3>
-              <p>Repudiandae amet nihil natus in distinctio suscipit id. Doloremque ducimus ea sit non.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="600">
-              <img src="assets/img/values-3.png" class="img-fluid" alt="">
-              <h3>Fugit cupiditate alias nobis.</h3>
-              <p>Quam rem vitae est autem molestias explicabo debitis sint. Vero aliquid quidem commodi.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Values Section -->
-
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-emoji-smile"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Happy Clients</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Projects</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-headset" style="color: #15be56;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hours Of Support</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-people" style="color: #bb0852;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hard Workers</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Counts Section -->
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Features</h2>
-          <p>Laboriosam et omnis fuga quis dolor direda fara</p>
-        </header>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <img src="assets/img/features.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
-            <div class="row align-self-center gy-4">
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Eos aspernatur rem</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Facilis neque ipsa</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Volup amet voluptas</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Rerum omnis sint</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Alias possimus</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="700">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Repellendus mollitia</h3>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div> <!-- / row -->
-
-        <!-- Feature Tabs -->
-        <div class="row feture-tabs" data-aos="fade-up">
-          <div class="col-lg-6">
-            <h3>Neque officiis dolore maiores et exercitationem quae est seda lidera pat claero</h3>
-
-            <!-- Tabs -->
-            <ul class="nav nav-pills mb-3">
-              <li>
-                <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Saepe fuga</a>
-              </li>
-              <li>
-                <a class="nav-link" data-bs-toggle="pill" href="#tab2">Voluptates</a>
-              </li>
-              <li>
-                <a class="nav-link" data-bs-toggle="pill" href="#tab3">Corrupti</a>
-              </li>
-            </ul><!-- End Tabs -->
-
-            <!-- Tab Content -->
-            <div class="tab-content">
-
-              <div class="tab-pane fade show active" id="tab1">
-                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                </div>
-                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                </div>
-                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 1 Content -->
-
-              <div class="tab-pane fade show" id="tab2">
-                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                </div>
-                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                </div>
-                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 2 Content -->
-
-              <div class="tab-pane fade show" id="tab3">
-                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                </div>
-                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                </div>
-                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 3 Content -->
-
-            </div>
-
-          </div>
-
-          <div class="col-lg-6">
-            <img src="assets/img/features-2.png" class="img-fluid" alt="">
-          </div>
-
-        </div><!-- End Feature Tabs -->
-
-        <!-- Feature Icons -->
-        <div class="row feature-icons" data-aos="fade-up">
-          <h3>Ratione mollitia eos ab laudantium rerum beatae quo</h3>
-
-          <div class="row">
-
-            <div class="col-xl-4 text-center" data-aos="fade-right" data-aos-delay="100">
-              <img src="assets/img/features-3.png" class="img-fluid p-4" alt="">
-            </div>
-
-            <div class="col-xl-8 d-flex content">
-              <div class="row align-self-center gy-4">
-
-                <div class="col-md-6 icon-box" data-aos="fade-up">
-                  <i class="ri-line-chart-line"></i>
-                  <div>
-                    <h4>Corporis voluptates sit</h4>
-                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-                  <i class="ri-stack-line"></i>
-                  <div>
-                    <h4>Ullamco laboris nisi</h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-                  <i class="ri-brush-4-line"></i>
-                  <div>
-                    <h4>Labore consequatur</h4>
-                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-                  <i class="ri-magic-line"></i>
-                  <div>
-                    <h4>Beatae veritatis</h4>
-                    <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-                  <i class="ri-command-line"></i>
-                  <div>
-                    <h4>Molestiae dolor</h4>
-                    <p>Et fuga et deserunt et enim. Dolorem architecto ratione tensa raptor marte</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
-                  <i class="ri-radar-line"></i>
-                  <div>
-                    <h4>Explicabo consectetur</h4>
-                    <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div><!-- End Feature Icons -->
-
-      </div>
-
-    </section><!-- End Features Section -->
+    </section>
+    <!-- End About Section -->
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
-
       <div class="container" data-aos="fade-up">
-
         <header class="section-header">
           <h2>Services</h2>
-          <p>Veritatis et dolores facere numquam et praesentium</p>
+          <p>NFT Playground</p>
         </header>
 
         <div class="row gy-4">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-box blue">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Nesciunt Mete</h3>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-box purple">
+              <i class="ri-camera-3-line icon"></i>
+              <h3>Game Streamers</h3>
+              <p>
+                Grow your audience and expand your brand with your own NFTs.
+              </p>
+              <div class="pricing">
+                <div class="price"></div>
+
+                <br /><a href="#" class="btn-buy" id="service-streamers">Start Now</a>
+              </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-box orange">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Eosle Commodi</h3>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            <div class="service-box green">
+              <i class="ri-artboard-line icon"></i>
+              <h3>NFT Creators</h3>
+              <p>
+                Increase the value of your NFTs by adding in-game rewards and
+                bonuses for every holder.
+              </p>
+              <div class="pricing">
+                <div class="price"></div>
+
+                <br /><a href="#" class="btn-buy" id="service-creators">Start Now</a>
+              </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-box green">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Ledo Markt</h3>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            <div class="service-box orange">
+              <i class="ri-code-s-slash-line icon"></i>
+              <h3>Game Developers</h3>
+              <p>
+                Add your game to our platform and integrate with our API to
+                enable NFT gameplay.
+              </p>
+              <div class="pricing">
+                <div class="price"></div>
+
+                <br /><a href="#" class="btn-buy" id="service-developers">Start Now</a>
+              </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-box red">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Asperiores Commodi</h3>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              <i class="ri-gamepad-line icon"></i>
+              <h3>NFT Gamers</h3>
+              <p>
+                Select NFTs from your wallet and connect them for in-game
+                rewards and bonuses.
+              </p>
+              <div class="pricing">
+                <div class="price"></div>
+
+                <br /><a href="#" class="btn-buy" id="service-gamers">Start Now</a>
+              </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-box purple">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Velit Doloremque.</h3>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-box blue">
+              <i class="ri-exchange-funds-line icon"></i>
+              <h3>NFT Marketplace</h3>
+              <p>
+                Discover, buy, and sell NFTs in the EnjinX Marketplace
+              </p>
+              <div class="pricing">
+                <div class="price"></div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-            <div class="service-box pink">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Dolori Architecto</h3>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+                <br /><a href="#" class="btn-buy" id="service-market">Start Now</a>
+              </div>
             </div>
           </div>
 
         </div>
-
       </div>
-
-    </section><!-- End Services Section -->
-
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Pricing</h2>
-          <p>Check our Pricing</p>
-        </header>
-
-        <div class="row gy-4" data-aos="fade-left">
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <h3 style="color: #07d5c0;">Free Plan</h3>
-              <div class="price"><sup>$</sup>0<span> / mo</span></div>
-              <img src="assets/img/pricing-free.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li class="na">Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="box">
-              <span class="featured">Featured</span>
-              <h3 style="color: #65c600;">Starter Plan</h3>
-              <div class="price"><sup>$</sup>19<span> / mo</span></div>
-              <img src="assets/img/pricing-starter.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-            <div class="box">
-              <h3 style="color: #ff901c;">Business Plan</h3>
-              <div class="price"><sup>$</sup>29<span> / mo</span></div>
-              <img src="assets/img/pricing-business.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="box">
-              <h3 style="color: #ff0071;">Ultimate Plan</h3>
-              <div class="price"><sup>$</sup>49<span> / mo</span></div>
-              <img src="assets/img/pricing-ultimate.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Pricing Section -->
-
-    <!-- ======= F.A.Q Section ======= -->
-    <section id="faq" class="faq">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>F.A.Q</h2>
-          <p>Frequently Asked Questions</p>
-        </header>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <!-- F.A.Q List 1-->
-            <div class="accordion accordion-flush" id="faqlist1">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    Non consectetur a erat nam at lectus urna duis?
-                  </button>
-                </h2>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                  </button>
-                </h2>
-                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
-                  </button>
-                </h2>
-                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-
-            <!-- F.A.Q List 2-->
-            <div class="accordion accordion-flush" id="faqlist2">
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                  </button>
-                </h2>
-                <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                  <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                  </button>
-                </h2>
-                <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                  <div class="accordion-body">
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                    Varius vel pharetra vel turpis nunc eget lorem dolor?
-                  </button>
-                </h2>
-                <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                  <div class="accordion-body">
-                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End F.A.Q Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Portfolio</h2>
-          <p>Check our latest work</p>
-        </header>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 2"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Card 2"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Web 2"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Card 1"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Card 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Portfolio Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Testimonials</h2>
-          <p>What they are saying about us</p>
-        </header>
-
-        <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="200">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- End Testimonials Section -->
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Team</h2>
-          <p>Our hard working team</p>
-        </header>
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Team Section -->
+    </section>
+    <!-- End Services Section -->
 
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients">
-
       <div class="container" data-aos="fade-up">
-
         <header class="section-header">
-          <h2>Our Clients</h2>
-          <p>Temporibus omnis officia</p>
+          <h2>Our Games</h2>
+          <p>Connect your NFTs with any of the games in the playground</p>
         </header>
 
         <div class="clients-slider swiper-container">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide">
+              <img src="assets/img/clients/enigma-minmins.png" class="img-fluid" alt="Min-Mins" />
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/img/clients/enigma-shalwend.png" class="img-fluid" alt="Shield of Shalwend" />
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/img/clients/enigma-wgo2.png" class="img-fluid" alt="Wargods Online 2" />
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/img/clients/enigma-theta.png" class="img-fluid" alt="Theta Warriors Defense" />
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/img/clients/enigma-k9.png" class="img-fluid" alt="K9 Empire" />
+            </div>
           </div>
           <div class="swiper-pagination"></div>
         </div>
       </div>
-
-    </section><!-- End Clients Section -->
-
-    <!-- ======= Recent Blog Posts Section ======= -->
-    <section id="recent-blog-posts" class="recent-blog-posts">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Blog</h2>
-          <p>Recent posts form our Blog</p>
-        </header>
-
-        <div class="row">
-
-          <div class="col-lg-4">
-            <div class="post-box">
-              <div class="post-img"><img src="assets/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-              <span class="post-date">Tue, September 15</span>
-              <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit</h3>
-              <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="post-box">
-              <div class="post-img"><img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt=""></div>
-              <span class="post-date">Fri, August 28</span>
-              <h3 class="post-title">Et repellendus molestiae qui est sed omnis voluptates magnam</h3>
-              <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="post-box">
-              <div class="post-img"><img src="assets/img/blog/blog-3.jpg" class="img-fluid" alt=""></div>
-              <span class="post-date">Mon, July 11</span>
-              <h3 class="post-title">Quia assumenda est et veritatis aut quae</h3>
-              <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Recent Blog Posts Section -->
+    </section>
+    <!-- End Clients Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
-
       <div class="container" data-aos="fade-up">
-
         <header class="section-header">
           <h2>Contact</h2>
           <p>Contact Us</p>
         </header>
 
         <div class="row gy-4">
-
-          <div class="col-lg-6">
-
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
-                  <p>A108 Adam Street,<br>New York, NY 535022</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box">
-                  <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
-                  <p>Monday - Friday<br>9:00AM - 05:00PM</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <form action="forms/contact.php" method="post" class="php-email-form">
               <div class="row gy-4">
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required />
+                </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required />
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required />
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message"></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="sent-message">
+                    Your message has been sent. Thank you!
+                  </div>
 
                   <button type="submit">Send Message</button>
                 </div>
-
               </div>
             </form>
-
           </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Contact Section -->
 
+    <!-- ======= Gamers Section ======= -->
+    <section id="section-gamers" class="gamers">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <h2>NFT Gamers</h2>
+          <p>Play with your NFTs</p>
+        </header>
+
+        <div class="wizard">
+          <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item active">
+                <a title="1. Scan Wallet" class="nav-link" id="nav-gamers-wallet" role="tab" data-bs-toggle="tab"
+                  aria-controls="gamers-wallet" href="#list-gamers-wallet">
+                  <span class="round-tab">
+                    <i class="fas fa-wallet" style="font-size: 3.7vh"></i>
+                  </span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="2. Select Token" class="nav-link" id="nav-gamers-nfts" role="tab" data-bs-toggle="tab"
+                  aria-controls="gamers-nfts" href="#list-gamers-nfts">
+                  <span class="round-tab"><i class="fas fa-sd-card" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="3. Select Game" class="nav-link" id="nav-gamers-games" role="tab" data-bs-toggle="tab"
+                  aria-controls="gamers-games" href="#list-gamers-games">
+                  <span class="round-tab"><i class="fas fa-gamepad" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="4. Select Content" class="nav-link" id="nav-gamers-content" role="tab" data-bs-toggle="tab"
+                  aria-controls="gamers-content" href="#list-gamers-content">
+                  <span class="round-tab"><i class="fas fa-link" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="5. Review Order" class="nav-link" id="nav-gamers-review" role="tab" data-bs-toggle="tab"
+                  aria-controls="gamers-review" href="#list-gamers-review">
+                  <span class="round-tab"><i class="fas fa-shopping-cart" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
+        <div class="row spacer">&nbsp;</div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-gamers-wallet" role="tabpanel"
+                aria-labelledby="nav-gamers-wallet">
+                <div class="col-lg-12">
+                  <h4>Input your Wallet address</h4>
+                  <form id="gamers-scan-form" action="#" method="post">
+                    <input type="hidden" name="walletMode" value="gamers" />
+                    <div class="row gy-4">
+                      <div class="col-md-6">
+                        <input type="text" name="wallet-address" id="wallet-address" class="form-control"
+                          placeholder="Ethereum Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <!-- <select
+                            name="wallet-platform"
+                            class="form-control"
+                            required
+                          >
+                            <option value="">Select Wallet Platform</option>
+                            <option valid="enjin" selected>Enjin</option>
+                          </select> -->
+                        <a href="https://enjin.io/software/wallet" target="_blank">Download the Enjin Wallet</a>
+                      </div>
+                      <div class="col-md-12 text-center">
+                        <button id="scan-wallet" class="btn-read-more" type="submit">
+                          Scan Wallet
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-gamers-nfts" role="tabpanel" aria-labelledby="nav-gamers-nfts">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="gamers-nft-panel">
+                    <div class="panel-heading">
+                      <h4>Select a Token</h4>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="gamers-nfts">
+                        <li class="list-group-item">Awaiting results...</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-gamers-games" role="tabpanel" aria-labelledby="nav-gamers-games">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="gamers-games-panel">
+                    <div class="panel-heading">
+                      <h4>Select a Game</h4>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="gamers-games">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-gamers-content" role="tabpanel" aria-labelledby="nav-gamers-content">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="gamers-games-panel">
+                    <div class="panel-heading">
+                      <h4>Link your NFT</h4>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="gamers-content">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-gamers-review" role="tabpanel" aria-labelledby="nav-gamers-review">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="gamers-review-panel">
+                    <div class="panel-heading">
+                      <h4>Review your Order</h4>
+                      <p class="section-header">Complete your purchase to link your NFT to this content. Enjoy!</p>
+                    </div>
+                    <div class="panel-body">
+                      <div class="flex-shrink-0 text-center">
+                        <p class="game-icon">
+                          <span id="gamers-review-token"></span> <i class="fas fa-link" style="font-size: 3.7vh"></i>
+                          <span id="gamers-review-icon"></span>
+                        </p>
+                        <p>
+                          <strong id="gamers-review-name"></strong>
+                        </p>
+                        <p>
+                        <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
+                          <input type="hidden" name="cmd" value="_pay_simple">
+                          <input type="hidden" name="reset" value="1">
+                          <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
+                          <input type="hidden" name="currency" value="USD">
+                          <input type="hidden" name="amountf" id="amountf" value="5.00">
+                          <input type="hidden" name="item_number" id="item_number" value="2">
+                          <input type="hidden" name="invoice" id="invoice" value="7">
+                          <input type="hidden" name="custom" id="custom" value="7">
+                          <input type="hidden" name="item_name" id="item_name" value="Test NFT Item">
+                          <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
+                            alt="Buy Now with CoinPayments.net">
+                        </form>
+                        <span id="gamers-review-cost"></span>
+                        </p>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+    <!-- ======= End Gamers Section ======= -->
 
-    </section><!-- End Contact Section -->
 
-  </main><!-- End #main -->
+    <!-- ======= Creators Section ======= -->
+    <section id="section-creators" class="gamers">
+      <div class="container">
+        <header class="section-header">
+          <h2>NFT Creators</h2>
+          <p>Add value to your NFTs</p>
+        </header>
+
+        <div class="wizard">
+          <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item active">
+                <a title="1. Scan Wallet" class="nav-link" id="nav-creators-wallet" role="tab" data-bs-toggle="tab"
+                  aria-controls="creators-wallet" href="#list-creators-wallet">
+                  <span class="round-tab">
+                    <i class="fas fa-wallet" style="font-size: 3.7vh"></i>
+                  </span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="2. Select Token" class="nav-link" id="nav-creators-nfts" role="tab" data-bs-toggle="tab"
+                  aria-controls="creators-nfts" href="#list-creators-nfts">
+                  <span class="round-tab"><i class="fas fa-sd-card" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="3. Select Game" class="nav-link" id="nav-creators-games" role="tab" data-bs-toggle="tab"
+                  aria-controls="creators-games" href="#list-creators-games">
+                  <span class="round-tab"><i class="fas fa-gamepad" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="4. Select Content" class="nav-link" id="nav-creators-content" role="tab" data-bs-toggle="tab"
+                  aria-controls="creators-content" href="#list-creators-content">
+                  <span class="round-tab"><i class="fas fa-link" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="5. Review Order" class="nav-link" id="nav-creators-review" role="tab" data-bs-toggle="tab"
+                  aria-controls="creators-review" href="#list-creators-review">
+                  <span class="round-tab"><i class="fas fa-shopping-cart" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row spacer">&nbsp;</div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-creators-wallet" role="tabpanel"
+                aria-labelledby="nav-creators-wallet">
+                <div class="col-lg-12">
+                  <h4>Input your Wallet address</h4>
+                  <form id="creators-scan-form" action="#" method="post">
+                    <input type="hidden" name="walletMode" value="creators" />
+                    <div class="row gy-4">
+                      <div class="col-md-12 text-center">
+                        <input type="text" name="wallet-address" id="creators-wallet-address" class="form-control"
+                          placeholder="Ethereum Wallet Address" required />
+                      </div>
+
+                      <div class="col-md-12 text-center">
+                        <button id="creators-scan-wallet" class="btn-read-more" type="submit">
+                          Scan Wallet
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-creators-nfts" role="tabpanel" aria-labelledby="nav-creators-nfts">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="creators-nft-panel">
+                    <div class="panel-heading">
+                      <h4>Select a Token</h4>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="creators-nfts">
+                        <li class="list-group-item">Awaiting results...</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-creators-games" role="tabpanel" aria-labelledby="nav-creators-games">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="creators-games-panel">
+                    <div class="panel-heading">
+                      <h4>Select a Game</h4>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="creators-games">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-creators-content" role="tabpanel"
+                aria-labelledby="nav-creators-content">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="creators-games-panel">
+                    <div class="panel-heading">
+                      <h4>Link your NFT</h4>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="creators-content">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-creators-review" role="tabpanel"
+                aria-labelledby="nav-creators-review">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="creators-review-panel">
+                    <div class="panel-heading">
+                      <h4>Review your Order</h4>
+                      <p class="section-header">Complete your purchase to link your NFT to this content. Enjoy!</p>
+                    </div>
+                    <div class="panel-body">
+                      <div class="flex-shrink-0 text-center">
+                        <p class="game-icon">
+                          <span id="creators-review-token"></span> <i class="fas fa-link" style="font-size: 3.7vh"></i>
+                          <span id="creators-review-icon"></span>
+                        </p>
+                        <p>
+                          <strong id="creators-review-name"></strong>
+                        </p>
+                        <p>
+                        <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
+                          <input type="hidden" name="cmd" value="_pay_simple">
+                          <input type="hidden" name="reset" value="1">
+                          <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
+                          <input type="hidden" name="currency" value="USD">
+                          <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
+                          <input type="hidden" name="item_number" id="creators-item_number" value="2">
+                          <input type="hidden" name="invoice" id="creators-invoice" value="7">
+                          <input type="hidden" name="custom" id="creators-custom" value="7">
+                          <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
+                          <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
+                            alt="Buy Now with CoinPayments.net">
+                        </form>
+                        <span id="creators-review-cost"></span>
+                        </p>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ======= End Creators Section ======= -->
+
+
+    <!-- ======= Developers Section ======= -->
+    <section id="section-developers" class="gamers">
+      <div class="container">
+        <header class="section-header">
+          <h2>Game Developers</h2>
+          <p>Add your games to the NFT Playground</p>
+        </header>
+
+        <div class="wizard">
+          <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item active">
+                <a title="1. Create Publisher" class="nav-link" id="nav-developers-publisher" role="tab"
+                  data-bs-toggle="tab" aria-controls="developers-publisher" href="#list-developers-publisher">
+                  <span class="round-tab">
+                    <i class="fas fa-user-tie" style="font-size: 3.7vh"></i>
+                  </span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="2. Create Game" class="nav-link" id="nav-developers-games" role="tab" data-bs-toggle="tab"
+                  aria-controls="developers-games" href="#list-developers-games">
+                  <span class="round-tab"><i class="fas fa-gamepad" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="3. Create Content" class="nav-link" id="nav-developers-content" role="tab"
+                  data-bs-toggle="tab" aria-controls="developers-content" href="#list-developers-content">
+                  <span class="round-tab"><i class="fas fa-puzzle-piece" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="4. Review Submission" class="nav-link" id="nav-developers-review" role="tab"
+                  data-bs-toggle="tab" aria-controls="developers-review" href="#list-developers-review">
+                  <span class="round-tab"><i class="fas fa-check" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row spacer">&nbsp;</div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-developers-publisher" role="tabpanel"
+                aria-labelledby="nav-creators-wallet">
+                <div class="col-lg-12">
+                  <h4>Create Publisher</h4>
+
+                  <div class="row gy-4">
+                    <div class="col-lg-6 text-center">
+                      <div class="service-box">
+                        <h3>New Publisher</h3>
+                        <p>
+                          Create a Publisher profile
+                        </p>
+                        <div class="pricing">
+                          <div class="price"></div>
+
+                          <br /><a href="#" class="btn-buy" id="service-streamers" data-bs-toggle="modal"
+                            data-bs-target="#developers-new-modal">Start Here</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                      <div class="service-box">
+                        <h3>Existing Publisher</h3>
+                        <p>
+                          Manage your games and content
+                        </p>
+                        <div class="pricing">
+                          <div class="price"></div>
+
+                          <br /><a href="#" class="btn-buy" id="service-streamers" data-bs-toggle="modal"
+                            data-bs-target="#developers-login-modal">Continue</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-developers-games" role="tabpanel"
+                aria-labelledby="nav-developers-games">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="developers-games-panel">
+                    <div class="panel-heading">
+                      <h4>Create a Game</h4>
+                    </div>
+                    <div style="text-align: end; padding-bottom: 20px;">
+                      <button id="developers-new-game" type="submit" data-bs-toggle="modal"
+                        data-bs-target="#developers-game-modal">
+                        New Game
+                      </button>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="developers-games">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-developers-content" role="tabpanel"
+                aria-labelledby="nav-developers-content">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="developers-games-panel">
+                    <div class="panel-heading">
+                      <h4>Create Game Content</h4>
+                    </div>
+                    <div style="text-align: end; padding-bottom: 20px;">
+                      <button id="developers-new-content" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#developers-content-modal">
+                        New Content
+                      </button>&nbsp;&nbsp;&nbsp;
+
+                      <button id="developers-purchase-content" type="button" class="btn btn-success">
+                        Submit Content
+                      </button>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="developers-content">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-developers-review" role="tabpanel"
+                aria-labelledby="nav-developers-review">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="developers-review-panel">
+                    <div class="panel-heading">
+                      <h4>Submit your Content for Approval</h4>
+                      <p class="section-header">Your content will appear after a successful approval. Thanks!</p>
+                    </div>
+                    <div class="panel-body">
+                      <div class="flex-shrink-0 text-center">
+
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ======= End Developers Section ======= -->
+
+
+
+    <!-- ======= Streamers Section ======= -->
+    <section id="section-streamers" class="gamers">
+      <div class="container">
+        <header class="section-header">
+          <h2>Twitch Streamers</h2>
+          <p>Create NFTs for the Playground</p>
+        </header>
+
+        <div class="wizard">
+          <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item active">
+                <a title="1. Twitch Login" class="nav-link" id="nav-streamers-login" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-login" href="#list-streamers-login">
+                  <span class="round-tab">
+                    <i class="fas fa-user-tie" style="font-size: 3.7vh"></i>
+                  </span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="2. Create NFTs" class="nav-link" id="nav-streamers-nfts" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-nfts" href="#list-streamers-nfts">
+                  <span class="round-tab"><i class="fas fa-sd-card" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="3. NFT Package" class="nav-link" id="nav-streamers-packages" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-packages" href="#list-streamers-packages">
+                  <span class="round-tab"><i class="fas fa-box" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+              <li role="presentation" class="nav-item disabled">
+                <a title="4. Review Order" class="nav-link" id="nav-streamers-review" role="tab" data-bs-toggle="tab"
+                  aria-controls="streamers-review" href="#list-streamers-review">
+                  <span class="round-tab"><i class="fas fa-puzzle-piece" style="font-size: 3.7vh"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row spacer">&nbsp;</div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-streamers-login" role="tabpanel"
+                aria-labelledby="nav-streamers-login">
+                <div class="col-lg-12">
+                  <h4>Streamer Login</h4>
+
+                  <div class="row gy-4 text-center">
+                    <div class="pricing">
+                      <div class="price"></div>
+
+                      <br /><a href="#" class="btn-buy" id="login-streamers">Authenticate Twitch Account</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-streamers-nfts" role="tabpanel" aria-labelledby="nav-streamers-nfts">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="streamers-nfts-panel">
+                    <div class="panel-heading">
+                      <h4>Create NFTs</h4>
+                    </div>
+                    <div style="text-align: end; padding-bottom: 20px;">
+                      <button id="streamers-new-nfts" type="submit" data-bs-toggle="modal"
+                        data-bs-target="#streamers-nfts-modal">
+                        New NFT
+                      </button>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="streamers-nfts">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-streamers-packages" role="tabpanel"
+                aria-labelledby="nav-streamers-packages">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="streamers-packages-panel">
+                    <div class="panel-heading">
+                      <h4>Add NFT Supply</h4>
+                    </div>
+                    <div style="text-align: center; padding-bottom: 20px;">
+                      <button id="streamers-extension-btn" type="button" class="btn btn-success">
+                        Continue to Extension
+                      </button>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="list-group" id="streamers-packages">
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="list-streamers-review" role="tabpanel"
+                aria-labelledby="nav-streamers-review">
+                <div class="col-md-12">
+                  <div class="panel panel-primary" id="streamers-review-panel">
+                    <div class="panel-heading">
+                      <h4>Twitch Extension Integration</h4>
+                      <p class="section-header">Add the PlayNFT Extension to your channel Bio to start distribution.</p>
+                    </div>
+                    <div class="panel-body">
+                      <div class="flex-shrink-0 text-center">
+                        <p class="game-icon">
+                          <img src="assets/img/extensions.png" class="img-fluid" alt="Twitch Extensions" />
+                        </p>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ======= End Streamers Section ======= -->
+
+
+
+  </main>
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-12 text-center">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-          </div>
-          <div class="col-lg-6">
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="footer-top">
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
-              <img src="assets/img/logo.png" alt="">
-              <span>FlexStart</span>
+              <img src="assets/img/logo.png" alt="PlayNFT" />
             </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <p>
+              We are building an ecosystem to extend the utility and value of
+              NFTs.
+            </p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -1252,62 +1030,37 @@
             </div>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Contact Us</h4>
+            <h4>Donations</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              <strong>Ethereum:</strong><br />0x9A5e4aD75D29830D8bca2Ed7A5dA33Cab63DC415<br />
             </p>
-
+            <p>
+              <strong>Bitcoin:</strong><br />1ADPinDUh7eHraZB83kzfraD2J8PZVWvrz<br />
+            </p>
           </div>
-
         </div>
       </div>
     </div>
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        &copy; Copyright <strong><span>PlayNFT</span></strong>. All Rights Reserved
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
+  <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+    crossorigin="anonymous"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
@@ -1318,6 +1071,2286 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script id="token-template" type="text/x-jquery-tmpl">
+      <li id="${tokenId}" data-image="${tokenImage}" data-index="${tokenIndex}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="${tokenImage}"
+            class="img-fluid"
+            alt="${tokenName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <strong>${tokenName} #${tokenIndex}</strong>
+          <p>ID: ${tokenId}</p>
+          <div class="actions">
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="creators-token-template" type="text/x-jquery-tmpl">
+      <li id="${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action creators-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="${tokenImage}"
+            class="img-fluid"
+            alt="${tokenName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <strong>${tokenName}</strong>
+          <p>ID: ${tokenId}</p>
+          <p>Total Supply: ${tokenSupply}</p>
+          <div class="actions">
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="games-template" type="text/x-jquery-tmpl">
+      <li id="gamers_game_${gameId}" class="list-group-item d-flex list-group-item-action gamers-games-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/${publisherId}/${gameId}/icon.png"
+            class="img-fluid"
+            alt="${gameName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          
+          <strong>${gameName}</strong>
+          <p>Status: ${gameStatus}</p>
+          <p>{{html gamePlatforms}}</p>
+          <div class="actions">
+            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-game-publisherId="${publisherId}" data-bs-toggle="modal" data-bs-target="#gamers-game-modal">View Details</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="creators-games-template" type="text/x-jquery-tmpl">
+      <li id="creators_game_${gameId}" class="list-group-item d-flex list-group-item-action creators-games-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/${publisherId}/${gameId}/icon.png"
+            class="img-fluid"
+            alt="${gameName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          
+          <strong>${gameName}</strong>
+          <p>Status: ${gameStatus}</p>
+          <p>{{html gamePlatforms}}</p>
+          <div class="actions">
+            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-icon="${gameIcon}" data-game-platforms="${gamePlatforms}" data-game-publisher="${companyName}" data-game-website="${website}" data-game-companyInfo="${companyInfo}" data-game-publisherId="${publisherId}" data-bs-toggle="modal" data-bs-target="#creators-game-modal">View Details</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="developers-games-template" type="text/x-jquery-tmpl">
+      <li id="${gameId}" class="list-group-item d-flex list-group-item-action creators-games-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/${publisherID}/${gameId}/icon.png"
+            class="img-fluid"
+            alt="${gameName}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          
+          <strong>${gameName} ${gameReview}</strong>
+          <p>Status: ${gameStatus}</p>
+          <p>{{html gamePlatforms}}</p>
+          <div class="actions">
+            <a href="#" onclick="deleteGame(event, this)" class="btn-details-delete" data-game-id="${gameId}" data-game-info="${gameInfo}">Delete</a>
+            <a href="#" class="btn-details" data-game-id="${gameId}" data-game-name="${gameName}" data-game-info="${gameInfo}" data-game-status="${gameStatusValue}" data-game-icon="${gameIcon}" data-game-platformSteam="${gamePlatformSteam}" data-game-platformGoogle="${gamePlatformGoogle}" data-game-platformApple="${gamePlatformApple}" data-bs-toggle="modal" data-bs-target="#developers-game-modal">Edit</a>
+            <a href="#" id="developers-games-select" class="btn-details-select" data-game-id="${gameId}">Select</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <div class="modal" tabindex="-1" id="gamers-game-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="gamers-game-name"></h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="flex-shrink-0 game-icon">
+                  <span id="gamers-game-icon"></span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <p><strong>Publisher:</strong> <span id="gamers-game-publisher"></span></p>
+                <p><strong>Website:</strong> <span id="gamers-game-website"></span></p>
+                <p>
+                  <span id="gamers-game-platforms"></span>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div>
+                  <hr>
+                </div>
+                <div>
+                  <header>
+                    <h4>Game Description</h4>
+                    <p><span id="gamers-game-info"></span></p>
+                  </header>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="gamers-games-select">Select Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="creators-game-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="creators-game-name"></h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="flex-shrink-0 game-icon">
+                  <span id="creators-game-icon"></span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <p><strong>Publisher:</strong> <span id="creators-game-publisher"></span></p>
+                <p><strong>Website:</strong> <span id="creators-game-website"></span></p>
+                <p>
+                  <span id="creators-game-platforms"></span>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div>
+                  <hr>
+                </div>
+                <div>
+                  <header>
+                    <h4>Game Description</h4>
+                    <p><span id="creators-game-info"></span></p>
+                  </header>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="creators-games-select">Select Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="content-template" type="text/x-jquery-tmpl">
+      <li id="gamers_content_${id}" class="list-group-item d-flex list-group-item-action gamers-content-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/${publisherID}/${gameId}/${id}/icon.png"
+            class="img-fluid"
+            alt="${title}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${title}</strong>
+          <p>Type: ${type}</p>
+          <div class="actions">
+            <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#gamers-content-modal">View Details</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="creators-content-template" type="text/x-jquery-tmpl">
+      <li id="creators_content_${id}" class="list-group-item d-flex list-group-item-action creators-content-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/${publisherID}/${gameId}/${id}/icon.png"
+            class="img-fluid"
+            alt="${title}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${title}</strong>
+          <p>Type: ${type}</p>
+          <div class="actions">
+            <a href="#" class="btn-details" data-content-id="${id}" data-content-gameid="${gameId}" data-content-title="${title}" data-content-info="${info}" data-content-icon="${image}" data-content-info="${info}" data-bs-toggle="modal" data-bs-target="#creators-content-modal">View Details</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="developers-content-template" type="text/x-jquery-tmpl">
+      <li id="developers_content_${id}" class="list-group-item d-flex list-group-item-action developers-content-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/${publisherID}/${gameId}/${id}/icon.png"
+            class="img-fluid"
+            alt="${title}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${title}</strong>
+          <p>Type: ${typetext}</p>
+          <p>Status: ${status}</p>
+          <p>Code: ${code}</p>
+          <div class="actions">
+            {{if locked == 0 }}
+            <a href="#" onclick="deleteContent(event, this)" id="developers-content-delete" class="btn-details-delete" data-content-id="${id}" data-content-gameid="${gameId}" data-content-info="${info}">Delete</a>
+            {{/if}}
+            <a href="#" class="btn-details" data-content-id="${id}" data-content-title="${title}" data-content-gameid="${gameId}" data-content-target="${target}" data-content-exclusive="${exclusive}" data-content-icon="${image}" data-content-info="${info}" data-content-type="${type}" data-content-cost="${cost}" data-content-code="${code}" data-bs-toggle="modal" data-bs-target="#developers-content-modal">Edit</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="streamers-nfts-template" type="text/x-jquery-tmpl">
+      <li id="streamers_nft_${id}" class="list-group-item d-flex list-group-item-action streamers-nft-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="https://playnft.s3.amazonaws.com/nfts/${streamerId}/${id}/icon.png"
+            class="img-fluid"
+            alt="${name}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${name}</strong>
+          <p>Status: ${status_text}<br/>
+          Supply: ${supply}</p>
+          <div class="actions">
+            {{if minted == 0 }}
+            <a href="#" onclick="deleteNFT(event, this)" id="streamers-nfts-delete" class="btn-details-delete" data-nft-id="${id}" data-nft-description="${description}">Delete</a>
+            {{/if}}
+            <a href="#" class="btn-details" data-nft-id="${id}" data-nft-name="${name}" data-nft-description="${description}" data-nft-cost="${cost}" data-nft-status="${status}"  data-bs-toggle="modal" data-bs-target="#streamers-nfts-modal">Edit</a>
+            <a href="#" id="streamers-nfts-select" class="btn-details-select" data-id="${id}" data-supply="${supply}">Select</a>
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <script id="streamers-packages-template" type="text/x-jquery-tmpl">
+      <li id="streamers_packages_${id}" class="list-group-item d-flex list-group-item-action streamers-packages-item">
+        <div class="flex-shrink-0 game-icon">
+          <img
+            src="assets/img/package-${id}.png"
+            class="img-fluid"
+            alt="${name}"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="cost"><sup>$</sup>${cost}</div>
+          <strong>${name}</strong>
+          <p>Supply Limit: ${supply}</p>
+          <div class="actions" id="streamers-packages-purchase-${id}">
+            {{if supply == 10 }}
+              <a href="#" id="streamers-packages-select" class="btn-details-select" data-packages-id="${id}" data-nft-id="${nftid}">Select</a>
+            {{/if}}
+          </div>
+        </div>
+      </li>
+    </script>
+
+  <div class="modal" tabindex="-1" id="gamers-content-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="gamers-content-title"></h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="flex-shrink-0 content-icon">
+                  <span id="gamers-content-icon"></span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <header>
+                  <h4>Description</h4>
+                  <p><span id="gamers-content-info"></span></p>
+                </header>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="gamers-content-select">Select Content</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="creators-content-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="creators-content-title"></h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="flex-shrink-0 content-icon">
+                  <span id="creators-content-icon"></span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <header>
+                  <h4>Description</h4>
+                  <p><span id="creators-content-info"></span></p>
+                </header>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="creators-content-select">Select Content</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="developers-new-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Create PlayNFT Publisher Profile</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="developers-new-form" action="#" method="post">
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="developers_name" id="developers_name" class="form-control"
+                    placeholder="Publisher Name" required />
+                  <label for="developers_name">Publisher Name</label>
+                  <div id="PublisherNameFeedback" class="invalid-feedback">
+                    Publisher Name already exists.
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="url" class="form-control" name="developers_website" id="developers_website"
+                    placeholder="Publisher Website" required />
+                  <label for="developers_website">Publisher Website</label>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="email" class="form-control" name="developers_email" id="developers_email"
+                    placeholder="Notification Email" required />
+                  <label for="developers_email">Notification Email</label>
+                </div>
+
+                <div class="col-md-12 form-floating mb-3">
+                  <input type="text" class="form-control" name="developers_wallet" id="developers_wallet"
+                    placeholder="Payment Wallet" required />
+                  <label for="developers_wallet">Ethereum wallet address used for payments</label>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  <textarea class="form-control" name="developers_info" id="developers_info" rows="6"
+                    placeholder="Publisher Info" style="height: max-content;"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="developers-new-publisher">Create Publisher</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="developers-login-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">PlayNFT Publisher Login</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="developers-login-form" action="#" method="post">
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="developers_name" id="login_developers_name" class="form-control"
+                    placeholder="Publisher Name" required />
+                  <label for="developers_name">Publisher Name</label>
+
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="email" class="form-control" name="developers_email" id="login_developers_email"
+                    placeholder="Notification Email" required />
+                  <label for="developers_email">Notification Email</label>
+                </div>
+
+                <div class="col-md-12 form-floating mb-3">
+                  <input type="text" class="form-control" name="developers_wallet" id="login_developers_wallet"
+                    placeholder="Payment Wallet" required />
+                  <label for="developers_wallet">Ethereum wallet address used for payments</label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="developers-login-publisher">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="developers-view-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">PlayNFT Publisher Profile</h3>
+        </div>
+        <form id="developers-edit-form" action="#" method="post">
+          <input type="hidden" name="developers_id" id="edit_developers_id" class="form-control" />
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="developers_name" id="edit_developers_name" class="form-control"
+                    placeholder="Publisher Name" readonly />
+                  <label for="developers_name">Publisher Name</label>
+                  <div id="PublisherFeedback" class="invalid-feedback">
+                    Publisher not found.
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="url" class="form-control" name="developers_website" id="edit_developers_website"
+                    placeholder="Publisher Website" required />
+                  <label for="developers_website">Publisher Website</label>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="email" class="form-control" name="developers_email" id="edit_developers_email"
+                    placeholder="Notification Email" required />
+                  <label for="developers_email">Notification Email</label>
+                </div>
+
+                <div class="col-md-12 form-floating mb-3">
+                  <input type="text" class="form-control" name="developers_wallet" id="edit_developers_wallet"
+                    placeholder="Payment Wallet" readonly />
+                  <label for="developers_wallet">Ethereum wallet address used for payments</label>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  <textarea class="form-control" name="developers_info" id="edit_developers_info" rows="6"
+                    placeholder="Publisher Info" style="height: max-content;"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="developers-edit-publisher">Continue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" tabindex="-1" id="developers-game-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">PlayNFT Game Profile</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="developers-game-form" action="#" method="post">
+          <input type="hidden" name="developers_game_id" id="developers_game_id" class="form-control" />
+          <input type="hidden" name="developers_publisher_id" id="developers_publisher_id" class="form-control" />
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="developers_game_name" id="developers_game_name" class="form-control"
+                    placeholder="Game Name" required />
+                  <label for="developers_game_name">Game Name</label>
+                  <div id="PublisherGameFeedback" class="invalid-feedback">
+                    Game not found.
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="developers_game_icon" class="form-label">Upload square image</label>
+                  <input class="form-control" type="file" name="developers_game_icon" id="developers_game_icon"
+                    accept=".png">
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <select class="form-select" id="developers_game_status" name="developers_game_status"
+                    aria-label="Development Status">
+                    <option value="0">In Development</option>
+                    <option value="1">Live</option>
+                  </select>
+                  <label for="developers_game_status">Development Status</label>
+                </div>
+
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" id="developers_game_steam"
+                    name="developers_game_steam">
+                  <label class="form-check-label" for="developers_game_steam"><i class="fab fa-steam-symbol"></i> Steam
+                    Platform</label>
+                </div>
+
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" id="developers_game_apple"
+                    name="developers_game_apple">
+                  <label class="form-check-label" for="developers_game_apple"><i class="fab fa-app-store-ios"></i> Apple
+                    Platform</label>
+                </div>
+
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" id="developers_game_google"
+                    name="developers_game_google">
+                  <label class="form-check-label" for="developers_game_google"><i class="fab fa-google-play"></i> Google
+                    Platform</label>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  <textarea class="form-control" name="developers_game_info" id="developers_game_info" rows="6"
+                    placeholder="Game Info" style="height: max-content;"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="developers-edit-game">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="developers-content-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">PlayNFT Game Content</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="developers-content-form" action="#" method="post">
+          <input type="hidden" name="developers_content_id" id="developers_content_id" class="form-control" />
+          <input type="hidden" name="developers_game_id" id="developers_game_id" class="form-control" />
+          <input type="hidden" name="developers_publisher_id" id="developers_publisher_id" class="form-control" />
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="developers_content_name" id="developers_content_name" class="form-control"
+                    placeholder="Content Name" required />
+                  <label for="developers_content_name">Content Name</label>
+                  <div id="PublisherGameFeedback" class="invalid-feedback">
+                    Content not found.
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="developers_content_code" id="developers_content_code" class="form-control"
+                    placeholder="Content Code" required />
+                  <label for="developers_content_code">Content Code</label>
+                  This code will be returned when a user's token has been linked with this content. (Example:
+                  unlock_quest1)<br />
+
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="number" name="developers_content_cost" id="developers_content_cost" class="form-control"
+                    placeholder="Content Cost" min="1" step="any" required />
+                  <label for="developers_content_cost">Content Cost</label>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="developers_content_icon" class="form-label">Upload square image</label>
+                  <input class="form-control" type="file" name="developers_content_icon" id="developers_content_icon"
+                    accept=".png">
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <select class="form-select" id="developers_content_type" name="developers_content_type"
+                    aria-label="Content Type">
+                    <option value="0">Unlockable Item</option>
+                    <option value="1">Modifier</option>
+                    <option value="2">Consummable</option>
+                    <option value="3">Event</option>
+                  </select>
+                  <label for="developers_content_type">Content Type</label>
+                </div>
+
+                <div class="form-check form-switch mb-3">
+                  if selected, this exclusive content is only able to be linked to one NFT.<br />
+                  <input class="form-check-input" type="checkbox" id="developers_content_exclusive"
+                    name="developers_content_exclusive">
+                  <label class="form-check-label" for="developers_content_exclusive">Exclusive?</label>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <select class="form-select" id="developers_content_target" name="developers_content_target"
+                    aria-label="Content Target">
+                    <option value="0">Everyone</option>
+                    <option value="1">Creators Only</option>
+                    <option value="2">Streamers Only</option>
+                    <option value="3">Gamers Only</option>
+                  </select>
+                  <label for="developers_content_target">Content Target</label>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  Provide detailed instructions on how this content is accessed in the game.<br />
+                  <textarea class="form-control" name="developers_content_info" id="developers_content_info" rows="6"
+                    placeholder="Content Instructions" style="height: max-content;"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="developers-edit-content">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" tabindex="-1" id="streamers-nfts-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Streamer NFT</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="streamers-nfts-form" action="#" method="post">
+          <input type="hidden" name="streamers_nft_id" id="streamers_nft_id" class="form-control" />
+          <input type="hidden" name="streamer_id" id="streamer_id" class="form-control" />
+          <div class="modal-body">
+            <div class="container">
+              <div class="gy-4">
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="text" name="streamers_nft_name" id="streamers_nft_name" class="form-control"
+                    placeholder="NFT Name" required />
+                  <label for="streamers_nft_name">NFT Name</label>
+                  <div id="StreamerNFTFeedback" class="invalid-feedback">
+                    NFT not found.
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="streamers_nft_icon" class="form-label">Upload square image</label>
+                  <input class="form-control" type="file" name="streamers_nft_icon" id="streamers_nft_icon"
+                    accept=".png" required>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <select class="form-select" id="streamers_nft_status" name="streamers_nft_status"
+                    aria-label="Visibility Status">
+                    <option value="0" selected="selected">Offline</option>
+                    <option value="1">Live</option>
+                  </select>
+                  <label for="streamers_nft_status">Visibility Status</label>
+                </div>
+
+                <div class="col-md-6 form-floating mb-3">
+                  <input type="number" name="streamers_nft_cost" id="streamers_nft_cost" class="form-control"
+                    placeholder="0" min="1" step="0.01" required />
+                  <label for="streamers_nft_cost">NFT Cost</label>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  <textarea class="form-control" name="streamers_nft_description" id="streamers_nft_description"
+                    rows="6" placeholder="Description" style="height: max-content;"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="streamers-edit-nft">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    var tokenID = "";
+    var tokenIndex = "";
+    var tokenImage = "";
+    var walletID = "";
+    var publisherID = "";
+    var gameID = "";
+    var contentID = "";
+    var streamerID = "";
+
+    function hideSections() {
+      $("section").hide();
+      $(".hero .container").hide();
+      $(".hero").height("0px");
+    }
+
+    function showSections() {
+      $("section").show();
+      $(".hero").height("100vh");
+      $(".hero .container").show();
+      $("#section-gamers").hide();
+      $("#section-creators").hide();
+      $("#section-developers").hide();
+      $("#section-streamers").hide();
+    }
+
+    $(document).ready(function () {
+      showSections()
+
+      var hash = window.location.hash.substring(1);
+      var params = {}
+      hash.split('&').map(hk => {
+        let temp = hk.split('=');
+        params[temp[0]] = temp[1]
+      });
+
+      console.log(params)
+      if (params.access_token && params.token_type && params.state && params.id_token) {
+        var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+        let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+        if (params.state == state) {
+          hideSections();
+          $("#section-streamers").show();
+
+          $.ajax({
+            url: 'https://id.twitch.tv/oauth2/userinfo',
+            type: 'GET',
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+            },
+            data: {},
+            success: function (data) {
+              console.info(data);
+
+              if (data.aud != clientID) return;
+              if (data.email_verified == false) {
+                alert("Twitch Email must be verified!");
+                return;
+              }
+
+              streamerID = data.sub;
+
+              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture };
+
+              $.ajax({
+                url:
+                  "https://api.playnft.io/getnfts",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify(formData),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                  console.info(data);
+                  let response = jQuery.parseJSON(data);
+
+                  $("#streamers-nfts").empty();
+
+                  response.forEach(function (item) {
+                    var status = "Offline"
+                    if (item.status == "1") status = "Live"
+
+                    let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                    $("#streamers-nfts-template")
+                      .tmpl(game_content)
+                      .appendTo("#streamers-nfts");
+                  });
+
+                  openTab("#nav-streamers-nfts");
+                },
+              });
+
+
+            },
+            error: function (error) {
+              console.info(error);
+            },
+          });
+        }
+      }
+
+      $("#service-gamers").click(function () {
+        hideSections();
+        $("#section-gamers").show();
+      });
+
+      $("#service-creators").click(function () {
+        hideSections();
+        $("#section-creators").show();
+      });
+
+      $("#service-developers").click(function () {
+        hideSections();
+        $("#section-developers").show();
+      });
+
+      $("#service-streamers").click(function () {
+        hideSections();
+        $("#section-streamers").show();
+      });
+
+      $(".nav-link").click(function () {
+        if ($(".hero .container").is(":hidden") && !$(this).attr("role")) {
+          showSections();
+          window.location.hash = $(this).attr("href");
+        }
+      });
+
+      $("#gamers-scan-form").on("submit", function (e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const formData = Object.fromEntries(data.entries());
+        console.log(JSON.stringify(formData));
+
+        walletID = $('#wallet-address').val()
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/gettokens",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#gamers-nfts").empty();
+
+            response.forEach(function (item) {
+              if (item.value > 0) {
+                let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: item.token.meta.image, tokenIndex: item.index.replace(/^0+/, '') };
+                $("#token-template")
+                  .tmpl(token_content)
+                  .appendTo("#gamers-nfts");
+              }
+            });
+
+            openTab("#nav-gamers-nfts");
+          },
+        });
+      });
+
+      $("#creators-scan-form").on("submit", function (e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const formData = Object.fromEntries(data.entries());
+        console.log(JSON.stringify(formData));
+
+        walletID = $('#creators-wallet-address').val()
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/gettokens",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#creators-nfts").empty();
+
+            response.forEach(function (item) {
+              if (item.value > 0) {
+                if (item.token.meta.image == "") return;
+
+                if (item.token.totalSupply == 18446744073709551615) {
+                  item.token.totalSupply = "Infinite";
+                }
+
+                let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: item.token.meta.image, tokenSupply: item.token.totalSupply };
+                $("#creators-token-template")
+                  .tmpl(token_content)
+                  .appendTo("#creators-nfts");
+              }
+            });
+
+            openTab("#nav-creators-nfts");
+          },
+        });
+      });
+
+      $("#developers-new-form").on("submit", function (e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const formData = Object.fromEntries(data.entries());
+        console.log(JSON.stringify(formData));
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/createpublisher",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            try {
+              let response = jQuery.parseJSON(data);
+
+              publisherID = response["insertId"];
+              console.log("publisherID: " + publisherID);
+
+              var myModalEl = document.getElementById('developers-new-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
+              openTab("#nav-developers-games");
+            } catch (error) {
+              console.log("Error")
+              $('#developers_name').addClass('is-invalid');
+            }
+
+          },
+        });
+      });
+
+      $("#developers-login-form").on("submit", function (e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const formData = Object.fromEntries(data.entries());
+        console.log(JSON.stringify(formData));
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/getpublisher",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            try {
+              let response = jQuery.parseJSON(data)[0];
+
+              if (!response["id"]) {
+                console.log(response)
+                $('#login_developers_name').addClass('is-invalid');
+              }
+              else {
+                publisherID = response["id"];
+                console.log("publisherID: " + publisherID);
+
+                var myModalEl = document.getElementById('developers-login-modal')
+                var modal = bootstrap.Modal.getInstance(myModalEl)
+                modal.hide();
+
+                $('#developers-view-modal').show();
+
+                $('#edit_developers_name').val(response["companyName"])
+                $('#edit_developers_website').val(response["website"])
+                $('#edit_developers_email').val(response["email"])
+                $('#edit_developers_wallet').val(response["wallet"])
+                $('#edit_developers_info').val(response["companyInfo"])
+                $('#edit_developers_id').val(publisherID)
+              }
+
+            } catch (error) {
+              console.log("Error " + error)
+              $('#login_developers_name').addClass('is-invalid');
+            }
+
+          },
+        });
+      });
+
+      $("#developers-edit-form").on("submit", function (e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const formData = Object.fromEntries(data.entries());
+        console.log(JSON.stringify(formData));
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updatepublisher",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            try {
+              const publisherData = { "publisherId": publisherID }
+
+              $.ajax({
+                url:
+                  "https://api.playnft.io/getgames",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify(publisherData),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                  console.info(data);
+                  let response = jQuery.parseJSON(data);
+
+                  $("#developers-games").empty();
+
+                  response.forEach(function (item) {
+                    let status
+                    let cost
+                    let review = '';
+
+                    if (item.status == 0) {
+                      status = "Development"
+                    }
+                    if (item.status == 1) {
+                      status = "Live"
+                    }
+                    if (item.approved == 0) {
+                      review = " (In Review)"
+                    }
+
+                    let platforms = ''
+                    if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+                    if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+                    if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+                    let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameReview: review, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
+                    $("#developers-games-template")
+                      .tmpl(game_content)
+                      .appendTo("#developers-games");
+
+                  });
+
+                  $('#developers-view-modal').hide()
+                  openTab("#nav-developers-games");
+                },
+              });
+            } catch (error) {
+              console.log("Error " + error)
+              $('#edit_developers_name').addClass('is-invalid');
+            }
+
+          },
+        });
+
+      });
+
+      $("#developers-game-form").on("submit", function (e) {
+        e.preventDefault();
+        var file = $('#developers_game_icon')[0].files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+
+          // when image data was read
+          reader.onload = function (event) {
+            // I usually remove the prefix to only keep data, but it depends on your server
+            var fileData = event.target.result.replace("data:" + file.type + ";base64,", '');
+
+            const data = new FormData(e.target);
+            data.append("icon", fileData);
+            data.append("icon_type", file.type);
+            const formData = Object.fromEntries(data.entries());
+            console.log(JSON.stringify(formData));
+
+            updateGame(formData);
+          }
+        } else {
+          const data = new FormData(e.target);
+          const formData = Object.fromEntries(data.entries());
+          console.log(JSON.stringify(formData));
+
+          updateGame(formData);
+        }
+      });
+
+      function updateGame(formData) {
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updategame",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+            setTimeout(function () {
+              $("#developers-games").empty();
+
+              response.forEach(function (item) {
+                let status
+                let cost
+                let review = ''
+                if (item.status == 0) {
+                  status = "Development"
+                }
+                if (item.status == 1) {
+                  status = "Live"
+                }
+                if (item.approved == 0) {
+                  review = "(In Review)"
+                }
+
+                let platforms = ''
+                if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+                if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+                if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+                let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
+                $("#developers-games-template")
+                  .tmpl(game_content)
+                  .appendTo("#developers-games");
+
+              });
+
+              var myModalEl = document.getElementById('developers-game-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
+
+            }, 2000);
+          },
+        });
+      }
+
+      $("#developers-content-form").on("submit", function (e) {
+        e.preventDefault();
+        var file = $('#developers_content_icon')[0].files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+
+          // when image data was read
+          reader.onload = function (event) {
+            // I usually remove the prefix to only keep data, but it depends on your server
+            var fileData = event.target.result.replace("data:" + file.type + ";base64,", '');
+
+            const data = new FormData(e.target);
+            data.append("icon", fileData);
+            data.append("icon_type", file.type);
+            const formData = Object.fromEntries(data.entries());
+            console.log(JSON.stringify(formData));
+
+            updateContent(formData);
+          }
+        } else {
+          const data = new FormData(e.target);
+          const formData = Object.fromEntries(data.entries());
+          console.log(JSON.stringify(formData));
+
+          updateContent(formData);
+        }
+      });
+
+      function updateContent(formData) {
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updatecontent",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+            setTimeout(function () {
+              $("#developers-content").empty();
+
+              response.forEach(function (item) {
+                let type = ''
+
+                if (item.type == 0) {
+                  type = "Unlockable Item"
+                }
+                if (item.type == 1) {
+                  type = "Modifier"
+                }
+                if (item.type == 2) {
+                  type = "Consummable"
+                }
+                if (item.type == 3) {
+                  type = "Event"
+                }
+
+                if (item.status == -1) {
+                  status = "Locked"
+                }
+                if (item.status == 0) {
+                  status = "New"
+                }
+                if (item.status == 1) {
+                  status = "Submitted"
+                }
+                if (item.status == 2) {
+                  status = "Approved"
+                }
+
+                let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, info: item.description, locked: item.locked };
+                $("#developers-content-template")
+                  .tmpl(game_content)
+                  .appendTo("#developers-content");
+
+              });
+
+              $("#developers-content-form")[0].reset();
+
+              var myModalEl = document.getElementById('developers-content-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
+
+            }, 2000);
+          },
+        });
+      }
+
+      $("#streamers-nfts-form").on("submit", function (e) {
+        e.preventDefault();
+        var file = $('#streamers_nft_icon')[0].files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+
+          // when image data was read
+          reader.onload = function (event) {
+            // I usually remove the prefix to only keep data, but it depends on your server
+            var fileData = event.target.result.replace("data:" + file.type + ";base64,", '');
+
+            const data = new FormData(e.target);
+            data.append("icon", fileData);
+            data.append("icon_type", file.type);
+            const formData = Object.fromEntries(data.entries());
+            console.log(JSON.stringify(formData));
+
+            updateNFT(formData);
+          }
+        } else {
+          const data = new FormData(e.target);
+          const formData = Object.fromEntries(data.entries());
+          console.log(JSON.stringify(formData));
+
+          updateNFT(formData);
+        }
+      });
+
+      function updateNFT(formData) {
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updatenft",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+            setTimeout(function () {
+              $("#streamers-nfts").empty();
+
+              response.forEach(function (item) {
+
+                var status = "Offline"
+                if (item.status == "1") status = "Live"
+
+                let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                $("#streamers-nfts-template")
+                  .tmpl(game_content)
+                  .appendTo("#streamers-nfts");
+
+              });
+
+              $("#streamers-nfts-form")[0].reset();
+
+              var myModalEl = document.getElementById('streamers-nfts-modal')
+              var modal = bootstrap.Modal.getInstance(myModalEl)
+              modal.hide();
+
+            }, 2000);
+          },
+        });
+      }
+
+      //Wizard
+      $('a[data-bs-toggle="tab"]').on("show.bs.tab", function (e) {
+        var $target = $(e.target);
+
+        if ($target.parent().hasClass("disabled")) {
+          console.log($target.parent());
+          return false;
+        }
+      });
+
+
+    });
+
+    $(document).on("click", "li", function () {
+
+      if ($(this).hasClass("gamers-nft-item")) {
+        $(".gamers-nft-item").removeClass("active");
+        $(this).addClass("active");
+        tokenID = $(this).attr('id');
+        tokenImage = $(this).data('image');
+        tokenIndex = $(this).data('index');
+
+        let formData = { tokenId: $(this).attr('id'), wallet: walletID, tokenIndex: tokenIndex };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/getgames",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#gamers-games").empty();
+
+            response.forEach(function (item) {
+              let status
+              let cost
+              if (item.status == 0) {
+                status = "Development"
+                cost = 10
+              }
+              if (item.status == 1) {
+                status = "Live"
+                cost = 25
+              }
+
+              let platforms = ''
+              if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+              if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+              if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+
+              let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo, publisherId: item.publisherId, };
+              $("#games-template")
+                .tmpl(game_content)
+                .appendTo("#gamers-games");
+
+            });
+
+            openTab("#nav-gamers-games");
+          },
+        });
+      }
+
+      if ($(this).hasClass("creators-nft-item")) {
+        $(".creators-nft-item").removeClass("active");
+        $(this).addClass("active");
+        tokenID = $(this).attr('id');
+        tokenImage = $(this).data('image');
+
+        let formData = { tokenId: $(this).attr('id'), wallet: walletID };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/getgames",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#creators-games").empty();
+
+            response.forEach(function (item) {
+              let status
+              let cost
+              if (item.status == 0) {
+                status = "Development"
+                cost = 10
+              }
+              if (item.status == 1) {
+                status = "Live"
+                cost = 25
+              }
+
+              let platforms = ''
+              if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+              if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+              if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+              let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo, publisherId: item.publisherId };
+              $("#creators-games-template")
+                .tmpl(game_content)
+                .appendTo("#creators-games");
+
+            });
+
+            openTab("#nav-creators-games");
+          },
+        });
+      }
+
+      if ($(this).hasClass("nav-item completed")) {
+        let $active = $(".wizard .nav-tabs li.active");
+        $active.removeClass('active')
+        $(this).addClass('active')
+      }
+
+    });
+
+    $(document).on("click", "#gamers-games-select", function () {
+
+      let id = $(this).data('id');
+      let formData = { gameId: id, tokenId: tokenID, tokenIndex: tokenIndex };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/getcontent",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#gamers-content").empty();
+
+          response.forEach(function (item) {
+            let type = ''
+
+            if (item.type == 0) {
+              type = "Unlockable Item"
+            }
+            if (item.type == 1) {
+              type = "Modifier"
+            }
+            if (item.type == 2) {
+              type = "Consummable"
+            }
+            if (item.type == 3) {
+              type = "Event"
+            }
+
+            if (item.status < 2) return;
+            if (item.locked != 0) return;
+
+            let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
+            $("#content-template")
+              .tmpl(game_content)
+              .appendTo("#gamers-content");
+
+          });
+
+          var myModalEl = document.getElementById('gamers-game-modal')
+          var modal = bootstrap.Modal.getInstance(myModalEl)
+          modal.hide();
+          openTab("#nav-gamers-content");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#creators-games-select", function () {
+
+      let id = $(this).data('id');
+      let formData = { gameId: id, tokenId: tokenID, tokenIndex: 0 };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/getcontent",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#creators-content").empty();
+
+          response.forEach(function (item) {
+            let type = ''
+
+            if (item.type == 0) {
+              type = "Unlockable Item"
+            }
+            if (item.type == 1) {
+              type = "Modifier"
+            }
+            if (item.type == 2) {
+              type = "Consummable"
+            }
+            if (item.type == 3) {
+              type = "Event"
+            }
+
+            if (item.status < 2) return;
+            if (item.locked != 0) return;
+
+            let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.adjCost, type: type, info: item.description, locked: item.locked };
+            $("#creators-content-template")
+              .tmpl(game_content)
+              .appendTo("#creators-content");
+
+          });
+
+          var myModalEl = document.getElementById('creators-game-modal')
+          var modal = bootstrap.Modal.getInstance(myModalEl)
+          modal.hide();
+          openTab("#nav-creators-content");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#gamers-content-select", function () {
+
+      var _contentId = $(this).data('id');
+      var _gameId = $(this).data('game');
+      let _tokenId = tokenID.replace('gamers_nft_', '');
+      let _walletId = $(this).data('wallet');
+      let _icon = $(this).data('icon');
+      let _name = $(this).data('name');
+      let _mode = "gamers";
+      let _index = tokenIndex;
+
+      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: _index };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/createorder",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#gamers-review").empty();
+
+          response.forEach(function (item) {
+
+
+            $("#gamers-review-cost").html("Total: $" + item.cost)
+            $('#gamers-review-token').html('<img src="' + tokenImage + '"/>')
+            $('#gamers-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
+            $("#gamers-review-name").html(_name)
+
+            $('#amountf').val(item.cost)
+            $('#item_number').val(_contentId)
+            $('#invoice').val(item.orderId)
+            $('#custom').val(item.code)
+            $('#item_name').val(_name)
+          });
+
+          var myModalEl = document.getElementById('gamers-content-modal')
+          var modal = bootstrap.Modal.getInstance(myModalEl)
+          modal.hide();
+          openTab("#nav-gamers-review");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#developers-games-select", function (e) {
+      e.preventDefault();
+      let id = $(this).data('game-id');
+      let formData = { gameId: id, publisherId: publisherID };
+      console.log(formData)
+
+      gameID = id;
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/getcontent",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#developers-content").empty();
+
+          response.forEach(function (item) {
+            let type = ''
+            let status = ''
+
+            if (item.type == 0) {
+              type = "Unlockable Item"
+            }
+            if (item.type == 1) {
+              type = "Modifier"
+            }
+            if (item.type == 2) {
+              type = "Consummable"
+            }
+            if (item.type == 3) {
+              type = "Event"
+            }
+
+            if (item.status == -1) {
+              status = "Locked"
+            }
+            if (item.status == 0) {
+              status = "New"
+            }
+            if (item.status == 1) {
+              status = "Submitted"
+            }
+            if (item.status == 2) {
+              status = "Approved"
+            }
+
+            let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, info: item.description, status: status, locked: item.locked };
+            $("#developers-content-template")
+              .tmpl(game_content)
+              .appendTo("#developers-content");
+
+          });
+
+          openTab("#nav-developers-content");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#creators-content-select", function () {
+
+      var _contentId = $(this).data('id');
+      var _gameId = $(this).data('game');
+      let _tokenId = tokenID;
+      let _walletId = $(this).data('wallet');
+      let _icon = $(this).data('icon');
+      let _name = $(this).data('name');
+      let _mode = "creators";
+
+      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0 };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/createorder",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+          let response = jQuery.parseJSON(data);
+
+          $("#creators-review").empty();
+
+          response.forEach(function (item) {
+
+
+            $("#creators-review-cost").html("Total: $" + item.cost)
+            $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
+            $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
+            $("#creators-review-name").html(_name)
+
+            $('#creators-amountf').val(item.cost)
+            $('#creators-item_number').val(_contentId)
+            $('#creators-invoice').val(item.orderId)
+            $('#creators-custom').val(item.code)
+            $('#creators-item_name').val(_name)
+          });
+
+          var myModalEl = document.getElementById('creators-content-modal')
+          var modal = bootstrap.Modal.getInstance(myModalEl)
+          modal.hide();
+          openTab("#nav-creators-review");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#developers-purchase-content", function () {
+
+      let formData = { gameId: gameID, publisherId: publisherID };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/submitcontent",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+
+          $("#developers-review").empty();
+
+          openTab("#nav-developers-review");
+        },
+      });
+
+    });
+
+    $(document).on("click", "#streamers-nfts-select", function () {
+
+      let id = $(this).data('id');
+      let supply = $(this).data('supply');
+
+      if (supply == 0) {
+        let formData = { nftId: id, streamerId: streamerID };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/getpackages",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#streamers-packages").empty();
+
+            let game_content = { id: 1, name: "10 Supply", cost: 0, supply: 10, nftid: id };
+            $("#streamers-packages-template")
+              .tmpl(game_content)
+              .appendTo("#streamers-packages");
+
+            response.forEach(function (item) {
+
+              if (item.supply == -1) item.supply = "Infinite"
+
+              let game_content = { id: item.id, name: item.name, cost: item.cost, supply: item.supply, nftid: id };
+              $("#streamers-packages-template")
+                .tmpl(game_content)
+                .appendTo("#streamers-packages");
+
+              RenderPayPal(item, "#streamers-packages-purchase-" + item.id, id);
+
+            });
+
+            $('#streamers-extension-btn').hide()
+            openTab("#nav-streamers-packages");
+          },
+        });
+
+      } else {
+        openTab("#nav-streamers-packages");
+      }
+
+    });
+
+    $(document).on("click", "#streamers-packages-select", function () {
+
+      let id = $(this).data('packages-id');
+      let nftid = $(this).data('nft-id');
+
+      let formData = { packageId: id, nftId: nftid, streamerId: streamerID };
+      console.log(formData)
+
+      $.ajax({
+        url:
+          "https://api.playnft.io/selectpackage",
+        type: "POST",
+        crossDomain: true,
+        data: JSON.stringify(formData),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+          console.info(data);
+
+          openTab("#nav-streamers-review");
+        },
+      });
+
+
+
+    });
+
+    $(document).on("click", "#streamers-extension-btn", function () {
+
+      openTab("#nav-streamers-review");
+
+    })
+
+
+
+
+
+    $(document).on("click", "#login-streamers", function () {
+      let clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+      let redirectSite = location.protocol + "//" + location.host
+      let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+
+
+      location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
+
+    });
+
+    $(document).on('show.bs.modal', '#gamers-game-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var gameId = button.data('game-id')
+      var gameName = button.data('game-name')
+      var gameIcon = button.data('game-icon')
+      var gamePlatforms = button.data('game-platforms')
+      var gameInfo = button.data('game-info')
+      var publisherName = button.data('game-publisher')
+      var publisherWebsite = button.data('game-website')
+      var publisherId = button.data('game-publisherid')
+
+      publisherID = publisherId;
+
+
+      var modal = $(this)
+
+      modal.find('#gamers-game-name').text(gameName)
+      modal.find('#gamers-game-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherId + '/' + gameId + '/icon.png"/>')
+      modal.find('#gamers-game-info').html(gameInfo)
+      modal.find('#gamers-game-platforms').html(gamePlatforms)
+      modal.find('#gamers-games-select').data('id', gameId)
+      modal.find('#gamers-game-publisher').text(publisherName)
+      modal.find('#gamers-game-website').text(publisherWebsite)
+
+    })
+
+    $(document).on('show.bs.modal', '#creators-game-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var gameId = button.data('game-id')
+      var gameName = button.data('game-name')
+      var gameIcon = button.data('game-icon')
+      var gamePlatforms = button.data('game-platforms')
+      var gameInfo = button.data('game-info')
+      var publisherName = button.data('game-publisher')
+      var publisherWebsite = button.data('game-website')
+      var publisherId = button.data('game-publisherid')
+
+      publisherID = publisherId;
+
+      var modal = $(this)
+
+      modal.find('#creators-game-name').text(gameName)
+      modal.find('#creators-game-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherId + '/' + gameId + '/icon.png"/>')
+      modal.find('#creators-game-info').html(gameInfo)
+      modal.find('#creators-game-platforms').html(gamePlatforms)
+      modal.find('#creators-games-select').data('id', gameId)
+      modal.find('#creators-game-publisher').text(publisherName)
+      modal.find('#creators-game-website').text(publisherWebsite)
+
+    })
+
+    $(document).on('show.bs.modal', '#gamers-content-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var id = button.data('content-id')
+      var gameId = button.data('content-gameid')
+      var gameName = button.data('content-title')
+      var gameIcon = button.data('content-icon')
+      var gameInfo = button.data('content-info')
+      walletID = $('#wallet-address').val()
+
+      var modal = $(this)
+
+      modal.find('#gamers-content-title').text(gameName)
+      modal.find('#gamers-content-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + gameId + '/' + id + '/icon.png"/>')
+      modal.find('#gamers-content-info').html(gameInfo)
+      modal.find('#gamers-content-select').data('id', id)
+      modal.find('#gamers-content-select').data('name', gameName)
+      modal.find('#gamers-content-select').data('game', gameId)
+      modal.find('#gamers-content-select').data('wallet', walletID)
+      modal.find('#gamers-content-select').data('token', gameId)
+      modal.find('#gamers-content-select').data('icon', gameIcon)
+    })
+
+    $(document).on('show.bs.modal', '#creators-content-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var id = button.data('content-id')
+      var gameId = button.data('content-gameid')
+      var gameName = button.data('content-title')
+      var gameIcon = button.data('content-icon')
+      var gameInfo = button.data('content-info')
+
+
+      var modal = $(this)
+
+      modal.find('#creators-content-title').text(gameName)
+      modal.find('#creators-content-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + gameId + '/' + id + '/icon.png"/>')
+      modal.find('#creators-content-info').html(gameInfo)
+      modal.find('#creators-content-select').data('id', id)
+      modal.find('#creators-content-select').data('name', gameName)
+      modal.find('#creators-content-select').data('game', gameId)
+      modal.find('#creators-content-select').data('wallet', walletID)
+      modal.find('#creators-content-select').data('token', gameId)
+      modal.find('#creators-content-select').data('icon', gameIcon)
+    })
+
+    $(document).on('show.bs.modal', '#developers-game-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var gameId = button.data('game-id')
+      var gameName = button.data('game-name')
+      var gameIcon = button.data('game-icon')
+      var gamePlatformSteam = Boolean(button.data('game-platformsteam'))
+      var gamePlatformApple = Boolean(button.data('game-platformapple'))
+      var gamePlatformGoogle = Boolean(button.data('game-platformgoogle'))
+      var gameInfo = button.data('game-info')
+      var gameStatus = button.data('game-status')
+
+      var modal = $(this)
+      modal.find('#developers_game_name').val(gameName)
+      //modal.find('#developers-game-icon').html('<img src="assets/img/clients/' + gameIcon + '"/>')
+      modal.find('#developers_game_info').val(gameInfo)
+      tinymce.get('developers_game_info').setContent(gameInfo)
+      modal.find('#developers_game_status').val(gameStatus)
+      modal.find('#developers_game_steam').attr("checked", gamePlatformSteam)
+      modal.find('#developers_game_apple').attr("checked", gamePlatformApple)
+      modal.find('#developers_game_google').attr("checked", gamePlatformGoogle)
+      modal.find('#developers_game_id').val(gameId)
+      modal.find('#developers_publisher_id').val(publisherID)
+
+    })
+
+    $(document).on('show.bs.modal', '#developers-content-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var Id = button.data('content-id')
+      var gameId = button.data('content-gameid')
+      var gameName = button.data('content-title')
+      var gameIcon = button.data('content-image')
+      var gameInfo = button.data('content-info')
+      var gameStatus = button.data('content-status')
+      var gameCode = button.data('content-code')
+      var gameCost = button.data('content-cost')
+      var exclusive = button.data('content-exclusive')
+      var type = button.data('content-type')
+      var target = button.data('content-target')
+
+      if (!gameId) gameId = gameID;
+      if (!Id) Id = 0;
+      console.log(exclusive)
+      if (exclusive == 0) exclusive = false;
+
+      var modal = $(this)
+      modal.find('#developers_content_name').val(gameName)
+      modal.find('#developers_content_info').val(gameInfo)
+      tinymce.get('developers_content_info').setContent(gameInfo)
+      modal.find('#developers_content_status').val(gameStatus)
+      modal.find('#developers_content_id').val(Id)
+      modal.find('#developers_game_id').val(gameId)
+      modal.find('#developers_publisher_id').val(publisherID)
+      modal.find('#developers_content_code').val(gameCode)
+      modal.find('#developers_content_cost').val(gameCost)
+      modal.find('#developers_content_exclusive').attr("checked", exclusive)
+      modal.find('#developers_content_type').val(type)
+      modal.find('#developers_content_target').val(target)
+
+    })
+
+    $(document).on('show.bs.modal', '#streamers-nfts-modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var Id = button.data('nft-id')
+      var gameName = button.data('nft-name')
+      var gameIcon = button.data('nft-image')
+      var gameInfo = button.data('nft-description')
+      var gameStatus = button.data('nft-status')
+      var gameCost = button.data('nft-cost')
+
+      if (!Id) Id = 0;
+
+      var modal = $(this)
+      modal.find('#streamers_nft_name').val(gameName)
+      if(gameInfo) modal.find('#streamers_nft_description').val(gameInfo)
+      if(gameInfo) tinymce.get('streamers_nft_description').setContent(gameInfo)
+      if(gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
+      modal.find('#streamers_nft_id').val(Id)
+      modal.find('#streamer_id').val(streamerID)
+      if(gameCost) modal.find('#streamers_nft_cost').val(gameCost)
+    })
+
+    function openTab(tabId) {
+      let active = $(".wizard .nav-tabs li.active");
+      console.log(active)
+      active.addClass("completed");
+      active.removeClass("active");
+      let next = active.next();
+
+      next.addClass("active");
+      next.removeClass("disabled");
+
+      var nextTab = document.querySelector(tabId);
+      var tab = new bootstrap.Tab(nextTab);
+      tab.show();
+    }
+
+    function resetTabs() {
+
+    }
+
+    function deleteGame(event, elem) {
+      event.preventDefault();
+
+      if (window.confirm('Are you sure?')) {
+        let id = $(elem).data('game-id');
+        let info = $(elem).data('game-info');
+        let formData = { developers_game_id: id, developers_game_status: -1, developers_publisher_id: publisherID, developers_game_info: info };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updategame",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#developers-games").empty();
+
+            response.forEach(function (item) {
+              let status
+              let cost
+              if (item.status == 0) {
+                status = "Development"
+              }
+              if (item.status == 1) {
+                status = "Live"
+              }
+
+              let platforms = ''
+              if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+              if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+              if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+              let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gameStatusValue: item.status, gamePlatforms: platforms, gamePlatformSteam: item.platform_steam, gamePlatformApple: item.platform_apple, gamePlatformGoogle: item.platform_google };
+              $("#developers-games-template")
+                .tmpl(game_content)
+                .appendTo("#developers-games");
+
+            });
+          },
+        });
+      }
+    }
+
+    function deleteContent(event, elem) {
+      event.preventDefault();
+
+      if (window.confirm('Are you sure?')) {
+        let id = $(elem).data('content-id');
+        let info = $(elem).data('content-info');
+        let gameid = $(elem).data('content-gameid');
+
+        let formData = { developers_content_id: id, developers_content_status: -1, developers_publisher_id: publisherID, developers_content_info: info, developers_game_id: gameid };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updatecontent",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+
+            $("#developers-content").empty();
+
+            response.forEach(function (item) {
+              let type = ''
+              let status = ''
+
+              if (item.type == 0) {
+                type = "Unlockable Item"
+              }
+              if (item.type == 1) {
+                type = "Modifier"
+              }
+              if (item.type == 2) {
+                type = "Consummable"
+              }
+              if (item.type == 3) {
+                type = "Event"
+              }
+
+              if (item.status == -1) {
+                status = "Locked"
+              }
+              if (item.status == 0) {
+                status = "New"
+              }
+              if (item.status == 1) {
+                status = "Submitted"
+              }
+              if (item.status == 2) {
+                status = "Approved"
+              }
+
+              let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, code: item.code, exclusive: item.exclusive, target: item.target, type: item.type, typetext: type, status: status, info: item.description, locked: item.locked };
+              $("#developers-content-template")
+                .tmpl(game_content)
+                .appendTo("#developers-content");
+
+            });
+
+          },
+        });
+      }
+    }
+
+    function deleteNFT(event, elem) {
+      event.preventDefault();
+
+      if (window.confirm('Are you sure?')) {
+        let id = $(elem).data('nft-id');
+        let info = $(elem).data('nft-description');
+        let formData = { streamers_nft_id: id, streamers_nft_status: -1, streamers_nft_description: info, streamer_id: streamerID };
+        console.log(formData)
+
+        $.ajax({
+          url:
+            "https://api.playnft.io/updatenft",
+          type: "POST",
+          crossDomain: true,
+          data: JSON.stringify(formData),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            console.info(data);
+            var response = jQuery.parseJSON(data);
+
+            setTimeout(function () {
+              $("#streamers-nfts").empty();
+
+              response.forEach(function (item) {
+
+                var status = "Offline"
+                if (item.status == "1") status = "Live"
+
+                let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                $("#streamers-nfts-template")
+                  .tmpl(game_content)
+                  .appendTo("#streamers-nfts");
+
+              });
+
+            }, 2000);
+          },
+        });
+      }
+    }
+
+    function RenderPayPal(item, elem, nftid) {
+      console.log(item)
+      console.log(elem)
+      paypal.Buttons({
+        style: {
+          layout: 'horizontal',
+          color: 'blue',
+          shape: 'pill',
+          label: 'pay',
+          tagline: 'false',
+          height: 45
+        },
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                currency_code: "USD",
+                value: item.cost
+              },
+              description: item.name,
+              custom_id: nftid + '|' + streamerID
+            }]
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            openTab("#nav-streamers-review");
+          });
+        }
+      }).render(elem);
+    }
+  </script>
 </body>
 
 </html>
