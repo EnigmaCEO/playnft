@@ -517,6 +517,7 @@ section {
 .about .content {
   background-color: #f6f9ff;
   padding: 40px;
+  min-height: -webkit-fill-available;
 }
 
 .about h3 {

@@ -34,7 +34,7 @@
   <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
   <script src="https://kit.fontawesome.com/0a0492e97d.js" crossorigin="anonymous"></script>
   <script
-    src="https://www.paypal.com/sdk/js?client-id=AVNlOUZPkk6p-la2kYB5ehQBcTI6F2TxUYr5ROlJzVDkPqefC2R1K5yQrLYRTx9h1h0yWGv1JEYC-eys"></script>
+    src="https://www.paypal.com/sdk/js?client-id=Afublr47iUx9od__o9lROJup9U0wx74gtOgqlGi-xPG8hGRUggDp1497DSQTMaAN9hP5FspYXTg9bZu0"></script>
 
   <script src="https://cdn.tiny.cloud/1/doicvbneaya0gerwmrc6gn0ei4uw3vsk4znmslowgfwri44v/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
@@ -52,8 +52,7 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="" />
-        <span>PlayNFT</span>
+        <img src="assets/img/logo.png" alt="PlayNFT" />
       </a>
 
       <nav id="navbar" class="navbar">
@@ -203,7 +202,9 @@
           </div>
 
           <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="" />
+            <div class="content">
+              <img src="assets/img/feature.png" class="img-fluid" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -360,7 +361,7 @@
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message"></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -1015,8 +1016,7 @@
         <div class="row gy-4">
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
-              <img src="assets/img/logo.png" alt="" />
-              <span>PlayNFT</span>
+              <img src="assets/img/logo.png" alt="PlayNFT" />
             </a>
             <p>
               We are building an ecosystem to extend the utility and value of
@@ -1482,7 +1482,7 @@
 
                 <div class="col-md-12 mb-3">
                   <textarea class="form-control" name="developers_info" id="developers_info" rows="6"
-                    placeholder="Publisher Info" style="height: max-content;" required></textarea>
+                    placeholder="Publisher Info" style="height: max-content;"></textarea>
                 </div>
 
               </div>
@@ -1581,7 +1581,7 @@
 
                 <div class="col-md-12 mb-3">
                   <textarea class="form-control" name="developers_info" id="edit_developers_info" rows="6"
-                    placeholder="Publisher Info" style="height: max-content;" required></textarea>
+                    placeholder="Publisher Info" style="height: max-content;"></textarea>
                 </div>
 
               </div>
@@ -1657,7 +1657,7 @@
 
                 <div class="col-md-12 mb-3">
                   <textarea class="form-control" name="developers_game_info" id="developers_game_info" rows="6"
-                    placeholder="Game Info" style="height: max-content;" required></textarea>
+                    placeholder="Game Info" style="height: max-content;"></textarea>
                 </div>
 
               </div>
@@ -1749,7 +1749,7 @@
                 <div class="col-md-12 mb-3">
                   Provide detailed instructions on how this content is accessed in the game.<br />
                   <textarea class="form-control" name="developers_content_info" id="developers_content_info" rows="6"
-                    placeholder="Content Instructions" style="height: max-content;" required></textarea>
+                    placeholder="Content Instructions" style="height: max-content;"></textarea>
                 </div>
 
               </div>
@@ -1811,7 +1811,7 @@
 
                 <div class="col-md-12 mb-3">
                   <textarea class="form-control" name="streamers_nft_description" id="streamers_nft_description"
-                    rows="6" placeholder="Description" style="height: max-content;" required></textarea>
+                    rows="6" placeholder="Description" style="height: max-content;"></textarea>
                 </div>
 
               </div>
@@ -3133,12 +3133,12 @@
 
       var modal = $(this)
       modal.find('#streamers_nft_name').val(gameName)
-      modal.find('#streamers_nft_description').val(gameInfo)
-      tinymce.get('streamers_nft_description').setContent(gameInfo)
-      modal.find('#streamers_nft_status').val(gameStatus)
+      if(gameInfo) modal.find('#streamers_nft_description').val(gameInfo)
+      if(gameInfo) tinymce.get('streamers_nft_description').setContent(gameInfo)
+      if(gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
       modal.find('#streamers_nft_id').val(Id)
       modal.find('#streamer_id').val(streamerID)
-      modal.find('#streamers_nft_cost').val(gameCost)
+      if(gameCost) modal.find('#streamers_nft_cost').val(gameCost)
     })
 
     function openTab(tabId) {
