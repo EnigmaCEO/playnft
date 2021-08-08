@@ -442,7 +442,7 @@
                     <input type="hidden" name="walletMode" value="gamers" />
                     <div class="row gy-4">
                       <div class="col-md-6">
-                        <input type="text" name="wallet-address" id="wallet-address" class="form-control"
+                        <input type="text" name="walletAddress" id="walletAddress" class="form-control"
                           placeholder="Ethereum Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
@@ -615,7 +615,7 @@
                     <input type="hidden" name="walletMode" value="creators" />
                     <div class="row gy-4">
                       <div class="col-md-12 text-center">
-                        <input type="text" name="wallet-address" id="creators-wallet-address" class="form-control"
+                        <input type="text" name="walletAddress" id="creators-walletAddress" class="form-control"
                           placeholder="Ethereum Wallet Address" required />
                       </div>
 
@@ -1961,7 +1961,7 @@
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
 
-        walletID = $('#wallet-address').val()
+        walletID = $('#walletAddress').val()
 
         $.ajax({
           url:
@@ -1997,7 +1997,7 @@
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
 
-        walletID = $('#creators-wallet-address').val()
+        walletID = $('#creators-walletAddress').val()
 
         $.ajax({
           url:
@@ -2106,6 +2106,7 @@
                 $('#edit_developers_email').val(response["email"])
                 $('#edit_developers_wallet').val(response["wallet"])
                 $('#edit_developers_info').val(response["companyInfo"])
+                if(response["companyInfo"]) tinymce.get('edit_developers_info').setContent(response["companyInfo"])
                 $('#edit_developers_id').val(publisherID)
               }
 
@@ -3023,7 +3024,7 @@
       var gameName = button.data('content-title')
       var gameIcon = button.data('content-icon')
       var gameInfo = button.data('content-info')
-      walletID = $('#wallet-address').val()
+      walletID = $('#walletAddress').val()
 
       var modal = $(this)
 
