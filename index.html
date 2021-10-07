@@ -1972,17 +1972,33 @@
           dataType: "json",
           contentType: "application/json",
           success: function (data) {
-            console.info(data);
+            //console.info(JSON.stringify(data));
             let response = jQuery.parseJSON(data);
 
             $("#gamers-nfts").empty();
+            console.info(response.length);
 
+            let count = 1;
             response.forEach(function (item) {
               if (item.value > 0) {
-                let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: item.token.meta.image, tokenIndex: item.index.replace(/^0+/, '') };
-                $("#token-template")
-                  .tmpl(token_content)
-                  .appendTo("#gamers-nfts");
+
+                let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
+
+                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+
+                  try {
+                    let meta = jQuery.parseJSON(metaData);
+                    if (!meta.image) return;
+
+                    console.log("Success #" + count++ + ": " + url)
+                    let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenIndex: item.index.replace(/^0+/, '') };
+                    $("#token-template")
+                      .tmpl(token_content)
+                      .appendTo("#gamers-nfts");
+                  } catch (e) {
+                    console.log("Failed #" + count++ + ": " + url)
+                  }
+                });
               }
             });
 
@@ -2013,18 +2029,32 @@
 
             $("#creators-nfts").empty();
 
+            let count = 1;
             response.forEach(function (item) {
               if (item.value > 0) {
-                if (item.token.meta.image == "") return;
 
                 if (item.token.totalSupply == 18446744073709551615) {
                   item.token.totalSupply = "Infinite";
                 }
 
-                let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: item.token.meta.image, tokenSupply: item.token.totalSupply };
-                $("#creators-token-template")
-                  .tmpl(token_content)
-                  .appendTo("#creators-nfts");
+                let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
+
+                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+
+                  try {
+                    let meta = jQuery.parseJSON(metaData);
+                    if (!meta.image) return;
+
+                    console.log("Success #" + count++ + ": " + url)
+
+                    let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
+                    $("#creators-token-template")
+                      .tmpl(token_content)
+                      .appendTo("#creators-nfts");
+                  } catch (e) {
+                    console.log("Failed #" + count++ + ": " + url)
+                  }
+                });
               }
             });
 
@@ -2106,7 +2136,7 @@
                 $('#edit_developers_email').val(response["email"])
                 $('#edit_developers_wallet').val(response["wallet"])
                 $('#edit_developers_info').val(response["companyInfo"])
-                if(response["companyInfo"]) tinymce.get('edit_developers_info').setContent(response["companyInfo"])
+                if (response["companyInfo"]) tinymce.get('edit_developers_info').setContent(response["companyInfo"])
                 $('#edit_developers_id').val(publisherID)
               }
 
@@ -3076,7 +3106,7 @@
       modal.find('#developers_game_name').val(gameName)
       //modal.find('#developers-game-icon').html('<img src="assets/img/clients/' + gameIcon + '"/>')
       modal.find('#developers_game_info').val(gameInfo)
-      if(gameInfo) tinymce.get('developers_game_info').setContent(gameInfo)
+      if (gameInfo) tinymce.get('developers_game_info').setContent(gameInfo)
       modal.find('#developers_game_status').val(gameStatus)
       modal.find('#developers_game_steam').attr("checked", gamePlatformSteam)
       modal.find('#developers_game_apple').attr("checked", gamePlatformApple)
@@ -3108,7 +3138,7 @@
       var modal = $(this)
       modal.find('#developers_content_name').val(gameName)
       modal.find('#developers_content_info').val(gameInfo)
-      if(gameInfo) tinymce.get('developers_content_info').setContent(gameInfo)
+      if (gameInfo) tinymce.get('developers_content_info').setContent(gameInfo)
       modal.find('#developers_content_status').val(gameStatus)
       modal.find('#developers_content_id').val(Id)
       modal.find('#developers_game_id').val(gameId)
@@ -3134,12 +3164,12 @@
 
       var modal = $(this)
       modal.find('#streamers_nft_name').val(gameName)
-      if(gameInfo) modal.find('#streamers_nft_description').val(gameInfo)
-      if(gameInfo) tinymce.get('streamers_nft_description').setContent(gameInfo)
-      if(gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
+      if (gameInfo) modal.find('#streamers_nft_description').val(gameInfo)
+      if (gameInfo) tinymce.get('streamers_nft_description').setContent(gameInfo)
+      if (gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
       modal.find('#streamers_nft_id').val(Id)
       modal.find('#streamer_id').val(streamerID)
-      if(gameCost) modal.find('#streamers_nft_cost').val(gameCost)
+      if (gameCost) modal.find('#streamers_nft_cost').val(gameCost)
     })
 
     function openTab(tabId) {
