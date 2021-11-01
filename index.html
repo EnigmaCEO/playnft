@@ -955,12 +955,17 @@
                   <div class="panel panel-primary" id="streamers-review-panel">
                     <div class="panel-heading">
                       <h4>Twitch Extension Integration</h4>
-                      <p class="section-header">Add the PlayNFT Extension to your channel Bio to start distribution.</p>
+                      <p class="section-header">Install the PlayNFT Extension and create a new Panel to start distributing your tokens.</p>
                     </div>
                     <div class="panel-body">
                       <div class="flex-shrink-0 text-center">
                         <p class="game-icon">
-                          <img src="assets/img/extensions.png" class="img-fluid" alt="Twitch Extensions" />
+                          <a href="https://dashboard.twitch.tv/extensions/3v4y6bwztvpyxfeoxq5ik79iosx3km-0.0.1" target="_blank">
+                            <img src="assets/img/extensions.png" class="img-fluid" alt="Twitch Extensions" /><br>
+                            <button id="streamers-extension-btn" type="button" class="btn btn-primary">
+                              <span class="fa fa-external-link"></span> Install Extension
+                            </button>
+                          </a>
                         </p>
 
                       </div>
@@ -1312,7 +1317,7 @@
           />
         </div>
         <div class="flex-grow-1 ms-3">
-          <div class="cost"><sup>$</sup>${cost}</div>
+          <div class="cost">${cost} Bits</div>
           <strong>${name}</strong>
           <p>Status: ${status_text}<br/>
           Supply: ${supply}</p>
@@ -1776,8 +1781,18 @@
                 </div>
 
                 <div class="col-md-6 form-floating mb-3">
-                  <input type="number" name="streamers_nft_cost" id="streamers_nft_cost" class="form-control"
-                    placeholder="0" min="1" step="0.01" required />
+                  <select class="form-select" name="streamers_nft_cost" id="streamers_nft_cost" aria-label="Visibility Status">
+                    <option value="tier1" selected="selected">99 Bits</option>
+                    <option value="tier2" >199 Bits</option>
+                    <option value="tier3" >299 Bits</option>
+                    <option value="tier4" >399 Bits</option>
+                    <option value="tier5" >499 Bits</option>
+                    <option value="tier6" >599 Bits</option>
+                    <option value="tier7" >699 Bits</option>
+                    <option value="tier8" >799 Bits</option>
+                    <option value="tier9" >899 Bits</option>
+                    <option value="tier10" >999 Bits</option>
+                  </select>
                   <label for="streamers_nft_cost">NFT Cost</label>
                 </div>
 
@@ -1808,6 +1823,9 @@
     var gameID = "";
     var contentID = "";
     var streamerID = "";
+    var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10'};
+    var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
+
 
     function hideSections() {
       $("section").hide();
@@ -1880,8 +1898,8 @@
                   response.forEach(function (item) {
                     var status = "Offline"
                     if (item.status == "1") status = "Live"
-
-                    let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                    
+                    let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                     $("#streamers-nfts-template")
                       .tmpl(game_content)
                       .appendTo("#streamers-nfts");
@@ -2419,8 +2437,8 @@
 
                 var status = "Offline"
                 if (item.status == "1") status = "Live"
-
-                let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                
+                let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                 $("#streamers-nfts-template")
                   .tmpl(game_content)
                   .appendTo("#streamers-nfts");
@@ -3131,7 +3149,8 @@
       var gameInfo = button.data('nft-description')
       var gameStatus = button.data('nft-status')
       var gameCost = button.data('nft-cost')
-
+      
+      
       if (!Id) Id = 0;
 
       var modal = $(this)
@@ -3141,7 +3160,7 @@
       if (gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
       modal.find('#streamers_nft_id').val(Id)
       modal.find('#streamer_id').val(streamerID)
-      if (gameCost) modal.find('#streamers_nft_cost').val(gameCost)
+      if (gameCost) modal.find('#streamers_nft_cost').val(TIERS[gameCost])
     })
 
     function openTab(tabId) {
@@ -3308,8 +3327,8 @@
 
                 var status = "Offline"
                 if (item.status == "1") status = "Live"
-
-                let game_content = { id: item.id, name: item.name, cost: item.cost, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                
+                let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                 $("#streamers-nfts-template")
                   .tmpl(game_content)
                   .appendTo("#streamers-nfts");
