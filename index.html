@@ -2003,7 +2003,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
               streamerID = data.sub;
 
-              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture };
+              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode:"streamer"};
 
               $.ajax({
                 url:
