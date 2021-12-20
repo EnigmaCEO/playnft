@@ -864,7 +864,7 @@
                         <div class="pricing">
                           <div class="price"></div>
 
-                          <br /><a href="#" class="btn-buy" id="service-streamers" data-bs-toggle="modal"
+                          <br /><a href="#" class="btn-buy" data-bs-toggle="modal"
                             data-bs-target="#developers-new-modal">Start Here</a>
                         </div>
                       </div>
@@ -878,7 +878,7 @@
                         <div class="pricing">
                           <div class="price"></div>
 
-                          <br /><a href="#" class="btn-buy" id="service-streamers" data-bs-toggle="modal"
+                          <br /><a href="#" class="btn-buy" data-bs-toggle="modal"
                             data-bs-target="#developers-login-modal">Continue</a>
                         </div>
                       </div>
@@ -1926,7 +1926,11 @@
       </div>
     </div>
   </div>
-
+  <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
+    </div>
+  </div>
 
   <script>
     var tokenID = "";
@@ -1991,6 +1995,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
         if (params.state == state) {
           hideSections();
           $("#section-streamers").show();
+          startLoading();
 
           $.ajax({
             url: 'https://id.twitch.tv/oauth2/userinfo',
@@ -2078,6 +2083,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#gamers-scan-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
         const data = new FormData(e.target);
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
@@ -2130,6 +2136,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#creators-scan-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         const data = new FormData(e.target);
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
@@ -2186,6 +2194,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#developers-new-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         const data = new FormData(e.target);
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
@@ -2213,6 +2223,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
             } catch (error) {
               console.log("Error")
               $('#developers_name').addClass('is-invalid');
+              stopLoading();
             }
 
           },
@@ -2221,6 +2232,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#developers-login-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         const data = new FormData(e.target);
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
@@ -2259,11 +2272,13 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
                 $('#edit_developers_info').val(response["companyInfo"])
                 if (response["companyInfo"]) tinymce.get('edit_developers_info').setContent(response["companyInfo"])
                 $('#edit_developers_id').val(publisherID)
+                stopLoading();
               }
 
             } catch (error) {
               console.log("Error " + error)
               $('#login_developers_name').addClass('is-invalid');
+              stopLoading();
             }
 
           },
@@ -2272,6 +2287,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#developers-edit-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         const data = new FormData(e.target);
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
@@ -2346,6 +2363,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#developers-game-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         var file = $('#developers_game_icon')[0].files[0];
         if (file) {
           var reader = new FileReader();
@@ -2427,6 +2446,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#developers-content-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         var file = $('#developers_content_icon')[0].files[0];
         if (file) {
           var reader = new FileReader();
@@ -2520,6 +2541,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
       $("#streamers-nfts-form").on("submit", function (e) {
         e.preventDefault();
+        startLoading();
+
         var file = $('#streamers_nft_icon')[0].files[0];
         if (file) {
           var reader = new FileReader();
@@ -2603,6 +2626,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     $(document).on("click", "li", function () {
 
       if ($(this).hasClass("gamers-nft-item")) {
+        startLoading();
+
         $(".gamers-nft-item").removeClass("active");
         $(this).addClass("active");
         tokenID = $(this).attr('id');
@@ -2657,6 +2682,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       }
 
       if ($(this).hasClass("creators-nft-item")) {
+        startLoading();
+
         $(".creators-nft-item").removeClass("active");
         $(this).addClass("active");
         tokenID = $(this).attr('id');
@@ -2717,6 +2744,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#gamers-games-select", function () {
+      startLoading();
 
       let id = $(this).data('id');
       let formData = { gameId: id, tokenId: tokenID, tokenIndex: tokenIndex };
@@ -2772,6 +2800,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#creators-games-select", function () {
+      startLoading();
 
       let id = $(this).data('id');
       let formData = { gameId: id, tokenId: tokenID, tokenIndex: 0 };
@@ -2827,6 +2856,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#gamers-content-select", function () {
+      startLoading();
 
       var _contentId = $(this).data('id');
       var _gameId = $(this).data('game');
@@ -2880,6 +2910,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
     $(document).on("click", "#developers-games-select", function (e) {
       e.preventDefault();
+      startLoading();
+
       let id = $(this).data('game-id');
       let formData = { gameId: id, publisherId: publisherID };
       console.log(formData)
@@ -2944,6 +2976,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#creators-content-select", function () {
+      startLoading();
 
       var _contentId = $(this).data('id');
       var _gameId = $(this).data('game');
@@ -2995,6 +3028,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#developers-purchase-content", function () {
+      startLoading();
 
       let formData = { gameId: gameID, publisherId: publisherID };
       console.log(formData)
@@ -3019,11 +3053,13 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#streamers-nfts-select", function () {
-
+      
       let id = $(this).data('id');
       let supply = $(this).data('supply');
 
       if (supply == 0) {
+        startLoading();
+
         let formData = { nftId: id, streamerId: streamerID };
         console.log(formData)
 
@@ -3071,6 +3107,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#streamers-packages-select", function () {
+      startLoading();
 
       let id = $(this).data('packages-id');
       let nftid = $(this).data('nft-id');
@@ -3307,6 +3344,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       var nextTab = document.querySelector(tabId);
       var tab = new bootstrap.Tab(nextTab);
       tab.show();
+      stopLoading();
     }
 
     function resetTabs() {
@@ -3315,6 +3353,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
     function deleteGame(event, elem) {
       event.preventDefault();
+      startLoading();
 
       if (window.confirm('Are you sure?')) {
         let id = $(elem).data('game-id');
@@ -3364,6 +3403,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
     function deleteContent(event, elem) {
       event.preventDefault();
+      startLoading();
 
       if (window.confirm('Are you sure?')) {
         let id = $(elem).data('content-id');
@@ -3432,6 +3472,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
     function deleteNFT(event, elem) {
       event.preventDefault();
+      startLoading();
 
       if (window.confirm('Are you sure?')) {
         let id = $(elem).data('nft-id');
@@ -3502,6 +3543,14 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
           });
         }
       }).render(elem);
+    }
+
+    function startLoading(){
+       $('#spinnerModal').modal('show');
+    }
+
+    function stopLoading(){
+       $('#spinnerModal').modal('hide');
     }
   </script>
 </body>
