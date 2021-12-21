@@ -2604,7 +2604,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
               var myModalEl = document.getElementById('streamers-nfts-modal')
               var modal = bootstrap.Modal.getInstance(myModalEl)
               modal.hide();
-
+              stopLoading();
             }, 2000);
           },
         });
