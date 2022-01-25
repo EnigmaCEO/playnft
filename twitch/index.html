@@ -185,15 +185,8 @@
                                         <div class="panel-body">
                                             <div class="flex-shrink-0 text-center">
                                                 <p class="game-icon">
-                                                    <a href="https://dashboard.twitch.tv/extensions/3v4y6bwztvpyxfeoxq5ik79iosx3km-1.0.0"
-                                                        target="_blank">
-                                                        <img src="assets/img/extensions.png" class="img-fluid"
-                                                            alt="Twitch Extensions" /><br>
-                                                        <button id="streamers-extension-btn" type="button"
-                                                            class="btn btn-primary">
-                                                            <span class="fa fa-external-link"></span> Install Extension
-                                                        </button>
-                                                    </a>
+                                                    Your request has been sent to the blockchain. The NFT will be arriving to your wallet shortly!<br><br>
+                                                    Thank you for using PlayNFT
                                                 </p>
 
                                             </div>
@@ -314,6 +307,9 @@
                                         minute: 'numeric', // numeric, 2-digit
                                         second: 'numeric', // numeric, 2-digit
                                     })
+
+                                    if(item.claimed == 1) item.supply = 0;
+
                                     let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId, supply: item.supply };
                                     $("#twitch-nfts-template")
                                         .tmpl(game_content)
