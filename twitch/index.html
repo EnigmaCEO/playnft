@@ -75,7 +75,7 @@
             <div class="container">
                 <header class="section-header">
                     <h2>Twitch Tokens</h2>
-                    <p>Claim your NFTs</p>
+                    <p>Token Inventory</p>
                 </header>
 
                 <div class="wizard">
@@ -91,7 +91,7 @@
                                 </a>
                             </li>
                             <li role="presentation" class="nav-item disabled">
-                                <a title="2. Claim NFTs" class="nav-link" id="nav-twitch-nfts" role="tab"
+                                <a title="2. Token Inventory" class="nav-link" id="nav-twitch-nfts" role="tab"
                                     data-bs-toggle="tab" aria-controls="twitch-nfts" href="#list-twitch-nfts">
                                     <span class="round-tab"><i class="fas fa-sd-card"
                                             style="font-size: 3.7vh"></i></span>
@@ -140,7 +140,7 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-primary" id="twitch-nfts-panel">
                                         <div class="panel-heading">
-                                            <h4>Claim NFTs</h4>
+                                            <h4>Streamer Tokens</h4>
                                         </div>
                                         <div style="text-align: end; padding-bottom: 20px;">
 
@@ -241,8 +241,10 @@
             <p>Streamer: ${streamer}<br/>
             Date Acquired: ${date}</p>
             <div class="actions">
-              
-              <a href="#" id="twitch-nfts-select" class="btn-details-select" data-id="${transactionId}" data-streamerid="${streamerId}" >Claim</a>
+              {{if supply > 0 }}
+                <a href="#" id="twitch-nfts-select" class="btn-details-select" data-id="${transactionId}" data-streamerid="${streamerId}" >Convert to NFT</a>
+              {{/if}}
+              <a href="#" id="twitch-nfts-download" class="btn-details" data-content-id="${id}" data-content-streamer="${streamerId}">Download</a>
             </div>
           </div>
         </li>
@@ -312,7 +314,7 @@
                                         minute: 'numeric', // numeric, 2-digit
                                         second: 'numeric', // numeric, 2-digit
                                     })
-                                    let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId };
+                                    let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId, supply: item.supply };
                                     $("#twitch-nfts-template")
                                         .tmpl(game_content)
                                         .appendTo("#twitch-nfts");

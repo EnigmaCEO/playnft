@@ -2420,6 +2420,13 @@ div.spacer
     line-height: 0;
 }
 
+div.spacer-20
+{
+    font-size: 0; 
+    height: 20px;
+    line-height: 0;
+}
+
 
 .wizard {
   /*margin: 20px auto;*/
