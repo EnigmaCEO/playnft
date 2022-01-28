@@ -62,9 +62,14 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#streamers">Streamers</a></li>
+          <li class="dropdown"><a href="#"><span>Showcase</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="#streamers">Streamers</a></li>
+              <li><a class="nav-link scrollto" href="#clients">Games</a></li>
+              <li><a class="nav-link scrollto" href="#nfts">NFT Utility</a></li>
+            </ul>
+          </li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#clients">Games</a></li>
           <li><a class="nav-link scrollto" href="#partners">Partners</a></li>
           <li><a class="nav-link" href="/roadmap/">Roadmap</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
@@ -86,7 +91,7 @@
         <div class="col-lg-6 d-flex flex-column justify-content-center">
           <h1 data-aos="fade-up">The playground for NFTs</h1>
           <h2 data-aos="fade-up" data-aos-delay="400">
-            Collect, Connect, and Play!
+            "I just bought an NFT... now what?"
           </h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
@@ -190,8 +195,7 @@
           <div class="swiper-slide">
             <div class="testimonial-item">
               <div class="profile mt-auto">
-                <img
-                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/2621b461703eb33d-profile_image-150x150.jpeg"
+                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/2621b461703eb33d-profile_image-150x150.jpeg"
                   class="testimonial-img" alt="">
                 <h3>JustinLCarter</h3>
                 <h4>0 NFTs</h4>
@@ -208,7 +212,7 @@
             <div class="testimonial-item">
               <div class="profile mt-auto">
                 <img
-                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/8a76516a-368f-4da0-8cf5-8e2e9a3689f7-profile_image-150x150.png"
+                  src="https://static-cdn.jtvnw.net/jtv_user_pictures/93232cde-2eac-42aa-a0b3-2f63cf898562-profile_image-150x150.png"
                   class="testimonial-img" alt="">
                 <h3>MiraScarlet</h3>
                 <h4>0 NFTs</h4>
@@ -299,7 +303,7 @@
               <i class="ri-camera-3-line icon"></i>
               <h3>Game Streamers</h3>
               <p>
-                Grow your audience and expand your brand with your own NFTs.
+                Grow your audience and expand your brand with your own Digital Tokens.
               </p>
               <div class="pricing">
                 <div class="price"></div>
@@ -523,22 +527,60 @@
                   <h4>Input your Wallet address</h4>
                   <form id="gamers-scan-form" action="#" method="post">
                     <input type="hidden" name="walletMode" value="gamers" />
-                    <div class="row gy-4">
+                    <div class="gy-4">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-enj"
+                          value="enj" checked>
+                        <label class="form-check-label" for="gamers-chain-enj"><img style="width:50px"
+                            src="assets/img/enjin-coin-enj-logo.svg" alt="Enjin" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-avax"
+                          value="avax">
+                        <label class="form-check-label" for="gamers-chain-avax"><img style="width:50px"
+                            src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-heco"
+                          value="heco">
+                        <label class="form-check-label" for="gamers-chain-heco"><img style="width:50px"
+                            src="assets/img/heco-logo.svg" alt="Heco" /></label>
+                      </div>
+                    </div>
+                    <div class="row spacer-20">&nbsp;</div>
+                    <div class="row gy-4" id="gamers-wallet-enj">
                       <div class="col-md-6">
                         <input type="text" name="walletAddress" id="walletAddress" class="form-control"
                           placeholder="Ethereum Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
-                        <!-- <select
-                            name="wallet-platform"
-                            class="form-control"
-                            required
-                          >
-                            <option value="">Select Wallet Platform</option>
-                            <option valid="enjin" selected>Enjin</option>
-                          </select> -->
                         <a href="https://enjin.io/software/wallet" target="_blank">Download the Enjin Wallet</a>
                       </div>
+                    </div>
+                    <div class="row gy-4" id="gamers-wallet-avax">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressAvax" id="walletAddressAvax" class="form-control"
+                          placeholder="Avalanche Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="avax-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4" id="gamers-wallet-heco">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressHeco" id="walletAddressHeco" class="form-control"
+                          placeholder="HECO Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="heco-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row spacer-20">&nbsp;</div>
+                    <div class="row gy-4">
                       <div class="col-md-12 text-center">
                         <button id="scan-wallet" class="btn-read-more" type="submit">
                           Scan Wallet
@@ -696,12 +738,44 @@
                   <h4>Input your Wallet address</h4>
                   <form id="creators-scan-form" action="#" method="post">
                     <input type="hidden" name="walletMode" value="creators" />
-                    <div class="row gy-4">
-                      <div class="col-md-12 text-center">
+
+                    <div class="gy-4">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-enj"
+                          value="enj" checked>
+                        <label class="form-check-label" for="creators-chain-enj"><img style="width:50px"
+                            src="assets/img/enjin-coin-enj-logo.svg" alt="Enjin" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-avax"
+                          value="avax">
+                        <label class="form-check-label" for="creators-chain-avax"><img style="width:50px"
+                            src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
+                      </div>
+                    </div>
+                    <div class="row spacer-20">&nbsp;</div>
+                    <div class="row gy-4" id="creators-wallet-enj">
+                      <div class="col-md-6">
                         <input type="text" name="walletAddress" id="creators-walletAddress" class="form-control"
                           placeholder="Ethereum Wallet Address" required />
                       </div>
-
+                      <div class="col-md-6 text-end">
+                        <a href="https://enjin.io/software/wallet" target="_blank">Download the Enjin Wallet</a>
+                      </div>
+                    </div>
+                    <div class="row gy-4" id="creators-wallet-avax">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressAvax" id="creators-walletAddressAvax" class="form-control"
+                          placeholder="Avalanche Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="creators-avax-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row spacer-20">&nbsp;</div>
+                    <div class="row gy-4">
                       <div class="col-md-12 text-center">
                         <button id="creators-scan-wallet" class="btn-read-more" type="submit">
                           Scan Wallet
@@ -964,7 +1038,7 @@
       <div class="container">
         <header class="section-header">
           <h2>Twitch Streamers</h2>
-          <p>Create NFTs for the Playground</p>
+          <p>Create Digital Tokens</p>
         </header>
 
         <div class="wizard">
@@ -980,7 +1054,7 @@
                 </a>
               </li>
               <li role="presentation" class="nav-item disabled">
-                <a title="2. Create NFTs" class="nav-link" id="nav-streamers-nfts" role="tab" data-bs-toggle="tab"
+                <a title="2. Create Tokens" class="nav-link" id="nav-streamers-nfts" role="tab" data-bs-toggle="tab"
                   aria-controls="streamers-nfts" href="#list-streamers-nfts">
                   <span class="round-tab"><i class="fas fa-sd-card" style="font-size: 3.7vh"></i></span>
                 </a>
@@ -1024,12 +1098,12 @@
                 <div class="col-md-12">
                   <div class="panel panel-primary" id="streamers-nfts-panel">
                     <div class="panel-heading">
-                      <h4>Create NFTs</h4>
+                      <h4>Create Tokens</h4>
                     </div>
                     <div style="text-align: end; padding-bottom: 20px;">
                       <button id="streamers-new-nfts" type="submit" data-bs-toggle="modal"
                         data-bs-target="#streamers-nfts-modal">
-                        New NFT
+                        New Token
                       </button>
                     </div>
                     <div class="panel-body">
@@ -1045,7 +1119,7 @@
                 <div class="col-md-12">
                   <div class="panel panel-primary" id="streamers-packages-panel">
                     <div class="panel-heading">
-                      <h4>Add NFT Supply</h4>
+                      <h4>Add Token Supply</h4>
                     </div>
                     <div style="text-align: center; padding-bottom: 20px;">
                       <button id="streamers-extension-btn" type="button" class="btn btn-success">
@@ -1066,12 +1140,14 @@
                   <div class="panel panel-primary" id="streamers-review-panel">
                     <div class="panel-heading">
                       <h4>Twitch Extension Integration</h4>
-                      <p class="section-header">Install the PlayNFT Extension and create a new Panel to start distributing your tokens.</p>
+                      <p class="section-header">Install the PlayNFT Extension and create a new Panel to start
+                        distributing your tokens.</p>
                     </div>
                     <div class="panel-body">
                       <div class="flex-shrink-0 text-center">
                         <p class="game-icon">
-                          <a href="https://dashboard.twitch.tv/extensions/3v4y6bwztvpyxfeoxq5ik79iosx3km-1.0.0" target="_blank">
+                          <a href="https://dashboard.twitch.tv/extensions/3v4y6bwztvpyxfeoxq5ik79iosx3km-1.0.0"
+                            target="_blank">
                             <img src="assets/img/extensions.png" class="img-fluid" alt="Twitch Extensions" /><br>
                             <button id="streamers-extension-btn" type="button" class="btn btn-primary">
                               <span class="fa fa-external-link"></span> Install Extension
@@ -1109,7 +1185,7 @@
             <a href="PlayNFT_Pitchdeck.pdf" target="_blank" class="align-items-center">
               <b>Pitch Deck <i class="fas fa-file-download"></i></b>
             </a>
-            
+
             <p>
               We are building an ecosystem to extend the utility and value of
               NFTs.
@@ -1117,7 +1193,8 @@
             <div class="social-links mt-3">
               <a href="https://twitter.com/playnft_io" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="https://www.facebook.com/PlayNFT.io" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="https://www.linkedin.com/company/playnftio" class="linkedin"><i class="bi bi-linkedin bx bxl-linkedin"></i></a>
+              <a href="https://www.linkedin.com/company/playnftio" class="linkedin"><i
+                  class="bi bi-linkedin bx bxl-linkedin"></i></a>
             </div>
           </div>
 
@@ -1860,7 +1937,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title">Streamer NFT</h3>
+          <h3 class="modal-title">Streamer Token</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form id="streamers-nfts-form" action="#" method="post">
@@ -1873,9 +1950,9 @@
                 <div class="col-md-6 form-floating mb-3">
                   <input type="text" name="streamers_nft_name" id="streamers_nft_name" class="form-control"
                     placeholder="NFT Name" required />
-                  <label for="streamers_nft_name">NFT Name</label>
+                  <label for="streamers_nft_name">Token Name</label>
                   <div id="StreamerNFTFeedback" class="invalid-feedback">
-                    NFT not found.
+                    Token not found.
                   </div>
                 </div>
 
@@ -1895,19 +1972,20 @@
                 </div>
 
                 <div class="col-md-6 form-floating mb-3">
-                  <select class="form-select" name="streamers_nft_cost" id="streamers_nft_cost" aria-label="Visibility Status">
+                  <select class="form-select" name="streamers_nft_cost" id="streamers_nft_cost"
+                    aria-label="Visibility Status">
                     <option value="tier1" selected="selected">99 Bits</option>
-                    <option value="tier2" >199 Bits</option>
-                    <option value="tier3" >299 Bits</option>
-                    <option value="tier4" >399 Bits</option>
-                    <option value="tier5" >499 Bits</option>
-                    <option value="tier6" >599 Bits</option>
-                    <option value="tier7" >699 Bits</option>
-                    <option value="tier8" >799 Bits</option>
-                    <option value="tier9" >899 Bits</option>
-                    <option value="tier10" >999 Bits</option>
+                    <option value="tier2">199 Bits</option>
+                    <option value="tier3">299 Bits</option>
+                    <option value="tier4">399 Bits</option>
+                    <option value="tier5">499 Bits</option>
+                    <option value="tier6">599 Bits</option>
+                    <option value="tier7">699 Bits</option>
+                    <option value="tier8">799 Bits</option>
+                    <option value="tier9">899 Bits</option>
+                    <option value="tier10">999 Bits</option>
                   </select>
-                  <label for="streamers_nft_cost">NFT Cost</label>
+                  <label for="streamers_nft_cost">Token Cost</label>
                 </div>
 
                 <div class="col-md-12 mb-3">
@@ -1928,7 +2006,7 @@
   </div>
   <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
-        <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
+      <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
     </div>
   </div>
 
@@ -1941,26 +2019,176 @@
     var gameID = "";
     var contentID = "";
     var streamerID = "";
-    var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10'};
+    var chainID = "enj";
+    var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
     var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
 
+    /*********** Moralis API **********************/
 
+    const serverUrl = "https://mdpsykxctp2q.usemoralis.com:2053/server";
+    const appId = "pvhbtIHRFx1uCvBPgvv60fVnYVFBVriAZR3bdx9B";
+    Moralis.start({ serverUrl, appId });
+    Moralis.enableWeb3();
 
-          async function f1() {
-            try {
-            const serverUrl = "https://mdpsykxctp2q.usemoralis.com:2053/server";
-const appId = "pvhbtIHRFx1uCvBPgvv60fVnYVFBVriAZR3bdx9B";
-Moralis.start({ serverUrl, appId });
-const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e1510b22" };
-    const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(function (details) {
-      console.log(details)
-          }).catch((err) => { console.error(err); });
-        } catch(err) {
-    alert(err); // TypeError: failed to fetch
-  }
-}
+    const NODE_URL = "https://speedy-nodes-nyc.moralis.io/3957d6edf92c62bb7839c783/avalanche/mainnet";
+    const provider = new Web3.providers.HttpProvider(NODE_URL);
+    const web3 = new Web3(provider);
 
-//f1();
+    async function getContractOwner(chain, item) {
+      let address = item.token_address;
+
+      try {
+        await $.getJSON('https://api.snowtrace.io/api?module=contract&action=getabi&address=' + address + '&apikey=CHC31DJQ3F1TZYTEF9GP17JAFVBVT7ZN85', async function (data) {
+
+          var contractABI = "";
+
+          try {
+            contractABI = JSON.parse(data.result);
+            if (contractABI != '') {
+              const options = {
+                chain: chain,
+                address: address,
+                function_name: "owner",
+                abi: contractABI
+              };
+              const owner = await Moralis.Web3API.native.runContractFunction(options);
+              console.log("Address: " + address + " - Owner: " + owner)
+              console.log("Token Owner: " + item.owner_of)
+              let meta = jQuery.parseJSON(item.metadata);
+
+              if (owner.toLowerCase() == item.owner_of.toLowerCase()) {
+                await $.getJSON('https://api.snowtrace.io/api?module=stats&action=tokensupply&contractaddress=' + address + '&apikey=CHC31DJQ3F1TZYTEF9GP17JAFVBVT7ZN85', function (data) {
+
+                  let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image, tokenIndex: item.token_id, tokenSupply: data.result };
+
+                  $("#creators-token-template")
+                    .tmpl(token_content)
+                    .appendTo("#creators-nfts");
+                });
+              }
+            } else {
+              console.log("Error");
+            }
+          } catch (err) { }
+
+        });
+      } catch (err) { }
+    }
+
+    async function getNFTs(chain, address) {
+
+      console.log(chain)
+      console.log(address)
+
+      const options = { chain: chain, address: address };
+      const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(function (details) {
+        console.log(details.result)
+        var nfts = details.result;
+
+        nfts.forEach(function (item) {
+          console.log(item)
+          if (item.is_valid == 1 && item.amount > 0) {
+            if (!item.metadata) return;
+            if (!item.name) return;
+
+            let meta = jQuery.parseJSON(item.metadata);
+            if (!meta.image) return;
+
+            let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image, tokenIndex: item.token_id };
+
+            $("#token-template")
+              .tmpl(token_content)
+              .appendTo("#gamers-nfts");
+          }
+        });
+
+        stopLoading();
+      }).catch((err) => {
+        console.error(err);
+      });
+    }
+
+    async function getCreatorsNFTs(chain, address) {
+
+      console.log(chain)
+      console.log(address)
+
+      let options = { chain: chain, address: address };
+      const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
+        console.log(details.result)
+        var nfts = details.result;
+        var tokenArray = [];
+
+        for (const item of nfts) {
+          console.log(item)
+
+          if (item.is_valid == 1) {
+            if (!item.metadata) break;
+            if (!item.name) break;
+
+            let meta = jQuery.parseJSON(item.metadata);
+            if (!meta.image) break;
+
+            if (!tokenArray.includes(item.token_address)) {
+              tokenArray.push(item.token_address);
+            } else {
+              break;
+            }
+
+            await getContractOwner(chain, item)
+
+          }
+        }
+
+        stopLoading();
+      }).catch((err) => {
+        console.error(err);
+      });
+    }
+
+    async function AddHecoNetwork() {
+      const chainId = 128;
+      const chainName = "heco-mainnet";
+      const currencyName = "HECO";
+      const currencySymbol = "HT";
+      const rpcUrl = "https://http-mainnet.hecochain.com";
+      const blockExplorerUrl = "https://scan.hecochain.com";
+
+      await Moralis.addNetwork(
+        chainId,
+        chainName,
+        currencyName,
+        currencySymbol,
+        rpcUrl,
+        blockExplorerUrl
+      )
+
+      await Moralis.switchNetwork(chainId); 
+    }
+
+    async function moralisLogin(chain) {
+      if (chain == "heco") {
+        AddHecoNetwork();
+      }
+
+      let user = Moralis.User.current();
+      
+      if (!user) {
+
+        user = await Moralis.authenticate({ signingMessage: "PlayNFT using Moralis", type: chain })
+          .then(function (user) {
+            return user.get("ethAddress");
+          })
+          .catch(function (error) {
+            console.log(error);
+            return null;
+          });
+      } else {
+        return user.get("ethAddress");
+      }
+    }
+
+    /*********** Moralis API **********************/
 
     function hideSections() {
       $("section").hide();
@@ -2015,7 +2243,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
               streamerID = data.sub;
 
-              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode:"streamer"};
+              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "streamer" };
 
               $.ajax({
                 url:
@@ -2034,7 +2262,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
                   response.forEach(function (item) {
                     var status = "Offline"
                     if (item.status == "1") status = "Live"
-                    
+
                     let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                     $("#streamers-nfts-template")
                       .tmpl(game_content)
@@ -2053,6 +2281,110 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
           });
         }
       }
+
+
+
+      $("#avax-wallet-connect").click(function () {
+        moralisLogin("avax").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#walletAddressAvax").val(address);
+          } else {
+
+          }
+        });
+      });
+
+      $("#heco-wallet-connect").click(function () {
+        moralisLogin("heco").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#walletAddressHeco").val(address);
+          } else {
+
+          }
+        });
+      });
+
+      $("#creators-avax-wallet-connect").click(function () {
+        moralisLogin("avax").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#creators-walletAddressAvax").val(address);
+          } else {
+
+          }
+        });
+      });
+
+      $("#creators-heco-wallet-connect").click(function () {
+        moralisLogin("heco").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#creators-walletAddressHeco").val(address);
+          } else {
+
+          }
+        });
+      });
+
+      $("#gamers-wallet-avax").hide();
+      $('#walletAddressAvax').prop('required', false);
+      $("#gamers-wallet-heco").hide();
+      $('#walletAddressHeco').prop('required', false);
+
+      $("#creators-wallet-avax").hide();
+      $('#creators-walletAddressAvax').prop('required', false);
+      $("#creators-wallet-heco").hide();
+      $('#creators-walletAddressHeco').prop('required', false);
+
+      $("input[name='gamers-chain']").change(function () {
+        var chain = $('input[name="gamers-chain"]:checked').val();
+
+        $("#gamers-wallet-enj").hide();
+        $("#gamers-wallet-avax").hide();
+        $("#gamers-wallet-heco").hide();
+        $('#walletAddress').prop('required', false);
+        $('#walletAddressAvax').prop('required', false);
+        $('#walletAddressHeco').prop('required', false);
+
+        chainID = chain;
+
+        if (chain == "enj") {
+          $("#gamers-wallet-enj").show();
+          $('#walletAddress').prop('required', true);
+        }
+        if (chain == "avax") {
+          $("#gamers-wallet-avax").show();
+          $('#walletAddressAvax').prop('required', true);
+        }
+        if (chain == "heco") {
+          $("#gamers-wallet-heco").show();
+          $('#walletAddressHeco').prop('required', true);
+        }
+      });
+
+      $("input[name='creators-chain']").change(function () {
+        var chain = $('input[name="creators-chain"]:checked').val();
+
+        $("#creators-wallet-enj").hide();
+        $("#creators-wallet-avax").hide();
+        $('#creators-walletAddress').prop('required', false);
+        $('#creators-walletAddressAvax').prop('required', false);
+
+        chainID = chain;
+
+        if (chain == "enj") {
+          $("#creators-wallet-enj").show();
+          $('#creators-walletAddress').prop('required', true);
+        }
+        if (chain == "avax") {
+          $("#creators-wallet-avax").show();
+          $('#creators-walletAddressAvax').prop('required', true);
+        }
+      });
+
+
 
       $("#service-gamers").click(function () {
         hideSections();
@@ -2088,50 +2420,70 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
 
-        walletID = $('#walletAddress').val()
+        if ($('input[name="gamers-chain"]:checked').val() == "enj") {
+          walletID = $('#walletAddress').val()
 
-        $.ajax({
-          url:
-            "https://api.playnft.io/gettokens",
-          type: "POST",
-          crossDomain: true,
-          data: JSON.stringify(formData),
-          dataType: "json",
-          contentType: "application/json",
-          success: function (data) {
-            //console.info(JSON.stringify(data));
-            let response = jQuery.parseJSON(data);
+          $.ajax({
+            url:
+              "https://api.playnft.io/gettokens",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+              //console.info(JSON.stringify(data));
+              let response = jQuery.parseJSON(data);
 
-            $("#gamers-nfts").empty();
-            console.info(response.length);
+              $("#gamers-nfts").empty();
+              console.info(response.length);
 
-            let count = 1;
-            response.forEach(function (item) {
-              if (item.value > 0) {
+              let count = 1;
+              response.forEach(function (item) {
+                if (item.value > 0) {
 
-                let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
+                  let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
 
-                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                  $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
 
-                  try {
-                    let meta = jQuery.parseJSON(metaData);
-                    if (!meta.image) return;
+                    try {
+                      let meta = jQuery.parseJSON(metaData);
+                      if (!meta.image) return;
 
-                    console.log("Success #" + count++ + ": " + url)
-                    let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenIndex: item.index.replace(/^0+/, '') };
-                    $("#token-template")
-                      .tmpl(token_content)
-                      .appendTo("#gamers-nfts");
-                  } catch (e) {
-                    console.log("Failed #" + count++ + ": " + url)
-                  }
-                });
-              }
-            });
+                      console.log("Success #" + count++ + ": " + url)
+                      let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenIndex: item.index.replace(/^0+/, '') };
+                      $("#token-template")
+                        .tmpl(token_content)
+                        .appendTo("#gamers-nfts");
+                    } catch (e) {
+                      console.log("Failed #" + count++ + ": " + url)
+                    }
+                  });
+                }
+              });
 
-            openTab("#nav-gamers-nfts");
-          },
-        });
+              openTab("#nav-gamers-nfts");
+            },
+          });
+        }
+
+        if ($('input[name="gamers-chain"]:checked').val() == "avax") {
+          walletID = $('#walletAddressAvax').val();
+          $("#gamers-nfts").empty();
+
+          getNFTs("avalanche", walletID)
+
+          openTab("#nav-gamers-nfts");
+        }
+
+        if ($('input[name="gamers-chain"]:checked').val() == "heco") {
+          walletID = $('#walletAddressHeco').val();
+          $("#gamers-nfts").empty();
+
+          getNFTs("", walletID)
+
+          openTab("#nav-gamers-nfts");
+        }
       });
 
       $("#creators-scan-form").on("submit", function (e) {
@@ -2142,54 +2494,74 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
         const formData = Object.fromEntries(data.entries());
         console.log(JSON.stringify(formData));
 
-        walletID = $('#creators-walletAddress').val()
+        if ($('input[name="creators-chain"]:checked').val() == "enj") {
+          walletID = $('#creators-walletAddress').val()
 
-        $.ajax({
-          url:
-            "https://api.playnft.io/gettokens",
-          type: "POST",
-          crossDomain: true,
-          data: JSON.stringify(formData),
-          dataType: "json",
-          contentType: "application/json",
-          success: function (data) {
-            console.info(data);
-            let response = jQuery.parseJSON(data);
+          $.ajax({
+            url:
+              "https://api.playnft.io/gettokens",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+              console.info(data);
+              let response = jQuery.parseJSON(data);
 
-            $("#creators-nfts").empty();
+              $("#creators-nfts").empty();
 
-            let count = 1;
-            response.forEach(function (item) {
-              if (item.value > 0) {
+              let count = 1;
+              response.forEach(function (item) {
+                if (item.value > 0) {
 
-                if (item.token.totalSupply == 18446744073709551615) {
-                  item.token.totalSupply = "Infinite";
-                }
-
-                let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
-
-                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
-
-                  try {
-                    let meta = jQuery.parseJSON(metaData);
-                    if (!meta.image) return;
-
-                    console.log("Success #" + count++ + ": " + url)
-
-                    let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
-                    $("#creators-token-template")
-                      .tmpl(token_content)
-                      .appendTo("#creators-nfts");
-                  } catch (e) {
-                    console.log("Failed #" + count++ + ": " + url)
+                  if (item.token.totalSupply == 18446744073709551615) {
+                    item.token.totalSupply = "Infinite";
                   }
-                });
-              }
-            });
 
-            openTab("#nav-creators-nfts");
-          },
-        });
+                  let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
+
+                  $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+
+                    try {
+                      let meta = jQuery.parseJSON(metaData);
+                      if (!meta.image) return;
+
+                      console.log("Success #" + count++ + ": " + url)
+
+                      let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
+                      $("#creators-token-template")
+                        .tmpl(token_content)
+                        .appendTo("#creators-nfts");
+                    } catch (e) {
+                      console.log("Failed #" + count++ + ": " + url)
+                    }
+                  });
+                }
+              });
+
+              openTab("#nav-creators-nfts");
+            },
+          });
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "avax") {
+          walletID = $('#creators-walletAddressAvax').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("avalanche", walletID)
+
+          openTab("#nav-creators-nfts");
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "heco") {
+          walletID = $('#creators-walletAddressHeco').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("heco", walletID)
+
+          openTab("#nav-creators-nfts");
+        }
       });
 
       $("#developers-new-form").on("submit", function (e) {
@@ -2591,7 +2963,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
                 var status = "Offline"
                 if (item.status == "1") status = "Live"
-                
+
                 let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                 $("#streamers-nfts-template")
                   .tmpl(game_content)
@@ -2747,7 +3119,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       startLoading();
 
       let id = $(this).data('id');
-      let formData = { gameId: id, tokenId: tokenID, tokenIndex: tokenIndex };
+      let formData = { gameId: id, tokenId: tokenID, tokenIndex: tokenIndex, chain: chainID };
       console.log(formData)
 
       $.ajax({
@@ -2803,7 +3175,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       startLoading();
 
       let id = $(this).data('id');
-      let formData = { gameId: id, tokenId: tokenID, tokenIndex: 0 };
+      let formData = { gameId: id, tokenId: tokenID, tokenIndex: 0, chain: chainID };
       console.log(formData)
 
       $.ajax({
@@ -2861,13 +3233,13 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       var _contentId = $(this).data('id');
       var _gameId = $(this).data('game');
       let _tokenId = tokenID.replace('gamers_nft_', '');
-      let _walletId = $(this).data('wallet');
       let _icon = $(this).data('icon');
       let _name = $(this).data('name');
       let _mode = "gamers";
       let _index = tokenIndex;
 
-      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: _index };
+
+      let formData = { contentId: _contentId, gameId: _gameId, wallet: walletID, token: _tokenId, mode: _mode, index: _index, chain: chainID };
       console.log(formData)
 
       $.ajax({
@@ -2986,7 +3358,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       let _name = $(this).data('name');
       let _mode = "creators";
 
-      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0 };
+      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0, chain: chainID };
       console.log(formData)
 
       $.ajax({
@@ -3053,7 +3425,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     });
 
     $(document).on("click", "#streamers-nfts-select", function () {
-      
+
       let id = $(this).data('id');
       let supply = $(this).data('supply');
 
@@ -3212,7 +3584,6 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       var gameName = button.data('content-title')
       var gameIcon = button.data('content-icon')
       var gameInfo = button.data('content-info')
-      walletID = $('#walletAddress').val()
 
       var modal = $(this)
 
@@ -3317,8 +3688,8 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       var gameInfo = button.data('nft-description')
       var gameStatus = button.data('nft-status')
       var gameCost = button.data('nft-cost')
-      
-      
+
+
       if (!Id) Id = 0;
 
       var modal = $(this)
@@ -3332,6 +3703,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
     })
 
     function openTab(tabId) {
+      stopLoading();
       let active = $(".wizard .nav-tabs li.active");
       console.log(active)
       active.addClass("completed");
@@ -3344,7 +3716,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       var nextTab = document.querySelector(tabId);
       var tab = new bootstrap.Tab(nextTab);
       tab.show();
-      stopLoading();
+
     }
 
     function resetTabs() {
@@ -3499,7 +3871,7 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
 
                 var status = "Offline"
                 if (item.status == "1") status = "Live"
-                
+
                 let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                 $("#streamers-nfts-template")
                   .tmpl(game_content)
@@ -3545,12 +3917,12 @@ const options = { chain: "eth", address: "0x000000000000000000000000ef599ec4e151
       }).render(elem);
     }
 
-    function startLoading(){
-       $('#spinnerModal').modal('show');
+    function startLoading() {
+      $('#spinnerModal').modal('show');
     }
 
-    function stopLoading(){
-       $('#spinnerModal').modal('hide');
+    function stopLoading() {
+      $('#spinnerModal').modal('hide');
     }
   </script>
 </body>
