@@ -259,14 +259,18 @@
             <div class="content">
               <h3>Who We Are</h3>
               <h2>
-                We are building an ecosystem to extend the utility and value
-                of NFTs.
+                We are a cross-chain NFT utility platform.
               </h2>
               <p>
-                This platform was created to allow NFT holders and creators to
-                add value to their tokens by using them in blockchain enabled
-                games. Game developers can use this platform to fundraise or
-                create unique experiences for their blockchain communities.
+                PlayNFT connects NFT holders and NFT Collection creators to in-game content of blockchain enabled
+                games. This utility is the next evolution of the NFT ecosystem. 
+                We are solving the problems of blockchain segmentation and the lack of NFT utility. 
+              </p>
+              <p>
+                Current blockchains supported:<br>
+                <img style="width:50px" src="assets/img/enjin-coin-enj-logo.svg" alt="Enjin" />
+                <img style="width:50px" src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" />
+                <img style="width:50px" src="assets/img/heco-logo.svg" alt="Heco" />
               </p>
               <div class="text-center text-lg-start">
                 <a href="#"
@@ -303,7 +307,8 @@
               <i class="ri-camera-3-line icon"></i>
               <h3>Game Streamers</h3>
               <p>
-                Grow your audience and expand your brand with your own Digital Tokens.
+                Grow your audience and expand your brand with your own Digital Tokens. 
+                Distribute using our Twitch extension.
               </p>
               <div class="pricing">
                 <div class="price"></div>
@@ -318,8 +323,8 @@
               <i class="ri-artboard-line icon"></i>
               <h3>NFT Creators</h3>
               <p>
-                Increase the value of your NFTs by adding in-game rewards and
-                bonuses for every holder.
+                Increase the value of your NFT Collections by adding in-game rewards and
+                utility for every holder.
               </p>
               <div class="pricing">
                 <div class="price"></div>
@@ -334,8 +339,8 @@
               <i class="ri-code-s-slash-line icon"></i>
               <h3>Game Developers</h3>
               <p>
-                Add your game to our platform and integrate with our API to
-                enable NFT gameplay.
+                List your in-game unlockable items and rewards to NFT holders. 
+                Integrate with our API to access cross-chain users.
               </p>
               <div class="pricing">
                 <div class="price"></div>
@@ -752,6 +757,12 @@
                         <label class="form-check-label" for="creators-chain-avax"><img style="width:50px"
                             src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-heco"
+                          value="heco">
+                        <label class="form-check-label" for="creators-chain-heco"><img style="width:50px"
+                            src="assets/img/heco-logo.svg" alt="Heco" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4" id="creators-wallet-enj">
@@ -770,6 +781,17 @@
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="creators-avax-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4" id="creators-wallet-heco">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressHeco" id="creators-walletAddressHeco" class="form-control"
+                          placeholder="HECO Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="creators-heco-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
                       </div>
@@ -2004,7 +2026,7 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+  <div class="modal" tabindex="-1" role="dialog" id="spinnerModal">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
       <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
     </div>
@@ -2079,71 +2101,128 @@
 
       console.log(chain)
       console.log(address)
+      if (chain == "heco") {
+        await Moralis.switchNetwork(128);
+        const chainId = await Moralis.chainId;
+        console.log(chainId);
+        chain = chainId;
 
-      const options = { chain: chain, address: address };
-      const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(function (details) {
-        console.log(details.result)
-        var nfts = details.result;
+        $.getJSON('https://api.covalenthq.com/v1/128/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
+          console.log("Data: " + JSON.stringify(data));
+          var nfts = data.data.items;
 
-        nfts.forEach(function (item) {
-          console.log(item)
-          if (item.is_valid == 1 && item.amount > 0) {
-            if (!item.metadata) return;
-            if (!item.name) return;
+          nfts.forEach(function (item) {
+            console.log(item)
+            if (item.type == "nft" && item.balance > 0) {
+              if (!item.contract_name) return;
 
-            let meta = jQuery.parseJSON(item.metadata);
-            if (!meta.image) return;
+              let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url, tokenIndex: 0 };
 
-            let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image, tokenIndex: item.token_id };
+              $("#token-template")
+                .tmpl(token_content)
+                .appendTo("#gamers-nfts");
+            }
+          });
 
-            $("#token-template")
-              .tmpl(token_content)
-              .appendTo("#gamers-nfts");
-          }
+          stopLoading();
+        })
+      }
+
+      if (chain == "avalanche") {
+        const options = { chain: chain, address: address };
+        console.log(options)
+        const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(function (details) {
+          console.log(details.result)
+          var nfts = details.result;
+
+          nfts.forEach(function (item) {
+            console.log(item)
+            if (item.is_valid == 1 && item.amount > 0) {
+              if (!item.metadata) return;
+              if (!item.name) return;
+
+              let meta = jQuery.parseJSON(item.metadata);
+              if (!meta.image) return;
+
+              let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image, tokenIndex: item.token_id };
+
+              $("#token-template")
+                .tmpl(token_content)
+                .appendTo("#gamers-nfts");
+            }
+          });
+
+          stopLoading();
+        }).catch((err) => {
+          console.error(err);
         });
-
-        stopLoading();
-      }).catch((err) => {
-        console.error(err);
-      });
+      }
     }
 
     async function getCreatorsNFTs(chain, address) {
 
       console.log(chain)
       console.log(address)
+      if (chain == "heco") {
+        await Moralis.switchNetwork(128);
+        const chainId = await Moralis.chainId;
+        console.log(chainId);
+        chain = chainId;
 
-      let options = { chain: chain, address: address };
-      const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
-        console.log(details.result)
-        var nfts = details.result;
-        var tokenArray = [];
+        $.getJSON('https://api.covalenthq.com/v1/128/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
+          console.log("Data: " + JSON.stringify(data));
+          var nfts = data.data.items;
 
-        for (const item of nfts) {
-          console.log(item)
+          nfts.forEach(function (item) {
+            console.log(item)
+            if (item.type == "nft" && item.balance > 0) {
+              if (!item.contract_name) return;
 
-          if (item.is_valid == 1) {
-            if (!item.metadata) break;
-            if (!item.name) break;
+              let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url, tokenIndex: 0 };
 
-            let meta = jQuery.parseJSON(item.metadata);
-            if (!meta.image) break;
-
-            if (!tokenArray.includes(item.token_address)) {
-              tokenArray.push(item.token_address);
-            } else {
-              break;
+              $("#creators-token-template")
+                .tmpl(token_content)
+                .appendTo("#creators-nfts");
             }
+          });
 
-            await getContractOwner(chain, item)
+          stopLoading();
+        })
+      }
 
+      if (chain == "avalanche") {
+        let options = { chain: chain, address: address };
+        const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
+          console.log(details.result)
+          var nfts = details.result;
+          var tokenArray = [];
+
+          for (const item of nfts) {
+            console.log(item)
+
+            if (item.is_valid == 1) {
+              if (!item.metadata) break;
+              if (!item.name) break;
+
+              let meta = jQuery.parseJSON(item.metadata);
+              if (!meta.image) break;
+
+              if (!tokenArray.includes(item.token_address)) {
+                tokenArray.push(item.token_address);
+              } else {
+                break;
+              }
+
+              await getContractOwner(chain, item)
+
+            }
           }
-        }
 
-        stopLoading();
-      }).catch((err) => {
-        console.error(err);
-      });
+          stopLoading();
+        }).catch((err) => {
+          console.error(err);
+        });
+      }
     }
 
     async function AddHecoNetwork() {
@@ -2163,7 +2242,7 @@
         blockExplorerUrl
       )
 
-      await Moralis.switchNetwork(chainId); 
+      await Moralis.switchNetwork(chainId);
     }
 
     async function moralisLogin(chain) {
@@ -2172,7 +2251,7 @@
       }
 
       let user = Moralis.User.current();
-      
+
       if (!user) {
 
         user = await Moralis.authenticate({ signingMessage: "PlayNFT using Moralis", type: chain })
@@ -2369,6 +2448,7 @@
 
         $("#creators-wallet-enj").hide();
         $("#creators-wallet-avax").hide();
+        $("#creators-wallet-heco").hide();
         $('#creators-walletAddress').prop('required', false);
         $('#creators-walletAddressAvax').prop('required', false);
 
@@ -2381,6 +2461,10 @@
         if (chain == "avax") {
           $("#creators-wallet-avax").show();
           $('#creators-walletAddressAvax').prop('required', true);
+        }
+        if (chain == "heco") {
+          $("#creators-wallet-heco").show();
+          $('#creators-walletAddressHeco').prop('required', true);
         }
       });
 
@@ -2480,7 +2564,7 @@
           walletID = $('#walletAddressHeco').val();
           $("#gamers-nfts").empty();
 
-          getNFTs("", walletID)
+          getNFTs("heco", walletID)
 
           openTab("#nav-gamers-nfts");
         }
