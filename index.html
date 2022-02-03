@@ -263,8 +263,8 @@
               </h2>
               <p>
                 PlayNFT connects NFT holders and NFT Collection creators to in-game content of blockchain enabled
-                games. This utility is the next evolution of the NFT ecosystem. 
-                We are solving the problems of blockchain segmentation and the lack of NFT utility. 
+                games. This utility is the next evolution of the NFT ecosystem.
+                We are solving the problems of blockchain segmentation and the lack of NFT utility.
               </p>
               <p>
                 Current blockchains supported:<br>
@@ -307,7 +307,7 @@
               <i class="ri-camera-3-line icon"></i>
               <h3>Game Streamers</h3>
               <p>
-                Grow your audience and expand your brand with your own Digital Tokens. 
+                Grow your audience and expand your brand with your own Digital Tokens.
                 Distribute using our Twitch extension.
               </p>
               <div class="pricing">
@@ -339,7 +339,7 @@
               <i class="ri-code-s-slash-line icon"></i>
               <h3>Game Developers</h3>
               <p>
-                List your in-game unlockable items and rewards to NFT holders. 
+                List your in-game unlockable items and rewards to NFT holders.
                 Integrate with our API to access cross-chain users.
               </p>
               <div class="pricing">
@@ -554,21 +554,27 @@
                         <label class="form-check-label" for="gamers-chain-heco"><img style="width:50px"
                             src="assets/img/heco-logo.svg" alt="Heco" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-polygon"
+                          value="polygon">
+                        <label class="form-check-label" for="gamers-chain-polygon"><img style="width:50px"
+                            src="assets/img/polygon-matic-logo.svg" alt="Polygon" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
-                    <div class="row gy-4" id="gamers-wallet-enj">
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-enj">
                       <div class="col-md-6">
-                        <input type="text" name="walletAddress" id="walletAddress" class="form-control"
+                        <input type="text" name="walletAddress" id="walletAddress" class="form-control wallet-address"
                           placeholder="Ethereum Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         <a href="https://enjin.io/software/wallet" target="_blank">Download the Enjin Wallet</a>
                       </div>
                     </div>
-                    <div class="row gy-4" id="gamers-wallet-avax">
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-avax">
                       <div class="col-md-6">
-                        <input type="text" name="walletAddressAvax" id="walletAddressAvax" class="form-control"
-                          placeholder="Avalanche Wallet Address" required />
+                        <input type="text" name="walletAddressAvax" id="walletAddressAvax"
+                          class="form-control wallet-address" placeholder="Avalanche Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="avax-wallet-connect" class="btn btn-primary" type="button">
@@ -576,13 +582,24 @@
                         </button>
                       </div>
                     </div>
-                    <div class="row gy-4" id="gamers-wallet-heco">
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-heco">
                       <div class="col-md-6">
-                        <input type="text" name="walletAddressHeco" id="walletAddressHeco" class="form-control"
-                          placeholder="HECO Wallet Address" required />
+                        <input type="text" name="walletAddressHeco" id="walletAddressHeco"
+                          class="form-control wallet-address" placeholder="HECO Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="heco-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-polygon">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressPolygon" id="walletAddressPolygon"
+                          class="form-control wallet-address" placeholder="Polygon Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="polygon-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
                       </div>
@@ -766,21 +783,27 @@
                         <label class="form-check-label" for="creators-chain-heco"><img style="width:50px"
                             src="assets/img/heco-logo.svg" alt="Heco" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-polygon"
+                          value="polygon">
+                        <label class="form-check-label" for="creators-chain-polygon"><img style="width:50px"
+                            src="assets/img/polygon-matic-logo.svg" alt="Polygon" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
-                    <div class="row gy-4" id="creators-wallet-enj">
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
                       <div class="col-md-6">
-                        <input type="text" name="walletAddress" id="creators-walletAddress" class="form-control"
-                          placeholder="Ethereum Wallet Address" required />
+                        <input type="text" name="walletAddress" id="creators-walletAddress"
+                          class="form-control wallet-address" placeholder="Ethereum Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         <a href="https://enjin.io/software/wallet" target="_blank">Download the Enjin Wallet</a>
                       </div>
                     </div>
-                    <div class="row gy-4" id="creators-wallet-avax">
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-avax">
                       <div class="col-md-6">
-                        <input type="text" name="walletAddressAvax" id="creators-walletAddressAvax" class="form-control"
-                          placeholder="Avalanche Wallet Address" required />
+                        <input type="text" name="walletAddressAvax" id="creators-walletAddressAvax"
+                          class="form-control wallet-address" placeholder="Avalanche Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="creators-avax-wallet-connect" class="btn btn-primary" type="button">
@@ -788,13 +811,24 @@
                         </button>
                       </div>
                     </div>
-                    <div class="row gy-4" id="creators-wallet-heco">
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-heco">
                       <div class="col-md-6">
-                        <input type="text" name="walletAddressHeco" id="creators-walletAddressHeco" class="form-control"
-                          placeholder="HECO Wallet Address" required />
+                        <input type="text" name="walletAddressHeco" id="creators-walletAddressHeco"
+                          class="form-control wallet-address" placeholder="HECO Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="creators-heco-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-polygon">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressPolygon" id="creators-walletAddressPolygon"
+                          class="form-control wallet-address" placeholder="Polygon Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="creators-polygon-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
                       </div>
@@ -2047,6 +2081,7 @@
     var chainID = "enj";
     var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
     var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
+    var CHAINS = { eth: 1, avalanche: 43114, polygon: 137, heco: 128 };
 
     /*********** Moralis API **********************/
 
@@ -2055,49 +2090,42 @@
     Moralis.start({ serverUrl, appId });
     Moralis.enableWeb3();
 
-    const NODE_URL = "https://speedy-nodes-nyc.moralis.io/3957d6edf92c62bb7839c783/avalanche/mainnet";
+    /*const NODE_URL = "https://speedy-nodes-nyc.moralis.io/3957d6edf92c62bb7839c783/avalanche/mainnet";
     const provider = new Web3.providers.HttpProvider(NODE_URL);
-    const web3 = new Web3(provider);
+    const web3 = new Web3(provider);*/
 
-    async function getContractOwner(chain, item) {
+    async function getContractOwner(chain, item, owner) {
       let address = item.token_address;
 
-      try {
-        await $.getJSON('https://api.snowtrace.io/api?module=contract&action=getabi&address=' + address + '&apikey=CHC31DJQ3F1TZYTEF9GP17JAFVBVT7ZN85', async function (data) {
+      if (chain == "polygon" || chain == "avalanche") {
 
-          var contractABI = "";
+        await $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_metadata/' + item.token_id + '/?key=ckey_859b732db5394a57936af2db4db', function (data) {
+          console.log("Data: " + JSON.stringify(data));
+          var nfts = data.data.items;
 
-          try {
-            contractABI = JSON.parse(data.result);
-            if (contractABI != '') {
-              const options = {
-                chain: chain,
-                address: address,
-                function_name: "owner",
-                abi: contractABI
-              };
-              const owner = await Moralis.Web3API.native.runContractFunction(options);
-              console.log("Address: " + address + " - Owner: " + owner)
-              console.log("Token Owner: " + item.owner_of)
-              let meta = jQuery.parseJSON(item.metadata);
+          nfts.forEach(function (item) {
+            console.log(item)
+            if (item.type == "nft") {
+              if (!item.contract_name) return;
+              if (!item.nft_data) return;
 
-              if (owner.toLowerCase() == item.owner_of.toLowerCase()) {
-                await $.getJSON('https://api.snowtrace.io/api?module=stats&action=tokensupply&contractaddress=' + address + '&apikey=CHC31DJQ3F1TZYTEF9GP17JAFVBVT7ZN85', function (data) {
+              if (item.nft_data[0].original_owner.toLowerCase() != owner.toLowerCase()) return;
+              
+              if (!item.nft_data[0].external_data.image) return;
+              $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_token_ids/?key=ckey_859b732db5394a57936af2db4db', function (supply) {
+                console.log("Supply: " + JSON.stringify(supply));
+                let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.nft_data[0].external_data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0, tokenSupply: supply.data.pagination.total_count };
 
-                  let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image, tokenIndex: item.token_id, tokenSupply: data.result };
-
-                  $("#creators-token-template")
-                    .tmpl(token_content)
-                    .appendTo("#creators-nfts");
-                });
-              }
-            } else {
-              console.log("Error");
+                $("#creators-token-template")
+                  .tmpl(token_content)
+                  .appendTo("#creators-nfts");
+              });
             }
-          } catch (err) { }
+          });
 
-        });
-      } catch (err) { }
+          stopLoading();
+        })
+      }
     }
 
     async function getNFTs(chain, address) {
@@ -2105,12 +2133,12 @@
       console.log(chain)
       console.log(address)
       if (chain == "heco") {
-        await Moralis.switchNetwork(128);
+        await Moralis.switchNetwork(CHAINS[chain]);
         const chainId = await Moralis.chainId;
         console.log(chainId);
         chain = chainId;
 
-        $.getJSON('https://api.covalenthq.com/v1/128/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
+        $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
           console.log("Data: " + JSON.stringify(data));
           var nfts = data.data.items;
 
@@ -2119,7 +2147,7 @@
             if (item.type == "nft" && item.balance > 0) {
               if (!item.contract_name) return;
 
-              let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url, tokenIndex: 0 };
+              let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0 };
 
               $("#token-template")
                 .tmpl(token_content)
@@ -2131,7 +2159,7 @@
         })
       }
 
-      if (chain == "avalanche") {
+      if (chain == "avalanche" || chain == "polygon") {
         const options = { chain: chain, address: address };
         console.log(options)
         const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(function (details) {
@@ -2147,7 +2175,7 @@
               let meta = jQuery.parseJSON(item.metadata);
               if (!meta.image) return;
 
-              let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image, tokenIndex: item.token_id };
+              let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: item.token_id };
 
               $("#token-template")
                 .tmpl(token_content)
@@ -2167,12 +2195,12 @@
       console.log(chain)
       console.log(address)
       if (chain == "heco") {
-        await Moralis.switchNetwork(128);
+        await Moralis.switchNetwork(CHAINS[chain]);
         const chainId = await Moralis.chainId;
         console.log(chainId);
         chain = chainId;
 
-        $.getJSON('https://api.covalenthq.com/v1/128/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
+        $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
           console.log("Data: " + JSON.stringify(data));
           var nfts = data.data.items;
 
@@ -2193,7 +2221,7 @@
         })
       }
 
-      if (chain == "avalanche") {
+      if (chain == "avalanche" || chain == "polygon") {
         let options = { chain: chain, address: address };
         const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
           console.log(details.result)
@@ -2204,19 +2232,19 @@
             console.log(item)
 
             if (item.is_valid == 1) {
-              if (!item.metadata) break;
-              if (!item.name) break;
+              if (!item.metadata) continue;
+              if (!item.name) continue;
 
               let meta = jQuery.parseJSON(item.metadata);
-              if (!meta.image) break;
+              if (!meta.image) continue;
 
               if (!tokenArray.includes(item.token_address)) {
                 tokenArray.push(item.token_address);
               } else {
-                break;
+                continue;
               }
 
-              await getContractOwner(chain, item)
+              await getContractOwner(chain, item, address)
 
             }
           }
@@ -2388,6 +2416,17 @@
         });
       });
 
+      $("#polygon-wallet-connect").click(function () {
+        moralisLogin("polygon").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#walletAddressPolygon").val(address);
+          } else {
+
+          }
+        });
+      });
+
       $("#creators-avax-wallet-connect").click(function () {
         moralisLogin("avax").then(function (address) {
           console.log(address)
@@ -2410,25 +2449,30 @@
         });
       });
 
-      $("#gamers-wallet-avax").hide();
-      $('#walletAddressAvax').prop('required', false);
-      $("#gamers-wallet-heco").hide();
-      $('#walletAddressHeco').prop('required', false);
+      $("#creators-polygon-wallet-connect").click(function () {
+        moralisLogin("polygon").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#creators-walletAddressPolygon").val(address);
+          } else {
 
-      $("#creators-wallet-avax").hide();
-      $('#creators-walletAddressAvax').prop('required', false);
-      $("#creators-wallet-heco").hide();
-      $('#creators-walletAddressHeco').prop('required', false);
+          }
+        });
+      });
+
+      $(".chain-wallet").hide();
+      $('.wallet-address').prop('required', false)
+      $("#gamers-wallet-enj").show();
+      $('#walletAddress').prop('required', true);
+      $("#creators-wallet-enj").show();
+      $('#creators-walletAddress').prop('required', true);
+
 
       $("input[name='gamers-chain']").change(function () {
         var chain = $('input[name="gamers-chain"]:checked').val();
 
-        $("#gamers-wallet-enj").hide();
-        $("#gamers-wallet-avax").hide();
-        $("#gamers-wallet-heco").hide();
-        $('#walletAddress').prop('required', false);
-        $('#walletAddressAvax').prop('required', false);
-        $('#walletAddressHeco').prop('required', false);
+        $(".chain-wallet").hide();
+        $('.wallet-address').prop('required', false)
 
         chainID = chain;
 
@@ -2444,16 +2488,17 @@
           $("#gamers-wallet-heco").show();
           $('#walletAddressHeco').prop('required', true);
         }
+        if (chain == "polygon") {
+          $("#gamers-wallet-polygon").show();
+          $('#walletAddressPolygon').prop('required', true);
+        }
       });
 
       $("input[name='creators-chain']").change(function () {
         var chain = $('input[name="creators-chain"]:checked').val();
 
-        $("#creators-wallet-enj").hide();
-        $("#creators-wallet-avax").hide();
-        $("#creators-wallet-heco").hide();
-        $('#creators-walletAddress').prop('required', false);
-        $('#creators-walletAddressAvax').prop('required', false);
+        $(".chain-wallet").hide();
+        $('.wallet-address').prop('required', false)
 
         chainID = chain;
 
@@ -2468,6 +2513,10 @@
         if (chain == "heco") {
           $("#creators-wallet-heco").show();
           $('#creators-walletAddressHeco').prop('required', true);
+        }
+        if (chain == "polygon") {
+          $("#creators-wallet-polygon").show();
+          $('#creators-walletAddressPolygon').prop('required', true);
         }
       });
 
@@ -2571,6 +2620,15 @@
 
           openTab("#nav-gamers-nfts");
         }
+
+        if ($('input[name="gamers-chain"]:checked').val() == "polygon") {
+          walletID = $('#walletAddressPolygon').val();
+          $("#gamers-nfts").empty();
+
+          getNFTs("polygon", walletID)
+
+          openTab("#nav-gamers-nfts");
+        }
       });
 
       $("#creators-scan-form").on("submit", function (e) {
@@ -2646,6 +2704,15 @@
           $("#creators-nfts").empty();
 
           getCreatorsNFTs("heco", walletID)
+
+          openTab("#nav-creators-nfts");
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "polygon") {
+          walletID = $('#creators-walletAddressPolygon').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("polygon", walletID)
 
           openTab("#nav-creators-nfts");
         }
