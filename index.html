@@ -2082,14 +2082,22 @@
     var chainID = "enj";
     var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
     var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
-    var CHAINS = { eth: 1, avalanche: 43114, polygon: 137, heco: 128 };
+    var CHAINS = { eth: 1, avax: 43114, polygon: 137, heco: 128 };
 
     /*********** Moralis API **********************/
 
     const serverUrl = "https://mdpsykxctp2q.usemoralis.com:2053/server";
     const appId = "pvhbtIHRFx1uCvBPgvv60fVnYVFBVriAZR3bdx9B";
+
     Moralis.start({ serverUrl, appId });
     Moralis.enableWeb3();
+
+    Moralis.onAccountChanged(async (account) => {
+      const confirmed = confirm("Link this address to PlayNFT?");
+      if (confirmed) {
+        await Moralis.link(account);
+      }
+    });
 
     /*const NODE_URL = "https://speedy-nodes-nyc.moralis.io/3957d6edf92c62bb7839c783/avalanche/mainnet";
     const provider = new Web3.providers.HttpProvider(NODE_URL);
@@ -2111,7 +2119,7 @@
               if (!item.nft_data) return;
 
               if (item.nft_data[0].original_owner.toLowerCase() != owner.toLowerCase()) return;
-              
+
               if (!item.nft_data[0].external_data.image) return;
               $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_token_ids/?key=ckey_859b732db5394a57936af2db4db', function (supply) {
                 console.log("Supply: " + JSON.stringify(supply));
@@ -2277,16 +2285,70 @@
       await Moralis.switchNetwork(chainId);
     }
 
+    async function AddAvaxNetwork() {
+      const chainId = 43114;
+      const chainName = "Avalanche Mainnet";
+      const currencyName = "AVAX";
+      const currencySymbol = "AVAX";
+      const rpcUrl = "https://api.avax.network/ext/bc/C/rpc";
+      const blockExplorerUrl = "https://cchain.explorer.avax.network/";
+
+      await Moralis.addNetwork(
+        chainId,
+        chainName,
+        currencyName,
+        currencySymbol,
+        rpcUrl,
+        blockExplorerUrl
+      );
+
+      await Moralis.switchNetwork(chainId);
+    }
+
+    async function AddPolygonNetwork() {
+      const chainId = 137;
+      const chainName = "Polygon";
+      const currencyName = "MATIC";
+      const currencySymbol = "MATIC";
+      const rpcUrl = "https://polygon-rpc.com";
+      const blockExplorerUrl = "https://polygonscan.com/";
+
+      await Moralis.addNetwork(
+        chainId,
+        chainName,
+        currencyName,
+        currencySymbol,
+        rpcUrl,
+        blockExplorerUrl
+      );
+
+      await Moralis.switchNetwork(chainId);
+    }
+
     async function moralisLogin(chain) {
+      const isWeb3Active = Moralis.ensureWeb3IsInstalled()
+
+      if (isWeb3Active) {
+        console.log("Activated");
+      } else {
+        await Moralis.enableWeb3();
+      }
+
       if (chain == "heco") {
         AddHecoNetwork();
       }
+      if (chain == "avax") {
+        AddAvaxNetwork();
+      }
+      if(chain == "polygon") {
+        AddPolygonNetwork();
+      }
 
       let user = Moralis.User.current();
-
+      console.log(chain)
+      console.log(CHAINS[chain])
       if (!user) {
-
-        user = await Moralis.authenticate({ signingMessage: "PlayNFT using Moralis", type: chain })
+        let user = await Moralis.authenticate({ signingMessage: "PlayNFT using Moralis", type: chain })
           .then(function (user) {
             return user.get("ethAddress");
           })
@@ -2294,7 +2356,9 @@
             console.log(error);
             return null;
           });
+
       } else {
+        console.log(user)
         return user.get("ethAddress");
       }
     }
