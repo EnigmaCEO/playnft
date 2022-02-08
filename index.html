@@ -272,6 +272,7 @@
                 <img style="width:50px" src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" />
                 <img style="width:50px" src="assets/img/heco-logo.svg" alt="Heco" />
                 <img style="width:50px" src="assets/img/polygon-matic-logo.svg" alt="Polygon" />
+                <img style="width:50px" src="assets/img/velas-vlx-logo.svg" alt="Velas" />
               </p>
               <div class="text-center text-lg-start">
                 <a href="#"
@@ -545,7 +546,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-avax"
-                          value="avax">
+                          value="avalanche">
                         <label class="form-check-label" for="gamers-chain-avax"><img style="width:50px"
                             src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
                       </div>
@@ -560,6 +561,12 @@
                           value="polygon">
                         <label class="form-check-label" for="gamers-chain-polygon"><img style="width:50px"
                             src="assets/img/polygon-matic-logo.svg" alt="Polygon" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-velas"
+                          value="velas">
+                        <label class="form-check-label" for="gamers-chain-velas"><img style="width:50px"
+                            src="assets/img/velas-vlx-logo.svg" alt="Velas" /></label>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -601,6 +608,17 @@
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="polygon-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-velas">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressVelas" id="walletAddressVelas"
+                          class="form-control wallet-address" placeholder="Velas Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="velas-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
                       </div>
@@ -774,7 +792,7 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-avax"
-                          value="avax">
+                          value="avalanche">
                         <label class="form-check-label" for="creators-chain-avax"><img style="width:50px"
                             src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
                       </div>
@@ -1303,6 +1321,7 @@
       <li id="${tokenId}" data-image="${tokenImage}" data-index="${tokenIndex}" class="list-group-item d-flex list-group-item-action gamers-nft-item">
         <div class="flex-shrink-0 game-icon">
           <img
+            id="image-${tokenId}"
             src="${tokenImage}"
             class="img-fluid"
             alt="${tokenName}"
@@ -1311,6 +1330,7 @@
         <div class="flex-grow-1 ms-3">
           <strong>${tokenName} #${tokenIndex}</strong>
           <p>ID: ${tokenId}</p>
+          <span id="verify-${tokenId}" class="verify-token"></span>
           <div class="actions">
           </div>
         </div>
@@ -1321,6 +1341,7 @@
       <li id="${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action creators-nft-item">
         <div class="flex-shrink-0 game-icon">
           <img
+            id="image-${tokenId}"
             src="${tokenImage}"
             class="img-fluid"
             alt="${tokenName}"
@@ -2082,8 +2103,45 @@
     var chainID = "enj";
     var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
     var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
-    var CHAINS = { eth: 1, avax: 43114, polygon: 137, heco: 128 };
-
+    var CHAINS = { eth: 1, avalanche: 43114, polygon: 137, heco: 128 };
+    var simplified_abi = [
+      {
+        'inputs': [{ 'internalType': 'address', 'name': 'owner', 'type': 'address' }],
+        'name': 'balanceOf',
+        'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }],
+        'payable': false, 'stateMutability': 'view', 'type': 'function', 'constant': true
+      },
+      {
+        'inputs': [],
+        'name': 'name',
+        'outputs': [{ 'internalType': 'string', 'name': '', 'type': 'string' }],
+        'stateMutability': 'view', 'type': 'function', 'constant': true
+      },
+      {
+        'inputs': [{ 'internalType': 'uint256', 'name': 'tokenId', 'type': 'uint256' }],
+        'name': 'ownerOf',
+        'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }],
+        'payable': false, 'stateMutability': 'view', 'type': 'function', 'constant': true
+      },
+      {
+        'inputs': [{ 'internalType': 'uint256', 'name': 'tokenId', 'type': 'uint256' }],
+        'name': 'tokenURI',
+        'outputs': [{ 'internalType': 'string', 'name': '', 'type': 'string' }],
+        'payable': false, 'stateMutability': 'view', 'type': 'function', 'constant': true
+      },
+      {
+        'inputs': [],
+        'name': 'symbol',
+        'outputs': [{ 'internalType': 'string', 'name': '', 'type': 'string' }],
+        'stateMutability': 'view', 'type': 'function', 'constant': true
+      },
+      {
+        'inputs': [],
+        'name': 'totalSupply',
+        'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }],
+        'stateMutability': 'view', 'type': 'function', 'constant': true
+      },
+    ];
     /*********** Moralis API **********************/
 
     const serverUrl = "https://mdpsykxctp2q.usemoralis.com:2053/server";
@@ -2138,15 +2196,15 @@
     }
 
     async function getNFTs(chain, address) {
-
+      startLoading();
       console.log(chain)
       console.log(address)
+
       if (chain == "heco") {
         await Moralis.switchNetwork(CHAINS[chain]);
         const chainId = await Moralis.chainId;
         console.log(chainId);
-        chain = chainId;
-
+        
         $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
           console.log("Data: " + JSON.stringify(data));
           var nfts = data.data.items;
@@ -2164,7 +2222,7 @@
             }
           });
 
-          stopLoading();
+          openTab("#nav-gamers-nfts");
         })
       }
 
@@ -2192,23 +2250,88 @@
             }
           });
 
-          stopLoading();
+          openTab("#nav-gamers-nfts");
         }).catch((err) => {
           console.error(err);
         });
       }
+
+      if (chain == "velas") {
+
+        await fetch('https://graphql.bitquery.io', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-API-KEY': 'BQYv8qjokwd5p934UXoQc2ywlZ3Bh19Q'
+          },
+          body: JSON.stringify({
+            query: '{\
+                  ethereum(network: velas) {\
+                    address(address: {is: "'+ address + '"}) {\
+                      balances {\
+                        currency {\
+                          address\
+                          symbol\
+                          tokenType\
+                          tokenId\
+                          name\
+                        }\
+                        value\
+                      }\
+                    }\
+                  }\
+                }'})
+        })
+          .then(async function (r) {
+            await r.json().then(function (data) {
+              console.log(data)
+
+              var nfts = data.data.ethereum.address[0].balances;
+              console.log(nfts)
+              nfts.forEach(async function (item) {
+
+                if (item.value == 0) return;
+                if (item.currency.tokenType == "") return;
+                if (item.currency.address == "-") return;
+                console.log(item)
+
+                let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: item.currency.tokenId };
+
+                $("#token-template")
+                  .tmpl(token_content)
+                  .appendTo("#gamers-nfts");
+
+
+                openTab("#nav-gamers-nfts");
+                /*
+                const ethers = Moralis.web3Library
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+
+        let contract = await new ethers.Contract(item.currency.address, simplified_abi, provider);
+                console.log(contract)
+                //await contract.totalSupply().then(r => console.log('Total Supply: ' + r.toNumber()))
+                await contract.tokenURI('10773').then(r => {
+                  console.log(r.toString())
+                })
+                await contract.balanceOf('0x0dbDB9e3503D1323f9e0CB95ef61244ebEAE04fA').then(r => console.log('Balance: ' + r))
+*/
+              })
+            })
+          });
+      }
     }
 
     async function getCreatorsNFTs(chain, address) {
-
+      startLoading();
       console.log(chain)
       console.log(address)
+
       if (chain == "heco") {
         await Moralis.switchNetwork(CHAINS[chain]);
         const chainId = await Moralis.chainId;
         console.log(chainId);
-        chain = chainId;
-
+        
         $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
           console.log("Data: " + JSON.stringify(data));
           var nfts = data.data.items;
@@ -2226,7 +2349,7 @@
             }
           });
 
-          stopLoading();
+          openTab("#nav-creators-nfts");
         })
       }
 
@@ -2257,11 +2380,16 @@
 
             }
           }
-
-          stopLoading();
+          
+          openTab("#nav-creators-nfts");
         }).catch((err) => {
           console.error(err);
         });
+      }
+
+      if (chain == "velas") {
+
+        openTab("#nav-creators-nfts");
       }
     }
 
@@ -2325,6 +2453,30 @@
       await Moralis.switchNetwork(chainId);
     }
 
+    async function AddVelasNetwork() {
+      const chainId = 106;
+      const chainName = "Velas";
+      const currencyName = "Velas";
+      const currencySymbol = "VLX";
+      const rpcUrl = "https://evmexplorer.velas.com/rpc";
+      const blockExplorerUrl = "https://evmexplorer.velas.com";
+      const providerUrl = "wss://api.velas.com"
+
+      await Moralis.enableWeb3();
+      const web3 = new Web3(providerUrl);
+
+      await Moralis.addNetwork(
+        chainId,
+        chainName,
+        currencyName,
+        currencySymbol,
+        rpcUrl,
+        blockExplorerUrl
+      )
+
+      await Moralis.switchNetwork(chainId);
+    }
+
     async function moralisLogin(chain) {
       const isWeb3Active = Moralis.ensureWeb3IsInstalled()
 
@@ -2337,11 +2489,14 @@
       if (chain == "heco") {
         AddHecoNetwork();
       }
-      if (chain == "avax") {
+      if (chain == "avalanche") {
         AddAvaxNetwork();
       }
-      if(chain == "polygon") {
+      if (chain == "polygon") {
         AddPolygonNetwork();
+      }
+      if (chain == "velas") {
+        AddVelasNetwork();
       }
 
       let user = Moralis.User.current();
@@ -2460,7 +2615,7 @@
 
 
       $("#avax-wallet-connect").click(function () {
-        moralisLogin("avax").then(function (address) {
+        moralisLogin("avalanche").then(function (address) {
           console.log(address)
           if (address) {
             $("#walletAddressAvax").val(address);
@@ -2492,8 +2647,19 @@
         });
       });
 
+      $("#velas-wallet-connect").click(function () {
+        moralisLogin("velas").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#walletAddressVelas").val(address);
+          } else {
+
+          }
+        });
+      });
+
       $("#creators-avax-wallet-connect").click(function () {
-        moralisLogin("avax").then(function (address) {
+        moralisLogin("avalanche").then(function (address) {
           console.log(address)
           if (address) {
             $("#creators-walletAddressAvax").val(address);
@@ -2525,6 +2691,17 @@
         });
       });
 
+      $("#creators-velas-wallet-connect").click(function () {
+        moralisLogin("velas").then(function (address) {
+          console.log(address)
+          if (address) {
+            $("#creators-walletAddressVelas").val(address);
+          } else {
+
+          }
+        });
+      });
+
       $(".chain-wallet").hide();
       $('.wallet-address').prop('required', false)
       $("#gamers-wallet-enj").show();
@@ -2545,7 +2722,7 @@
           $("#gamers-wallet-enj").show();
           $('#walletAddress').prop('required', true);
         }
-        if (chain == "avax") {
+        if (chain == "avalanche") {
           $("#gamers-wallet-avax").show();
           $('#walletAddressAvax').prop('required', true);
         }
@@ -2556,6 +2733,10 @@
         if (chain == "polygon") {
           $("#gamers-wallet-polygon").show();
           $('#walletAddressPolygon').prop('required', true);
+        }
+        if (chain == "velas") {
+          $("#gamers-wallet-velas").show();
+          $('#walletAddressVelas').prop('required', true);
         }
       });
 
@@ -2571,7 +2752,7 @@
           $("#creators-wallet-enj").show();
           $('#creators-walletAddress').prop('required', true);
         }
-        if (chain == "avax") {
+        if (chain == "avalanche") {
           $("#creators-wallet-avax").show();
           $('#creators-walletAddressAvax').prop('required', true);
         }
@@ -2582,6 +2763,10 @@
         if (chain == "polygon") {
           $("#creators-wallet-polygon").show();
           $('#creators-walletAddressPolygon').prop('required', true);
+        }
+        if (chain == "velas") {
+          $("#creators-wallet-velas").show();
+          $('#creators-walletAddressVelas').prop('required', true);
         }
       });
 
@@ -2668,13 +2853,12 @@
           });
         }
 
-        if ($('input[name="gamers-chain"]:checked').val() == "avax") {
+        if ($('input[name="gamers-chain"]:checked').val() == "avalanche") {
           walletID = $('#walletAddressAvax').val();
           $("#gamers-nfts").empty();
 
           getNFTs("avalanche", walletID)
 
-          openTab("#nav-gamers-nfts");
         }
 
         if ($('input[name="gamers-chain"]:checked').val() == "heco") {
@@ -2683,7 +2867,6 @@
 
           getNFTs("heco", walletID)
 
-          openTab("#nav-gamers-nfts");
         }
 
         if ($('input[name="gamers-chain"]:checked').val() == "polygon") {
@@ -2692,7 +2875,15 @@
 
           getNFTs("polygon", walletID)
 
-          openTab("#nav-gamers-nfts");
+        }
+
+        if ($('input[name="gamers-chain"]:checked').val() == "velas") {
+          walletID = $('#walletAddressVelas').val();
+          $("#gamers-nfts").empty();
+
+          getNFTs("velas", walletID)
+
+
         }
       });
 
@@ -2755,13 +2946,12 @@
           });
         }
 
-        if ($('input[name="creators-chain"]:checked').val() == "avax") {
+        if ($('input[name="creators-chain"]:checked').val() == "avalanche") {
           walletID = $('#creators-walletAddressAvax').val();
           $("#creators-nfts").empty();
 
           getCreatorsNFTs("avalanche", walletID)
 
-          openTab("#nav-creators-nfts");
         }
 
         if ($('input[name="creators-chain"]:checked').val() == "heco") {
@@ -2770,7 +2960,6 @@
 
           getCreatorsNFTs("heco", walletID)
 
-          openTab("#nav-creators-nfts");
         }
 
         if ($('input[name="creators-chain"]:checked').val() == "polygon") {
@@ -2779,7 +2968,14 @@
 
           getCreatorsNFTs("polygon", walletID)
 
-          openTab("#nav-creators-nfts");
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "velas") {
+          walletID = $('#creators-walletAddressVelas').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("velas", walletID)
+
         }
       });
 
@@ -3215,6 +3411,17 @@
     });
 
     $(document).on("click", "li", function () {
+      tokenImage = $(this).data('image');
+      console.log(tokenImage)
+      $(".verify-token").empty();
+      $("#verify-" + $(this).attr('id')).append('<form id="verify-token-form" class="form-inline">\
+  <div class="col-auto">\
+    <label for="token-verify-'+ $(this).attr('id') + '" class="sr-only">Verify: </label>\
+    <input style="width:40%" type="text" class="form-control mb-2" id="token-verify-'+ $(this).attr('id') + '" placeholder="Token Index">\
+  </div>\
+  <div class="col-auto"><button type="submit" class="btn btn-primary mb-2">Verify</button></div>\
+</form>')
+      return;
 
       if ($(this).hasClass("gamers-nft-item")) {
         startLoading();
