@@ -352,7 +352,7 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
             <div class="service-box red">
               <i class="ri-gamepad-line icon"></i>
               <h3>NFT Gamers</h3>
@@ -368,7 +368,7 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
             <div class="service-box blue">
               <i class="ri-exchange-funds-line icon"></i>
               <h3>NFT Marketplace</h3>
@@ -728,7 +728,7 @@
       <div class="container">
         <header class="section-header">
           <h2>NFT Creators</h2>
-          <p>Add value to your NFTs</p>
+          <p>Add value to your NFT Collections</p>
         </header>
 
         <div class="wizard">
@@ -808,6 +808,12 @@
                         <label class="form-check-label" for="creators-chain-polygon"><img style="width:50px"
                             src="assets/img/polygon-matic-logo.svg" alt="Polygon" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-velas"
+                          value="velas">
+                        <label class="form-check-label" for="creators-chain-velas"><img style="width:50px"
+                            src="assets/img/velas-vlx-logo.svg" alt="Velas" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -848,6 +854,17 @@
                       </div>
                       <div class="col-md-6 text-end">
                         <button id="creators-polygon-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-velas">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressVelas" id="creators-walletAddressVelas"
+                          class="form-control wallet-address" placeholder="Velas Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="creators-velas-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
                       </div>
@@ -2157,10 +2174,6 @@
       }
     });
 
-    /*const NODE_URL = "https://speedy-nodes-nyc.moralis.io/3957d6edf92c62bb7839c783/avalanche/mainnet";
-    const provider = new Web3.providers.HttpProvider(NODE_URL);
-    const web3 = new Web3(provider);*/
-
     async function getContractOwner(chain, item, owner) {
       let address = item.token_address;
 
@@ -2204,7 +2217,7 @@
         await Moralis.switchNetwork(CHAINS[chain]);
         const chainId = await Moralis.chainId;
         console.log(chainId);
-        
+
         $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
           console.log("Data: " + JSON.stringify(data));
           var nfts = data.data.items;
@@ -2331,7 +2344,7 @@
         await Moralis.switchNetwork(CHAINS[chain]);
         const chainId = await Moralis.chainId;
         console.log(chainId);
-        
+
         $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
           console.log("Data: " + JSON.stringify(data));
           var nfts = data.data.items;
@@ -2380,7 +2393,7 @@
 
             }
           }
-          
+
           openTab("#nav-creators-nfts");
         }).catch((err) => {
           console.error(err);
@@ -2389,7 +2402,81 @@
 
       if (chain == "velas") {
 
-        openTab("#nav-creators-nfts");
+        await fetch('https://graphql.bitquery.io', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-API-KEY': 'BQYv8qjokwd5p934UXoQc2ywlZ3Bh19Q'
+          },
+          body: JSON.stringify({
+            query: '{\
+                  ethereum(network: velas) {\
+                    address(address: {is: "'+ address + '"}) {\
+                      balances {\
+                        currency {\
+                          address\
+                          symbol\
+                          tokenType\
+                          tokenId\
+                          name\
+                        }\
+                        value\
+                      }\
+                    }\
+                  }\
+                }'})
+        })
+          .then(async function (r) {
+            await r.json().then(function (data) {
+              console.log(data)
+
+              var nfts = data.data.ethereum.address[0].balances;
+              console.log(nfts)
+              nfts.forEach(async function (item) {
+
+                if (item.value == 0) return;
+                if (item.currency.tokenType == "") return;
+                if (item.currency.address == "-") return;
+                console.log(item)
+
+                const ethers = Moralis.web3Library
+
+                const provider = new ethers.providers.JsonRpcProvider('https://evmexplorer.velas.com/rpc');
+
+                let contract = await new ethers.Contract(item.currency.address, simplified_abi, provider);
+                var totalSupply = 1;
+                var owner = "";
+
+                await contract.ownerOf(0).then(r => {
+                  console.log(r.toString())
+                  owner = r.toString()
+                }).catch(error => console.log(error))
+
+                if (owner.toLowerCase() != address.toLowerCase()) return;
+
+                await contract.totalSupply().then(r => {
+                  console.log('Total Supply: ' + r.toNumber())
+                  totalSupply = r.toNumber()
+                })
+
+                
+
+                let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: 0, tokenSupply: totalSupply };
+
+                $("#creators-token-template")
+                  .tmpl(token_content)
+                  .appendTo("#creators-nfts");
+
+
+                openTab("#nav-creators-nfts");
+
+              })
+
+              
+            })
+
+          })
       }
     }
 
@@ -3407,32 +3494,144 @@
         }
       });
 
-
     });
 
+    async function verifyToken(elem, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      startLoading()
+      let id = elem.value;
+      let index = $("#verify-token-index").val();
+      let mode = $("#verify-token-mode").val();
+      console.log(id + " - " + index);
+
+      const ethers = Moralis.web3Library
+
+      const provider = new ethers.providers.JsonRpcProvider('https://evmexplorer.velas.com/rpc');
+
+      let contract = await new ethers.Contract(id, simplified_abi, provider);
+
+      try {
+        await contract.ownerOf(index).then(r => {
+          console.log(r.toString())
+          if (r.toLowerCase() == walletID.toLowerCase()) {
+            console.log("owner")
+            tokenID = id;
+
+            $(".gamers-nft-item").removeClass("active");
+            $(this).addClass("active");
+            tokenIndex = index;
+
+            let formData = { tokenId: tokenID, wallet: walletID, tokenIndex: tokenIndex };
+            console.log(formData)
+
+            $.ajax({
+              url:
+                "https://api.playnft.io/getgames",
+              type: "POST",
+              crossDomain: true,
+              data: JSON.stringify(formData),
+              dataType: "json",
+              contentType: "application/json",
+              success: function (data) {
+                console.info(data);
+                let response = jQuery.parseJSON(data);
+
+                $("#gamers-games").empty();
+
+                response.forEach(function (item) {
+                  let status
+                  let cost
+                  if (item.status == 0) {
+                    status = "Development"
+                    cost = 10
+                  }
+                  if (item.status == 1) {
+                    status = "Live"
+                    cost = 25
+                  }
+
+                  let platforms = ''
+                  if (item.platform_steam != 0) platforms += '<i class="fab fa-steam-symbol"></i> '
+                  if (item.platform_apple != 0) platforms += '<i class="fab fa-app-store-ios"></i> '
+                  if (item.platform_google != 0) platforms += '<i class="fab fa-google-play"></i> '
+
+                  let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo, publisherId: item.publisherId, };
+                  $("#games-template")
+                    .tmpl(game_content)
+                    .appendTo("#gamers-games");
+
+                });
+
+                openTab("#nav-gamers-games");
+              },
+            });
+            /*
+            contract.tokenURI(id).then(async function (meta) {
+              console.log(meta)
+ 
+              await $.getJSON(meta, function (data) {
+                console.log("Data: " + JSON.stringify(data));
+ 
+                let name = data.name;
+                let image = data.image || data.image_url;
+ 
+                $("#image-" + id).attr("src",image);
+                $(".verify-token").empty();
+                
+                stopLoading()
+              })
+            }).catch(error => {
+              console.log(error)
+              $("#verify-token-index").addClass('is-invalid')
+              $("#verify-token-index").val('Invalid Data')
+              stopLoading()
+            });*/
+          } else {
+            console.log("not owner")
+            $("#verify-token-index").addClass('is-invalid')
+            $("#verify-token-index").val('Verify Failed')
+            stopLoading()
+          }
+        })
+      } catch (error) {
+        console.log("not owner")
+        $("#verify-token-index").addClass('is-invalid')
+        $("#verify-token-index").val('Invalid Index')
+        stopLoading()
+      }
+
+    }
+
     $(document).on("click", "li", function () {
-     /* tokenImage = $(this).data('image');
-      console.log(tokenImage)
-      $(".verify-token").empty();
-      $("#verify-" + $(this).attr('id')).append('<form id="verify-token-form" class="form-inline">\
-  <div class="col-auto">\
-    <label for="token-verify-'+ $(this).attr('id') + '" class="sr-only">Verify: </label>\
-    <input style="width:40%" type="text" class="form-control mb-2" id="token-verify-'+ $(this).attr('id') + '" placeholder="Token Index">\
-  </div>\
-  <div class="col-auto"><button type="submit" class="btn btn-primary mb-2">Verify</button></div>\
-</form>')
-      return;*/
 
       if ($(this).hasClass("gamers-nft-item")) {
+        tokenImage = $(this).data('image');
+        console.log(tokenImage)
+        if (tokenImage && tokenImage.includes(".svg")) {
+          let mode = "creators";
+          if ($(this).hasClass("gamers-nft-item")) mode = "gamers";
+          $(".verify-token").empty();
+
+          $("#verify-" + $(this).attr('id')).append('<form class="form-inline">\
+            <div class="col-auto"><input type="hidden" id="verify-token-mode" value="'+ mode + '">\
+              <label for="verify-token-index" class="sr-only">Verify: </label>\
+              <input style="width:40%" type="text" class="form-control mb-2" id="verify-token-index" name="verify-token-index" placeholder="Token Index">\
+            </div>\
+            <div class="col-auto"><button onclick="verifyToken(this, event)" id="verify-token" type="button" value="'+ $(this).attr('id') + '" class="btn btn-primary mb-2">Verify</button></div>\
+          </form>')
+          $("#verify-token-index").focus()
+          return;
+        }
+
         startLoading();
 
         $(".gamers-nft-item").removeClass("active");
         $(this).addClass("active");
         tokenID = $(this).attr('id');
-        tokenImage = $(this).data('image');
         tokenIndex = $(this).data('index');
 
-        let formData = { tokenId: $(this).attr('id'), wallet: walletID, tokenIndex: tokenIndex };
+        let formData = { tokenId: tokenID, wallet: walletID, tokenIndex: tokenIndex };
         console.log(formData)
 
         $.ajax({
@@ -3487,7 +3686,7 @@
         tokenID = $(this).attr('id');
         tokenImage = $(this).data('image');
 
-        let formData = { tokenId: $(this).attr('id'), wallet: walletID };
+        let formData = { tokenId: tokenID, wallet: walletID };
         console.log(formData)
 
         $.ajax({
