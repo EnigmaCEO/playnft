@@ -2111,6 +2111,7 @@
   <script>
     var tokenID = "";
     var tokenIndex = "";
+    var tokenSupply = 0;
     var tokenImage = "";
     var walletID = "";
     var publisherID = "";
@@ -2194,6 +2195,7 @@
               if (!item.nft_data[0].external_data.image) return;
               $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_token_ids/?key=ckey_859b732db5394a57936af2db4db', function (supply) {
                 console.log("Supply: " + JSON.stringify(supply));
+                tokenSupply = supply.data.pagination.total_count;
                 let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.nft_data[0].external_data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0, tokenSupply: supply.data.pagination.total_count };
 
                 $("#creators-token-template")
@@ -2460,8 +2462,8 @@
                   totalSupply = r.toNumber()
                 })
 
-                
 
+                tokenSupply = totalSupply;
                 let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: 0, tokenSupply: totalSupply };
 
                 $("#creators-token-template")
@@ -2473,7 +2475,7 @@
 
               })
 
-              
+
             })
 
           })
@@ -3016,7 +3018,7 @@
                       if (!meta.image) return;
 
                       console.log("Success #" + count++ + ": " + url)
-
+                      tokenSupply = item.token.totalSupply;
                       let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
                       $("#creators-token-template")
                         .tmpl(token_content)
@@ -3800,7 +3802,8 @@
       startLoading();
 
       let id = $(this).data('id');
-      let formData = { gameId: id, tokenId: tokenID, tokenIndex: 0, chain: chainID };
+
+      let formData = { gameId: id, tokenId: tokenID, tokenIndex: 0, chain: chainID, supply: tokenSupply };
       console.log(formData)
 
       $.ajax({
@@ -3983,7 +3986,7 @@
       let _name = $(this).data('name');
       let _mode = "creators";
 
-      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0, chain: chainID };
+      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0, chain: chainID, supply: tokenSupply};
       console.log(formData)
 
       $.ajax({
