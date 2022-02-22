@@ -41,6 +41,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+  <script src='https://unpkg.com/xrpl@2.1.0-beta.1'></script>
 
   <script>
     tinymce.init({
@@ -54,7 +55,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="PlayNFT" />
       </a>
 
@@ -568,6 +569,12 @@
                         <label class="form-check-label" for="gamers-chain-velas"><img style="width:50px"
                             src="assets/img/velas-vlx-logo.svg" alt="Velas" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-xrp"
+                          value="xrp">
+                        <label class="form-check-label" for="gamers-chain-xrp"><img style="width:50px"
+                            src="assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="gamers-wallet-enj">
@@ -621,6 +628,15 @@
                         <button id="velas-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-xrp">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressXrp" id="walletAddressXrp"
+                          class="form-control wallet-address" placeholder="XRP Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -814,6 +830,12 @@
                         <label class="form-check-label" for="creators-chain-velas"><img style="width:50px"
                             src="assets/img/velas-vlx-logo.svg" alt="Velas" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-xrp"
+                          value="xrp">
+                        <label class="form-check-label" for="creators-chain-xrp"><img style="width:50px"
+                            src="assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -867,6 +889,15 @@
                         <button id="creators-velas-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-xrp">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressXrp" id="creators-walletAddressXrp"
+                          class="form-control wallet-address" placeholder="XRP Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -2316,24 +2347,62 @@
                 $("#token-template")
                   .tmpl(token_content)
                   .appendTo("#gamers-nfts");
-
-
-                openTab("#nav-gamers-nfts");
-                /*
-                const ethers = Moralis.web3Library
-        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
-
-        let contract = await new ethers.Contract(item.currency.address, simplified_abi, provider);
-                console.log(contract)
-                //await contract.totalSupply().then(r => console.log('Total Supply: ' + r.toNumber()))
-                await contract.tokenURI('10773').then(r => {
-                  console.log(r.toString())
-                })
-                await contract.balanceOf('0x0dbDB9e3503D1323f9e0CB95ef61244ebEAE04fA').then(r => console.log('Balance: ' + r))
-*/
               })
+
+              openTab("#nav-gamers-nfts");
             })
           });
+      }
+
+      if (chain == "xrp") {
+        const PUBLIC_SERVER = "wss://xrplcluster.com/"
+        const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
+        await client.connect()
+        try {
+          /*const wallet = xrpl.Wallet.fromSeed('sniFYCMzLCuGSj5A1AAy4xPwwQQiw')
+          const transactionBlob = {
+    TransactionType: "NFTokenMint",
+    Account: wallet.classicAddress,
+    URI: xrpl.convertStringToHex('https://jumpnet.cloud.enjin.io/platform/334/assets/50c0000000000bc4.json'),
+    TokenTaxon: 1 
+  }
+
+  const tx = await client.submitAndWait(transactionBlob,{wallet})
+console.log(wallet.classicAddress)*/
+
+          const data = await client.request({
+            method: "account_nfts",
+            account: address
+          })
+          console.log(data)
+          var nfts = data.result.account_nfts;
+
+          nfts.forEach(async function (item) {
+
+            console.log(item)
+            if (item.URI == "") return;
+            let meta = xrpl.convertHexToString(item.URI)
+            $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+              let data = jQuery.parseJSON(metaData);
+              console.log(data)
+
+              let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: item.TokenTaxon };
+
+              $("#token-template")
+                .tmpl(token_content)
+                .appendTo("#gamers-nfts");
+
+            })
+          })
+
+          openTab("#nav-gamers-nfts");
+
+        } catch (error) {
+          console.log(error)
+          stopLoading()
+        }
+
+        client.disconnect();
       }
     }
 
@@ -2469,16 +2538,57 @@
                 $("#creators-token-template")
                   .tmpl(token_content)
                   .appendTo("#creators-nfts");
-
-
-                openTab("#nav-creators-nfts");
-
               })
 
+              openTab("#nav-creators-nfts");
 
             })
 
           })
+      }
+
+      if (chain == "xrp") {
+        const PUBLIC_SERVER = "wss://xrplcluster.com/"
+        const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
+        await client.connect()
+        try {
+          const data = await client.request({
+            method: "account_nfts",
+            account: address
+          })
+          console.log(data)
+          var nfts = data.result.account_nfts;
+
+          nfts.forEach(async function (item) {
+
+            console.log(item)
+            if (item.URI == "") return;
+            if (item.Issuer.toLowerCase() != address.toLowerCase()) return;
+
+            let meta = xrpl.convertHexToString(item.URI)
+            $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+              let data = jQuery.parseJSON(metaData);
+              console.log(data)
+
+              tokenSupply = 1;
+              let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: 0, tokenSupply: 1 };
+
+              $("#creators-token-template")
+                .tmpl(token_content)
+                .appendTo("#creators-nfts");
+
+
+            })
+          })
+
+          openTab("#nav-creators-nfts");
+
+        } catch (error) {
+          console.log(error)
+          stopLoading()
+        }
+
+        client.disconnect();
       }
     }
 
@@ -2827,6 +2937,10 @@
           $("#gamers-wallet-velas").show();
           $('#walletAddressVelas').prop('required', true);
         }
+        if (chain == "xrp") {
+          $("#gamers-wallet-xrp").show();
+          $('#walletAddressXrp').prop('required', true);
+        }
       });
 
       $("input[name='creators-chain']").change(function () {
@@ -2856,6 +2970,10 @@
         if (chain == "velas") {
           $("#creators-wallet-velas").show();
           $('#creators-walletAddressVelas').prop('required', true);
+        }
+        if (chain == "xrp") {
+          $("#creators-wallet-xrp").show();
+          $('#creators-walletAddressXrp').prop('required', true);
         }
       });
 
@@ -2963,7 +3081,6 @@
           $("#gamers-nfts").empty();
 
           getNFTs("polygon", walletID)
-
         }
 
         if ($('input[name="gamers-chain"]:checked').val() == "velas") {
@@ -2971,8 +3088,13 @@
           $("#gamers-nfts").empty();
 
           getNFTs("velas", walletID)
+        }
 
+        if ($('input[name="gamers-chain"]:checked').val() == "xrp") {
+          walletID = $('#walletAddressXrp').val();
+          $("#gamers-nfts").empty();
 
+          getNFTs("xrp", walletID)
         }
       });
 
@@ -3064,6 +3186,14 @@
           $("#creators-nfts").empty();
 
           getCreatorsNFTs("velas", walletID)
+
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "xrp") {
+          walletID = $('#creators-walletAddressXrp').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("xrp", walletID)
 
         }
       });
@@ -3986,7 +4116,7 @@
       let _name = $(this).data('name');
       let _mode = "creators";
 
-      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0, chain: chainID, supply: tokenSupply};
+      let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0, chain: chainID, supply: tokenSupply };
       console.log(formData)
 
       $.ajax({
