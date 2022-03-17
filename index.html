@@ -40,7 +40,7 @@
     referrerpolicy="origin"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+  <script src="https://unpkg.com/moralis@1.5.4/dist/moralis.js"></script>
   <script src='https://unpkg.com/xrpl@2.1.0-beta.1'></script>
 
   <script>
@@ -356,7 +356,7 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
             <div class="service-box red">
               <i class="ri-gamepad-line icon"></i>
-              <h3>NFT Gamers</h3>
+              <h3>NFT Hodlers</h3>
               <p>
                 Select NFTs from your wallet and connect them for in-game
                 rewards and bonuses.
@@ -575,6 +575,12 @@
                         <label class="form-check-label" for="gamers-chain-xrp"><img style="width:50px"
                             src="assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-solana"
+                          value="solana">
+                        <label class="form-check-label" for="gamers-chain-solana"><img style="width:50px"
+                            src="assets/img/solana-sol-logo.svg" alt="Solana" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="gamers-wallet-enj">
@@ -634,6 +640,15 @@
                       <div class="col-md-6">
                         <input type="text" name="walletAddressXrp" id="walletAddressXrp"
                           class="form-control wallet-address" placeholder="XRP Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-solana">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressSolana" id="walletAddressSolana"
+                          class="form-control wallet-address" placeholder="Solana Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
 
@@ -836,6 +851,12 @@
                         <label class="form-check-label" for="creators-chain-xrp"><img style="width:50px"
                             src="assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-xrp"
+                          value="solana">
+                        <label class="form-check-label" for="creators-chain-solana"><img style="width:50px"
+                            src="assets/img/solana-sol-logo.svg" alt="Solana" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -895,6 +916,15 @@
                       <div class="col-md-6">
                         <input type="text" name="walletAddressXrp" id="creators-walletAddressXrp"
                           class="form-control wallet-address" placeholder="XRP Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-solana">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressSolana" id="creators-walletAddressSolana"
+                          class="form-control wallet-address" placeholder="Solana Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
 
@@ -2404,6 +2434,42 @@ console.log(wallet.classicAddress)*/
 
         client.disconnect();
       }
+
+      if (chain == "solana") {
+        let options = { address: address };
+        console.log(options)
+        const tokenMetadata = await Moralis.SolanaAPI.account.getNFTs(options).then(function (details) {
+          console.log(details)
+          var nfts = details;
+
+          nfts.forEach(async function (item) {
+            console.log(item)
+            options = { network: "mainnet", address: item.associatedTokenAddress };
+            const tokenMetadata = await Moralis.SolanaAPI.nft.getNFTMetadata(options).then(function (result) {
+              console.log(result)
+              var metaData = result;
+
+              metaData.forEach(function (meta) {
+                if (!meta.mint) return;
+                if (!meta.name) return;
+                if (!meta.metaplex.metadataUri) return;
+                let data = jQuery.parseJSON(meta.metaplex.metadataUri);
+                console.log(data)
+
+                let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: data.token_id };
+
+                $("#token-template")
+                  .tmpl(token_content)
+                  .appendTo("#gamers-nfts");
+              });
+            });
+          });
+
+          openTab("#nav-gamers-nfts");
+        }).catch((err) => {
+          console.error(err);
+        });
+      }
     }
 
     async function getCreatorsNFTs(chain, address) {
@@ -2590,6 +2656,42 @@ console.log(wallet.classicAddress)*/
 
         client.disconnect();
       }
+
+      if (chain == "solana") {
+        let options = { address: address };
+        console.log(options)
+        const tokenMetadata = await Moralis.SolanaAPI.account.getNFTs(options).then(function (details) {
+          console.log(details)
+          var nfts = details;
+
+          nfts.forEach(async function (item) {
+            console.log(item)
+            options = { address: item.associatedTokenAddress };
+            const tokenMetadata = await Moralis.SolanaAPI.nft.getNFTMetadata(options).then(function (result) {
+              console.log(result)
+              var metaData = result;
+
+              metaData.forEach(function (meta) {
+                if (!meta.mint) return;
+                if (!meta.name) return;
+                if (!meta.metaplex.metadataUri) return;
+                let data = jQuery.parseJSON(meta.metaplex.metadataUri);
+                console.log(data)
+
+                let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: data.token_id };
+
+                $("#token-template")
+                  .tmpl(token_content)
+                  .appendTo("#gamers-nfts");
+              });
+            });
+          });
+
+          openTab("#nav-gamers-nfts");
+        }).catch((err) => {
+          console.error(err);
+        });
+      }
     }
 
     async function AddHecoNetwork() {
@@ -2675,6 +2777,7 @@ console.log(wallet.classicAddress)*/
 
       await Moralis.switchNetwork(chainId);
     }
+
 
     async function moralisLogin(chain) {
       const isWeb3Active = Moralis.ensureWeb3IsInstalled()
@@ -2941,6 +3044,10 @@ console.log(wallet.classicAddress)*/
           $("#gamers-wallet-xrp").show();
           $('#walletAddressXrp').prop('required', true);
         }
+        if (chain == "solana") {
+          $("#gamers-wallet-solana").show();
+          $('#walletAddressSolana').prop('required', true);
+        }
       });
 
       $("input[name='creators-chain']").change(function () {
@@ -2974,6 +3081,10 @@ console.log(wallet.classicAddress)*/
         if (chain == "xrp") {
           $("#creators-wallet-xrp").show();
           $('#creators-walletAddressXrp').prop('required', true);
+        }
+        if (chain == "solana") {
+          $("#creators-wallet-solana").show();
+          $('#creators-walletAddressSolana').prop('required', true);
         }
       });
 
@@ -3096,6 +3207,13 @@ console.log(wallet.classicAddress)*/
 
           getNFTs("xrp", walletID)
         }
+
+        if ($('input[name="gamers-chain"]:checked').val() == "solana") {
+          walletID = $('#walletAddressSolana').val();
+          $("#gamers-nfts").empty();
+
+          getNFTs("solana", walletID)
+        }
       });
 
       $("#creators-scan-form").on("submit", function (e) {
@@ -3194,6 +3312,14 @@ console.log(wallet.classicAddress)*/
           $("#creators-nfts").empty();
 
           getCreatorsNFTs("xrp", walletID)
+
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "solana") {
+          walletID = $('#creators-walletAddressSolana').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("solana", walletID)
 
         }
       });
