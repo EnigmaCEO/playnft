@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>PlayNFT - The Cross-chain NFT Utility Platform</title>
+  <title>PlayNFT - The Cross-chain NFT Utility Marketplace</title>
   <meta content="" name="description" />
 
   <meta content="nft" name="keywords" />
@@ -274,6 +274,7 @@
                 <img style="width:50px" src="assets/img/heco-logo.svg" alt="Heco" />
                 <img style="width:50px" src="assets/img/polygon-matic-logo.svg" alt="Polygon" />
                 <img style="width:50px" src="assets/img/velas-vlx-logo.svg" alt="Velas" />
+                <img style="width:50px" src="assets/img/near-protocol-near-logo.svg" alt="NEAR Protocol" />
               </p>
               <div class="text-center text-lg-start">
                 <a href="#"
@@ -581,6 +582,12 @@
                         <label class="form-check-label" for="gamers-chain-solana"><img style="width:50px"
                             src="assets/img/solana-sol-logo.svg" alt="Solana" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gamers-chain" id="gamers-chain-near"
+                          value="near">
+                        <label class="form-check-label" for="gamers-chain-near"><img style="width:50px"
+                            src="assets/img/near-protocol-near-logo.svg" alt="Near" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="gamers-wallet-enj">
@@ -649,6 +656,15 @@
                       <div class="col-md-6">
                         <input type="text" name="walletAddressSolana" id="walletAddressSolana"
                           class="form-control wallet-address" placeholder="Solana Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="gamers-wallet-near">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressNear" id="walletAddressNear"
+                          class="form-control wallet-address" placeholder="Near Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
 
@@ -852,10 +868,16 @@
                             src="assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-xrp"
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-solana"
                           value="solana">
                         <label class="form-check-label" for="creators-chain-solana"><img style="width:50px"
                             src="assets/img/solana-sol-logo.svg" alt="Solana" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-near"
+                          value="near">
+                        <label class="form-check-label" for="creators-chain-near"><img style="width:50px"
+                            src="assets/img/near-protocol-near-logo.svg" alt="Near" /></label>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -925,6 +947,15 @@
                       <div class="col-md-6">
                         <input type="text" name="walletAddressSolana" id="creators-walletAddressSolana"
                           class="form-control wallet-address" placeholder="Solana Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-near">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressNear" id="creators-walletAddressNear"
+                          class="form-control wallet-address" placeholder="Near Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
 
@@ -2388,18 +2419,8 @@
         const PUBLIC_SERVER = "wss://xrplcluster.com/"
         const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
         await client.connect()
+
         try {
-          /*const wallet = xrpl.Wallet.fromSeed('sniFYCMzLCuGSj5A1AAy4xPwwQQiw')
-          const transactionBlob = {
-    TransactionType: "NFTokenMint",
-    Account: wallet.classicAddress,
-    URI: xrpl.convertStringToHex('https://jumpnet.cloud.enjin.io/platform/334/assets/50c0000000000bc4.json'),
-    TokenTaxon: 1 
-  }
-
-  const tx = await client.submitAndWait(transactionBlob,{wallet})
-console.log(wallet.classicAddress)*/
-
           const data = await client.request({
             method: "account_nfts",
             account: address
@@ -2469,6 +2490,76 @@ console.log(wallet.classicAddress)*/
         }).catch((err) => {
           console.error(err);
         });
+      }
+
+      if (chain == "near") {
+        $.getJSON('https://api.aurorascan.dev/api?module=account&action=tokennfttx&address=' + address + '&sort=asc', function (data) {
+          console.log("Data: " + JSON.stringify(data));
+          var transfers = data.result;
+          var nftArray = [];
+
+          transfers.forEach(function (item) {
+            console.log(item)
+
+            var nftAddress = item.contractAddress + '-' + item.tokenID + '-' + item.tokenName;
+
+            if (item.to == address) {
+              if (!nftArray.includes(nftAddress)) {
+                nftArray.push(nftAddress);
+              }
+            } else
+              if (item.from == address) {
+                if (nftArray.includes(nftAddress)) {
+                  nftArray.pop(nftAddress);
+                  const index = nftArray.indexOf(nftAddress);
+                  if (index > -1) {
+                    nftArray.splice(index, 1);
+                  }
+                }
+              }
+          });
+
+          const ethers = Moralis.web3Library
+          const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
+
+
+
+          nftArray.forEach(async function (item) {
+            console.log(item)
+            const nft = item.split('-')
+            let contract = await new ethers.Contract(nft[0], simplified_abi, provider);
+            var tokenURI = "";
+            let image = "/assets/img/near-protocol-near-logo.svg";
+
+            try {
+              await contract.tokenURI(nft[1]).then(r => {
+                console.log("URL: " + r.toString().replace("ipfs://", "https://ipfs.io/ipfs/"))
+                tokenURI = r.toString()
+              }).catch(error => console.log(error))
+
+            } catch (error) {
+              console.log(error)
+            }
+
+            await $.getJSON(tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/"), function (metaData) {
+              console.log(metaData)
+
+              if (metaData) {
+                image = metaData.image.replace("ipfs://", "https://ipfs.io/ipfs/");
+              }
+            }).catch((err) => {
+              //console.error(err);
+            });
+
+            let token_content = { tokenId: nft[0], tokenName: nft[2], tokenImage: image, tokenIndex: nft[1] };
+
+            $("#token-template")
+              .tmpl(token_content)
+              .appendTo("#gamers-nfts");
+          });
+
+          openTab("#nav-gamers-nfts");
+        })
       }
     }
 
@@ -2678,19 +2769,83 @@ console.log(wallet.classicAddress)*/
                 let data = jQuery.parseJSON(meta.metaplex.metadataUri);
                 console.log(data)
 
-                let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: data.token_id };
+                let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0, tokenSupply: 1 };
 
-                $("#token-template")
+                $("#creators-token-template")
                   .tmpl(token_content)
-                  .appendTo("#gamers-nfts");
+                  .appendTo("#creators-nfts");
               });
             });
           });
 
-          openTab("#nav-gamers-nfts");
+          openTab("#nav-creators-nfts");
         }).catch((err) => {
           console.error(err);
         });
+      }
+
+      if (chain == "near") {
+        $.getJSON('https://api.aurorascan.dev/api?module=account&action=txlist&address=' + address + '&sort=asc&apikey=5YZZTXW2DDRP89PXN7DUE7TY914E2IV456', function (data) {
+          console.log("Data: " + JSON.stringify(data));
+          let transfers = data.result;
+          var nftArray = [];
+
+          transfers.forEach(function (item) {
+            console.log(item)
+
+            var nftAddress = item.contractAddress;
+
+            if (item.to == "" && item.input != "" ) {
+              if (!nftArray.includes(nftAddress)) {
+                nftArray.push(nftAddress);
+              }
+            }
+          });
+
+          const ethers = Moralis.web3Library
+          const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
+
+
+
+          nftArray.forEach(async function (item) {
+            console.log(item)
+            
+            let contract = await new ethers.Contract(item, simplified_abi, provider);
+            var tokenURI = "";
+            let image = "/assets/img/near-protocol-near-logo.svg";
+            var totalSupply = 1;
+            var tokenName = "";
+
+            try {
+                await contract.name().then(r => {
+                  tokenName = r.toString()
+                })
+
+            } catch (error) {
+              console.log(error)
+              return;
+            }
+
+            try {
+                await contract.totalSupply().then(r => {
+                  console.log('Total Supply: ' + r.toNumber())
+                  totalSupply = r.toNumber()
+                })
+
+            } catch (error) {
+              console.log(error)
+              return;
+            }
+
+            let token_content = { tokenId: item, tokenName: tokenName, tokenImage: image, tokenIndex: 0, tokenSupply: totalSupply };
+
+            $("#creators-token-template")
+                .tmpl(token_content)
+                .appendTo("#creators-nfts");
+          });
+
+          openTab("#nav-creators-nfts");
+        })
       }
     }
 
@@ -3048,6 +3203,10 @@ console.log(wallet.classicAddress)*/
           $("#gamers-wallet-solana").show();
           $('#walletAddressSolana').prop('required', true);
         }
+        if (chain == "near") {
+          $("#gamers-wallet-near").show();
+          $('#walletAddressNear').prop('required', true);
+        }
       });
 
       $("input[name='creators-chain']").change(function () {
@@ -3085,6 +3244,10 @@ console.log(wallet.classicAddress)*/
         if (chain == "solana") {
           $("#creators-wallet-solana").show();
           $('#creators-walletAddressSolana').prop('required', true);
+        }
+        if (chain == "near") {
+          $("#creators-wallet-near").show();
+          $('#creators-walletAddressNear').prop('required', true);
         }
       });
 
@@ -3214,6 +3377,13 @@ console.log(wallet.classicAddress)*/
 
           getNFTs("solana", walletID)
         }
+
+        if ($('input[name="gamers-chain"]:checked').val() == "near") {
+          walletID = $('#walletAddressNear').val();
+          $("#gamers-nfts").empty();
+
+          getNFTs("near", walletID)
+        }
       });
 
       $("#creators-scan-form").on("submit", function (e) {
@@ -3320,6 +3490,14 @@ console.log(wallet.classicAddress)*/
           $("#creators-nfts").empty();
 
           getCreatorsNFTs("solana", walletID)
+
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "near") {
+          walletID = $('#creators-walletAddressNear').val();
+          $("#creators-nfts").empty();
+
+          getCreatorsNFTs("near", walletID)
 
         }
       });
@@ -3866,7 +4044,7 @@ console.log(wallet.classicAddress)*/
       if ($(this).hasClass("gamers-nft-item")) {
         tokenImage = $(this).data('image');
         console.log(tokenImage)
-        if (tokenImage && tokenImage.includes(".svg")) {
+        if (tokenImage && tokenImage.includes("vlx")) {
           let mode = "creators";
           if ($(this).hasClass("gamers-nft-item")) mode = "gamers";
           $(".verify-token").empty();
