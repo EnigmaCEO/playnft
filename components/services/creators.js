@@ -189,10 +189,12 @@ class ServicesCreators extends HTMLElement {
                     <div class="row gy-4 chain-wallet" id="creators-wallet-near">
                       <div class="col-md-6">
                         <input type="text" name="walletAddressNear" id="creators-walletAddressNear"
-                          class="form-control wallet-address" placeholder="Near Wallet Address" required />
+                          class="form-control wallet-address" placeholder="Aurora Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
-
+                        <button id="creators-near-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>

@@ -997,6 +997,17 @@ $(document).ready(function () {
         });
     });
 
+    $("#creators-near-wallet-connect").click(function () {
+        moralisLogin("near").then(function (address) {
+            console.log(address)
+            if (address) {
+                $("#creators-walletAddressNear").val(address);
+            } else {
+
+            }
+        });
+    });
+
     $(".chain-wallet").hide();
     $('.wallet-address').prop('required', false)
     $("#gamers-wallet-enj").show();
