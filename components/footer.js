@@ -11,7 +11,7 @@ class Footer extends HTMLElement {
                 <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-info">
                     <a href="index.html" class="logo align-items-center">
-                    <img src="assets/img/logo.png" alt="PlayNFT" />
+                    <img src="/assets/img/logo.png" alt="PlayNFT" />
                     </a>
                     <a href="PlayNFT_Pitchdeck.pdf" target="_blank" class="align-items-center">
                     <b>Pitch Deck <i class="fas fa-file-download"></i></b>
