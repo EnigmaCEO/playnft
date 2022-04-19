@@ -4,6 +4,9 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+
+var streamer_swiper;
+
 (function() {
   "use strict";
 
@@ -247,11 +250,12 @@
   /**
    * Testimonials slider
    */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
+  streamer_swiper = new Swiper('.testimonials-slider', {
+    speed: 300,
+    loop: false,
+    observer: true,
     autoplay: {
-      delay: 5000,
+      delay: 2000,
       disableOnInteraction: false
     },
     slidesPerView: 'auto',

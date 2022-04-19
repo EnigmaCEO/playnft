@@ -363,6 +363,25 @@
         </div>
       </li>
     </script>
+
+    <script id="active-streamers-template" type="text/x-jquery-tmpl">
+      <div class="swiper-slide">
+        <div class="testimonial-item">
+        <div class="profile mt-auto">
+            <img
+            src="${picture}"
+            class="testimonial-img" alt="">
+            <h3>${name}</h3>
+            <h4>${nfts} Tokens</h4>
+
+        </div>
+        <p>
+            <button type="submit" onclick="window.open('https://www.twitch.tv/${name}')">Visit Channel</button>
+        </p>
+
+        </div>
+      </div>
+    </script>
 </body>
 
 </html>

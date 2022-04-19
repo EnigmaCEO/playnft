@@ -111,7 +111,7 @@ class ServicesCreators extends HTMLElement {
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-near"
                           value="near">
                         <label class="form-check-label" for="creators-chain-near"><img style="width:50px"
-                            src="assets/img/near-protocol-near-logo.svg" alt="Near" /></label>
+                            src="assets/img/aurora.png" alt="Aurora" /></label>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>

@@ -820,8 +820,50 @@ function showSections() {
     $("#section-streamers").hide();
 }
 
+function showActiveStreamers() {
+    $.ajax({
+        url:
+            "https://api.playnft.io/getactivestreamers",
+        type: 'GET',
+        crossDomain: true,
+        data: {},
+        success: function (data) {
+            console.info(data);
+            let response = jQuery.parseJSON(data);
+
+            $("#streamer_list").empty();
+            $("#streamer_list").append('<div class="swiper-slide"></div>')
+            
+
+            response.forEach(function (val) {
+                
+                let game_content = { name: val.name, picture: val.picture, nfts: val.nfts };
+                $("#active-streamers-template")
+                    .tmpl(game_content)
+                    .appendTo("#streamer_list");
+
+                streamer_swiper.update()
+                streamer_swiper.updateSize()
+            });
+
+            $("#streamer_list").append('<div class="swiper-slide"></div>')
+            setTimeout(function () {
+                streamer_swiper.update()
+                streamer_swiper.updateSize()
+               }, 500);
+        },
+        error: function (data) {
+            console.info(data);
+        }
+        
+    });
+}
+
+
+
 $(document).ready(function () {
     showSections()
+    showActiveStreamers()
 
     var hash = window.location.hash.substring(1);
     var params = {}
