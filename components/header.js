@@ -35,11 +35,11 @@ class Header extends HTMLElement {
                     <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li class="dropdown"><a href="#"><span>Showcase</span> <i class="bi bi-chevron-down"></i></a>
+                    <li class="dropdown"><a href="#"><span>Utility Marketplace</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                        <li><a class="nav-link scrollto" href="#streamers">Streamers</a></li>
-                        <li><a class="nav-link scrollto" href="#clients">Games</a></li>
-                        <li><a class="nav-link scrollto" href="#nfts">NFT Utility</a></li>
+                        <li><a class="nav-link scrollto" href="#streamers">Twitch Streamers</a></li>
+                        <li><a class="nav-link scrollto" href="#clients">Blockchain Games</a></li>
+                        <li><a class="nav-link scrollto" href="#nfts">NFT Collections</a></li>
                         </ul>
                     </li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
