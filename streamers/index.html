@@ -61,14 +61,19 @@
 
     <div class="row spacer">&nbsp;</div>
     <main id="main">
+        <div id="back_button" style="position:absolute; left:20px"><button type="submit" onclick="window.location.assign('/streamers/')">&lt;</button></div>
+                
         <!-- ======= Streamers Section ======= -->
         <section id="section-streamers" class="gamers">
             <div class="container text-center">
+                
                 <header class="section-header">
+                    
                     <h2>Twitch Streamers</h2>
-                    <p>Collect Tokens from your favorite Twitch Streamers.</p>
+                    <p id="streamer_name">Collect Tokens from your favorite Twitch Streamers.</p>
                 </header>
-                <div id="streamer_list" class="card-deck" style="display:flex;flex-wrap: wrap;justify-content: center;"></div>
+                <div id="streamer_list" class="card-deck" style="display:flex;flex-wrap: wrap;justify-content: center;">
+                </div>
             </div>
         </section>
         <!-- ======= End Streamers Section ======= -->
@@ -108,11 +113,11 @@
                     let response = jQuery.parseJSON(data);
 
                     $("#streamer_list").empty();
-                    
+
                     response.forEach(function (val) {
 
-                        if(val.nfts == null) val.nfts = 0;
-                        let game_content = { name: val.name, picture: val.picture, nfts: val.nfts };
+                        if (val.nfts == null) val.nfts = 0;
+                        let game_content = { id: val.id, name: val.name, picture: val.picture, nfts: val.nfts };
                         $("#streamers-template")
                             .tmpl(game_content)
                             .appendTo("#streamer_list");
@@ -127,23 +132,123 @@
             });
         }
 
+        function showStreamerTokens(id) {
+            var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
+
+            $.ajax({
+                url:
+                    "https://api.playnft.io/getstreamerdata",
+                type: 'POST',
+                crossDomain: true,
+                data: JSON.stringify({ streamer_id: id }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    console.info(data);
+                    let response = jQuery.parseJSON(data);
+
+                    $("#streamer_list").empty();
+
+                    response.forEach(function (val) {
+
+                        val.cost = PRICES[val.cost]/100.0;
+                        $("#streamer_name").text(val.streamer_name)
+                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/nfts/'+id+'/'+val.id+'/icon.png', description: $(val.description).text(), supply: val.supply, cost: val.cost };
+                        $("#token-template")
+                            .tmpl(game_content)
+                            .appendTo("#streamer_list");
+
+                        RenderPayPal(val, "#token-purchase-" + val.id, id);
+
+
+                    });
+
+
+
+                },
+                error: function (data) {
+                    console.info(data);
+                }
+
+            });
+        }
+
+        function RenderPayPal(item, elem, nftid, streamerID) {
+            console.log(item)
+            console.log(elem)
+            paypal.Buttons({
+                style: {
+                    layout: 'horizontal',
+                    color: 'blue',
+                    shape: 'pill',
+                    label: 'pay',
+                    tagline: 'false',
+                    height: 45
+                },
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                currency_code: "USD",
+                                value: 0
+                            },
+                            description: item.name,
+                            custom_id: nftid + '|' + streamerID
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+
+                    });
+                }
+            }).render(elem);
+        }
+
 
 
         $(document).ready(function () {
-            showStreamers()
+            var url = window.location.search;
+            url = url.replace("?", '');
+            //alert(url);
+
+            if (url) {
+                $("#streamer_name").empty();
+                $("#back_button").show();
+                showStreamerTokens(url)
+
+            } else {
+                $("#back_button").hide();
+                showStreamers()
+            }
         });
 
     </script>
 
-<script id="streamers-template" type="text/x-jquery-tmpl">
+    <script id="streamers-template" type="text/x-jquery-tmpl">
+        <div class="card" style="width:250px;margin: 10px;">
+            <img class="card-img-top" src="${picture}" alt="${name}"  onError="this.onerror=null;this.src='/assets/img/twitch-v2.svg';">
+            <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <p class="card-text">${nfts} Tokens</p>
+            <p class="card-text">
+                <button style="width:90%;margin-bottom:10px;background-color:green" type="submit" onclick="window.location.assign('/streamers/?${id}')">View Tokens</button>
+                <button style="width:90%;" type="submit" onclick="window.open('https://www.twitch.tv/${name}')">Visit Channel <i class="ri-external-link-fill"></i></button></p>
+            </div>
+        </div>
+  </script>
+
+    <script id="token-template" type="text/x-jquery-tmpl">
     <div class="card" style="width:250px;margin: 10px;">
         <img class="card-img-top" src="${picture}" alt="${name}"  onError="this.onerror=null;this.src='/assets/img/twitch-v2.svg';">
         <div class="card-body">
-          <h5 class="card-title">${name}</h5>
-          <p class="card-text">${nfts} Tokens</p>
-          <p class="card-text"><button type="submit" onclick="window.open('https://www.twitch.tv/${name}')">Visit Channel</button></p>
+        <h5 class="card-title">${name}</h5>
+        <p class="card-text">${description}</p>
+        <p class="card-text">${supply} NFTs Remaining</p>
+        <p class="card-text" id="token-purchase-${id}"></p>
+            
         </div>
-      </div>
-  </script>
+    </div>
+</script>
 
 </html>
