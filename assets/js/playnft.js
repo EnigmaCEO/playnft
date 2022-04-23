@@ -51,8 +51,8 @@ var simplified_abi = [
 ];
 /*********** Moralis API **********************/
 
-const serverUrl = "https://mdpsykxctp2q.usemoralis.com:2053/server";
-const appId = "pvhbtIHRFx1uCvBPgvv60fVnYVFBVriAZR3bdx9B";
+const serverUrl = "https://s4wy4pswzlfd.usemoralis.com:2053/server";
+const appId = "brwT5yD5Q3O6yPw4MLI6EnDYK0TZmdZgTR6YFFte";
 
 Moralis.start({ serverUrl, appId });
 Moralis.enableWeb3();
@@ -139,7 +139,7 @@ async function getNFTs(chain, address) {
 
             nfts.forEach(function (item) {
                 console.log(item)
-                if (item.is_valid == 1 && item.amount > 0) {
+                if (item.amount > 0) {
                     if (!item.metadata) return;
                     if (!item.name) return;
 
