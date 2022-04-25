@@ -69,19 +69,19 @@ async function getContractOwner(chain, item, owner) {
 
     if (chain == "polygon" || chain == "avalanche") {
 
-        await $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_metadata/' + item.token_id + '/?key=ckey_859b732db5394a57936af2db4db', function (data) {
+        await $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_metadata/' + item.token_id + '/?key=ckey_859b732db5394a57936af2db4db', async function (data) {
             console.log("Data: " + JSON.stringify(data));
             var nfts = data.data.items;
 
-            nfts.forEach(function (item) {
+            for await (let item of nfts) {
                 console.log(item)
                 if (item.type == "nft") {
-                    if (!item.contract_name) return;
-                    if (!item.nft_data) return;
+                    if (!item.contract_name) continue;
+                    if (!item.nft_data) continue;
 
-                    if (item.nft_data[0].original_owner.toLowerCase() != owner.toLowerCase()) return;
+                    if (item.nft_data[0].original_owner.toLowerCase() != owner.toLowerCase()) continue;
 
-                    if (!item.nft_data[0].external_data.image) return;
+                    if (!item.nft_data[0].external_data.image) continue;
                     $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/tokens/' + address + '/nft_token_ids/?key=ckey_859b732db5394a57936af2db4db', function (supply) {
                         console.log("Supply: " + JSON.stringify(supply));
                         tokenSupply = supply.data.pagination.total_count;
@@ -90,13 +90,10 @@ async function getContractOwner(chain, item, owner) {
                         $("#creators-token-template")
                             .tmpl(token_content)
                             .appendTo("#creators-nfts");
-
-                        openTab("#nav-creators-nfts");
                     });
                 }
-            });
+            }
 
-            stopLoading();
         })
     }
 }
@@ -107,73 +104,74 @@ async function getNFTs(chain, address) {
     console.log(chain)
     console.log(address)
 
-    if (chain == "heco") {
-        await Moralis.switchNetwork(CHAINS[chain]);
-        const chainId = await Moralis.chainId;
-        console.log(chainId);
+    try {
 
-        $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', function (data) {
-            console.log("Data: " + JSON.stringify(data));
-            var nfts = data.data.items;
+        if (chain == "heco") {
+            await Moralis.switchNetwork(CHAINS[chain]);
+            const chainId = await Moralis.chainId;
+            console.log(chainId);
 
-            nfts.forEach(function (item) {
-                console.log(item)
-                if (item.type == "nft" && item.balance > 0) {
-                    if (!item.contract_name) return;
+            await $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', async function (data) {
+                console.log("Data: " + JSON.stringify(data));
+                var nfts = data.data.items;
 
-                    let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0 };
+                for await (let item of nfts) {
+                    console.log(item)
+                    if (item.type == "nft" && item.balance > 0) {
+                        if (!item.contract_name) continue;
 
-                    $("#token-template")
-                        .tmpl(token_content)
-                        .appendTo("#gamers-nfts");
+                        let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0 };
+
+                        $("#token-template")
+                            .tmpl(token_content)
+                            .appendTo("#gamers-nfts");
+                    }
                 }
-            });
 
-            openTab("#nav-gamers-nfts");
-        })
-    }
+            })
+        }
 
-    if (chain == "avalanche" || chain == "polygon") {
-        const options = { chain: chain, address: address };
-        console.log(options)
-        const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(function (details) {
-            console.log(details.result)
-            var nfts = details.result;
+        if (chain == "avalanche" || chain == "polygon") {
+            const options = { chain: chain, address: address };
+            console.log(options)
+            const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
+                console.log(details.result)
+                var nfts = details.result;
 
-            nfts.forEach(function (item) {
-                console.log(item)
-                if (item.amount > 0) {
-                    if (!item.metadata) return;
-                    if (!item.name) return;
+                for await (let item of nfts) {
+                    console.log(item)
+                    if (item.amount > 0) {
+                        if (!item.metadata) continue;
+                        if (!item.name) continue;
 
-                    let meta = jQuery.parseJSON(item.metadata);
-                    if (!meta.image) return;
+                        let meta = jQuery.parseJSON(item.metadata);
+                        if (!meta.image) continue;
 
-                    let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: item.token_id };
+                        let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: item.token_id };
 
-                    $("#token-template")
-                        .tmpl(token_content)
-                        .appendTo("#gamers-nfts");
+                        $("#token-template")
+                            .tmpl(token_content)
+                            .appendTo("#gamers-nfts");
+                    }
                 }
+
+            }).catch((err) => {
+                console.error(err);
+                setCreatorsError("Server Error. Try again?");
             });
+        }
 
-            openTab("#nav-gamers-nfts");
-        }).catch((err) => {
-            console.error(err);
-        });
-    }
+        if (chain == "velas") {
 
-    if (chain == "velas") {
-
-        await fetch('https://graphql.bitquery.io', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-API-KEY': 'BQYv8qjokwd5p934UXoQc2ywlZ3Bh19Q'
-            },
-            body: JSON.stringify({
-                query: '{\
+            await fetch('https://graphql.bitquery.io', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-API-KEY': 'BQYv8qjokwd5p934UXoQc2ywlZ3Bh19Q'
+                },
+                body: JSON.stringify({
+                    query: '{\
             ethereum(network: velas) {\
                 address(address: {is: "'+ address + '"}) {\
                 balances {\
@@ -189,41 +187,43 @@ async function getNFTs(chain, address) {
                 }\
             }\
             }'})
-        })
-            .then(async function (r) {
-                await r.json().then(function (data) {
-                    console.log(data)
+            })
+                .then(async function (r) {
+                    await r.json().then(async function (data) {
+                        console.log(data)
 
-                    var nfts = data.data.ethereum.address[0].balances;
-                    if (nfts) {
-                        console.log(nfts)
-                        nfts.forEach(async function (item) {
+                        var nfts = data.data.ethereum.address[0].balances;
+                        if (nfts) {
+                            console.log(nfts)
+                            for await (let item of nfts) {
 
-                            if (item.value == 0) return;
-                            if (item.currency.tokenType == "") return;
-                            if (item.currency.address == "-") return;
-                            console.log(item)
+                                if (item.value == 0) continue;
+                                if (item.currency.tokenType == "") continue;
+                                if (item.currency.address == "-") continue;
+                                console.log(item)
 
-                            let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: item.currency.tokenId };
+                                let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: item.currency.tokenId };
 
-                            $("#token-template")
-                                .tmpl(token_content)
-                                .appendTo("#gamers-nfts");
-                        })
+                                $("#token-template")
+                                    .tmpl(token_content)
+                                    .appendTo("#gamers-nfts");
+                            }
+                        }
+                    })
 
-                        openTab("#nav-gamers-nfts");
-                    }
                 })
+                .catch((error) => {
+                    console.log(error)
+                    setCreatorsError("Server Error. Try again?");
+                });
+        }
 
-            });
-    }
+        if (chain == "xrp") {
+            const PUBLIC_SERVER = "wss://xrplcluster.com/"
+            const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
+            await client.connect()
 
-    if (chain == "xrp") {
-        const PUBLIC_SERVER = "wss://xrplcluster.com/"
-        const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
-        await client.connect()
 
-        try {
             const data = await client.request({
                 method: "account_nfts",
                 account: address
@@ -231,10 +231,10 @@ async function getNFTs(chain, address) {
             console.log(data)
             var nfts = data.result.account_nfts;
 
-            nfts.forEach(async function (item) {
+            for await (let item of nfts) {
 
                 console.log(item)
-                if (item.URI == "") return;
+                if (item.URI == "") continue;
                 let meta = xrpl.convertHexToString(item.URI)
                 $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
                     let data = jQuery.parseJSON(metaData);
@@ -247,128 +247,121 @@ async function getNFTs(chain, address) {
                         .appendTo("#gamers-nfts");
 
                 })
-            })
+            }
 
-            openTab("#nav-gamers-nfts");
-
-        } catch (error) {
-            console.log(error)
-            stopLoading()
+            client.disconnect();
         }
 
-        client.disconnect();
-    }
+        if (chain == "solana") {
+            let options = { address: address };
+            console.log(options)
+            const tokenMetadata = await Moralis.SolanaAPI.account.getNFTs(options).then(async function (details) {
+                console.log(details)
+                var nfts = details;
 
-    if (chain == "solana") {
-        let options = { address: address };
-        console.log(options)
-        const tokenMetadata = await Moralis.SolanaAPI.account.getNFTs(options).then(function (details) {
-            console.log(details)
-            var nfts = details;
+                for await (let item of nfts) {
+                    console.log(item)
+                    options = { network: "mainnet", address: item.associatedTokenAddress };
+                    const tokenMetadata = await Moralis.SolanaAPI.nft.getNFTMetadata(options).then(async function (result) {
+                        console.log(result)
+                        var metaData = result;
 
-            nfts.forEach(async function (item) {
-                console.log(item)
-                options = { network: "mainnet", address: item.associatedTokenAddress };
-                const tokenMetadata = await Moralis.SolanaAPI.nft.getNFTMetadata(options).then(function (result) {
-                    console.log(result)
-                    var metaData = result;
+                        await metaData.forEach(function (meta) {
+                            if (!meta.mint) return;
+                            if (!meta.name) return;
+                            if (!meta.metaplex.metadataUri) return;
+                            let data = jQuery.parseJSON(meta.metaplex.metadataUri);
+                            console.log(data)
 
-                    metaData.forEach(function (meta) {
-                        if (!meta.mint) return;
-                        if (!meta.name) return;
-                        if (!meta.metaplex.metadataUri) return;
-                        let data = jQuery.parseJSON(meta.metaplex.metadataUri);
-                        console.log(data)
+                            let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: data.token_id };
 
-                        let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: data.token_id };
-
-                        $("#token-template")
-                            .tmpl(token_content)
-                            .appendTo("#gamers-nfts");
+                            $("#token-template")
+                                .tmpl(token_content)
+                                .appendTo("#gamers-nfts");
+                        });
                     });
-                });
-            });
-
-            openTab("#nav-gamers-nfts");
-        }).catch((err) => {
-            console.error(err);
-        });
-    }
-
-    if (chain == "near") {
-        $.getJSON('https://api.aurorascan.dev/api?module=account&action=tokennfttx&address=' + address + '&sort=asc', async function (data) {
-            console.log("Data: " + JSON.stringify(data));
-            var transfers = data.result;
-            var nftArray = [];
-
-            transfers.forEach(function (item) {
-                console.log(item)
-
-                var nftAddress = item.contractAddress + '-' + item.tokenID + '-' + item.tokenName;
-
-                if (item.to == address) {
-                    if (!nftArray.includes(nftAddress)) {
-                        nftArray.push(nftAddress);
-                    }
-                } else
-                    if (item.from == address) {
-                        if (nftArray.includes(nftAddress)) {
-                            nftArray.pop(nftAddress);
-                            const index = nftArray.indexOf(nftAddress);
-                            if (index > -1) {
-                                nftArray.splice(index, 1);
-                            }
-                        }
-                    }
-            });
-
-            const ethers = Moralis.web3Library
-            const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
-
-
-
-            for await (let item of nftArray) {
-                console.log(item)
-                const nft = item.split('-')
-                let contract = await new ethers.Contract(nft[0], simplified_abi, provider);
-                var tokenURI = "";
-                let image = "/assets/img/near-protocol-near-logo.svg";
-
-                try {
-                    await contract.tokenURI(nft[1]).then(r => {
-                        console.log("URL: " + r.toString().replace("ipfs://", "https://ipfs.io/ipfs/"))
-                        tokenURI = r.toString()
-                    }).catch(error => console.log(error))
-
-                } catch (error) {
-                    console.log(error)
                 }
 
-                await $.getJSON(tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/"), function (metaData) {
-                    console.log(metaData)
+            }).catch((err) => {
+                console.error(err);
+                setCreatorsError("Server Error. Try again?");
+            });
+        }
 
-                    if (metaData) {
-                        image = metaData.image.replace("ipfs://", "https://ipfs.io/ipfs/");
-                    }
-                }).catch((err) => {
-                    //console.error(err);
+        if (chain == "near") {
+            $.getJSON('https://api.aurorascan.dev/api?module=account&action=tokennfttx&address=' + address + '&sort=asc', async function (data) {
+                console.log("Data: " + JSON.stringify(data));
+                var transfers = data.result;
+                var nftArray = [];
+
+                transfers.forEach(function (item) {
+                    console.log(item)
+
+                    var nftAddress = item.contractAddress + '-' + item.tokenID + '-' + item.tokenName;
+
+                    if (item.to == address) {
+                        if (!nftArray.includes(nftAddress)) {
+                            nftArray.push(nftAddress);
+                        }
+                    } else
+                        if (item.from == address) {
+                            if (nftArray.includes(nftAddress)) {
+                                nftArray.pop(nftAddress);
+                                const index = nftArray.indexOf(nftAddress);
+                                if (index > -1) {
+                                    nftArray.splice(index, 1);
+                                }
+                            }
+                        }
                 });
 
-                let token_content = { tokenId: nft[0], tokenName: nft[2], tokenImage: image, tokenIndex: nft[1] };
+                const ethers = Moralis.web3Library
+                const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
 
-                $("#token-template")
-                    .tmpl(token_content)
-                    .appendTo("#gamers-nfts");
-            }
+                for await (let item of nftArray) {
+                    console.log(item)
+                    const nft = item.split('-')
+                    let contract = await new ethers.Contract(nft[0], simplified_abi, provider);
+                    var tokenURI = "";
+                    let image = "/assets/img/near-protocol-near-logo.svg";
 
-            if (!$.trim($("#gamers-nfts").html())) {
-                setGamersError("No Tokens found for this address.");
-            } else {
-                nextTab()
-                openTab("#nav-gamers-nfts");
-            }
-            
-        })
+                    try {
+                        await contract.tokenURI(nft[1]).then(r => {
+                            console.log("URL: " + r.toString().replace("ipfs://", "https://ipfs.io/ipfs/"))
+                            tokenURI = r.toString()
+                        }).catch(error => console.log(error))
+
+                    } catch (error) {
+                        console.log(error)
+                    }
+
+                    await $.getJSON(tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/"), function (metaData) {
+                        console.log(metaData)
+
+                        if (metaData) {
+                            image = metaData.image.replace("ipfs://", "https://ipfs.io/ipfs/");
+                        }
+                    }).catch((err) => {
+                        //console.error(err);
+                    });
+
+                    let token_content = { tokenId: nft[0], tokenName: nft[2], tokenImage: image, tokenIndex: nft[1] };
+
+                    $("#token-template")
+                        .tmpl(token_content)
+                        .appendTo("#gamers-nfts");
+                }
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        setCreatorsError("Server Error. Try again?");
+    }
+
+    if (!$.trim($("#gamers-nfts").html())) {
+        setGamersError("No Tokens found for this address.");
+    } else {
+        openTab("#nav-gamers-nfts");
     }
 }
 
@@ -378,97 +371,81 @@ async function getCreatorsNFTs(chain, address) {
     console.log(chain)
     console.log(address)
 
-    if (chain == "heco") {
-        await Moralis.switchNetwork(CHAINS[chain]);
-        const chainId = await Moralis.chainId;
-        console.log(chainId);
+    try {
+
+        if (chain == "heco") {
+            await Moralis.switchNetwork(CHAINS[chain]);
+            const chainId = await Moralis.chainId;
+            console.log(chainId);
 
 
-        $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', async function (data) {
-            console.log("Data: " + JSON.stringify(data));
-            var nfts = data.data.items;
-            var nft_count = 0;
+            await $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', async function (data) {
+                console.log("Data: " + JSON.stringify(data));
+                var nfts = data.data.items;
+                
+                for await (let item of nfts) {
+                    console.log(item)
+                    if (item.type == "nft" && item.balance > 0) {
+                        if (!item.contract_name) return;
 
-            await nfts.forEach(function (item) {
-                console.log(item)
-                if (item.type == "nft" && item.balance > 0) {
-                    if (!item.contract_name) return;
+                        let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url, tokenIndex: 0 };
 
-                    let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url, tokenIndex: 0 };
-
-                    $("#creators-token-template")
-                        .tmpl(token_content)
-                        .appendTo("#creators-nfts");
-
-                    nft_count++;
+                        $("#creators-token-template")
+                            .tmpl(token_content)
+                            .appendTo("#creators-nfts");
+                    }
                 }
-            });
 
-            console.log(nft_count)
-            if (nft_count > 0) {
-                openTab("#nav-creators-nfts");
-                nextTab();
-            } else {
-                setCreatorsError("No Tokens found for this address.");
-            }
-        })
-            .fail(function () {
-                setCreatorsError("Server Error. Try again?");
             })
+                .fail(function () {
+                    setCreatorsError("Server Error. Try again?");
+                })
+        }
+
+        if (chain == "avalanche" || chain == "polygon") {
+            let options = { chain: chain, address: address };
+            const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
+                console.log(details.result)
+                var nfts = details.result;
+                var tokenArray = [];
+                var nft_count = 0;
+
+                for await (const item of nfts) {
+                    console.log(item)
 
 
-    }
+                    if (!item.metadata) continue;
+                    if (!item.name) continue;
 
-    if (chain == "avalanche" || chain == "polygon") {
-        let options = { chain: chain, address: address };
-        const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
-            console.log(details.result)
-            var nfts = details.result;
-            var tokenArray = [];
-            var nft_count = 0;
+                    let meta = jQuery.parseJSON(item.metadata);
+                    if (!meta.image) continue;
 
-            for await (const item of nfts) {
-                console.log(item)
+                    if (!tokenArray.includes(item.token_address)) {
+                        tokenArray.push(item.token_address);
+                    } else {
+                        continue;
+                    }
 
+                    await getContractOwner(chain, item, address)
 
-                if (!item.metadata) continue;
-                if (!item.name) continue;
-
-                let meta = jQuery.parseJSON(item.metadata);
-                if (!meta.image) continue;
-
-                if (!tokenArray.includes(item.token_address)) {
-                    tokenArray.push(item.token_address);
-                } else {
-                    continue;
                 }
+            }).catch((err) => {
+                console.error(err);
+                setCreatorsError("Server Error. Try again?");
+            });
+        }
 
-                await getContractOwner(chain, item, address)
+        if (chain == "velas") {
 
-            }
-
-            if (!$.trim($("#creators-nfts").html())) {
-                setCreatorsError("No Tokens found for this address.");
-            } else {
-                nextTab()
-            }
-        }).catch((err) => {
-            console.error(err);
-            setCreatorsError("Server Error. Try again?");
-        });
-    }
-
-    if (chain == "velas") {
-
-        await fetch('https://graphql.bitquery.io', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-API-KEY': 'BQYv8qjokwd5p934UXoQc2ywlZ3Bh19Q'
-            },
-            body: JSON.stringify({
-                query: '{\
+            await fetch('https://graphql.bitquery.io', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-API-KEY': 'BQYv8qjokwd5p934UXoQc2ywlZ3Bh19Q'
+                },
+                body: JSON.stringify({
+                    query: '{\
             ethereum(network: velas) {\
                 address(address: {is: "'+ address + '"}) {\
                 balances {\
@@ -484,231 +461,206 @@ async function getCreatorsNFTs(chain, address) {
                 }\
             }\
             }'})
-        })
-            .then(async function (r) {
-                await r.json().then(async function (data) {
-                    console.log(data)
-                    var nft_count = 0;
-                    var nfts = data.data.ethereum.address[0].balances;
-                    console.log(nfts)
+            })
+                .then(async function (r) {
+                    await r.json().then(async function (data) {
+                        console.log(data)
+                        var nfts = data.data.ethereum.address[0].balances;
+                        console.log(nfts)
 
-                    if (nfts) {
-                        await nfts.forEach(async function (item) {
+                        if (nfts) {
+                            for await (let item of nfts) {
 
-                            if (item.value == 0) return;
-                            if (item.currency.tokenType == "") return;
-                            if (item.currency.address == "-") return;
-                            console.log(item)
+                                if (item.value == 0) continue;
+                                if (item.currency.tokenType == "") continue;
+                                if (item.currency.address == "-") continue;
+                                console.log(item)
 
-                            const ethers = Moralis.web3Library
+                                const ethers = Moralis.web3Library
 
-                            const provider = new ethers.providers.JsonRpcProvider('https://evmexplorer.velas.com/rpc');
+                                const provider = new ethers.providers.JsonRpcProvider('https://evmexplorer.velas.com/rpc');
 
-                            let contract = await new ethers.Contract(item.currency.address, simplified_abi, provider);
-                            var totalSupply = 1;
-                            var owner = "";
+                                let contract = await new ethers.Contract(item.currency.address, simplified_abi, provider);
+                                var totalSupply = 1;
+                                var owner = "";
 
-                            await contract.ownerOf(0).then(r => {
-                                console.log(r.toString())
-                                owner = r.toString()
-                            }).catch(error => console.log(error))
+                                await contract.ownerOf(0).then(r => {
+                                    console.log(r.toString())
+                                    owner = r.toString()
+                                }).catch(error => console.log(error))
 
-                            if (owner.toLowerCase() != address.toLowerCase()) return;
+                                if (owner.toLowerCase() != address.toLowerCase()) continue;
 
-                            await contract.totalSupply().then(r => {
-                                console.log('Total Supply: ' + r.toNumber())
-                                totalSupply = r.toNumber()
-                            })
+                                await contract.totalSupply().then(r => {
+                                    console.log('Total Supply: ' + r.toNumber())
+                                    totalSupply = r.toNumber()
+                                })
 
 
-                            tokenSupply = totalSupply;
-                            let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: 0, tokenSupply: totalSupply };
+                                tokenSupply = totalSupply;
+                                let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: 0, tokenSupply: totalSupply };
+
+                                $("#creators-token-template")
+                                    .tmpl(token_content)
+                                    .appendTo("#creators-nfts");
+                                
+                            }
+                        }
+                    })
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setCreatorsError("Server Error. Try again?");
+                });
+        }
+
+        if (chain == "xrp") {
+            const PUBLIC_SERVER = "wss://xrplcluster.com/"
+            const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
+            await client.connect()
+            
+                const data = await client.request({
+                    method: "account_nfts",
+                    account: address
+                })
+                console.log(data)
+                var nfts = data.result.account_nfts;
+
+                for await (let item of nfts) {
+
+                    console.log(item)
+                    if (item.URI == "") continue;
+                    if (item.Issuer.toLowerCase() != address.toLowerCase()) continue;
+
+                    let meta = xrpl.convertHexToString(item.URI)
+                    $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                        let data = jQuery.parseJSON(metaData);
+                        console.log(data)
+
+                        tokenSupply = 1;
+                        let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: 0, tokenSupply: 1 };
+
+                        $("#creators-token-template")
+                            .tmpl(token_content)
+                            .appendTo("#creators-nfts");
+                    })
+                }
+
+            client.disconnect();
+        }
+
+        if (chain == "solana") {
+            let options = { address: address };
+            console.log(options)
+            const tokenMetadata = await Moralis.SolanaAPI.account.getNFTs(options).then(async function (details) {
+                console.log(details)
+                var nfts = details;
+
+                for await (let item of nfts) {
+                    console.log(item)
+                    options = { address: item.associatedTokenAddress };
+                    const tokenMetadata = await Moralis.SolanaAPI.nft.getNFTMetadata(options).then(function (result) {
+                        console.log(result)
+                        var metaData = result;
+
+                        metaData.forEach(function (meta) {
+                            if (!meta.mint) return;
+                            if (!meta.name) return;
+                            if (!meta.metaplex.metadataUri) return;
+                            let data = jQuery.parseJSON(meta.metaplex.metadataUri);
+                            console.log(data)
+
+                            let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0, tokenSupply: 1 };
 
                             $("#creators-token-template")
                                 .tmpl(token_content)
                                 .appendTo("#creators-nfts");
-                            nft_count++;
-                        })
-                    }
+                        });
+                    });
+                }
 
-                    if (nft_count > 0) {
-                        openTab("#nav-creators-nfts");
-                        nextTab();
-                    } else {
-                        setCreatorsError("No Tokens found for this address.");
-                    }
-
-                })
-
-            })
-            .catch((error) => {
-                console.log(error)
+            }).catch((err) => {
+                console.error(err);
                 setCreatorsError("Server Error. Try again?");
             });
-    }
+        }
 
-    if (chain == "xrp") {
-        const PUBLIC_SERVER = "wss://xrplcluster.com/"
-        const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
-        await client.connect()
-        try {
-            const data = await client.request({
-                method: "account_nfts",
-                account: address
-            })
-            console.log(data)
-            var nfts = data.result.account_nfts;
+        if (chain == "near") {
+            await $.getJSON('https://api.aurorascan.dev/api?module=account&action=txlist&address=' + address + '&sort=asc&apikey=5YZZTXW2DDRP89PXN7DUE7TY914E2IV456', async function (data) {
+                console.log("Data: " + JSON.stringify(data));
+                let transfers = data.result;
+                var nftArray = [];
 
-            await nfts.forEach(async function (item) {
+                transfers.forEach(function (item) {
+                    console.log(item)
 
-                console.log(item)
-                if (item.URI == "") return;
-                if (item.Issuer.toLowerCase() != address.toLowerCase()) return;
+                    var nftAddress = item.contractAddress;
 
-                let meta = xrpl.convertHexToString(item.URI)
-                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
-                    let data = jQuery.parseJSON(metaData);
-                    console.log(data)
+                    if (item.to == "" && item.input != "") {
+                        if (!nftArray.includes(nftAddress)) {
+                            nftArray.push(nftAddress);
+                        }
+                    }
+                });
 
-                    tokenSupply = 1;
-                    let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: 0, tokenSupply: 1 };
+                const ethers = Moralis.web3Library
+                const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
+
+                for await (let item of nftArray) {
+                    console.log(item)
+
+                    let contract = await new ethers.Contract(item, simplified_abi, provider);
+                    var tokenURI = "";
+                    let image = "/assets/img/near-protocol-near-logo.svg";
+                    var totalSupply = 1;
+                    var tokenName = "";
+
+                    try {
+                        await contract.name().then(r => {
+                            tokenName = r.toString()
+                        })
+
+                    } catch (error) {
+                        console.log(error)
+                        continue;
+                    }
+
+                    try {
+                        await contract.totalSupply().then(r => {
+                            console.log('Total Supply: ' + r.toNumber())
+                            totalSupply = r.toNumber()
+                        })
+
+                    } catch (error) {
+                        console.log(error)
+                        continue;
+                    }
+
+                    let token_content = { tokenId: item, tokenName: tokenName, tokenImage: image, tokenIndex: 0, tokenSupply: totalSupply };
 
                     $("#creators-token-template")
                         .tmpl(token_content)
                         .appendTo("#creators-nfts");
 
+                }
+
+                if (!$.trim($("#creators-nfts").html())) {
+                    setCreatorsError("No Tokens found for this address.");
+                } else {
                     openTab("#nav-creators-nfts");
-                })
-            })
-
-            if (!$.trim($("#creators-nfts").html())) {
-                setCreatorsError("No Tokens found for this address.");
-            } else {
-                nextTab()
-            }
-
-
-        } catch (error) {
-            console.log(error)
-            setCreatorsError("Server Error. Try again?");
+                }
+            });
         }
-
-        client.disconnect();
+    } catch (error) {
+        console.log(error)
+        setCreatorsError("Server Error. Try again?");
     }
 
-    if (chain == "solana") {
-        let options = { address: address };
-        console.log(options)
-        const tokenMetadata = await Moralis.SolanaAPI.account.getNFTs(options).then( async function (details) {
-            console.log(details)
-            var nfts = details;
-
-            await nfts.forEach(async function (item) {
-                console.log(item)
-                options = { address: item.associatedTokenAddress };
-                const tokenMetadata = await Moralis.SolanaAPI.nft.getNFTMetadata(options).then(function (result) {
-                    console.log(result)
-                    var metaData = result;
-
-                    metaData.forEach(function (meta) {
-                        if (!meta.mint) return;
-                        if (!meta.name) return;
-                        if (!meta.metaplex.metadataUri) return;
-                        let data = jQuery.parseJSON(meta.metaplex.metadataUri);
-                        console.log(data)
-
-                        let token_content = { tokenId: item.associatedTokenAddress, tokenName: meta.name, tokenImage: data.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0, tokenSupply: 1 };
-
-                        $("#creators-token-template")
-                            .tmpl(token_content)
-                            .appendTo("#creators-nfts");
-
-                        openTab("#nav-creators-nfts");
-                    });
-                });
-            });
-
-            if (!$.trim($("#creators-nfts").html())) {
-                setCreatorsError("No Tokens found for this address.");
-            } else {
-                nextTab()
-            }
-
-        }).catch((err) => {
-            console.error(err);
-            setCreatorsError("Server Error. Try again?");
-        });
-    }
-
-    if (chain == "near") {
-        await $.getJSON('https://api.aurorascan.dev/api?module=account&action=txlist&address=' + address + '&sort=asc&apikey=5YZZTXW2DDRP89PXN7DUE7TY914E2IV456', async function (data) {
-            console.log("Data: " + JSON.stringify(data));
-            let transfers = data.result;
-            var nftArray = [];
-
-            transfers.forEach(function (item) {
-                console.log(item)
-
-                var nftAddress = item.contractAddress;
-
-                if (item.to == "" && item.input != "") {
-                    if (!nftArray.includes(nftAddress)) {
-                        nftArray.push(nftAddress);
-                    }
-                }
-            });
-
-            const ethers = Moralis.web3Library
-            const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
-
-            for await (let item of nftArray) {
-                console.log(item)
-
-                let contract = await new ethers.Contract(item, simplified_abi, provider);
-                var tokenURI = "";
-                let image = "/assets/img/near-protocol-near-logo.svg";
-                var totalSupply = 1;
-                var tokenName = "";
-
-                try {
-                    await contract.name().then(r => {
-                        tokenName = r.toString()
-                    })
-
-                } catch (error) {
-                    console.log(error)
-                    continue;
-                }
-
-                try {
-                    await contract.totalSupply().then(r => {
-                        console.log('Total Supply: ' + r.toNumber())
-                        totalSupply = r.toNumber()
-                    })
-
-                } catch (error) {
-                    console.log(error)
-                    continue;
-                }
-
-                let token_content = { tokenId: item, tokenName: tokenName, tokenImage: image, tokenIndex: 0, tokenSupply: totalSupply };
-
-                $("#creators-token-template")
-                    .tmpl(token_content)
-                    .appendTo("#creators-nfts");
-
-            }
-        
-            if (!$.trim($("#creators-nfts").html())) {
-                setCreatorsError("No Tokens found for this address.");
-            } else {
-                nextTab()
-                openTab("#nav-creators-nfts");
-            }
-            
-        });
-
-        
+    if (!$.trim($("#creators-nfts").html())) {
+        setCreatorsError("No Tokens found for this address.");
+    } else {
+        openTab("#nav-creators-nfts");
     }
 }
 
@@ -1253,7 +1205,7 @@ $(document).ready(function () {
                 data: JSON.stringify(formData),
                 dataType: "json",
                 contentType: "application/json",
-                success: function (data) {
+                success: async function (data) {
                     //console.info(JSON.stringify(data));
                     let response = jQuery.parseJSON(data);
 
@@ -1261,30 +1213,34 @@ $(document).ready(function () {
                     console.info(response.length);
 
                     let count = 1;
-                    response.forEach(function (item) {
+                    for await (let item of response) {
                         if (item.value > 0) {
 
                             let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
 
-                            $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                            await $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
 
                                 try {
                                     let meta = jQuery.parseJSON(metaData);
                                     if (!meta.image) return;
 
-                                    console.log("Success #" + count++ + ": " + url)
+                                    //console.log("Success #" + count++ + ": " + url)
                                     let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenIndex: item.index.replace(/^0+/, '') };
                                     $("#token-template")
                                         .tmpl(token_content)
                                         .appendTo("#gamers-nfts");
                                 } catch (e) {
-                                    console.log("Failed #" + count++ + ": " + url)
+                                    //console.log("Failed #" + count++ + ": " + url)
                                 }
                             });
                         }
-                    });
+                    }
 
-                    openTab("#nav-gamers-nfts");
+                    if (!$.trim($("#gamers-nfts").html())) {
+                        setGamersError("No Tokens found for this address.");
+                    } else {
+                        openTab("#nav-gamers-nfts");
+                    }
                 },
             });
         }
@@ -1360,14 +1316,14 @@ $(document).ready(function () {
                 data: JSON.stringify(formData),
                 dataType: "json",
                 contentType: "application/json",
-                success: function (data) {
+                success: async function (data) {
                     console.info(data);
                     let response = jQuery.parseJSON(data);
 
                     $("#creators-nfts").empty();
 
                     let count = 1;
-                    response.forEach(function (item) {
+                    for await (let item of response) {
                         if (item.value > 0) {
 
                             if (item.token.totalSupply == 18446744073709551615) {
@@ -1376,26 +1332,30 @@ $(document).ready(function () {
 
                             let url = item.token.itemURI.replace("{id}", item.token.id).replace("{index}", item.index);
 
-                            $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                            await $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: url }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
 
                                 try {
                                     let meta = jQuery.parseJSON(metaData);
                                     if (!meta.image) return;
 
-                                    console.log("Success #" + count++ + ": " + url)
+                                    //console.log("Success #" + count++ + ": " + url)
                                     tokenSupply = item.token.totalSupply;
                                     let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
                                     $("#creators-token-template")
                                         .tmpl(token_content)
                                         .appendTo("#creators-nfts");
                                 } catch (e) {
-                                    console.log("Failed #" + count++ + ": " + url)
+                                    //console.log("Failed #" + count++ + ": " + url)
                                 }
                             });
                         }
-                    });
+                    }
 
-                    openTab("#nav-creators-nfts");
+                    if (!$.trim($("#creators-nfts").html())) {
+                        setCreatorsError("No Tokens found for this address.");
+                    } else {
+                        openTab("#nav-creators-nfts");
+                    }
                 },
             });
         }
@@ -2737,7 +2697,7 @@ function openTab(tabId) {
 }
 
 function nextTab() {
-    
+
 }
 
 function resetTabs() {
