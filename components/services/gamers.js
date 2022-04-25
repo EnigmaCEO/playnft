@@ -199,6 +199,7 @@ class ServicesGamers extends HTMLElement {
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4">
                       <div class="col-md-12 text-center">
+                        <div id="gamers-error" style="color: red"></div>
                         <button id="scan-wallet" class="btn-read-more" type="submit">
                           Scan Wallet
                         </button>

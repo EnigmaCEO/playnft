@@ -200,6 +200,7 @@ class ServicesCreators extends HTMLElement {
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4">
                       <div class="col-md-12 text-center">
+                        <div id="creators-error" style="color: red"></div>
                         <button id="creators-scan-wallet" class="btn-read-more" type="submit">
                           Scan Wallet
                         </button>
