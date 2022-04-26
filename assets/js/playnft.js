@@ -382,7 +382,7 @@ async function getCreatorsNFTs(chain, address) {
             await $.getJSON('https://api.covalenthq.com/v1/' + CHAINS[chain] + '/address/' + address + '/balances_v2/?nft=true&no-nft-fetch=false&key=ckey_859b732db5394a57936af2db4db', async function (data) {
                 console.log("Data: " + JSON.stringify(data));
                 var nfts = data.data.items;
-                
+
                 for await (let item of nfts) {
                     console.log(item)
                     if (item.type == "nft" && item.balance > 0) {
@@ -503,7 +503,7 @@ async function getCreatorsNFTs(chain, address) {
                                 $("#creators-token-template")
                                     .tmpl(token_content)
                                     .appendTo("#creators-nfts");
-                                
+
                             }
                         }
                     })
@@ -519,33 +519,33 @@ async function getCreatorsNFTs(chain, address) {
             const PUBLIC_SERVER = "wss://xrplcluster.com/"
             const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
             await client.connect()
-            
-                const data = await client.request({
-                    method: "account_nfts",
-                    account: address
+
+            const data = await client.request({
+                method: "account_nfts",
+                account: address
+            })
+            console.log(data)
+            var nfts = data.result.account_nfts;
+
+            for await (let item of nfts) {
+
+                console.log(item)
+                if (item.URI == "") continue;
+                if (item.Issuer.toLowerCase() != address.toLowerCase()) continue;
+
+                let meta = xrpl.convertHexToString(item.URI)
+                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                    let data = jQuery.parseJSON(metaData);
+                    console.log(data)
+
+                    tokenSupply = 1;
+                    let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: 0, tokenSupply: 1 };
+
+                    $("#creators-token-template")
+                        .tmpl(token_content)
+                        .appendTo("#creators-nfts");
                 })
-                console.log(data)
-                var nfts = data.result.account_nfts;
-
-                for await (let item of nfts) {
-
-                    console.log(item)
-                    if (item.URI == "") continue;
-                    if (item.Issuer.toLowerCase() != address.toLowerCase()) continue;
-
-                    let meta = xrpl.convertHexToString(item.URI)
-                    $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
-                        let data = jQuery.parseJSON(metaData);
-                        console.log(data)
-
-                        tokenSupply = 1;
-                        let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: 0, tokenSupply: 1 };
-
-                        $("#creators-token-template")
-                            .tmpl(token_content)
-                            .appendTo("#creators-nfts");
-                    })
-                }
+            }
 
             client.disconnect();
         }
@@ -657,10 +657,12 @@ async function getCreatorsNFTs(chain, address) {
         setCreatorsError("Server Error. Try again?");
     }
 
-    if (!$.trim($("#creators-nfts").html())) {
-        setCreatorsError("No Tokens found for this address.");
-    } else {
-        openTab("#nav-creators-nfts");
+    if (chain != "near") {
+        if (!$.trim($("#creators-nfts").html())) {
+            setCreatorsError("No Tokens found for this address.");
+        } else {
+            openTab("#nav-creators-nfts");
+        }
     }
 }
 
