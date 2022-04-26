@@ -351,6 +351,12 @@ async function getNFTs(chain, address) {
                         .tmpl(token_content)
                         .appendTo("#gamers-nfts");
                 }
+
+                if (!$.trim($("#gamers-nfts").html())) {
+                    setGamersError("No Tokens found for this address.");
+                } else {
+                    openTab("#nav-gamers-nfts");
+                }
             })
         }
     } catch (error) {
@@ -358,10 +364,12 @@ async function getNFTs(chain, address) {
         setCreatorsError("Server Error. Try again?");
     }
 
-    if (!$.trim($("#gamers-nfts").html())) {
-        setGamersError("No Tokens found for this address.");
-    } else {
-        openTab("#nav-gamers-nfts");
+    if (chain != "near") {
+        if (!$.trim($("#gamers-nfts").html())) {
+            setGamersError("No Tokens found for this address.");
+        } else {
+            openTab("#nav-gamers-nfts");
+        }
     }
 }
 
