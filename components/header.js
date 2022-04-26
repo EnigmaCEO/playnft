@@ -38,7 +38,7 @@ class Header extends HTMLElement {
                     <li class="dropdown"><a href="#"><span>Utility Marketplace</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                         <li><a class="nav-link" href="/streamers/">Twitch Streamers</a></li>
-                        <li><a class="nav-link scrollto" href="#clients">Blockchain Games</a></li>
+                        <li><a class="nav-link" href="/games/">Blockchain Games</a></li>
                         <li><a class="nav-link scrollto" href="#nfts">NFT Collections</a></li>
                         </ul>
                     </li>
