@@ -152,8 +152,22 @@
 
                     response.forEach(function (val) {
 
-                        $("#games_name").text(val.streamer_name)
-                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/nfts/' + id + '/' + val.id + '/icon.png', description: $(val.description).text(), supply: val.supply, cost: val.cost };
+                        let type = ''
+
+                        if (val.type == 0) {
+                            type = "Unlockable Item"
+                        }
+                        if (val.type == 1) {
+                            type = "Modifier"
+                        }
+                        if (val.type == 2) {
+                            type = "Consummable"
+                        }
+                        if (val.type == 3) {
+                            type = "Event"
+                        }
+
+                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/'+ val.publisherId +'/'+ id +'/'+ val.id +'/icon.png', description: val.title, supply: 10, cost: val.cost, type: type };
                         $("#content-template")
                             .tmpl(game_content)
                             .appendTo("#games_list");
@@ -173,7 +187,6 @@
             //alert(url);
 
             if (url) {
-                $("#games_name").empty();
                 $("#back_button").show();
                 showGamesContent(url)
 
@@ -200,11 +213,12 @@
 
     <script id="content-template" type="text/x-jquery-tmpl">
     <div class="card" style="width:250px;margin: 10px;">
-        <img class="card-img-top" src="${picture}" alt="${name}"  onError="this.onerror=null;this.src='/assets/img/twitch-v2.svg';">
+        <img class="card-img-top" style="min-height: 248px;" src="${picture}" alt="${name}">
         <div class="card-body">
         <h5 class="card-title">${name}</h5>
         <p class="card-text">${description}</p>
-        <p class="card-text">${supply} NFTs Remaining</p>
+        <p class="card-text">Type: ${type}</p>
+        <p class="card-text">${supply} Links Remaining</p>
         <p class="card-text" id="token-purchase-${id}"></p>
             
         </div>
