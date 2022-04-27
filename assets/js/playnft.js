@@ -349,7 +349,7 @@ async function getNFTs(chain, address) {
 
                     $("#token-template")
                         .tmpl(token_content)
-                        .appendTo("#gamers-nfts");
+                        .appendTo("#creators-nfts");
                 }
 
                 if (!$.trim($("#gamers-nfts").html())) {
@@ -394,9 +394,9 @@ async function getCreatorsNFTs(chain, address) {
                 for await (let item of nfts) {
                     console.log(item)
                     if (item.type == "nft" && item.balance > 0) {
-                        if (!item.contract_name) return;
+                        if (!item.contract_name) continue;
 
-                        let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url, tokenIndex: 0 };
+                        let token_content = { tokenId: item.contract_address, tokenName: item.contract_name, tokenImage: item.logo_url.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0 };
 
                         $("#creators-token-template")
                             .tmpl(token_content)
@@ -416,7 +416,6 @@ async function getCreatorsNFTs(chain, address) {
                 console.log(details.result)
                 var nfts = details.result;
                 var tokenArray = [];
-                var nft_count = 0;
 
                 for await (const item of nfts) {
                     console.log(item)
@@ -436,7 +435,15 @@ async function getCreatorsNFTs(chain, address) {
 
                     await getContractOwner(chain, item, address)
 
+                    if (item.amount > 0) {
+                        let token_content = { tokenId: item.token_address, tokenName: item.name, tokenImage: meta.image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: item.token_id };
+
+                        $("#token-template")
+                            .tmpl(token_content)
+                            .appendTo("#creators-nfts");
+                    }
                 }
+
             }).catch((err) => {
                 console.error(err);
                 setCreatorsError("Server Error. Try again?");
@@ -497,20 +504,27 @@ async function getCreatorsNFTs(chain, address) {
                                     owner = r.toString()
                                 }).catch(error => console.log(error))
 
-                                if (owner.toLowerCase() != address.toLowerCase()) continue;
-
                                 await contract.totalSupply().then(r => {
                                     console.log('Total Supply: ' + r.toNumber())
                                     totalSupply = r.toNumber()
-                                })
+                                }).catch(error => console.log(error))
 
 
-                                tokenSupply = totalSupply;
-                                let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: 0, tokenSupply: totalSupply };
+                                if (owner.toLowerCase() == address.toLowerCase()) {
 
-                                $("#creators-token-template")
-                                    .tmpl(token_content)
-                                    .appendTo("#creators-nfts");
+                                    tokenSupply = totalSupply;
+                                    let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: 0, tokenSupply: totalSupply };
+
+                                    $("#creators-token-template")
+                                        .tmpl(token_content)
+                                        .appendTo("#creators-nfts");
+                                } else {
+                                    let token_content = { tokenId: item.currency.address, tokenName: item.currency.name, tokenImage: "/assets/img/velas-vlx-logo.svg", tokenIndex: item.currency.tokenId };
+
+                                    $("#token-template")
+                                        .tmpl(token_content)
+                                        .appendTo("#creators-nfts");
+                                }
 
                             }
                         }
@@ -595,70 +609,146 @@ async function getCreatorsNFTs(chain, address) {
         }
 
         if (chain == "near") {
-            await $.getJSON('https://api.aurorascan.dev/api?module=account&action=txlist&address=' + address + '&sort=asc&apikey=5YZZTXW2DDRP89PXN7DUE7TY914E2IV456', async function (data) {
-                console.log("Data: " + JSON.stringify(data));
-                let transfers = data.result;
-                var nftArray = [];
+            await fetch('https://api.aurorascan.dev/api?module=account&action=txlist&address=' + address + '&sort=asc&apikey=5YZZTXW2DDRP89PXN7DUE7TY914E2IV456').then(async function (r) {
+                await r.json().then(async function (data) {
+                    console.log("Data: " + JSON.stringify(data));
+                    let transfers = data.result;
+                    var nftArray = [];
 
-                transfers.forEach(function (item) {
-                    console.log(item)
+                    transfers.forEach(function (item) {
+                        console.log(item)
 
-                    var nftAddress = item.contractAddress;
+                        var nftAddress = item.contractAddress;
 
-                    if (item.to == "" && item.input != "") {
-                        if (!nftArray.includes(nftAddress)) {
-                            nftArray.push(nftAddress);
+                        if (item.to == "" && item.input != "") {
+                            if (!nftArray.includes(nftAddress)) {
+                                nftArray.push(nftAddress);
+                            }
                         }
+                    });
+
+                    const ethers = Moralis.web3Library
+                    const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
+
+                    for await (let item of nftArray) {
+                        console.log(item)
+
+                        let contract = await new ethers.Contract(item, simplified_abi, provider);
+                        var tokenURI = "";
+                        let image = "/assets/img/near-protocol-near-logo.svg";
+                        var totalSupply = 1;
+                        var tokenName = "";
+
+                        try {
+                            await contract.name().then(r => {
+                                tokenName = r.toString()
+                            })
+
+                        } catch (error) {
+                            console.log(error)
+                            continue;
+                        }
+
+                        try {
+                            await contract.totalSupply().then(r => {
+                                console.log('Total Supply: ' + r.toNumber())
+                                totalSupply = r.toNumber()
+                            })
+
+                        } catch (error) {
+                            console.log(error)
+                            continue;
+                        }
+
+                        tokenSupply = totalSupply;
+                        let token_content = { tokenId: item, tokenName: tokenName, tokenImage: image, tokenIndex: 0, tokenSupply: totalSupply };
+
+                        $("#creators-token-template")
+                            .tmpl(token_content)
+                            .appendTo("#creators-nfts");
+
                     }
+
+                    /*if (!$.trim($("#creators-nfts").html())) {
+                        setCreatorsError("No Tokens found for this address.");
+                    } else {
+                        openTab("#nav-creators-nfts");
+                    }*/
                 });
+            })
 
-                const ethers = Moralis.web3Library
-                const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
 
-                for await (let item of nftArray) {
-                    console.log(item)
+            await fetch('https://api.aurorascan.dev/api?module=account&action=tokennfttx&address=' + address + '&sort=asc').then(async function (r) {
+                await r.json().then(async function (data) {
+                    console.log("Data: " + JSON.stringify(data));
+                    var transfers = data.result;
+                    var nftArray = [];
 
-                    let contract = await new ethers.Contract(item, simplified_abi, provider);
-                    var tokenURI = "";
-                    let image = "/assets/img/near-protocol-near-logo.svg";
-                    var totalSupply = 1;
-                    var tokenName = "";
+                    transfers.forEach(function (item) {
+                        console.log(item)
 
-                    try {
-                        await contract.name().then(r => {
-                            tokenName = r.toString()
-                        })
+                        var nftAddress = item.contractAddress + '-' + item.tokenID + '-' + item.tokenName;
 
-                    } catch (error) {
-                        console.log(error)
-                        continue;
+                        if (item.to == address) {
+                            if (!nftArray.includes(nftAddress)) {
+                                nftArray.push(nftAddress);
+                            }
+                        } else
+                            if (item.from == address) {
+                                if (nftArray.includes(nftAddress)) {
+                                    nftArray.pop(nftAddress);
+                                    const index = nftArray.indexOf(nftAddress);
+                                    if (index > -1) {
+                                        nftArray.splice(index, 1);
+                                    }
+                                }
+                            }
+                    });
+
+                    const ethers = Moralis.web3Library
+                    const provider = new ethers.providers.JsonRpcProvider('https://mainnet.aurora.dev/');
+
+                    for await (let item of nftArray) {
+                        console.log(item)
+                        const nft = item.split('-')
+                        let contract = await new ethers.Contract(nft[0], simplified_abi, provider);
+                        var tokenURI = "";
+                        let image = "/assets/img/near-protocol-near-logo.svg";
+
+                        try {
+                            await contract.tokenURI(nft[1]).then(r => {
+                                console.log("URL: " + r.toString().replace("ipfs://", "https://ipfs.io/ipfs/"))
+                                tokenURI = r.toString()
+                            }).catch(error => console.log(error))
+
+                        } catch (error) {
+                            console.log(error)
+                        }
+
+                        await $.getJSON(tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/"), function (metaData) {
+                            console.log(metaData)
+
+                            if (metaData) {
+                                image = metaData.image.replace("ipfs://", "https://ipfs.io/ipfs/");
+                            }
+                        }).catch((err) => {
+                            //console.error(err);
+                        });
+
+                        let token_content = { tokenId: nft[0], tokenName: nft[2], tokenImage: image, tokenIndex: nft[1] };
+
+                        $("#token-template")
+                            .tmpl(token_content)
+                            .appendTo("#creators-nfts");
                     }
 
-                    try {
-                        await contract.totalSupply().then(r => {
-                            console.log('Total Supply: ' + r.toNumber())
-                            totalSupply = r.toNumber()
-                        })
-
-                    } catch (error) {
-                        console.log(error)
-                        continue;
+                    if (!$.trim($("#creators-nfts").html())) {
+                        setCreatorsError("No Tokens found for this address.");
+                    } else {
+                        openTab("#nav-creators-nfts");
                     }
-
-                    let token_content = { tokenId: item, tokenName: tokenName, tokenImage: image, tokenIndex: 0, tokenSupply: totalSupply };
-
-                    $("#creators-token-template")
-                        .tmpl(token_content)
-                        .appendTo("#creators-nfts");
-
-                }
-
-                if (!$.trim($("#creators-nfts").html())) {
-                    setCreatorsError("No Tokens found for this address.");
-                } else {
-                    openTab("#nav-creators-nfts");
-                }
-            });
+                })
+            })
         }
     } catch (error) {
         console.log(error)
@@ -1349,11 +1439,18 @@ $(document).ready(function () {
                                     if (!meta.image) return;
 
                                     //console.log("Success #" + count++ + ": " + url)
-                                    tokenSupply = item.token.totalSupply;
-                                    let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
-                                    $("#creators-token-template")
-                                        .tmpl(token_content)
-                                        .appendTo("#creators-nfts");
+                                    if (item.token.creator.toLowerCase() == walletID.toLowerCase()) {
+                                        tokenSupply = item.token.totalSupply;
+                                        let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenSupply: item.token.totalSupply };
+                                        $("#creators-token-template")
+                                            .tmpl(token_content)
+                                            .appendTo("#creators-nfts");
+                                    } else {
+                                        let token_content = { tokenId: item.token.id, tokenName: item.token.name, tokenImage: meta.image, tokenIndex: item.index.replace(/^0+/, '') };
+                                        $("#token-template")
+                                            .tmpl(token_content)
+                                            .appendTo("#creators-nfts");
+                                    }
                                 } catch (e) {
                                     //console.log("Failed #" + count++ + ": " + url)
                                 }
@@ -1898,7 +1995,7 @@ async function verifyToken(elem, e) {
                         console.info(data);
                         let response = jQuery.parseJSON(data);
 
-                        $("#gamers-games").empty();
+                        $("#creators-games").empty();
 
                         response.forEach(function (item) {
                             let status
@@ -1920,11 +2017,11 @@ async function verifyToken(elem, e) {
                             let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo, publisherId: item.publisherId, };
                             $("#games-template")
                                 .tmpl(game_content)
-                                .appendTo("#gamers-games");
+                                .appendTo("#creators-games");
 
                         });
 
-                        openTab("#nav-gamers-games");
+                        openTab("#nav-creators-games");
                     },
                 });
                 /*
@@ -1988,9 +2085,11 @@ $(document).on("click", "li", function () {
         startLoading();
 
         $(".gamers-nft-item").removeClass("active");
+        $(".creators-nft-item").removeClass("active");
         $(this).addClass("active");
         tokenID = $(this).attr('id');
         tokenIndex = $(this).data('index');
+        tokenSupply = 0;
 
         let formData = { tokenId: tokenID, wallet: walletID, tokenIndex: tokenIndex };
         console.log(formData)
@@ -2030,11 +2129,11 @@ $(document).on("click", "li", function () {
                     let game_content = { gameId: item.id, gameName: item.name, gameIcon: item.icon, gameInfo: item.gameInfo, gameStatus: status, gamePlatforms: platforms, gameCost: cost, companyName: item.companyName, website: item.website, companyInfo: item.companyInfo, publisherId: item.publisherId, };
                     $("#games-template")
                         .tmpl(game_content)
-                        .appendTo("#gamers-games");
+                        .appendTo("#creators-games");
 
                 });
 
-                openTab("#nav-gamers-games");
+                openTab("#nav-creators-games");
             },
         });
     }
@@ -2042,6 +2141,7 @@ $(document).on("click", "li", function () {
     if ($(this).hasClass("creators-nft-item")) {
         startLoading();
 
+        $(".gamers-nft-item").removeClass("active");
         $(".creators-nft-item").removeClass("active");
         $(this).addClass("active");
         tokenID = $(this).attr('id');
@@ -2120,7 +2220,7 @@ $(document).on("click", "#gamers-games-select", function () {
             console.info(data);
             let response = jQuery.parseJSON(data);
 
-            $("#gamers-content").empty();
+            $("#creators-content").empty();
 
             response.forEach(function (item) {
                 let type = ''
@@ -2144,14 +2244,14 @@ $(document).on("click", "#gamers-games-select", function () {
                 let game_content = { id: item.id, gameId: item.gameId, title: item.title, image: item.image, cost: item.cost, type: type, info: item.description };
                 $("#content-template")
                     .tmpl(game_content)
-                    .appendTo("#gamers-content");
+                    .appendTo("#creators-content");
 
             });
 
             var myModalEl = document.getElementById('gamers-game-modal')
             var modal = bootstrap.Modal.getInstance(myModalEl)
             modal.hide();
-            openTab("#nav-gamers-content");
+            openTab("#nav-creators-content");
         },
     });
 
@@ -2241,15 +2341,15 @@ $(document).on("click", "#gamers-content-select", function () {
             console.info(data);
             let response = jQuery.parseJSON(data);
 
-            $("#gamers-review").empty();
+            $("#creators-review").empty();
 
             response.forEach(function (item) {
 
 
-                $("#gamers-review-cost").html("Total: $" + item.cost)
-                $('#gamers-review-token').html('<img src="' + tokenImage + '"/>')
-                $('#gamers-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
-                $("#gamers-review-name").html(_name)
+                $("#creators-review-cost").html("Total: $" + item.cost)
+                $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
+                $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
+                $("#creators-review-name").html(_name)
 
                 $('#amountf').val(item.cost)
                 $('#item_number').val(_contentId)
@@ -2261,7 +2361,7 @@ $(document).on("click", "#gamers-content-select", function () {
             var myModalEl = document.getElementById('gamers-content-modal')
             var modal = bootstrap.Modal.getInstance(myModalEl)
             modal.hide();
-            openTab("#nav-gamers-review");
+            openTab("#nav-creators-review");
         },
     });
 

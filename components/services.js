@@ -33,10 +33,9 @@ class Services extends HTMLElement {
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-box green">
                     <i class="ri-artboard-line icon"></i>
-                    <h3>NFT Creators</h3>
+                    <h3>NFT Utility</h3>
                     <p>
-                        Increase the value of your NFT Collections by adding in-game rewards and
-                        utility for every holder.
+                        Increase the value of your NFTs and Collections by linking them in-game rewards.
                     </p>
                     <div class="pricing">
                         <div class="price"></div>
@@ -62,7 +61,7 @@ class Services extends HTMLElement {
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                <!-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
                     <div class="service-box red">
                     <i class="ri-gamepad-line icon"></i>
                     <h3>NFT Hodlers</h3>
@@ -76,7 +75,7 @@ class Services extends HTMLElement {
                         <br /><a href="#" class="btn-buy" id="service-gamers">Start Now</a>
                     </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
                     <div class="service-box blue">

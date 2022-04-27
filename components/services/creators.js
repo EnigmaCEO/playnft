@@ -8,8 +8,8 @@ class ServicesCreators extends HTMLElement {
         <section id="section-creators" class="gamers">
       <div class="container">
         <header class="section-header">
-          <h2>NFT Creators</h2>
-          <p>Add value to your NFT Collections</p>
+          <h2>NFT Utility</h2>
+          <p>Add Utility to your NFTs and Collections</p>
         </header>
 
         <div class="wizard">
