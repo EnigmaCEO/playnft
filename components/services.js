@@ -32,7 +32,7 @@ class Services extends HTMLElement {
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-box green">
-                    <i class="ri-artboard-line icon"></i>
+                    <i class="ri-sd-card-line icon"></i>
                     <h3>NFT Utility</h3>
                     <p>
                         Increase the value of your NFTs and Collections by linking them in-game rewards.

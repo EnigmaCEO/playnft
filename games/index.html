@@ -52,6 +52,9 @@
     <!-- Page Components -->
     <script src="../components/header.js" type="text/javascript"></script>
     <script src="../components/footer.js" type="text/javascript"></script>
+    <script src="../components/services/creators.js" type="text/javascript"></script>
+
+    <script src="../components/modals.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -84,6 +87,11 @@
     <footer-component></footer-component>
     <!-- End Footer -->
 
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <modals-component></modals-component>
+
     <!-- Vendor JS Files -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -100,6 +108,7 @@
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/playnft.js"></script>
 
     <script>
         function showGames() {
@@ -141,7 +150,7 @@
                     "https://api.playnft.io/getcontent",
                 type: "POST",
                 crossDomain: true,
-                data: JSON.stringify({chain: 'playnft', gameId: id}),
+                data: JSON.stringify({ chain: 'playnft', gameId: id }),
                 dataType: "json",
                 contentType: "application/json",
                 success: function (data) {
@@ -167,8 +176,8 @@
                             type = "Event"
                         }
 
-                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/'+ val.publisherId +'/'+ id +'/'+ val.id +'/icon.png', description: val.title, supply: 10, cost: val.cost, type: type };
-                        $("#content-template")
+                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/' + val.publisherId + '/' + id + '/' + val.id + '/icon.png', description: val.title, supply: 10, cost: val.cost, type: type, gameId: id, publisherId: val.publisherId };
+                        $("#link-content-template")
                             .tmpl(game_content)
                             .appendTo("#games_list");
 
@@ -211,7 +220,7 @@
         </div>
   </script>
 
-    <script id="content-template" type="text/x-jquery-tmpl">
+    <script id="link-content-template" type="text/x-jquery-tmpl">
     <div class="card" style="width:250px;margin: 10px;">
         <img class="card-img-top" style="min-height: 248px;" src="${picture}" alt="${name}">
         <div class="card-body">
@@ -219,10 +228,51 @@
         <p class="card-text">${description}</p>
         <p class="card-text">Type: ${type}</p>
         <p class="card-text">${supply} Links Remaining</p>
-        <p class="card-text" id="token-purchase-${id}"></p>
-            
+        <p class="card-text">
+            <button id="content-purchase-${id}" style="width:90%;margin-bottom:10px;background-color:green" type="submit" data-bs-toggle="modal" data-bs-target="#purchase-content-modal" data-contentid="${id}" data-gameid="${gameId}" data-publisherid="${publisherId}" data-contentname="${description}">Purchase Link</button></p>
+
         </div>
     </div>
 </script>
+
+    <script id="token-template" type="text/x-jquery-tmpl">
+    <li id="${tokenId}" data-image="${tokenImage}" data-index="${tokenIndex}" class="list-group-item d-flex list-group-item-action games-gamers-nft-item">
+      <div class="flex-shrink-0 game-icon">
+        <img
+          id="image-${tokenId}"
+          src="${tokenImage}"
+          class="img-fluid"
+          alt="${tokenName}"
+        />
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <strong>${tokenName} #${tokenIndex}</strong>
+        <p>ID: ${tokenId}</p>
+        <span id="verify-${tokenId}" class="verify-token"></span>
+        <div class="actions">
+        </div>
+      </div>
+    </li>
+  </script>
+
+    <script id="creators-token-template" type="text/x-jquery-tmpl">
+    <li id="${tokenId}" data-image="${tokenImage}" class="list-group-item d-flex list-group-item-action games-creators-nft-item">
+      <div class="flex-shrink-0 game-icon">
+        <img
+          id="image-${tokenId}"
+          src="${tokenImage}"
+          class="img-fluid"
+          alt="${tokenName}"
+        />
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <strong>${tokenName} (Collection Owner)</strong>
+        <p>ID: ${tokenId}</p>
+        <p>Total Supply: ${tokenSupply}</p>
+        <div class="actions">
+        </div>
+      </div>
+    </li>
+  </script>
 
 </html>

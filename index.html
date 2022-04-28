@@ -62,7 +62,6 @@
   <script src="components/contact.js" type="text/javascript"></script>
   <script src="components/footer.js" type="text/javascript"></script>
   <script src="components/modals.js" type="text/javascript"></script>
-  <script src="components/services/gamers.js" type="text/javascript"></script>
   <script src="components/services/creators.js" type="text/javascript"></script>
   <script src="components/services/developers.js" type="text/javascript"></script>
   <script src="components/services/streamers.js" type="text/javascript"></script>
@@ -101,10 +100,6 @@
     <!-- ======= Contact Section ======= -->
     <contact-component></contact-component>
     <!-- End Contact Section -->
-
-    <!-- ======= Gamers Service Section ======= -->
-    <services-gamers-component></services-gamers-component>
-    <!-- ======= End Gamers Section ======= -->
 
     <!-- ======= Creators Service Section ======= -->
     <services-creators-component></services-creators-component>
@@ -364,7 +359,7 @@
       </li>
     </script>
 
-    <script id="active-streamers-template" type="text/x-jquery-tmpl">
+  <script id="active-streamers-template" type="text/x-jquery-tmpl">
       <div class="swiper-slide">
         <div class="testimonial-item">
         <div class="profile mt-auto">
@@ -382,6 +377,86 @@
         </div>
       </div>
     </script>
+
+  <script>
+    $(document).ready(function () {
+      showSections()
+      showActiveStreamers()
+
+      var hash = window.location.hash.substring(1);
+      var params = {}
+      hash.split('&').map(hk => {
+        let temp = hk.split('=');
+        params[temp[0]] = temp[1]
+      });
+
+      console.log(params)
+      if (params.access_token && params.token_type && params.state && params.id_token) {
+        var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+        let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+        if (params.state == state) {
+          hideSections();
+          $("#section-streamers").show();
+          startLoading();
+
+          $.ajax({
+            url: 'https://id.twitch.tv/oauth2/userinfo',
+            type: 'GET',
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+            },
+            data: {},
+            success: function (data) {
+              console.info(data);
+
+              if (data.aud != clientID) return;
+              if (data.email_verified == false) {
+                alert("Twitch Email must be verified!");
+                return;
+              }
+
+              streamerID = data.sub;
+
+              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "streamer" };
+
+              $.ajax({
+                url:
+                  "https://api.playnft.io/getnfts",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify(formData),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                  console.info(data);
+                  let response = jQuery.parseJSON(data);
+
+                  $("#streamers-nfts").empty();
+
+                  response.forEach(function (item) {
+                    var status = "Offline"
+                    if (item.status == "1") status = "Live"
+
+                    let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                    $("#streamers-nfts-template")
+                      .tmpl(game_content)
+                      .appendTo("#streamers-nfts");
+                  });
+
+                  openTab("#nav-streamers-nfts");
+                },
+              });
+
+
+            },
+            error: function (error) {
+              console.info(error);
+            },
+          });
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>

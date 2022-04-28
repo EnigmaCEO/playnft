@@ -554,9 +554,21 @@ class Modals extends HTMLElement {
             </div>
             </div>
         </div>
-        <div class="modal" tabindex="-1" role="dialog" id="spinnerModal">
+        <div class="modal" tabindex="-2" role="dialog" id="spinnerModal">
             <div class="modal-dialog modal-dialog-centered text-center" role="document">
             <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" id="purchase-content-modal">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Purchase NFT Link</h3>
+                    </div>
+                    <div class="modal-body">
+                    <services-creators-component modal="true"></services-creators-component>
+                    </div>
+                </div>
             </div>
         </div>
         `;

@@ -5,6 +5,7 @@ var tokenImage = "";
 var walletID = "";
 var publisherID = "";
 var gameID = "";
+var contentName = "";
 var contentID = "";
 var streamerID = "";
 var chainID = "enj";
@@ -978,83 +979,6 @@ function showActiveStreamers() {
 
 
 $(document).ready(function () {
-    showSections()
-    showActiveStreamers()
-
-    var hash = window.location.hash.substring(1);
-    var params = {}
-    hash.split('&').map(hk => {
-        let temp = hk.split('=');
-        params[temp[0]] = temp[1]
-    });
-
-    console.log(params)
-    if (params.access_token && params.token_type && params.state && params.id_token) {
-        var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
-        let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
-        if (params.state == state) {
-            hideSections();
-            $("#section-streamers").show();
-            startLoading();
-
-            $.ajax({
-                url: 'https://id.twitch.tv/oauth2/userinfo',
-                type: 'GET',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
-                },
-                data: {},
-                success: function (data) {
-                    console.info(data);
-
-                    if (data.aud != clientID) return;
-                    if (data.email_verified == false) {
-                        alert("Twitch Email must be verified!");
-                        return;
-                    }
-
-                    streamerID = data.sub;
-
-                    let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "streamer" };
-
-                    $.ajax({
-                        url:
-                            "https://api.playnft.io/getnfts",
-                        type: "POST",
-                        crossDomain: true,
-                        data: JSON.stringify(formData),
-                        dataType: "json",
-                        contentType: "application/json",
-                        success: function (data) {
-                            console.info(data);
-                            let response = jQuery.parseJSON(data);
-
-                            $("#streamers-nfts").empty();
-
-                            response.forEach(function (item) {
-                                var status = "Offline"
-                                if (item.status == "1") status = "Live"
-
-                                let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
-                                $("#streamers-nfts-template")
-                                    .tmpl(game_content)
-                                    .appendTo("#streamers-nfts");
-                            });
-
-                            openTab("#nav-streamers-nfts");
-                        },
-                    });
-
-
-                },
-                error: function (error) {
-                    console.info(error);
-                },
-            });
-        }
-    }
-
-
 
     $("#avax-wallet-connect").click(function () {
         moralisLogin("avalanche").then(function (address) {
@@ -2193,6 +2117,82 @@ $(document).on("click", "li", function () {
         });
     }
 
+
+    if ($(this).hasClass("games-gamers-nft-item")) {
+        tokenImage = $(this).data('image');
+        console.log(tokenImage)
+        if (tokenImage && tokenImage.includes("vlx")) {
+            let mode = "creators";
+            if ($(this).hasClass("gamers-nft-item")) mode = "gamers";
+            $(".verify-token").empty();
+
+            $("#verify-" + $(this).attr('id')).append('<form class="form-inline">\
+        <div class="col-auto"><input type="hidden" id="verify-token-mode" value="'+ mode + '">\
+        <label for="verify-token-index" class="sr-only">Verify: </label>\
+        <input style="width:40%" type="text" class="form-control mb-2" id="verify-token-index" name="verify-token-index" placeholder="Token Index">\
+        </div>\
+        <div class="col-auto"><button onclick="verifyToken(this, event)" id="verify-token" type="button" value="'+ $(this).attr('id') + '" class="btn btn-primary mb-2">Verify</button></div>\
+    </form>')
+            $("#verify-token-index").focus()
+            return;
+        }
+
+        startLoading();
+
+        $(".games-gamers-nft-item").removeClass("active");
+        $(".games-creators-nft-item").removeClass("active");
+        $(this).addClass("active");
+        tokenID = $(this).attr('id');
+        tokenIndex = $(this).data('index');
+        tokenSupply = 0;
+
+        var _contentId = contentID;
+        var _gameId = gameID;
+        let _tokenId = $(this).attr('id');
+        let _name = contentName;
+        let _mode = "gamers";
+        let _index = $(this).data('index');
+
+
+        let formData = { contentId: _contentId, gameId: _gameId, wallet: walletID, token: _tokenId, mode: _mode, index: _index, chain: chainID };
+        console.log(formData)
+
+        $.ajax({
+            url:
+                "https://api.playnft.io/createorder",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.info(data);
+                let response = jQuery.parseJSON(data);
+
+                $("#creators-review").empty();
+
+                if (response) {
+                    response.forEach(function (item) {
+
+                        $("#creators-review-cost").html("Total: $" + item.cost)
+                        $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
+                        $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
+                        $("#creators-review-name").html(_name)
+
+                        $('#creators-amountf').val(item.cost)
+                        $('#creators-item_number').val(_contentId)
+                        $('#creators-invoice').val(item.orderId)
+                        $('#creators-custom').val(item.code)
+                        $('#creators-item_name').val(_name)
+                    });
+
+                    openTab("#nav-creators-review");
+                }
+            },
+        });
+
+    }
+
     if ($(this).hasClass("nav-item completed")) {
         let $active = $(".wizard .nav-tabs li.active");
         $active.removeClass('active')
@@ -2320,7 +2320,6 @@ $(document).on("click", "#gamers-content-select", function () {
     var _contentId = $(this).data('id');
     var _gameId = $(this).data('game');
     let _tokenId = tokenID.replace('gamers_nft_', '');
-    let _icon = $(this).data('icon');
     let _name = $(this).data('name');
     let _mode = "gamers";
     let _index = tokenIndex;
@@ -2345,17 +2344,16 @@ $(document).on("click", "#gamers-content-select", function () {
 
             response.forEach(function (item) {
 
-
                 $("#creators-review-cost").html("Total: $" + item.cost)
                 $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                 $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                 $("#creators-review-name").html(_name)
 
-                $('#amountf').val(item.cost)
-                $('#item_number').val(_contentId)
-                $('#invoice').val(item.orderId)
-                $('#custom').val(item.code)
-                $('#item_name').val(_name)
+                $('#creators-amountf').val(item.cost)
+                $('#creators-item_number').val(_contentId)
+                $('#creators-invoice').val(item.orderId)
+                $('#creators-custom').val(item.code)
+                $('#creators-item_name').val(_name)
             });
 
             var myModalEl = document.getElementById('gamers-content-modal')
@@ -2787,6 +2785,18 @@ $(document).on('show.bs.modal', '#streamers-nfts-modal', function (event) {
     modal.find('#streamers_nft_id').val(Id)
     modal.find('#streamer_id').val(streamerID)
     if (gameCost) modal.find('#streamers_nft_cost').val(TIERS[gameCost])
+})
+
+$(document).on('show.bs.modal', '#purchase-content-modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    gameID = button.data('gameid')
+    contentID = button.data('contentid');
+    publisherID = button.data('publisherid');
+    contentName = button.data('contentname');
+    console.log(gameID)
+    console.log(contentID)
+    console.log(publisherID)
+    console.log(contentName)
 })
 
 function openTab(tabId) {
