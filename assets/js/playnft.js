@@ -2193,6 +2193,61 @@ $(document).on("click", "li", function () {
 
     }
 
+    if ($(this).hasClass("games-creators-nft-item")) {
+        startLoading();
+
+        $(".gamers-nft-item").removeClass("active");
+        $(".creators-nft-item").removeClass("active");
+        $(this).addClass("active");
+        tokenID = $(this).attr('id');
+        tokenImage = $(this).data('image');
+
+        var _contentId = contentID;
+        var _gameId = gameID;
+        let _tokenId = $(this).attr('id');
+        let _name = contentName;
+        let _mode = "gamers";
+        let _index = $(this).data('index');
+
+
+        let formData = { contentId: _contentId, gameId: _gameId, wallet: walletID, token: _tokenId, mode: _mode, index: 0, chain: chainID };
+        console.log(formData)
+
+        $.ajax({
+            url:
+                "https://api.playnft.io/createorder",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.info(data);
+                let response = jQuery.parseJSON(data);
+
+                $("#creators-review").empty();
+
+                if (response) {
+                    response.forEach(function (item) {
+
+                        $("#creators-review-cost").html("Total: $" + item.cost)
+                        $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
+                        $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
+                        $("#creators-review-name").html(_name)
+
+                        $('#creators-amountf').val(item.cost)
+                        $('#creators-item_number').val(_contentId)
+                        $('#creators-invoice').val(item.orderId)
+                        $('#creators-custom').val(item.code)
+                        $('#creators-item_name').val(_name)
+                    });
+
+                    openTab("#nav-creators-review");
+                }
+            },
+        });
+    }
+
     if ($(this).hasClass("nav-item completed")) {
         let $active = $(".wizard .nav-tabs li.active");
         $active.removeClass('active')
