@@ -1180,6 +1180,9 @@ $(document).ready(function () {
             $("#creators-wallet-near").show();
             $('#creators-walletAddressNear').prop('required', true);
         }
+        if (chain == "stx") {
+            $("#creators-wallet-stx").show();
+        }
     });
 
 

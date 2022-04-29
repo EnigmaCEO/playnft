@@ -39,7 +39,7 @@ class Header extends HTMLElement {
                         <ul>
                         <li><a class="nav-link" href="/streamers/">Twitch Streamers</a></li>
                         <li><a class="nav-link" href="/games/">Blockchain Games</a></li>
-                        <li><a class="nav-link scrollto" href="#nfts">NFT Collections</a></li>
+                        <li><a class="nav-link" href="/collections/">NFT Collections</a></li>
                         </ul>
                     </li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
