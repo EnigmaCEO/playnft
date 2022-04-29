@@ -2857,6 +2857,28 @@ $(document).on('show.bs.modal', '#purchase-content-modal', function (event) {
     console.log(contentName)
 })
 
+$(document).on('show.bs.modal', '#purchase-twitch-modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    let picture = button.data('picture');
+    let name = button.data('name');
+    let description = button.data('description');
+    let cost = button.data('cost');
+    let id = button.data('contentid');
+    let streamerid = button.data('streamerid');
+    let streamername = button.data('streamername');
+    let buyerid = streamerID;
+
+    let modal = $(this)
+
+    modal.find('#twitch_token_picture').attr("src",picture);
+    modal.find('#twitch_token_name').html(name)
+    modal.find('#twitch_token_description').html(description)
+
+    console.log(id + ' ' + streamerID + ' ' + cost)
+    $("#payment-options").empty();
+    RenderTwitchPayPal(name, cost, "#payment-options", id, buyerid, streamerid, streamername);
+})
+
 function openTab(tabId) {
     stopLoading();
     let active = $(".wizard .nav-tabs li.active");

@@ -16,6 +16,7 @@ class Header extends HTMLElement {
                     <nav id="navbar" class="navbar">
                         <ul>
                             <li><a class="nav-link scrollto active" href="../">Home</a></li>
+                            <li><a class="nav-link" href="/twitch/">Twitch Tokens</a></li>
                         </ul>
                         <i class="bi bi-list mobile-nav-toggle"></i>
                     </nav>

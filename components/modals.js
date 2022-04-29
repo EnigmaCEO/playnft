@@ -571,6 +571,24 @@ class Modals extends HTMLElement {
                 </div>
             </div>
         </div>
+        <div class="modal" tabindex="-1" id="purchase-twitch-modal">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Purchase Twitch Token</h3>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p><img id="twitch_token_picture" style="width: 50%;" src=""></p>
+                        <h5 id="twitch_token_name" ></h5>
+                        <hr>
+                        <p style="text-align: left;font-weight:bold">Description:</p>
+                        <p id="twitch_token_description" style="text-align: left;"></p>
+                        <div id="payment-options" class="modal-footer"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
         `;
     }
 }

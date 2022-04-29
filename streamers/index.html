@@ -52,6 +52,7 @@
     <!-- Page Components -->
     <script src="../components/header.js" type="text/javascript"></script>
     <script src="../components/footer.js" type="text/javascript"></script>
+    <script src="../components/modals.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -61,17 +62,23 @@
 
     <div class="row spacer">&nbsp;</div>
     <main id="main">
-        <div id="back_button" style="position:absolute; left:20px"><button type="submit" onclick="window.location.assign('/streamers/')">&lt;</button></div>
-                
+        <div id="back_button" style="position:absolute; left:20px"><button type="submit"
+                onclick="window.location.assign('/streamers/')">&lt;</button></div>
+
         <!-- ======= Streamers Section ======= -->
         <section id="section-streamers" class="gamers">
             <div class="container text-center">
-                
+
                 <header class="section-header">
-                    
                     <h2>Twitch Streamers</h2>
                     <p id="streamer_name">Collect Tokens from your favorite Twitch Streamers.</p>
                 </header>
+                <div class="pricing">
+                    <a href="#" class="btn-buy" id="login-twitch">Authenticate Twitch
+                        Account</a>
+                        <div class="row spacer">&nbsp;</div>
+                </div>
+                
                 <div id="streamer_list" class="card-deck" style="display:flex;flex-wrap: wrap;justify-content: center;">
                 </div>
             </div>
@@ -84,7 +91,9 @@
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+            class="bi bi-arrow-up-short"></i></a>
+
+    <modals-component></modals-component>
 
     <!-- Vendor JS Files -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -102,6 +111,7 @@
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/playnft.js"></script>
 
     <script>
         function showStreamers() {
@@ -154,16 +164,14 @@
 
                     response.forEach(function (val) {
 
-                        val.cost = PRICES[val.cost]/100.0;
+                        val.cost = PRICES[val.cost] / 100.0;
                         $("#streamer_name").text(val.streamer_name)
-                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/nfts/'+id+'/'+val.id+'/icon.png', description: $(val.description).text(), supply: val.supply, cost: val.cost };
+                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/nfts/' + id + '/' + val.id + '/icon.png', description: $(val.description).text(), supply: val.supply, cost: val.cost, streamername: val.streamer_name, streamerid: id };
                         $("#token-template")
                             .tmpl(game_content)
                             .appendTo("#streamer_list");
 
-                        RenderPayPal(val, "#token-purchase-" + val.id, id);
-
-
+                            if(streamerID == "") $(".token-purchase").hide();
                     });
 
 
@@ -176,9 +184,8 @@
             });
         }
 
-        function RenderPayPal(item, elem, nftid, streamerID) {
-            console.log(item)
-            console.log(elem)
+        function RenderTwitchPayPal(name, cost, elem, nftid, buyer, streamer, streamerName) {
+            console.log(nftid + '|' + buyer + '|' + streamer + '|' + streamerName + '|' + (cost*100))
             paypal.Buttons({
                 style: {
                     layout: 'horizontal',
@@ -193,16 +200,16 @@
                         purchase_units: [{
                             amount: {
                                 currency_code: "USD",
-                                value: 0
+                                value: cost
                             },
-                            description: item.name,
-                            custom_id: nftid + '|' + streamerID
+                            description: name,
+                            custom_id: nftid + '|' + buyer + '|' + streamer + '|' + streamerName + '|' + (cost*100)
                         }]
                     });
                 },
                 onApprove: function (data, actions) {
                     return actions.order.capture().then(function (details) {
-
+                        location.reload();
                     });
                 }
             }).render(elem);
@@ -215,6 +222,48 @@
             url = url.replace("?", '');
             //alert(url);
 
+            var hash = window.location.hash.substring(1);
+            var params = {}
+            hash.split('&').map(hk => {
+                let temp = hk.split('=');
+                params[temp[0]] = temp[1]
+            });
+
+            console.log(params)
+            if (params.access_token && params.token_type && params.state && params.id_token) {
+                var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+
+                url = params.state;
+                $(".pricing").hide();
+                
+                $.ajax({
+                    url: 'https://id.twitch.tv/oauth2/userinfo',
+                    type: 'GET',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+                    },
+                    data: {},
+                    success: function (data) {
+                        console.info(data);
+
+                        if (data.aud != clientID) return;
+                        if (data.email_verified == false) {
+                            alert("Twitch Email must be verified!");
+                            return;
+                        }
+
+                        streamerID = data.sub
+                        console.log(streamerID)
+
+                        $(".token-purchase").show();
+                    },
+                    error: function (error) {
+                        console.info(error);
+                    },
+                });
+
+            }
+
             if (url) {
                 $("#streamer_name").empty();
                 $("#back_button").show();
@@ -222,8 +271,19 @@
 
             } else {
                 $("#back_button").hide();
+                $(".pricing").hide();
                 showStreamers()
             }
+        });
+
+        $(document).on("click", "#login-twitch", function () {
+            let clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
+            let redirectSite = location.protocol + "//" + location.host + "/streamers"
+            let state = window.location.search.replace('?', '');
+
+
+            location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
+
         });
 
     </script>
@@ -246,9 +306,12 @@
         <img class="card-img-top" src="${picture}" alt="${name}"  onError="this.onerror=null;this.src='/assets/img/twitch-v2.svg';">
         <div class="card-body">
         <h5 class="card-title">${name}</h5>
-        <p class="card-text">${description}</p>
         <p class="card-text">${supply} NFTs Remaining</p>
-        <p class="card-text" id="token-purchase-${id}"></p>
+        <p class="card-text" id="token-purchase-${id}">
+            {{if supply != 0 }}
+            <button class="token-purchase" style="width:90%;margin-bottom:10px;background-color:green" type="submit" data-bs-toggle="modal" data-bs-target="#purchase-twitch-modal" data-contentid="${id}" data-description="${description}" data-picture="${picture}" data-name="${name}" data-cost="${cost}" data-streamerid="${streamerid}" data-streamername="${streamername}">$${cost}</button>
+            {{/if}}
+        </p>
             
         </div>
     </div>
