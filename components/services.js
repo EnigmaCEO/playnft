@@ -35,7 +35,7 @@ class Services extends HTMLElement {
                     <i class="ri-sd-card-line icon"></i>
                     <h3>NFT Utility</h3>
                     <p>
-                        Increase the value of your NFTs and Collections by linking them in-game rewards.
+                        Increase the value of your NFTs and Collections by linking them to our blockchain games to unlock special content.
                     </p>
                     <div class="pricing">
                         <div class="price"></div>
@@ -75,7 +75,7 @@ class Services extends HTMLElement {
                         <br /><a href="#" class="btn-buy" id="service-gamers">Start Now</a>
                     </div>
                     </div>
-                </div> -->
+                </div>
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
                     <div class="service-box blue">
@@ -90,7 +90,7 @@ class Services extends HTMLElement {
                         <br /><a href="https://enjinx.io/eth/marketplace" class="btn-buy" id="service-market">Start Now</a>
                     </div>
                     </div>
-                </div>
+                </div> -->
 
                 </div>
             </div>
