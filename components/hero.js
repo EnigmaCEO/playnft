@@ -27,7 +27,7 @@ class Hero extends HTMLElement {
                     <div class="container">
                         <div class="row jalign-items-center">
                             <div class="col-12 text-center">
-                            <h1>Utility Marketplace</h1>
+                            <h3 style="color: #012970;">Utility Marketplace</h3>
                             </div>
                         </div>
                         <div class="row justify-content-md-center">
