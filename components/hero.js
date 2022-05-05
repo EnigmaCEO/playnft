@@ -25,7 +25,7 @@ class Hero extends HTMLElement {
                 </div>
                 <div class="col-lg-5 hero-img" data-aos="zoom-out" data-aos-delay="200">
                     <div class="container">
-                        <div class="row jalign-items-center">
+                        <div class="row align-items-center">
                             <div class="col-12 text-center">
                             <h3 style="color: #012970;">Utility Marketplace</h3>
                             </div>

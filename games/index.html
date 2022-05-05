@@ -176,7 +176,7 @@
                             type = "Event"
                         }
 
-                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/' + val.publisherId + '/' + id + '/' + val.id + '/icon.png', description: val.title, supply: 10, cost: val.cost, type: type, gameId: id, publisherId: val.publisherId };
+                        let game_content = { id: val.id, name: val.name, picture: 'https://playnft.s3.amazonaws.com/' + val.publisherId + '/' + id + '/' + val.id + '/icon.png', description: val.title, supply: 10, cost: val.cost.toFixed(2), type: type, gameId: id, publisherId: val.publisherId };
                         $("#link-content-template")
                             .tmpl(game_content)
                             .appendTo("#games_list");
@@ -229,7 +229,7 @@
         <p class="card-text">Type: ${type}</p>
         <p class="card-text">${supply} Links Remaining</p>
         <p class="card-text">
-            <button id="content-purchase-${id}" style="width:90%;margin-bottom:10px;background-color:green" type="submit" data-bs-toggle="modal" data-bs-target="#purchase-content-modal" data-contentid="${id}" data-gameid="${gameId}" data-publisherid="${publisherId}" data-contentname="${description}">Purchase Link</button></p>
+            <button id="content-purchase-${id}" style="width:90%;margin-bottom:10px;background-color:green" type="submit" data-bs-toggle="modal" data-bs-target="#purchase-content-modal" data-contentid="${id}" data-gameid="${gameId}" data-publisherid="${publisherId}" data-contentname="${description}">$${cost}</button></p>
 
         </div>
     </div>

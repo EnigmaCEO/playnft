@@ -2187,6 +2187,14 @@ $(document).on("click", "li", function () {
                         $('#creators-invoice').val(item.orderId)
                         $('#creators-custom').val(item.code)
                         $('#creators-item_name').val(_name)
+
+                        if(item.cost > 35 && chainID == "near") {
+                            $("#onramper-purchase-button").html("Pay with NEAR");
+                            let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                            document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                        } else {
+                            $("#onramper-container").hide()
+                        }
                     });
 
                     openTab("#nav-creators-review");
@@ -2209,12 +2217,13 @@ $(document).on("click", "li", function () {
         var _gameId = gameID;
         let _tokenId = $(this).attr('id');
         let _name = contentName;
-        let _mode = "gamers";
+        let _mode = "creators";
         let _index = $(this).data('index');
 
-
-        let formData = { contentId: _contentId, gameId: _gameId, wallet: walletID, token: _tokenId, mode: _mode, index: 0, chain: chainID };
+        console.log(tokenSupply)
+        let formData = { contentId: _contentId, gameId: _gameId, wallet: walletID, token: _tokenId, mode: _mode, index: 0, chain: chainID, supply: tokenSupply };
         console.log(formData)
+        console.log(chainID)
 
         $.ajax({
             url:
@@ -2243,6 +2252,14 @@ $(document).on("click", "li", function () {
                         $('#creators-invoice').val(item.orderId)
                         $('#creators-custom').val(item.code)
                         $('#creators-item_name').val(_name)
+
+                        if(item.cost > 35 && chainID == "near") {
+                            $("#onramper-purchase-button").html("Pay with NEAR");
+                            let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                            document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                        } else {
+                            $("#onramper-container").hide()
+                        }
                     });
 
                     openTab("#nav-creators-review");
@@ -2412,6 +2429,14 @@ $(document).on("click", "#gamers-content-select", function () {
                 $('#creators-invoice').val(item.orderId)
                 $('#creators-custom').val(item.code)
                 $('#creators-item_name').val(_name)
+
+                if(item.cost > 35 && chainID == "near") {
+                    $("#onramper-purchase-button").html("Pay with NEAR");
+                    let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                    document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                } else {
+                    $("#onramper-container").hide()
+                }
             });
 
             var myModalEl = document.getElementById('gamers-content-modal')
@@ -2531,6 +2556,14 @@ $(document).on("click", "#creators-content-select", function () {
                 $('#creators-invoice').val(item.orderId)
                 $('#creators-custom').val(item.code)
                 $('#creators-item_name').val(_name)
+
+                if(item.cost > 35 && chainID == "near") {
+                    $("#onramper-purchase-button").html("Pay with NEAR");
+                    let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                    document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                } else {
+                    $("#onramper-container").hide()
+                }
             });
 
             var myModalEl = document.getElementById('creators-content-modal')
@@ -2650,10 +2683,14 @@ $(document).on("click", "#streamers-packages-select", function () {
 });
 
 $(document).on("click", "#streamers-extension-btn", function () {
-
     openTab("#nav-streamers-review");
-
 })
+
+$(document).on("click", "#onramper-purchase-button", function () {
+    $("#onramper").show();
+})
+
+
 
 
 
@@ -2855,6 +2892,10 @@ $(document).on('show.bs.modal', '#purchase-content-modal', function (event) {
     console.log(contentID)
     console.log(publisherID)
     console.log(contentName)
+})
+
+$(document).on('hidden.bs.modal', '#purchase-content-modal', function (event) {
+    window.location.reload()
 })
 
 $(document).on('show.bs.modal', '#purchase-twitch-modal', function (event) {

@@ -5,9 +5,7 @@ class ServicesCreators extends HTMLElement {
 
   connectedCallback() {
     if (this.attributes.modal) {
-      this.innerHTML = `
-        
-      <div class="container">
+      this.innerHTML = `<div class="container">
         
         <div class="wizard">
           <div class="wizard-inner">
@@ -225,23 +223,44 @@ class ServicesCreators extends HTMLElement {
                         <p>
                           <strong id="creators-review-name"></strong>
                         </p>
-                        <p>
-                        <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
-                          <input type="hidden" name="cmd" value="_pay_simple">
-                          <input type="hidden" name="reset" value="1">
-                          <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
-                          <input type="hidden" name="currency" value="USD">
-                          <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
-                          <input type="hidden" name="item_number" id="creators-item_number" value="2">
-                          <input type="hidden" name="invoice" id="creators-invoice" value="7">
-                          <input type="hidden" name="custom" id="creators-custom" value="7">
-                          <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
-                          <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
-                            alt="Buy Now with CoinPayments.net">
-                        </form>
+                        <div class="container">
+                          <div class="row align-items-center">
+                            <div class="col text-center">
+                              <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
+                                <input type="hidden" name="cmd" value="_pay_simple">
+                                <input type="hidden" name="reset" value="1">
+                                <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
+                                <input type="hidden" name="currency" value="USD">
+                                <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
+                                <input type="hidden" name="item_number" id="creators-item_number" value="2">
+                                <input type="hidden" name="invoice" id="creators-invoice" value="7">
+                                <input type="hidden" name="custom" id="creators-custom" value="7">
+                                <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
+                                <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
+                                  alt="Buy Now with CoinPayments.net">
+                              </form>
+                            </div>
+                            <div id="onramper-container" class="col text-center">
+                              <button id="onramper-purchase-button" class="btn btn-primary" type="button"></button>
+                            </div>
+                          </div>
+                        </div>
+                        
                         <span id="creators-review-cost"></span>
-                        </p>
-
+                        
+                        <iframe id="onramper" 
+                          src=""
+                          height="600px"
+                          width="440px"
+                          title="Onramper widget"
+                          frameborder="0"
+                          allow="accelerometer;
+                          autoplay; camera; gyroscope; payment"
+                          style="box-shadow: 1px 1px 1px 1px
+                          rgba(0,0,0,0.2);position:absolute;top:0px;left:0px;width:100%;height:100%;display:none"
+                        >
+                          <a href="https://widget.onramper.com" target="_blank">Buy Crypto</a>
+                        </iframe>
                       </div>
 
                     </div>
@@ -254,8 +273,7 @@ class ServicesCreators extends HTMLElement {
       </div>
         `;
     } else {
-      this.innerHTML = `
-        <section id="section-creators" class="gamers">
+      this.innerHTML = `<section id="section-creators" class="gamers">
       <div class="container">
         <header class="section-header">
           <h2>NFT Utility</h2>
@@ -519,22 +537,42 @@ class ServicesCreators extends HTMLElement {
                         <p>
                           <strong id="creators-review-name"></strong>
                         </p>
-                        <p>
-                        <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
-                          <input type="hidden" name="cmd" value="_pay_simple">
-                          <input type="hidden" name="reset" value="1">
-                          <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
-                          <input type="hidden" name="currency" value="USD">
-                          <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
-                          <input type="hidden" name="item_number" id="creators-item_number" value="2">
-                          <input type="hidden" name="invoice" id="creators-invoice" value="7">
-                          <input type="hidden" name="custom" id="creators-custom" value="7">
-                          <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
-                          <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
-                            alt="Buy Now with CoinPayments.net">
-                        </form>
+                        <div class="container">
+                          <div class="row align-items-center">
+                            <div class="col text-center">
+                              <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
+                                <input type="hidden" name="cmd" value="_pay_simple">
+                                <input type="hidden" name="reset" value="1">
+                                <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
+                                <input type="hidden" name="currency" value="USD">
+                                <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
+                                <input type="hidden" name="item_number" id="creators-item_number" value="2">
+                                <input type="hidden" name="invoice" id="creators-invoice" value="7">
+                                <input type="hidden" name="custom" id="creators-custom" value="7">
+                                <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
+                                <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
+                                  alt="Buy Now with CoinPayments.net">
+                              </form>
+                            </div>
+                            <div id="onramper-container" class="col text-center">
+                              <button id="onramper-purchase-button" class="btn btn-primary" type="button"></button>
+                            </div>
+                          </div>
+                        </div>
                         <span id="creators-review-cost"></span>
-                        </p>
+                        
+                        <iframe id="onramper" 
+                          src=""
+                          height="600px"
+                          width="440px"
+                          title="Onramper widget"
+                          frameborder="0"
+                          allow="accelerometer;
+                          autoplay; camera; gyroscope; payment"
+                          style="position:absolute;top:250px;left:0px;width:100%;display:none"
+                        >
+                          <a href="https://widget.onramper.com" target="_blank">Buy Crypto</a>
+                        </iframe>
 
                       </div>
 
