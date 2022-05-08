@@ -214,6 +214,7 @@
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/playnft.js"></script>
 
     <script id="twitch-nfts-template" type="text/x-jquery-tmpl">
         <li id="streamers_nft_${id}" class="list-group-item d-flex list-group-item-action streamers-nft-item">
@@ -390,6 +391,48 @@
         var nextTab = document.querySelector(tabId);
         var tab = new bootstrap.Tab(nextTab);
         tab.show();
+    }
+
+    function GetTwitchInventory() {
+        startLoading()
+        let formData = { streamer_id: streamerID, mode: "buyer" };
+
+        $.ajax({
+            url:
+                "https://api.playnft.io/getnfts",
+            type: "POST",
+            crossDomain: true,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.info(data);
+                let response = jQuery.parseJSON(data);
+                stopLoading()
+                $("#twitch-nfts").empty();
+
+                response.forEach(function (item) {
+                    var date = new Date(item.date)
+                    var dateString = date.toLocaleString('en-US', {
+                        day: 'numeric', // numeric, 2-digit
+                        year: 'numeric', // numeric, 2-digit
+                        month: 'long', // numeric, 2-digit, long, short, narrow
+                        hour: 'numeric', // numeric, 2-digit
+                        minute: 'numeric', // numeric, 2-digit
+                        second: 'numeric', // numeric, 2-digit
+                    })
+
+                    if (item.claimed == 1) item.supply = 0;
+
+                    let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId, supply: item.supply };
+                    $("#twitch-nfts-template")
+                        .tmpl(game_content)
+                        .appendTo("#twitch-nfts");
+                });
+
+                openTab("#nav-twitch-nfts");
+            },
+        });
     }
 </script>
 

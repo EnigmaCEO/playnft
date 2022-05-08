@@ -16,7 +16,17 @@ class Header extends HTMLElement {
                     <nav id="navbar" class="navbar">
                         <ul>
                             <li><a class="nav-link scrollto active" href="../">Home</a></li>
-                            <li><a class="nav-link" href="/twitch/">Twitch Tokens</a></li>
+                            
+                            <li id="header_account" class="dropdown d-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                <li><a class="nav-link" href="/account/">Dashboard</a></li>
+                                <li><a class="nav-link" href="/twitch/">Twitch Tokens</a></li>
+                                <li><a class="nav-link" href="javascript:LogOut()">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <li id="header_login" class="d-none">
+                                <a class="getstarted" href="/account/">Login</a>
+                            </li>
                         </ul>
                         <i class="bi bi-list mobile-nav-toggle"></i>
                     </nav>
@@ -47,8 +57,15 @@ class Header extends HTMLElement {
                     <li><a class="nav-link scrollto" href="#partners">Partners</a></li>
                     <li><a class="nav-link" href="/roadmap/">Roadmap</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li>
-                        <a class="getstarted scrollto" href="#services">Get Started</a>
+                    <li id="header_account" class="dropdown d-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                        <li><a class="nav-link" href="/account/">Dashboard</a></li>
+                        <li><a class="nav-link" href="/twitch/">Twitch Tokens</a></li>
+                        <li><a class="nav-link" href="javascript:LogOut()">Log Out</a></li>
+                        </ul>
+                    </li>
+                    <li id="header_login" class="d-none">
+                        <a class="getstarted" href="/account/">Login</a>
                     </li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>

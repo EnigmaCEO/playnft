@@ -54,16 +54,102 @@ var simplified_abi = [
 
 const serverUrl = "https://s4wy4pswzlfd.usemoralis.com:2053/server";
 const appId = "brwT5yD5Q3O6yPw4MLI6EnDYK0TZmdZgTR6YFFte";
+var MoralisUser = null;
 
-Moralis.start({ serverUrl, appId });
-Moralis.enableWeb3();
+const execute = async () => {
+    console.log("Started")
+    await Moralis.start({ serverUrl, appId }).catch((err) => {
+        switch (err.code) {
+            case Moralis.Error.INVALID_SESSION_TOKEN:
+                Moralis.User.logOut();
+                break;
 
-Moralis.onAccountChanged(async (account) => {
-    const confirmed = confirm("Link this address to PlayNFT?");
-    if (confirmed) {
-        await Moralis.link(account);
+        }
+    });
+
+    // Enable web3
+    //await Moralis.enableWeb3();
+
+    MoralisUser = Moralis.User.current();
+    console.log(MoralisUser)
+    console.log(window.location.pathname)
+    if (MoralisUser != null) {
+        if (window.location.pathname == "/account/") {
+            let username = MoralisUser.get("username")
+            if (username) $("#account-username").html(username)
+
+            $("#account-container").removeClass("d-none");
+            let ethAddress = MoralisUser.get("ethAddress")
+            if (ethAddress) $("#account_wallet").val(ethAddress)
+
+            let email = MoralisUser.get("email")
+            if (email) $("#account_email").val(email)
+
+            let twitchID = MoralisUser.get("twitchID")
+            if (twitchID && twitchID != "") {
+                console.log(twitchID)
+                streamerID = twitchID;
+            } else {
+                if (streamerID) {
+                    MoralisUser.set("twitchID", streamerID)
+                    MoralisUser.save();
+                }
+            }
+
+            if (streamerID) {
+                MoralisUser.set("twitchID", streamerID)
+                MoralisUser.save();
+                $("#add-twitch").hide();
+                $("#streamer-url").html(`<a target="_blank" href="https://www.playnft.io/streamers/?${streamerID}">https://www.playnft.io/streamers/?${streamerID}</a>`)
+                $("#twitch-container").removeClass("d-none");
+            }
+
+            let paypalID = MoralisUser.get("paypalID")
+            if (paypalID) $("#paypal_email").val(paypalID)
+
+        }
+
+        if (window.location.pathname == "/twitch/") {
+            let twitchID = MoralisUser.get("twitchID")
+            if (twitchID && twitchID != "") {
+                console.log(twitchID)
+                streamerID = twitchID;
+
+                GetTwitchInventory()
+            }
+        }
+
+        if (window.location.pathname == "/streamers/") {
+            let twitchID = MoralisUser.get("twitchID")
+            if (twitchID && twitchID != "") {
+                console.log(twitchID)
+                streamerID = twitchID;
+
+                $(".pricing").hide();
+                $(".token-purchase").show();
+            }
+        }
+
+        $("#header_account").removeClass("d-none");
+    } else {
+        if (window.location.pathname == "/account/") {
+            $("#registration-container").removeClass("d-none");
+        }
+
+        $("#header_login").removeClass("d-none");
+    }
+}
+
+
+execute().catch((err) => {
+    switch (err.code) {
+        case Moralis.Error.INVALID_SESSION_TOKEN:
+            Moralis.User.logOut();
+            break;
+
     }
 });
+
 
 async function getContractOwner(chain, item, owner) {
     let address = item.token_address;
@@ -903,20 +989,29 @@ async function moralisLogin(chain) {
     console.log(chain)
     console.log(CHAINS[chain])
     if (!user) {
-        let user = await Moralis.authenticate({ signingMessage: "PlayNFT using Moralis", type: chain })
-            .then(function (user) {
+        let user = await Moralis.authenticate({
+            provider: "web3Auth",
+            clientId: "BBE90Y0qXo6gqKvTP_JL6GkIwnNq3uiuhHaBQGbEWcAOqthYPVijiEi9Uq1YNrJpxxdx7jts_oEGK20hc583koM",
+            signingMessage: "PlayNFT using Moralis",
+            type: chain
+        })
+            .then(async function (user) {
                 console.log(user)
-                return user.get("ethAddress");
+                return await Promise.resolve(user.get("ethAddress"));
             })
             .catch(function (error) {
                 console.log(error);
                 return null;
             });
 
+        return user;
+
     } else {
         console.log(user)
         return user.get("ethAddress");
     }
+
+
 }
 
 /*********** Moralis API **********************/
@@ -1088,6 +1183,7 @@ $(document).ready(function () {
 
             }
         });
+
     });
 
     $(".chain-wallet").hide();
@@ -2188,9 +2284,9 @@ $(document).on("click", "li", function () {
                         $('#creators-custom').val(item.code)
                         $('#creators-item_name').val(_name)
 
-                        if(item.cost > 35 && chainID == "near") {
+                        if (item.cost > 35 && chainID == "near") {
                             $("#onramper-purchase-button").html("Pay with NEAR");
-                            let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                            let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                             document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                         } else {
                             $("#onramper-container").hide()
@@ -2253,9 +2349,9 @@ $(document).on("click", "li", function () {
                         $('#creators-custom').val(item.code)
                         $('#creators-item_name').val(_name)
 
-                        if(item.cost > 35 && chainID == "near") {
+                        if (item.cost > 35 && chainID == "near") {
                             $("#onramper-purchase-button").html("Pay with NEAR");
-                            let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                            let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                             document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                         } else {
                             $("#onramper-container").hide()
@@ -2430,9 +2526,9 @@ $(document).on("click", "#gamers-content-select", function () {
                 $('#creators-custom').val(item.code)
                 $('#creators-item_name').val(_name)
 
-                if(item.cost > 35 && chainID == "near") {
+                if (item.cost > 35 && chainID == "near") {
                     $("#onramper-purchase-button").html("Pay with NEAR");
-                    let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                    let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                     document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                 } else {
                     $("#onramper-container").hide()
@@ -2557,9 +2653,9 @@ $(document).on("click", "#creators-content-select", function () {
                 $('#creators-custom').val(item.code)
                 $('#creators-item_name').val(_name)
 
-                if(item.cost > 35 && chainID == "near") {
+                if (item.cost > 35 && chainID == "near") {
                     $("#onramper-purchase-button").html("Pay with NEAR");
-                    let contextData = {amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code}
+                    let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                     document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                 } else {
                     $("#onramper-container").hide()
@@ -2911,7 +3007,7 @@ $(document).on('show.bs.modal', '#purchase-twitch-modal', function (event) {
 
     let modal = $(this)
 
-    modal.find('#twitch_token_picture').attr("src",picture);
+    modal.find('#twitch_token_picture').attr("src", picture);
     modal.find('#twitch_token_name').html(name)
     modal.find('#twitch_token_description').html(description)
 
@@ -3155,4 +3251,12 @@ function setCreatorsError(msg) {
 function setGamersError(msg) {
     stopLoading();
     $('#gamers-error').html(msg);
+}
+
+async function LogOut() {
+    if (MoralisUser) {
+        await Moralis.User.logOut();
+        MoralisUser = null;
+        window.location.reload()
+    }
 }

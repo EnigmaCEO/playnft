@@ -18,7 +18,11 @@ var streamer_swiper;
     if (all) {
       return [...document.querySelectorAll(el)]
     } else {
+      try{
       return document.querySelector(el)
+      } catch (error) {
+        return null;
+      }
     }
   }
 
