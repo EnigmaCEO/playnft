@@ -446,6 +446,26 @@ async function getNFTs(chain, address) {
                 }
             })
         }
+
+        if (chain == "tezos") {
+            $.getJSON('https://api.tzkt.io/v1/tokens/balances?account=' + address, async function (data) {
+                console.log("Data: " + JSON.stringify(data));
+
+
+                let token_content = { tokenId: nft[0], tokenName: nft[2], tokenImage: image, tokenIndex: nft[1] };
+
+                $("#token-template")
+                    .tmpl(token_content)
+                    .appendTo("#creators-nfts");
+
+
+                if (!$.trim($("#gamers-nfts").html())) {
+                    setGamersError("No Tokens found for this address.");
+                } else {
+                    openTab("#nav-gamers-nfts");
+                }
+            })
+        }
     } catch (error) {
         console.log(error)
         setCreatorsError("Server Error. Try again?");
@@ -833,6 +853,76 @@ async function getCreatorsNFTs(chain, address) {
                         setCreatorsError("No Tokens found for this address.");
                     } else {
                         openTab("#nav-creators-nfts");
+                    }
+                })
+            })
+        }
+
+        if (chain == "tezos") {
+
+            await fetch('https://api.tzkt.io/v1/tokens/balances?token.metadata.creators.[*]=' + address).then(async function (r) {
+                await r.json().then(async function (data) {
+                    console.log("Data: " + JSON.stringify(data));
+                    var nfts = data;
+                    var nftArray = [];
+
+                    for await (let item of nfts) {
+                        if (!nftArray.includes(item.token.contract.address)) {
+                            nftArray.push(item.token.contract.address);
+                        } else {
+                            continue;
+                        }
+
+                        console.log(item)
+                        if (item.token.metadata) {
+                            if(!item.token.contract.alias || item.token.contract.alias == "") continue;
+                            console.log(item.token.metadata)
+                            let image = null;
+                            if (item.token.metadata.displayUri) image = item.token.metadata.displayUri;
+                            else if (item.token.metadata.uri) image = item.token.metadata.uri;
+                            else if (item.token.metadata.image) image = item.token.metadata.image;
+                            else if (item.token.metadata.artifactUri) image = item.token.metadata.artifactUri;
+
+                            if (!image) continue;
+
+                            await fetch('https://api.tzkt.io/v1/tokens/count?contract=' + item.token.contract.address).then(response => response.text())
+                                .then(totalSupply => { tokenSupply = totalSupply; });
+
+
+                            let token_content = { tokenId: item.token.contract.address, tokenName: item.token.contract.alias, tokenImage: image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: 0, tokenSupply: tokenSupply };
+
+                            $("#creators-token-template")
+                                .tmpl(token_content)
+                                .appendTo("#creators-nfts");
+                        }
+                    }
+                })
+            })
+
+            await fetch('https://api.tzkt.io/v1/tokens/balances?account=' + address + '&balance.gt=0').then(async function (r) {
+                await r.json().then(async function (data) {
+                    console.log("Data: " + JSON.stringify(data));
+                    var nfts = data;
+
+                    for await (let item of nfts) {
+                        console.log(item)
+                        if (item.token.metadata && item.balance > 0) {
+                            if(!item.token.metadata.name || item.token.metadata.name == "") continue;
+                            console.log(item.token.metadata)
+                            let image = null;
+                            if (item.token.metadata.displayUri) image = item.token.metadata.displayUri;
+                            else if (item.token.metadata.uri) image = item.token.metadata.uri;
+                            else if (item.token.metadata.image) image = item.token.metadata.image;
+                            else if (item.token.metadata.artifactUri) image = item.token.metadata.artifactUri;
+
+                            if (!image) continue;
+
+                            let token_content = { tokenId: item.token.contract.address, tokenName: item.token.metadata.name, tokenImage: image.replace("ipfs://", "https://ipfs.io/ipfs/"), tokenIndex: item.token.tokenId };
+
+                            $("#token-template")
+                                .tmpl(token_content)
+                                .appendTo("#creators-nfts");
+                        }
                     }
                 })
             })
@@ -1279,6 +1369,9 @@ $(document).ready(function () {
         if (chain == "stx") {
             $("#creators-wallet-stx").show();
         }
+        if (chain == "tezos") {
+            $("#creators-wallet-tezos").show();
+        }
     });
 
 
@@ -1543,6 +1636,14 @@ $(document).ready(function () {
             $("#creators-nfts").empty();
 
             getCreatorsNFTs("near", walletID)
+
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "tezos") {
+            walletID = $('#creators-walletAddressTezos').val();
+            $("#creators-nfts").empty();
+
+            getCreatorsNFTs("tezos", walletID)
 
         }
     });
@@ -2169,6 +2270,7 @@ $(document).on("click", "li", function () {
         $(this).addClass("active");
         tokenID = $(this).attr('id');
         tokenImage = $(this).data('image');
+        tokenSupply = $(this).data('supply');
 
         let formData = { tokenId: tokenID, wallet: walletID };
         console.log(formData)
@@ -2288,6 +2390,10 @@ $(document).on("click", "li", function () {
                             $("#onramper-purchase-button").html("Pay with NEAR");
                             let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                             document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                        } else if (item.cost > 35 && chainID == "tezos") {
+                            $("#onramper-purchase-button").html("Pay with Tezos");
+                            let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
+                            document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=XTZ&wallets=XTZ:tz1LRffeoVxFY73PEaimeBvhXwzot9NsxnG8&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                         } else {
                             $("#onramper-container").hide()
                         }
@@ -2308,6 +2414,7 @@ $(document).on("click", "li", function () {
         $(this).addClass("active");
         tokenID = $(this).attr('id');
         tokenImage = $(this).data('image');
+        tokenSupply = $(this).data('supply');
 
         var _contentId = contentID;
         var _gameId = gameID;
@@ -2353,6 +2460,10 @@ $(document).on("click", "li", function () {
                             $("#onramper-purchase-button").html("Pay with NEAR");
                             let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                             document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                        } else if (item.cost > 35 && chainID == "tezos") {
+                            $("#onramper-purchase-button").html("Pay with Tezos");
+                            let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
+                            document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=XTZ&wallets=XTZ:tz1LRffeoVxFY73PEaimeBvhXwzot9NsxnG8&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                         } else {
                             $("#onramper-container").hide()
                         }
@@ -2530,6 +2641,10 @@ $(document).on("click", "#gamers-content-select", function () {
                     $("#onramper-purchase-button").html("Pay with NEAR");
                     let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                     document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                } else if (item.cost > 35 && chainID == "tezos") {
+                    $("#onramper-purchase-button").html("Pay with Tezos");
+                    let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
+                    document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=XTZ&wallets=XTZ:tz1LRffeoVxFY73PEaimeBvhXwzot9NsxnG8&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                 } else {
                     $("#onramper-container").hide()
                 }
@@ -2657,6 +2772,10 @@ $(document).on("click", "#creators-content-select", function () {
                     $("#onramper-purchase-button").html("Pay with NEAR");
                     let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
                     document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=NEAR&wallets=NEAR:enigmagames.near&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
+                } else if (item.cost > 35 && chainID == "tezos") {
+                    $("#onramper-purchase-button").html("Pay with Tezos");
+                    let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
+                    document.getElementById('onramper').src = "https://widget.onramper.com?color=4154f1&apiKey=pk_prod_N7LkN3el4iNRotprTQZSEGx9IXrd2x7xqANyQjYaK4E0&country=us&isAmountEditable=false&isAddressEditable=false&onlyCryptos=XTZ&wallets=XTZ:tz1LRffeoVxFY73PEaimeBvhXwzot9NsxnG8&defaultAmount=" + item.cost + "&partnerContext=" + JSON.stringify(contextData)
                 } else {
                     $("#onramper-container").hide()
                 }

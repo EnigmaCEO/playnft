@@ -35,7 +35,7 @@ class ServicesCreators extends HTMLElement {
           </div>
         </div>
 
-        <div class="row spacer">&nbsp;</div>
+        <div class="row spacer-20">&nbsp;</div>
 
         <div class="row">
           <div class="col-12">
@@ -51,50 +51,56 @@ class ServicesCreators extends HTMLElement {
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-enj"
                           value="enj" checked>
-                        <label class="form-check-label" for="creators-chain-enj"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-enj"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/enjin-coin-enj-logo.svg" alt="Enjin" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-avax"
                           value="avalanche">
-                        <label class="form-check-label" for="creators-chain-avax"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-avax"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-heco"
                           value="heco">
-                        <label class="form-check-label" for="creators-chain-heco"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-heco"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/heco-logo.svg" alt="Heco" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-polygon"
                           value="polygon">
-                        <label class="form-check-label" for="creators-chain-polygon"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-polygon"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/polygon-matic-logo.svg" alt="Polygon" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-velas"
                           value="velas">
-                        <label class="form-check-label" for="creators-chain-velas"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-velas"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/velas-vlx-logo.svg" alt="Velas" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-xrp"
                           value="xrp">
-                        <label class="form-check-label" for="creators-chain-xrp"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-xrp"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-solana"
                           value="solana">
-                        <label class="form-check-label" for="creators-chain-solana"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-solana"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/solana-sol-logo.svg" alt="Solana" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-near"
                           value="near">
-                        <label class="form-check-label" for="creators-chain-near"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-near"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/aurora.png" alt="Aurora" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-tezos"
+                          value="tezos">
+                        <label class="form-check-label" for="creators-chain-tezos"><img style="height:50px;padding-bottom: 10px;"
+                            src="/assets/img/tezos-xtz-logo.svg" alt="Tezos" /></label>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -178,6 +184,15 @@ class ServicesCreators extends HTMLElement {
                         <button id="creators-near-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-tezos">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressTezos" id="creators-walletAddressTezos"
+                          class="form-control wallet-address" placeholder="Tezos Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -320,7 +335,7 @@ class ServicesCreators extends HTMLElement {
           </div>
         </div>
 
-        <div class="row spacer">&nbsp;</div>
+        <div class="row spacer-20">&nbsp;</div>
 
         <div class="row">
           <div class="col-12">
@@ -336,50 +351,56 @@ class ServicesCreators extends HTMLElement {
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-enj"
                           value="enj" checked>
-                        <label class="form-check-label" for="creators-chain-enj"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-enj"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/enjin-coin-enj-logo.svg" alt="Enjin" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-avax"
                           value="avalanche">
-                        <label class="form-check-label" for="creators-chain-avax"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-avax"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/avalanche-avax-logo.svg" alt="Avalanche" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-heco"
                           value="heco">
-                        <label class="form-check-label" for="creators-chain-heco"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-heco"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/heco-logo.svg" alt="Heco" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-polygon"
                           value="polygon">
-                        <label class="form-check-label" for="creators-chain-polygon"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-polygon"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/polygon-matic-logo.svg" alt="Polygon" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-velas"
                           value="velas">
-                        <label class="form-check-label" for="creators-chain-velas"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-velas"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/velas-vlx-logo.svg" alt="Velas" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-xrp"
                           value="xrp">
-                        <label class="form-check-label" for="creators-chain-xrp"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-xrp"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/xrp-xrp-logo.svg" alt="XRP" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-solana"
                           value="solana">
-                        <label class="form-check-label" for="creators-chain-solana"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-solana"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/solana-sol-logo.svg" alt="Solana" /></label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-near"
                           value="near">
-                        <label class="form-check-label" for="creators-chain-near"><img style="width:50px"
+                        <label class="form-check-label" for="creators-chain-near"><img style="width:50px;padding-bottom: 10px;"
                             src="/assets/img/aurora.png" alt="Aurora" /></label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-tezos"
+                          value="tezos">
+                        <label class="form-check-label" for="creators-chain-tezos"><img style="height:50px;padding-bottom: 10px;"
+                            src="/assets/img/tezos-xtz-logo.svg" alt="Tezos" /></label>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -463,6 +484,15 @@ class ServicesCreators extends HTMLElement {
                         <button id="creators-near-wallet-connect" class="btn btn-primary" type="button">
                           Connect with Metamask
                         </button>
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-tezos">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressTezos" id="creators-walletAddressTezos"
+                          class="form-control wallet-address" placeholder="Tezos Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
