@@ -487,7 +487,7 @@ class Modals extends HTMLElement {
             <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title">Streamer Token</h3>
+                <h3 class="modal-title">Edit NFT Data</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="streamers-nfts-form" action="#" method="post">
@@ -507,7 +507,7 @@ class Modals extends HTMLElement {
                         </div>
 
                         <div class="col-md-6 mb-3">
-                        <label for="streamers_nft_icon" class="form-label">Upload square image</label>
+                        <label for="streamers_nft_icon" class="form-label">Upload image</label>
                         <input class="form-control" type="file" name="streamers_nft_icon" id="streamers_nft_icon"
                             accept=".png" required>
                         </div>
@@ -524,16 +524,16 @@ class Modals extends HTMLElement {
                         <div class="col-md-6 form-floating mb-3">
                         <select class="form-select" name="streamers_nft_cost" id="streamers_nft_cost"
                             aria-label="Visibility Status">
-                            <option value="tier1" selected="selected">99 Bits</option>
-                            <option value="tier2">199 Bits</option>
-                            <option value="tier3">299 Bits</option>
-                            <option value="tier4">399 Bits</option>
-                            <option value="tier5">499 Bits</option>
-                            <option value="tier6">599 Bits</option>
-                            <option value="tier7">699 Bits</option>
-                            <option value="tier8">799 Bits</option>
-                            <option value="tier9">899 Bits</option>
-                            <option value="tier10">999 Bits</option>
+                            <option value="tier1" selected="selected">$0.99 Bits</option>
+                            <option value="tier2">$1.99 Bits</option>
+                            <option value="tier3">$2.99 Bits</option>
+                            <option value="tier4">$3.99 Bits</option>
+                            <option value="tier5">$4.99 Bits</option>
+                            <option value="tier6">$5.99 Bits</option>
+                            <option value="tier7">$6.99 Bits</option>
+                            <option value="tier8">$7.99 Bits</option>
+                            <option value="tier9">$8.99 Bits</option>
+                            <option value="tier10">$9.99 Bits</option>
                         </select>
                         <label for="streamers_nft_cost">Token Cost</label>
                         </div>

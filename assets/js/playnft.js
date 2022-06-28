@@ -102,6 +102,7 @@ const execute = async () => {
                 $("#add-twitch").hide();
                 $("#streamer-url").html(`<a target="_blank" href="https://www.playnft.io/streamers/?${streamerID}">https://www.playnft.io/streamers/?${streamerID}</a>`)
                 $("#twitch-container").removeClass("d-none");
+                GetTwitchBalance()
             }
 
             let paypalID = MoralisUser.get("paypalID")
@@ -875,7 +876,7 @@ async function getCreatorsNFTs(chain, address) {
 
                         console.log(item)
                         if (item.token.metadata) {
-                            if(!item.token.contract.alias || item.token.contract.alias == "") continue;
+                            if (!item.token.contract.alias || item.token.contract.alias == "") continue;
                             console.log(item.token.metadata)
                             let image = null;
                             if (item.token.metadata.displayUri) image = item.token.metadata.displayUri;
@@ -903,11 +904,11 @@ async function getCreatorsNFTs(chain, address) {
                 await r.json().then(async function (data) {
                     console.log("Data: " + JSON.stringify(data));
                     var nfts = data;
-
+                    
                     for await (let item of nfts) {
                         console.log(item)
                         if (item.token.metadata && item.balance > 0) {
-                            if(!item.token.metadata.name || item.token.metadata.name == "") continue;
+                            if (!item.token.metadata.name || item.token.metadata.name == "") continue;
                             console.log(item.token.metadata)
                             let image = null;
                             if (item.token.metadata.displayUri) image = item.token.metadata.displayUri;
@@ -923,6 +924,108 @@ async function getCreatorsNFTs(chain, address) {
                                 .tmpl(token_content)
                                 .appendTo("#creators-nfts");
                         }
+                    }
+                })
+            })
+        }
+
+        if (chain == "stx") {
+            await fetch('https://stacks-node-api.mainnet.stacks.co/extended/v1/tokens/nft/holdings?tx_metadata=true&principal=' + address).then(async function (r) {
+                await r.json().then(async function (data) {
+                    console.log("Data: " + JSON.stringify(data));
+                    var nfts = data.results;
+                    var nftArray = [];
+
+                    for(let item of nfts) {
+
+                        console.log(item)
+                        if(!item.tx.contract_call) continue;
+
+                        if (item.tx.sender_address.toLowerCase() == address.toLowerCase()) {
+                            if (!nftArray.includes(item.asset_identifier)) {
+                                nftArray.push(item.asset_identifier);
+                            } else {
+                                continue;
+                            }
+                        }
+                        
+                        let contract_address = item.tx.contract_call.contract_id.split('.')[0]
+                        let contract_id = item.tx.contract_call.contract_id.split('.')[1]
+                        let token_metadata = null;
+
+                        await fetch('https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/' + contract_address + '/' + contract_id + '/get-token-uri', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                "sender": item.tx.sender_address, "arguments": [
+                                    item.value.hex
+                                ]
+                            })
+                        }).then(async function (r) {
+                            await r.json().then(async function (data) {
+                                console.log(data)
+                                if (!data.okay) return;
+                                let raw = hex_to_ascii(data.result)
+                                console.log(raw)
+                                let rIndex = raw.indexOf('ipfs://')
+                                let uri = ""
+                                if (rIndex > -1) {
+                                    uri = raw.slice(rIndex)
+                                        .replace("ipfs://", "https://ipfs.io/ipfs/")
+                                        .replace('{id}', item.value.repr.replace('u', ''))
+                                        .replace('ipfs/ipfs', 'ipfs');
+                                } else {
+                                    rIndex = raw.indexOf('https://')
+                                    uri = raw.slice(rIndex).replace('{id}', item.value.repr.replace('u', ''))
+                                }
+                                console.log(uri)
+                                await fetch(uri).then(async function (r) {
+                                    await r.json().then(async function (data) {
+                                        token_metadata = data;
+                                    })
+                                }).catch(e => {
+
+                                })
+                            }).catch(e => {
+
+                            })
+                        })
+
+                        if (token_metadata) {
+                            if (!token_metadata.name || token_metadata.name == "") continue;
+                            console.log(token_metadata)
+                            let image = null;
+                            if (token_metadata.displayUri) image = token_metadata.displayUri;
+                            else if (token_metadata.uri) image = token_metadata.uri;
+                            else if (token_metadata.image) image = token_metadata.image;
+                            else if (token_metadata.artifactUri) image = token_metadata.artifactUri;
+
+                            if (!image) continue;
+
+                            if (item.tx.sender_address.toLowerCase() == address.toLowerCase()) {
+
+                                await fetch('https://stacks-node-api.mainnet.stacks.co/extended/v1/tokens/nft/mints?limit=1&asset_identifier=' + item.asset_identifier).then(response => response.json())
+                                    .then(data => { totalSupply = data.total; });
+
+                                let token_content = { tokenId: item.tx.tx_id, tokenName: token_metadata.name, tokenImage: image.replace("ipfs://", "https://ipfs.io/ipfs/").replace('ipfs/ipfs', 'ipfs'), tokenIndex: 0, tokenSupply: totalSupply };
+
+                                $("#creators-token-template")
+                                    .tmpl(token_content)
+                                    .appendTo("#creators-nfts");
+                            } else {
+                                let token_content = { tokenId: item.tx.tx_id, tokenName: token_metadata.name, tokenImage: image.replace("ipfs://", "https://ipfs.io/ipfs/").replace('ipfs/ipfs', 'ipfs'), tokenIndex: item.value.repr.replace('u', '') };
+
+                                $("#token-template")
+                                    .tmpl(token_content)
+                                    .appendTo("#creators-nfts");
+                            }
+                        }
+
+
+
                     }
                 })
             })
@@ -1644,6 +1747,14 @@ $(document).ready(function () {
             $("#creators-nfts").empty();
 
             getCreatorsNFTs("tezos", walletID)
+
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "stx") {
+            walletID = $('#creators-walletAddressStacks').val();
+            $("#creators-nfts").empty();
+
+            getCreatorsNFTs("stx", walletID)
 
         }
     });
@@ -2735,9 +2846,14 @@ $(document).on("click", "#creators-content-select", function () {
     let _walletId = $(this).data('wallet');
     let _icon = $(this).data('icon');
     let _name = $(this).data('name');
+    let _index = tokenIndex;
     let _mode = "creators";
 
-    let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: 0, chain: chainID, supply: tokenSupply };
+    if(_index != 0) {
+        _mode = "gamers"
+    }
+
+    let formData = { contentId: _contentId, gameId: _gameId, wallet: _walletId, token: _tokenId, mode: _mode, index: _index, chain: chainID, supply: tokenSupply };
     console.log(formData)
 
     $.ajax({
@@ -3150,6 +3266,11 @@ function openTab(tabId) {
     var tab = new bootstrap.Tab(nextTab);
     tab.show();
 
+    if (tabId == "#nav-streamers-review") { // set the streamer storefront url
+        $("#storefront_url").attr("href", "https://www.playnft.io/streamers/?" + streamerID)
+        $("#storefront_url").html("https://www.playnft.io/streamers/?" + streamerID)
+    }
+
 }
 
 function nextTab() {
@@ -3378,4 +3499,13 @@ async function LogOut() {
         MoralisUser = null;
         window.location.reload()
     }
+}
+
+function hex_to_ascii(str1) {
+    var hex = str1.toString();
+    var str = '';
+    for (var n = 0; n < hex.length; n += 2) {
+        str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+    }
+    return str;
 }

@@ -9,7 +9,7 @@ class ServicesStreamers extends HTMLElement {
       <div class="container">
         <header class="section-header">
           <h2>Twitch Streamers</h2>
-          <p>Create Digital Tokens</p>
+          <p>Create NFTs</p>
         </header>
 
         <div class="wizard">
@@ -25,7 +25,7 @@ class ServicesStreamers extends HTMLElement {
                 </a>
               </li>
               <li role="presentation" class="nav-item disabled">
-                <a title="2. Create Tokens" class="nav-link" id="nav-streamers-nfts" role="tab" data-bs-toggle="tab"
+                <a title="2. Create NFTs" class="nav-link" id="nav-streamers-nfts" role="tab" data-bs-toggle="tab"
                   aria-controls="streamers-nfts" href="#list-streamers-nfts">
                   <span class="round-tab"><i class="fas fa-sd-card" style="font-size: 3.7vh"></i></span>
                 </a>
@@ -69,12 +69,12 @@ class ServicesStreamers extends HTMLElement {
                 <div class="col-md-12">
                   <div class="panel panel-primary" id="streamers-nfts-panel">
                     <div class="panel-heading">
-                      <h4>Create Tokens</h4>
+                      <h4>Create NFTs</h4>
                     </div>
                     <div style="text-align: end; padding-bottom: 20px;">
                       <button id="streamers-new-nfts" type="submit" data-bs-toggle="modal"
                         data-bs-target="#streamers-nfts-modal">
-                        New Token
+                        New NFT
                       </button>
                     </div>
                     <div class="panel-body">
@@ -90,11 +90,11 @@ class ServicesStreamers extends HTMLElement {
                 <div class="col-md-12">
                   <div class="panel panel-primary" id="streamers-packages-panel">
                     <div class="panel-heading">
-                      <h4>Add Token Supply</h4>
+                      <h4>Add NFT Supply</h4>
                     </div>
                     <div style="text-align: center; padding-bottom: 20px;">
                       <button id="streamers-extension-btn" type="button" class="btn btn-success">
-                        Continue to Extension
+                        Continue to Storefront
                       </button>
                     </div>
                     <div class="panel-body">
@@ -110,22 +110,14 @@ class ServicesStreamers extends HTMLElement {
                 <div class="col-md-12">
                   <div class="panel panel-primary" id="streamers-review-panel">
                     <div class="panel-heading">
-                      <h4>Twitch Extension Integration</h4>
-                      <p class="section-header">Install the PlayNFT Extension and create a new Panel to start
-                        distributing your tokens.</p>
+                      <h4>NFT Distribution Storefront</h4>
+                      <p class="section-header">Add your stronfront URL to your Twitch profile or share in the chat during a stream to start distributing your NFTs.</p>
                     </div>
                     <div class="panel-body">
                       <div class="flex-shrink-0 text-center">
                         <p class="game-icon">
-                          <a href="https://dashboard.twitch.tv/extensions/3v4y6bwztvpyxfeoxq5ik79iosx3km-1.0.0"
-                            target="_blank">
-                            <img src="assets/img/extensions.png" class="img-fluid" alt="Twitch Extensions" /><br>
-                            <button id="streamers-extension-btn" type="button" class="btn btn-primary">
-                              <span class="fa fa-external-link"></span> Install Extension
-                            </button>
-                          </a>
+                          <a target="_blank" id="storefront_url" href=""></a>
                         </p>
-
                       </div>
 
                     </div>

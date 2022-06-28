@@ -64,8 +64,8 @@
         <section id="section-streamers" class="gamers">
             <div class="container">
                 <header class="section-header">
-                    <h2>Twitch Tokens</h2>
-                    <p>Token Inventory</p>
+                    <h2>Twitch NFTs</h2>
+                    <p>NFT Inventory</p>
                 </header>
 
                 <div class="wizard">
@@ -81,7 +81,7 @@
                                 </a>
                             </li>
                             <li role="presentation" class="nav-item disabled">
-                                <a title="2. Token Inventory" class="nav-link" id="nav-twitch-nfts" role="tab"
+                                <a title="2. NFT Inventory" class="nav-link" id="nav-twitch-nfts" role="tab"
                                     data-bs-toggle="tab" aria-controls="twitch-nfts" href="#list-twitch-nfts">
                                     <span class="round-tab"><i class="fas fa-sd-card"
                                             style="font-size: 3.7vh"></i></span>
@@ -130,7 +130,7 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-primary" id="twitch-nfts-panel">
                                         <div class="panel-heading">
-                                            <h4>Streamer Tokens</h4>
+                                            <h4>Streamer NFTs</h4>
                                         </div>
                                         <div style="text-align: end; padding-bottom: 20px;">
 
@@ -231,9 +231,8 @@
             Date Acquired: ${date}</p>
             <div class="actions">
               {{if supply > 0 }}
-                <a href="#" id="twitch-nfts-select" class="btn-details-select" data-id="${transactionId}" data-streamerid="${streamerId}" >Convert to NFT</a>
+                <a href="#" id="twitch-nfts-select" class="btn-details-select" data-id="${transactionId}" data-streamerid="${streamerId}" >Mint NFT</a>
               {{/if}}
-              <a href="#" id="twitch-nfts-download" class="btn-details" data-content-id="${id}" data-content-streamer="${streamerId}">Download</a>
             </div>
           </div>
         </li>

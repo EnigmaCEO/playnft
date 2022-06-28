@@ -19,8 +19,7 @@ class Services extends HTMLElement {
                     <i class="ri-camera-3-line icon"></i>
                     <h3>Game Streamers</h3>
                     <p>
-                        Grow your audience and expand your brand with your own Digital Tokens.
-                        Distribute using our Twitch extension.
+                        Grow your audience and expand your brand with your own NFTs that can be minted to multiple blockchains.
                     </p>
                     <div class="pricing">
                         <div class="price"></div>

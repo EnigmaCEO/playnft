@@ -6,7 +6,7 @@ class ServicesCreators extends HTMLElement {
   connectedCallback() {
     if (this.attributes.modal) {
       this.innerHTML = `<div class="container">
-        
+
         <div class="wizard">
           <div class="wizard-inner">
             <div class="connecting-line" style="width: 60%"></div>
@@ -102,6 +102,12 @@ class ServicesCreators extends HTMLElement {
                         <label class="form-check-label" for="creators-chain-tezos"><img style="height:50px;padding-bottom: 10px;"
                             src="/assets/img/tezos-xtz-logo.svg" alt="Tezos" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-stx"
+                          value="stx">
+                        <label class="form-check-label" for="creators-chain-stx"><img style="height:50px;padding-bottom: 10px;"
+                            src="/assets/img/stacks-stx-logo.svg" alt="Stacks" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -190,6 +196,15 @@ class ServicesCreators extends HTMLElement {
                       <div class="col-md-6">
                         <input type="text" name="walletAddressTezos" id="creators-walletAddressTezos"
                           class="form-control wallet-address" placeholder="Tezos Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-stx">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressStacks" id="creators-walletAddressStacks"
+                          class="form-control wallet-address" placeholder="Stacks Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         
@@ -402,6 +417,12 @@ class ServicesCreators extends HTMLElement {
                         <label class="form-check-label" for="creators-chain-tezos"><img style="height:50px;padding-bottom: 10px;"
                             src="/assets/img/tezos-xtz-logo.svg" alt="Tezos" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-stx"
+                          value="stx">
+                        <label class="form-check-label" for="creators-chain-stx"><img style="height:50px;padding-bottom: 10px;"
+                            src="/assets/img/stacks-stx-logo.svg" alt="Stacks" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -490,6 +511,15 @@ class ServicesCreators extends HTMLElement {
                       <div class="col-md-6">
                         <input type="text" name="walletAddressTezos" id="creators-walletAddressTezos"
                           class="form-control wallet-address" placeholder="Tezos Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-stx">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressStacks" id="creators-walletAddressStacks"
+                          class="form-control wallet-address" placeholder="Stacks Wallet Address" required />
                       </div>
                       <div class="col-md-6 text-end">
                         

@@ -318,7 +318,7 @@
           />
         </div>
         <div class="flex-grow-1 ms-3">
-          <div class="cost">${cost} Bits</div>
+          <div class="cost">$${cost}</div>
           <strong>${name}</strong>
           <p>Status: ${status_text}<br/>
           Supply: ${supply}</p>
@@ -433,7 +433,7 @@
                     var status = "Offline"
                     if (item.status == "1") status = "Live"
 
-                    let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                    let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost]/100.0, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                     $("#streamers-nfts-template")
                       .tmpl(game_content)
                       .appendTo("#streamers-nfts");

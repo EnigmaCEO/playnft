@@ -160,7 +160,7 @@
                                         <p><b>Pending Balance:</b> </p>
                                     </div>
                                     <div class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-end">
-                                        <p>$0.00</p>
+                                        <p id="streamer-balance"></p>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-floating mb-3">
@@ -237,6 +237,24 @@
 
             location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
 
+        }
+
+        function GetTwitchBalance() {
+            $("#streamer-balance").html('$0.00')
+            let formData = { streamer_id: streamerID };
+
+            $.ajax({
+                url:
+                    "https://api.playnft.io/getaccount",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify(formData),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    $("#streamer-balance").html('$0.00')
+                },
+            });
         }
 
         $(document).on("click", "#register-twitch", function (e) {
