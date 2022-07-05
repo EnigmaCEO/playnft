@@ -2935,6 +2935,7 @@ $(document).on("click", "#streamers-nfts-select", function () {
 
     let id = $(this).data('id');
     let supply = $(this).data('supply');
+    console.log(supply)
 
     if (supply == 0) {
         startLoading();
@@ -2980,6 +2981,8 @@ $(document).on("click", "#streamers-nfts-select", function () {
         });
 
     } else {
+        $("#streamers-packages").empty();
+        $('#streamers-extension-btn').show()
         openTab("#nav-streamers-packages");
     }
 
@@ -3210,7 +3213,7 @@ $(document).on('show.bs.modal', '#streamers-nfts-modal', function (event) {
     if (gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
     modal.find('#streamers_nft_id').val(Id)
     modal.find('#streamer_id').val(streamerID)
-    if (gameCost) modal.find('#streamers_nft_cost').val(TIERS[gameCost])
+    if (gameCost) modal.find('#streamers_nft_cost').val(TIERS[gameCost*100])
 })
 
 $(document).on('show.bs.modal', '#purchase-content-modal', function (event) {

@@ -524,16 +524,16 @@ class Modals extends HTMLElement {
                         <div class="col-md-6 form-floating mb-3">
                         <select class="form-select" name="streamers_nft_cost" id="streamers_nft_cost"
                             aria-label="Visibility Status">
-                            <option value="tier1" selected="selected">$0.99 Bits</option>
-                            <option value="tier2">$1.99 Bits</option>
-                            <option value="tier3">$2.99 Bits</option>
-                            <option value="tier4">$3.99 Bits</option>
-                            <option value="tier5">$4.99 Bits</option>
-                            <option value="tier6">$5.99 Bits</option>
-                            <option value="tier7">$6.99 Bits</option>
-                            <option value="tier8">$7.99 Bits</option>
-                            <option value="tier9">$8.99 Bits</option>
-                            <option value="tier10">$9.99 Bits</option>
+                            <option value="tier1" selected="selected">$0.99</option>
+                            <option value="tier2">$1.99</option>
+                            <option value="tier3">$2.99</option>
+                            <option value="tier4">$3.99</option>
+                            <option value="tier5">$4.99</option>
+                            <option value="tier6">$5.99</option>
+                            <option value="tier7">$6.99</option>
+                            <option value="tier8">$7.99</option>
+                            <option value="tier9">$8.99</option>
+                            <option value="tier10">$9.99</option>
                         </select>
                         <label for="streamers_nft_cost">Token Cost</label>
                         </div>
