@@ -1185,10 +1185,7 @@ async function moralisLogin(chain) {
     console.log(CHAINS[chain])
     if (!user) {
         let user = await Moralis.authenticate({
-            provider: "web3Auth",
-            clientId: "BBE90Y0qXo6gqKvTP_JL6GkIwnNq3uiuhHaBQGbEWcAOqthYPVijiEi9Uq1YNrJpxxdx7jts_oEGK20hc583koM",
-            signingMessage: "PlayNFT using Moralis",
-            type: chain
+            signingMessage: "PlayNFT using Moralis"
         })
             .then(async function (user) {
                 console.log(user)
