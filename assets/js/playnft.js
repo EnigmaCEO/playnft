@@ -932,7 +932,7 @@ async function getCreatorsNFTs(chain, address) {
         }
 
         if (chain == "stx") {
-            await fetch('https://stacks-node-api.testnet.stacks.co/extended/v1/tokens/nft/holdings?tx_metadata=true&principal=' + address).then(async function (r) {
+            await fetch('https://stacks-node-api.mainnet.stacks.co/extended/v1/tokens/nft/holdings?tx_metadata=true&principal=' + address).then(async function (r) {
                 await r.json().then(async function (data) {
                     console.log("Data: " + JSON.stringify(data));
                     var nfts = data.results;
@@ -955,7 +955,7 @@ async function getCreatorsNFTs(chain, address) {
                         let contract_id = item.tx.contract_call.contract_id.split('.')[1]
                         let token_metadata = null;
 
-                        await fetch('https://stacks-node-api.testnet.stacks.co/v2/contracts/call-read/' + contract_address + '/' + contract_id + '/get-token-uri', {
+                        await fetch('https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/' + contract_address + '/' + contract_id + '/get-token-uri', {
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
