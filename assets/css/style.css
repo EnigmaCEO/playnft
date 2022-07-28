@@ -2813,7 +2813,7 @@ h3 {
 .main-timeline .timeline:nth-child(4n+3) .title{ color: #3A3270; }
 .main-timeline .timeline:nth-child(4n+4):before,
 .main-timeline .timeline:nth-child(4n+4):after{
-  background-color: #0A2C80;
+  background-color: #ff0050;
 }
 .main-timeline .timeline:nth-child(4n+4) .timeline-content{ background: linear-gradient(#FE2C55,#ff0050); }
 .main-timeline .timeline:nth-child(4n+4) .title{ color: #ff0050; }

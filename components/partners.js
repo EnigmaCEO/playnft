@@ -33,9 +33,6 @@ class Partners extends HTMLElement {
                     <img src="assets/img/partners/heco.jpeg" class="img-fluid" alt="HECO" />
                     </div>
                     <div class="swiper-slide">
-                    <img src="assets/img/partners/coinpayments.png" class="img-fluid" alt="CoinPayments" />
-                    </div>
-                    <div class="swiper-slide">
                     <img src="assets/img/partners/covalent.png" class="img-fluid" alt="Covalent" />
                     </div>
                 </div>

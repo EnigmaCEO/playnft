@@ -267,19 +267,7 @@ class ServicesGamers extends HTMLElement {
                           <strong id="gamers-review-name"></strong>
                         </p>
                         <p>
-                        <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
-                          <input type="hidden" name="cmd" value="_pay_simple">
-                          <input type="hidden" name="reset" value="1">
-                          <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
-                          <input type="hidden" name="currency" value="USD">
-                          <input type="hidden" name="amountf" id="amountf" value="5.00">
-                          <input type="hidden" name="item_number" id="item_number" value="2">
-                          <input type="hidden" name="invoice" id="invoice" value="7">
-                          <input type="hidden" name="custom" id="custom" value="7">
-                          <input type="hidden" name="item_name" id="item_name" value="Test NFT Item">
-                          <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
-                            alt="Buy Now with CoinPayments.net">
-                        </form>
+                        
                         <span id="gamers-review-cost"></span>
                         </p>
 

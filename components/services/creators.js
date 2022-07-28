@@ -255,21 +255,7 @@ class ServicesCreators extends HTMLElement {
                         </p>
                         <div class="container">
                           <div class="row align-items-center">
-                            <div class="col text-center">
-                              <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
-                                <input type="hidden" name="cmd" value="_pay_simple">
-                                <input type="hidden" name="reset" value="1">
-                                <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
-                                <input type="hidden" name="currency" value="USD">
-                                <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
-                                <input type="hidden" name="item_number" id="creators-item_number" value="2">
-                                <input type="hidden" name="invoice" id="creators-invoice" value="7">
-                                <input type="hidden" name="custom" id="creators-custom" value="7">
-                                <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
-                                <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
-                                  alt="Buy Now with CoinPayments.net">
-                              </form>
-                            </div>
+                            
                             <div id="onramper-container" class="col text-center">
                               <button id="onramper-purchase-button" class="btn btn-primary" type="button"></button>
                             </div>
@@ -599,21 +585,7 @@ class ServicesCreators extends HTMLElement {
                         </p>
                         <div class="container">
                           <div class="row align-items-center">
-                            <div class="col text-center">
-                              <form action="https://www.coinpayments.net/index.php" method="post" target="_top">
-                                <input type="hidden" name="cmd" value="_pay_simple">
-                                <input type="hidden" name="reset" value="1">
-                                <input type="hidden" name="merchant" value="aca09a5c8eadff03ff731f14e42f7ae1">
-                                <input type="hidden" name="currency" value="USD">
-                                <input type="hidden" name="amountf" id="creators-amountf" value="5.00">
-                                <input type="hidden" name="item_number" id="creators-item_number" value="2">
-                                <input type="hidden" name="invoice" id="creators-invoice" value="7">
-                                <input type="hidden" name="custom" id="creators-custom" value="7">
-                                <input type="hidden" name="item_name" id="creators-item_name" value="Test NFT Item">
-                                <input type="image" src="https://www.coinpayments.net/images/pub/buynow-wide-blue.png"
-                                  alt="Buy Now with CoinPayments.net">
-                              </form>
-                            </div>
+                            
                             <div id="onramper-container" class="col text-center">
                               <button id="onramper-purchase-button" class="btn btn-primary" type="button"></button>
                             </div>

@@ -12,6 +12,8 @@ var chainID = "enj";
 var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
 var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
 var CHAINS = { eth: 1, avalanche: 43114, polygon: 137, heco: 128, near: 1313161554 };
+var CURRENCY = {enj: 'JENJ', stx: 'STX'};
+
 var simplified_abi = [
     {
         'inputs': [{ 'internalType': 'address', 'name': 'owner', 'type': 'address' }],
@@ -114,7 +116,7 @@ const execute = async () => {
             let twitchID = MoralisUser.get("twitchID")
             if (twitchID && twitchID != "") {
                 console.log(twitchID)
-                streamerID = twitchID;
+                buyerID = twitchID;
 
                 GetTwitchInventory()
             }
@@ -930,7 +932,7 @@ async function getCreatorsNFTs(chain, address) {
         }
 
         if (chain == "stx") {
-            await fetch('https://stacks-node-api.mainnet.stacks.co/extended/v1/tokens/nft/holdings?tx_metadata=true&principal=' + address).then(async function (r) {
+            await fetch('https://stacks-node-api.testnet.stacks.co/extended/v1/tokens/nft/holdings?tx_metadata=true&principal=' + address).then(async function (r) {
                 await r.json().then(async function (data) {
                     console.log("Data: " + JSON.stringify(data));
                     var nfts = data.results;
@@ -953,7 +955,7 @@ async function getCreatorsNFTs(chain, address) {
                         let contract_id = item.tx.contract_call.contract_id.split('.')[1]
                         let token_metadata = null;
 
-                        await fetch('https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/' + contract_address + '/' + contract_id + '/get-token-uri', {
+                        await fetch('https://stacks-node-api.testnet.stacks.co/v2/contracts/call-read/' + contract_address + '/' + contract_id + '/get-token-uri', {
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
@@ -1007,7 +1009,7 @@ async function getCreatorsNFTs(chain, address) {
 
                             if (item.tx.sender_address.toLowerCase() == address.toLowerCase()) {
 
-                                await fetch('https://stacks-node-api.mainnet.stacks.co/extended/v1/tokens/nft/mints?limit=1&asset_identifier=' + item.asset_identifier).then(response => response.json())
+                                await fetch('https://stacks-node-api.testnet.stacks.co/extended/v1/tokens/nft/mints?limit=1&asset_identifier=' + item.asset_identifier).then(response => response.json())
                                     .then(data => { totalSupply = data.total; });
 
                                 let token_content = { tokenId: item.tx.tx_id, tokenName: token_metadata.name, tokenImage: image.replace("ipfs://", "https://ipfs.io/ipfs/").replace('ipfs/ipfs', 'ipfs'), tokenIndex: 0, tokenSupply: totalSupply };
@@ -2486,17 +2488,12 @@ $(document).on("click", "li", function () {
                 if (response) {
                     response.forEach(function (item) {
 
-                        $("#creators-review-cost").html("Total: $" + item.cost)
+                        $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
                         $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                         $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                         $("#creators-review-name").html(_name)
 
-                        $('#creators-amountf').val(item.cost)
-                        $('#creators-item_number').val(_contentId)
-                        $('#creators-invoice').val(item.orderId)
-                        $('#creators-custom').val(item.code)
-                        $('#creators-item_name').val(_name)
-
+                        
                         if (item.cost > 35 && chainID == "near") {
                             $("#onramper-purchase-button").html("Pay with NEAR");
                             let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
@@ -2556,17 +2553,13 @@ $(document).on("click", "li", function () {
                 if (response) {
                     response.forEach(function (item) {
 
-                        $("#creators-review-cost").html("Total: $" + item.cost)
+                        $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
+                
                         $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                         $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                         $("#creators-review-name").html(_name)
 
-                        $('#creators-amountf').val(item.cost)
-                        $('#creators-item_number').val(_contentId)
-                        $('#creators-invoice').val(item.orderId)
-                        $('#creators-custom').val(item.code)
-                        $('#creators-item_name').val(_name)
-
+                        
                         if (item.cost > 35 && chainID == "near") {
                             $("#onramper-purchase-button").html("Pay with NEAR");
                             let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
@@ -2737,17 +2730,13 @@ $(document).on("click", "#gamers-content-select", function () {
 
             response.forEach(function (item) {
 
-                $("#creators-review-cost").html("Total: $" + item.cost)
+                $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
+                        
                 $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                 $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                 $("#creators-review-name").html(_name)
 
-                $('#creators-amountf').val(item.cost)
-                $('#creators-item_number').val(_contentId)
-                $('#creators-invoice').val(item.orderId)
-                $('#creators-custom').val(item.code)
-                $('#creators-item_name').val(_name)
-
+                
                 if (item.cost > 35 && chainID == "near") {
                     $("#onramper-purchase-button").html("Pay with NEAR");
                     let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
@@ -2873,16 +2862,11 @@ $(document).on("click", "#creators-content-select", function () {
             response.forEach(function (item) {
 
 
-                $("#creators-review-cost").html("Total: $" + item.cost)
+                $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
+                        
                 $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                 $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                 $("#creators-review-name").html(_name)
-
-                $('#creators-amountf').val(item.cost)
-                $('#creators-item_number').val(_contentId)
-                $('#creators-invoice').val(item.orderId)
-                $('#creators-custom').val(item.code)
-                $('#creators-item_name').val(_name)
 
                 if (item.cost > 35 && chainID == "near") {
                     $("#onramper-purchase-button").html("Pay with NEAR");

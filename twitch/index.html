@@ -146,16 +146,52 @@
                             <div class="tab-pane fade" id="list-twitch-wallet" role="tabpanel"
                                 aria-labelledby="nav-twitch-wallet">
                                 <div class="col-lg-12">
-                                    <h4>Input your Wallet address</h4>
+                                    <h4>Choose Blockchain for Minting</h4>
                                     <form id="twitch-scan-form" action="#" method="post">
+                                        <input type="hidden" name="walletMode" value="creators" />
+
+                                        <div class="gy-4">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="creators-chain"
+                                                    id="creators-chain-enj" value="enj" checked>
+                                                <label class="form-check-label" for="creators-chain-enj"><img
+                                                        style="width:50px;padding-bottom: 10px;"
+                                                        src="/assets/img/enjin-coin-enj-logo.svg" alt="Enjin" /></label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="creators-chain"
+                                                    id="creators-chain-stx" value="stx">
+                                                <label class="form-check-label" for="creators-chain-stx"><img
+                                                        style="width:50px;padding-bottom: 10px;"
+                                                        src="/assets/img/stacks-stx-logo.svg" alt="Stacks" /></label>
+                                            </div>
+                                        </div>
+                                        <div class="row spacer-20">&nbsp;</div>
+                                        <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
+                                            <div class="col-md-6">
+                                                <input type="text" name="walletAddress" id="twitch-walletAddress"
+                                                    class="form-control wallet-address"
+                                                    placeholder="Ethereum Wallet Address" required />
+                                            </div>
+                                            <div class="col-md-6 text-end">
+                                                <a href="https://enjin.io/software/wallet" target="_blank">Download the
+                                                    Enjin Wallet</a>
+                                            </div>
+                                        </div>
+                                        <div class="row gy-4 chain-wallet" id="creators-wallet-stx">
+                                            <div class="col-md-6">
+                                                <input type="text" name="walletAddressStacks"
+                                                    id="twitch-walletAddressStacks" class="form-control wallet-address"
+                                                    placeholder="Stacks Wallet Address" required />
+                                            </div>
+                                            <div class="col-md-6 text-end">
+
+                                            </div>
+                                        </div>
+                                        <div class="row spacer-20">&nbsp;</div>
                                         <div class="row gy-4">
                                             <div class="col-md-12 text-center">
-                                                <input type="text" name="walletAddress" id="twitch-walletAddress"
-                                                    class="form-control" placeholder="Ethereum Wallet Address"
-                                                    required />
-                                            </div>
-
-                                            <div class="col-md-12 text-center">
+                                                <div id="twitch-error" style="color: red"></div>
                                                 <button id="twitch-scan-wallet" class="btn-read-more" type="submit">
                                                     Mint NFT!
                                                 </button>
@@ -228,7 +264,11 @@
           <div class="flex-grow-1 ms-3">
             <strong>${name}</strong>
             <p>Streamer: ${streamer}<br/>
-            Date Acquired: ${date}</p>
+            Date Acquired: ${date}<br/>
+            {{if claimed == 1 }}
+            Chain Minted: ${chain}<br/>
+            {{/if}}
+        </p>
             <div class="actions">
               {{if supply > 0 }}
                 <a href="#" id="twitch-nfts-select" class="btn-details-select" data-id="${transactionId}" data-streamerid="${streamerId}" >Mint NFT</a>
@@ -355,10 +395,19 @@
 
     $("#twitch-scan-form").on("submit", function (e) {
         e.preventDefault();
+        $('#twitch-error').empty();
+        console.log(chainID)
 
-        walletID = $('#twitch-walletAddress').val()
-        let formData = { transactionId: transactionID, streamerId: streamerID, wallet: walletID, buyerId: buyerID };
+        if ($('input[name="creators-chain"]:checked').val() == "enj") {
+            walletID = $('#twitch-walletAddress').val();
+        }
 
+        if ($('input[name="creators-chain"]:checked').val() == "stx") {
+            walletID = $('#twitch-walletAddressStacks').val();
+        }
+        
+        let formData = { transactionId: transactionID, streamerId: streamerID, wallet: walletID, buyerId: buyerID, chain: chainID };
+        console.log(formData)
         $.ajax({
             url:
                 "https://api.playnft.io/mintnft",
@@ -370,8 +419,12 @@
             success: function (data) {
                 console.info(data);
                 let response = jQuery.parseJSON(data);
-
-                openTab("#nav-twitch-review");
+                console.info(response);
+                if (response && response[0].error) {
+                    $('#twitch-error').html(response[0].error);
+                } else {
+                    openTab("#nav-twitch-review");
+                }
             },
         });
     });
@@ -394,7 +447,7 @@
 
     function GetTwitchInventory() {
         startLoading()
-        let formData = { streamer_id: streamerID, mode: "buyer" };
+        let formData = { streamer_id: buyerID, mode: "buyer" };
 
         $.ajax({
             url:
@@ -421,9 +474,14 @@
                         second: 'numeric', // numeric, 2-digit
                     })
 
-                    if (item.claimed == 1) item.supply = 0;
+                    let chain = "";
+                    if (item.claimed == 1) {
+                        item.supply = 0;
+                        if(item.chain == "enj") chain = "Enjin Jumpnet";
+                        if(item.chain == "stx") chain = "Stacks";
+                    }
 
-                    let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId, supply: item.supply };
+                    let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId, supply: item.supply, claimed: item.claimed, chain: chain };
                     $("#twitch-nfts-template")
                         .tmpl(game_content)
                         .appendTo("#twitch-nfts");
