@@ -241,7 +241,7 @@
 
         function GetTwitchBalance() {
             $("#streamer-balance").html('$0.00')
-            let formData = { streamer_id: streamerID };
+            let formData = { streamerId: streamerID };
 
             $.ajax({
                 url:
@@ -252,7 +252,10 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (data) {
-                    $("#streamer-balance").html('$0.00')
+                    console.info(data);
+                    let response = jQuery.parseJSON(data);
+
+                    $("#streamer-balance").html('$' + response.balance)
                 },
             });
         }
