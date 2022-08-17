@@ -16,7 +16,13 @@ class Header extends HTMLElement {
                     <nav id="navbar" class="navbar">
                         <ul>
                             <li><a class="nav-link scrollto active" href="../">Home</a></li>
-                            
+                            <li class="dropdown"><a href="#"><span>Utility Marketplace</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                <li><a class="nav-link" href="/creators/">Content Creators</a></li>
+                                <li><a class="nav-link" href="/games/">Blockchain Games</a></li>
+                                <li><a class="nav-link" href="/collections/">NFT Collections</a></li>
+                                </ul>
+                            </li>
                             <li id="header_account" class="dropdown d-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
                                 <li><a class="nav-link" href="/account/">Dashboard</a></li>

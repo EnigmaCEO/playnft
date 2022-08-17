@@ -28,7 +28,7 @@ class About extends HTMLElement {
                             <img style="width:50px" src="assets/img/velas-vlx-logo.svg" alt="Velas" />
                             <img style="width:50px" src="assets/img/near-protocol-near-logo.svg" alt="NEAR Protocol" />
                             <img style="width:50px" src="assets/img/solana-sol-logo.svg" alt="Solana" />
-                            <img style="width:50px" src="assets/img/tezos-xtz-logo.svg" alt="Tezos" />
+                            <img style="height:50px" src="assets/img/tezos-xtz-logo.svg" alt="Tezos" />
                             <img style="width:50px" src="assets/img/stacks-stx-logo.svg" alt="Stacks" />
                         </p>
                     </div>
