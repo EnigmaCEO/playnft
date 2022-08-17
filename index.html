@@ -10,6 +10,17 @@
 
   <meta content="nft" name="keywords" />
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NTBHF6SC72"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NTBHF6SC72');
+</script>
+
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon" />
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
@@ -41,7 +52,7 @@
     referrerpolicy="origin"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  <script src="https://unpkg.com/moralis/dist/moralis.min.js"></script>
+  <script src="https://unpkg.com/moralis-v1@latest/dist/moralis.min.js"></script>
   <script src='https://unpkg.com/xrpl@2.1.0-beta.1'></script>
   <script src="https://unpkg.com/@web3auth/web3auth@latest/dist/web3auth.umd.min.js"></script>
 
@@ -387,68 +398,140 @@
       });
 
       console.log(params)
-      if (params.access_token && params.token_type && params.state && params.id_token) {
+      if (params.access_token && params.token_type && params.state) {
         var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
         let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
-        if (params.state == state) {
+        let service = params.state.split('%7C')[0];
+        let _state = params.state.split('%7C')[1];
+
+        if (params.state.includes('%257C')) {
+          service = params.state.split('%257C')[0];
+          _state = params.state.split('%257C')[1];
+        }
+
+        if (_state == state) {
           hideSections();
           $("#section-streamers").show();
           startLoading();
 
-          $.ajax({
-            url: 'https://id.twitch.tv/oauth2/userinfo',
-            type: 'GET',
-            beforeSend: function (xhr) {
-              xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
-            },
-            data: {},
-            success: function (data) {
-              console.info(data);
+          if (service == "youtube") {
+            $.ajax({
+              url: 'https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true',
+              type: 'GET',
+              beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+              },
+              data: {},
+              success: function (data) {
+                console.info(data);
 
-              if (data.aud != clientID) return;
-              if (data.email_verified == false) {
-                alert("Twitch Email must be verified!");
-                return;
+                if (data.items.length == 0) return;
+                if (!data.items[0].snippet.customUrl) {
+                  alert("YouTube custom URL must be set!");
+                  stopLoading();
+                  return;
+                }
+
+                serviceID = service;
+                streamerID = data.items[0].id;
+                let name = data.items[0].snippet.customUrl;
+                let picture = data.items[0].snippet.thumbnails.medium.url;
+                streamerName = name;
+
+                let formData = { streamer_id: streamerID, streamer_name: name, streamer_email: '', streamer_picture: picture, mode: "streamer", service: service };
+
+                $.ajax({
+                  url:
+                    "https://api.playnft.io/getnfts",
+                  type: "POST",
+                  crossDomain: true,
+                  data: JSON.stringify(formData),
+                  dataType: "json",
+                  contentType: "application/json",
+                  success: function (data) {
+                    console.info(data);
+                    let response = jQuery.parseJSON(data);
+
+                    $("#streamers-nfts").empty();
+
+                    response.forEach(function (item) {
+                      var status = "Offline"
+                      if (item.status == "1") status = "Live"
+
+                      let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost] / 100.0, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                      $("#streamers-nfts-template")
+                        .tmpl(game_content)
+                        .appendTo("#streamers-nfts");
+                    });
+
+                    openTab("#nav-streamers-nfts");
+                  },
+                });
+
+
               }
+            });
+          }
 
-              streamerID = data.sub;
+          if (service == "twitch") {
+            $.ajax({
+              url: 'https://id.twitch.tv/oauth2/userinfo',
+              type: 'GET',
+              beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+              },
+              data: {},
+              success: function (data) {
+                console.info(data);
 
-              let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "streamer" };
+                if (data.aud != clientID) return;
+                if (data.email_verified == false) {
+                  alert("Twitch Email must be verified!");
+                  stopLoading();
+                  return;
+                }
 
-              $.ajax({
-                url:
-                  "https://api.playnft.io/getnfts",
-                type: "POST",
-                crossDomain: true,
-                data: JSON.stringify(formData),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (data) {
-                  console.info(data);
-                  let response = jQuery.parseJSON(data);
+                streamerID = data.sub;
+                streamerName = data.preferred_username;
 
-                  $("#streamers-nfts").empty();
+                let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "streamer", service: service };
+                console.log(formData)
+                $.ajax({
+                  url:
+                    "https://api.playnft.io/getnfts",
+                  type: "POST",
+                  crossDomain: true,
+                  data: JSON.stringify(formData),
+                  dataType: "json",
+                  contentType: "application/json",
+                  success: function (data) {
+                    console.info(data);
+                    let response = jQuery.parseJSON(data);
 
-                  response.forEach(function (item) {
-                    var status = "Offline"
-                    if (item.status == "1") status = "Live"
+                    $("#streamers-nfts").empty();
 
-                    let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost]/100.0, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
-                    $("#streamers-nfts-template")
-                      .tmpl(game_content)
-                      .appendTo("#streamers-nfts");
-                  });
+                    response.forEach(function (item) {
+                      var status = "Offline"
+                      if (item.status == "1") status = "Live"
 
-                  openTab("#nav-streamers-nfts");
-                },
-              });
+                      let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost] / 100.0, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                      $("#streamers-nfts-template")
+                        .tmpl(game_content)
+                        .appendTo("#streamers-nfts");
+                    });
+
+                    openTab("#nav-streamers-nfts");
+                  },
+                });
 
 
-            },
-            error: function (error) {
-              console.info(error);
-            },
-          });
+              },
+              error: function (error) {
+                console.info(error);
+                stopLoading();
+              },
+            });
+          }
         }
       }
     });

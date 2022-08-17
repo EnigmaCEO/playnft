@@ -16,10 +16,10 @@ class Services extends HTMLElement {
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-box purple">
-                    <i class="ri-camera-3-line icon"></i>
-                    <h3>Game Streamers</h3>
+                    <i class="fa fa-twitch icon"></i> <i class="fa fa-youtube icon"></i> <i class="fa-brands fa-tiktok icon"></i>
+                    <h3>Content Creators</h3>
                     <p>
-                        Grow your audience and expand your brand with your own NFTs that can be minted to multiple blockchains.
+                        Grow your audience and expand your brand with your own multi-chain NFTs. No blockchain knowledge needed!
                     </p>
                     <div class="pricing">
                         <div class="price"></div>

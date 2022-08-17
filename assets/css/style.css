@@ -2395,6 +2395,7 @@ button[type="submit"]:hover {
 
 .game-icon img {
   width: 128px;
+  min-height: 128px;
 }
 
 .content-icon {
@@ -2404,6 +2405,17 @@ button[type="submit"]:hover {
 .content-icon img {
   width: 200px;
 }
+
+.creator-icon {
+  color: #4154f1;
+  font-size: xxx-large;
+}
+
+.account-container {
+  background-color: #f6f9ff;
+  padding: 10px;
+}
+
 
 h4 {
   font-size: 16px;

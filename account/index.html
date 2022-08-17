@@ -10,6 +10,17 @@
 
     <meta content="nft" name="keywords" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTBHF6SC72"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NTBHF6SC72');
+    </script>
+
+
     <!-- Favicons -->
     <link href="../assets/img/favicon.png" rel="icon" />
     <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
@@ -40,7 +51,7 @@
         referrerpolicy="origin"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script src="https://unpkg.com/moralis-v1@latest/dist/moralis.min.js"></script>
     <script src="https://unpkg.com/@web3auth/web3auth@latest/dist/web3auth.umd.min.js"></script>
 
     <script>
@@ -80,11 +91,19 @@
                     <div class="row justify-content-md-center">
                         <div class="col-4 register-buttons" onclick="TwitchLogin()">
                             <img src="/assets/img/twitch.svg">
-                            <p style="font-size:calc(100% + 0.5vw)">Connect using Twitch</p>
+                            <p style="font-size:calc(100% + 0.5vw)">Connect with Twitch</p>
                         </div>
                         <div class="col-4 register-buttons" onclick="MetaMaskLogin()">
                             <img src="/assets/img/metamask.svg">
-                            <p style="font-size:calc(100% + 0.5vw)">Connect using MetaMask</p>
+                            <p style="font-size:calc(100% + 0.5vw)">Connect with MetaMask</p>
+                        </div>
+                        <div class="col-4 register-buttons" onclick="YoutubeLogin()">
+                            <img src="/assets/img/youtube.svg">
+                            <p style="font-size:calc(100% + 0.5vw)">Connect with YouTube</p>
+                        </div>
+                        <div class="col-4 register-buttons" onclick="">
+                            <img src="/assets/img/tiktok.svg">
+                            <p style="font-size:calc(100% + 0.5vw)">Connect with TikTok<br>(Coming Soon!)</p>
                         </div>
                     </div>
                 </div>
@@ -95,78 +114,176 @@
                         </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
+                    <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-panel" type="button" role="tab" aria-controls="home"
+                                aria-selected="true">Profile</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="twitch-tab" data-bs-toggle="tab" data-bs-target="#twitch-panel"
+                                type="button" role="tab" aria-controls="profile" aria-selected="false">Twitch
+                                Streamer</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="youtube-tab" data-bs-toggle="tab"
+                                data-bs-target="#youtube-panel" type="button" role="tab" aria-controls="contact"
+                                aria-selected="false">YouTube Creator</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="tiktok-tab" data-bs-toggle="tab" data-bs-target="#tiktok-panel"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">TikTok
+                                Creator</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="history-tab" data-bs-toggle="tab"
+                                data-bs-target="#history-panel" type="button" role="tab" aria-controls="contact"
+                                aria-selected="false">Transaction History</button>
+                        </li>
+                    </ul>
 
                     <form id="account-edit-form" action="#" method="post">
-                        <div class="gy-4">
-                            <div class="row">
-                                <div
-                                    class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-start align-text-top">
-                                    <b>Username: </b>
+                        <div class="gy-4 account-container">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="profile-panel" role="tabpanel"
+                                    aria-labelledby="profile-tab">
+                                    <div class="row spacer">&nbsp;</div>
+                                    <div class="row">
+                                        <div
+                                            class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-start align-text-top">
+                                            <b>Username: </b>
+                                        </div>
+                                        <div
+                                            class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-end align-text-top">
+                                            <p id="account-username"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-floating mb-3">
+                                        <input type="email" class="form-control" name="account_email" id="account_email"
+                                            placeholder="Notification Email" required />
+                                        <label for="account_email">Notification Email</label>
+                                        <div class="invalid-feedback">
+                                            Invalid Email
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-floating mb-3">
+                                        <input type="text" class="form-control" name="account_wallet"
+                                            id="account_wallet" placeholder="Wallet Address" disabled />
+                                        <label for="account_wallet">Wallet Address</label>
+                                    </div>
+                                    <div class="col-md-6 form-floating mb-3 paypal_email">
+                                        <input type="email" class="form-control" name="paypal_email" id="paypal_email"
+                                            placeholder="PayPal Email" />
+                                        <label for="paypal_email">PayPal Email</label>
+                                    </div>
                                 </div>
-                                <div
-                                    class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-end align-text-top">
-                                    <p id="account-username"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 form-floating mb-3">
-                                <input type="email" class="form-control" name="account_email" id="account_email"
-                                    placeholder="Notification Email" required />
-                                <label for="account_email">Notification Email</label>
-                                <div class="invalid-feedback">
-                                    Invalid Email
-                                </div>
-                            </div>
-                            <div class="col-md-6 form-floating mb-3">
-                                <input type="text" class="form-control" name="account_wallet" id="account_wallet"
-                                    placeholder="Wallet Address" disabled />
-                                <label for="account_wallet">Wallet Address</label>
-                            </div>
-                            <div class="row" id="add-twitch">
-                                <div
-                                    class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-start align-text-top">
-                                    <b>Connect with Twitch: </b>
-                                </div>
-                                <div
-                                    class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-end align-text-top">
-                                    <button type="button" class="btn" style="background-color: #6441a5; color:white "
-                                        id="register-twitch">Connect</button>
-                                </div>
+                                <div class="tab-pane fade" id="twitch-panel" role="tabpanel"
+                                    aria-labelledby="twitch-tab">
+                                    <div class="row spacer">&nbsp;</div>
+                                    <div class="row" id="add-twitch">
+                                        <div
+                                            class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-start align-text-top">
+                                            <b>Connect with Twitch to start distributing NFTs: </b>
+                                        </div>
+                                        <div
+                                            class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-end align-text-top">
+                                            <button type="button" class="btn"
+                                                style="background-color: #6441a5; color:white "
+                                                id="register-twitch">Connect</button>
+                                        </div>
 
-                            </div>
-                            <div id="twitch-container" class="d-none">
-                                <div class="row align-items-center">
-                                    <div class="col-12 text-center">
-                                        <hr />
+                                    </div>
+                                    <div id="twitch-container" class="d-none">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-2 col-sm-4 form-floating mb-3 d-flex justify-content-start">
+                                                <p><b>Storefront URL:</b> </p>
+                                            </div>
+                                            <div
+                                                class="col-md-4 col-sm-8 form-floating mb-3 d-flex justify-content-end">
+                                                <p id="streamer-url"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div
+                                                class="col-md-3 col-sm-4 form-floating mb-3 d-flex justify-content-start">
+                                                <p><b>Revenue Split:</b> </p>
+                                            </div>
+                                            <div
+                                                class="col-md-3 col-sm-8 form-floating mb-3 d-flex justify-content-end">
+                                                <p>80%</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div
+                                                class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-start">
+                                                <p><b>Pending Balance:</b> </p>
+                                            </div>
+                                            <div
+                                                class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-end">
+                                                <p id="streamer-balance"></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-4 form-floating mb-3 d-flex justify-content-start">
-                                        <p><b>Streamer URL:</b> </p>
+                                <div class="tab-pane fade" id="youtube-panel" role="tabpanel"
+                                    aria-labelledby="youtube-tab">
+                                    <div class="row spacer">&nbsp;</div>
+                                    <div class="row" id="add-youtube">
+                                        <div
+                                            class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-start align-text-top">
+                                            <b>Connect with YouTube to start distributing NFTs: </b>
+                                        </div>
+                                        <div
+                                            class="col-md-3 col-sm-6 form-floating mb-3 d-flex justify-content-end align-text-top">
+                                            <button type="button" class="btn"
+                                                style="background-color: #6441a5; color:white "
+                                                id="register-youtube">Connect</button>
+                                        </div>
+
                                     </div>
-                                    <div class="col-md-4 col-sm-8 form-floating mb-3 d-flex justify-content-end">
-                                        <p id="streamer-url"></p>
+                                    <div id="youtube-container" class="d-none">
+                                        <div class="row">
+                                            <div
+                                                class="col-md-2 col-sm-4 form-floating mb-3 d-flex justify-content-start">
+                                                <p><b>Storefront URL:</b> </p>
+                                            </div>
+                                            <div
+                                                class="col-md-4 col-sm-8 form-floating mb-3 d-flex justify-content-end">
+                                                <p id="youtube-url"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div
+                                                class="col-md-3 col-sm-4 form-floating mb-3 d-flex justify-content-start">
+                                                <p><b>Revenue Split:</b> </p>
+                                            </div>
+                                            <div
+                                                class="col-md-3 col-sm-8 form-floating mb-3 d-flex justify-content-end">
+                                                <p>80%</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div
+                                                class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-start">
+                                                <p><b>Pending Balance:</b> </p>
+                                            </div>
+                                            <div
+                                                class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-end">
+                                                <p id="youtube-balance"></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 form-floating mb-3 d-flex justify-content-start">
-                                        <p><b>Revenue Split:</b> </p>
-                                    </div>
-                                    <div class="col-md-3 col-sm-8 form-floating mb-3 d-flex justify-content-end">
-                                        <p>80%</p>
-                                    </div>
+                                <div class="tab-pane fade" id="tiktok-panel" role="tabpanel"
+                                    aria-labelledby="tiktok-tab">
+                                    <div class="row spacer">&nbsp;</div>
+                                    (Coming Soon!)
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-start">
-                                        <p><b>Pending Balance:</b> </p>
-                                    </div>
-                                    <div class="col-md-3 col-xs-1 form-floating mb-3 d-flex justify-content-end">
-                                        <p id="streamer-balance"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-floating mb-3">
-                                    <input type="email" class="form-control" name="paypal_email" id="paypal_email"
-                                        placeholder="PayPal Email" />
-                                    <label for="paypal_email">PayPal Email</label>
+                                <div class="tab-pane fade" id="history-panel" role="tabpanel"
+                                    aria-labelledby="history-tab">
+                                    <div class="row spacer">&nbsp;</div>
+                                    (Coming Soon!)
                                 </div>
                             </div>
                             <div class="row spacer">&nbsp;</div>
@@ -216,7 +333,7 @@
     <script>
         async function MetaMaskLogin() {
             let user = await Moralis.authenticate({
-                signingMessage: "PlayNFT using Moralis"
+                signingMessage: "PlayNFT with Moralis"
             })
                 .then(async function (user) {
                     console.log(user)
@@ -233,14 +350,24 @@
         async function TwitchLogin() {
             let clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
             let redirectSite = location.protocol + "//" + location.host + "/account"
-            let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+            let state = 'twitch|' + window.btoa(encodeURIComponent(escape(new Date().toDateString())));
 
             location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
 
         }
 
+        async function YoutubeLogin() {
+            let clientID = "395370270279-i95j3msppjm0grdm1142fdj2noe9u1ib.apps.googleusercontent.com"
+            let redirectSite = location.protocol + "//" + location.host + '/account'
+            let state = 'youtube|' + window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+
+            location = 'https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&state=' + state + '&include_granted_scopes=true';
+
+        }
+
         function GetTwitchBalance() {
             $("#streamer-balance").html('$0.00')
+            $("#youtube-balance").html('$0.00')
             let formData = { streamerId: streamerID };
 
             $.ajax({
@@ -256,18 +383,19 @@
                     let response = jQuery.parseJSON(data);
 
                     $("#streamer-balance").html('$' + response.balance)
+                    $("#youtube-balance").html('$' + response.youtube_balance)
                 },
             });
         }
 
         $(document).on("click", "#register-twitch", function (e) {
             e.preventDefault();
-            let clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
-            let redirectSite = location.protocol + "//" + location.host + "/account"
-            let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+            TwitchLogin();
+        });
 
-            location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
-
+        $(document).on("click", "#register-youtube", function (e) {
+            e.preventDefault();
+            YoutubeLogin();
         });
 
         $("#account-edit-form").on("submit", async function (e) {
@@ -293,7 +421,8 @@
 
 
         $(document).ready(function () {
-
+            $("#streamer-balance").html('$0.00')
+            $("#youtube-balance").html('$0.00')
             var hash = window.location.hash.substring(1);
             var params = {}
             hash.split('&').map(hk => {
@@ -302,83 +431,176 @@
             });
 
             console.log(params)
-            if (params.access_token && params.token_type && params.state && params.id_token) {
+            if (params.access_token && params.token_type && params.state) {
                 var clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
                 let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+                let service = params.state.split('%7C')[0];
+                let _state = params.state.split('%7C')[1];
 
-                if (params.state == state) {
-                    $.ajax({
-                        url: 'https://id.twitch.tv/oauth2/userinfo',
-                        type: 'GET',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
-                        },
-                        data: {},
-                        success: function (data) {
-                            console.info(data);
+                if (params.state.includes('%257C')) {
+                    service = params.state.split('%257C')[0];
+                    _state = params.state.split('%257C')[1];
+                }
 
-                            if (data.aud != clientID) return;
-                            if (data.email_verified == false) {
-                                alert("Twitch Email must be verified!");
-                                return;
+                console.log(service)
+                if (_state == state) {
+
+                    if (service == "youtube") {
+                        $.ajax({
+                            url: 'https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true',
+                            type: 'GET',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+                            },
+                            data: {},
+                            success: function (data) {
+                                console.info(data);
+
+                                if (data.items.length == 0) {
+                                    alert("Invalid account!");
+                                    stopLoading();
+                                    return;
+                                }
+
+                                serviceID = service;
+                                streamerID = data.items[0].id;
+                                let name = data.items[0].snippet.customUrl ? data.items[0].snippet.customUrl : 'Google User';
+                                let picture = data.items[0].snippet.thumbnails.medium.url;
+                                name = name.replace(/^([@]*)/g, '')
+                                streamerName = name;
+
+                                let formData = { streamer_id: streamerID, streamer_name: name, streamer_email: '', streamer_picture: picture, mode: "streamer", service: service };
+
+                                $.ajax({
+                                    url:
+                                        "https://api.playnft.io/getnfts",
+                                    type: "POST",
+                                    crossDomain: true,
+                                    data: JSON.stringify(formData),
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: async function (data) {
+                                        console.info(data);
+                                        if (MoralisUser) {
+                                            MoralisUser.set("youtubeID", streamerID);
+                                            MoralisUser.set("youtubeName", streamerName);
+                                            MoralisUser.save();
+                                        } else {
+                                            $("#registration-container").addClass("d-none");
+                                            MoralisUser = await Moralis.User.logIn(streamerID, streamerID).then(() => {
+                                                location = location.protocol + "//" + location.host + "/account";
+                                            })
+                                                .catch(async function () {
+                                                    console.log("Login Failed");
+                                                    let user = new Moralis.User();
+                                                    user.set("username", streamerID);
+                                                    user.set("password", streamerID);
+                                                    user.set("youtubeID", streamerID);
+                                                    user.set("youtubeName", streamerName);
+
+                                                    try {
+                                                        await user.signUp();
+                                                        MoralisUser = await Moralis.User.logIn(streamerID, streamerID, { usePost: true });
+                                                        location = location.protocol + "//" + location.host + "/account";
+                                                    } catch (error) {
+                                                        //window.location.reload();
+                                                        console.log(error)
+                                                    }
+                                                });
+
+
+                                        }
+
+                                        if (streamerName != "Google User") {
+                                            $("#add-youtube").hide();
+                                            $("#youtube-container").removeClass("d-none");
+                                            $("#youtube-url").html(`<a target="_blank" href="http://playnft.io/y/?${streamerName}">http://playnft.io/y/?${streamerName}</a>`)
+                                        }
+                                    },
+                                });
+
+
                             }
+                        });
+                    }
 
-                            streamerID = data.sub;
-                            var username = data.preferred_username;
-                            var streamerEmail = data.email;
+                    if (service == "twitch") {
+                        $.ajax({
+                            url: 'https://id.twitch.tv/oauth2/userinfo',
+                            type: 'GET',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader('Authorization', 'Bearer ' + params.access_token);
+                            },
+                            data: {},
+                            success: function (data) {
+                                console.info(data);
 
-                            let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "register" };
+                                if (data.aud != clientID) return;
+                                if (data.email_verified == false) {
+                                    alert("Twitch Email must be verified!");
+                                    return;
+                                }
 
-                            $.ajax({
-                                url:
-                                    "https://api.playnft.io/getnfts",
-                                type: "POST",
-                                crossDomain: true,
-                                data: JSON.stringify(formData),
-                                dataType: "json",
-                                contentType: "application/json",
-                                success: async function (data) {
-                                    console.log(streamerID)
-                                    if (MoralisUser) {
-                                        MoralisUser.set("twitchID", streamerID);
-                                        MoralisUser.save();
-                                    } else {
-                                        $("#registration-container").addClass("d-none");
-                                        MoralisUser = await Moralis.User.logIn(username, streamerID).then(() => {
-                                            location = location.protocol + "//" + location.host + "/account";
-                                        })
-                                            .catch(async function () {
-                                                console.log("Login Failed");
-                                                let user = new Moralis.User();
-                                                user.set("username", username);
-                                                user.set("password", streamerID);
-                                                user.set("email", streamerEmail);
-                                                user.set("twitchID", streamerID);
+                                streamerID = data.sub;
+                                var username = data.preferred_username;
+                                var streamerEmail = data.email;
+                                streamerName = username;
 
-                                                try {
-                                                    await user.signUp();
-                                                    MoralisUser = await Moralis.User.logIn(username, streamerID, { usePost: true });
-                                                    location = location.protocol + "//" + location.host + "/account";
-                                                } catch (error) {
-                                                    //window.location.reload();
-                                                    console.log(error)
-                                                }
-                                            });
+                                let formData = { streamer_id: streamerID, streamer_name: data.preferred_username, streamer_email: data.email, streamer_picture: data.picture, mode: "register" };
+
+                                $.ajax({
+                                    url:
+                                        "https://api.playnft.io/getnfts",
+                                    type: "POST",
+                                    crossDomain: true,
+                                    data: JSON.stringify(formData),
+                                    dataType: "json",
+                                    contentType: "application/json",
+                                    success: async function (data) {
+                                        console.log(streamerID)
+                                        if (MoralisUser) {
+                                            MoralisUser.set("twitchID", streamerID);
+                                            MoralisUser.set("twitchName", streamerName);
+                                            MoralisUser.save();
+                                        } else {
+                                            $("#registration-container").addClass("d-none");
+                                            MoralisUser = await Moralis.User.logIn(streamerID, username).then(() => {
+                                                location = location.protocol + "//" + location.host + "/account";
+                                            })
+                                                .catch(async function () {
+                                                    console.log("Login Failed");
+                                                    let user = new Moralis.User();
+                                                    user.set("username", username);
+                                                    user.set("password", streamerID);
+                                                    user.set("email", streamerEmail);
+                                                    user.set("twitchID", streamerID);
+                                                    user.set("twitchName", streamerName);
+
+                                                    try {
+                                                        await user.signUp();
+                                                        MoralisUser = await Moralis.User.logIn(streamerID, username, { usePost: true });
+                                                        location = location.protocol + "//" + location.host + "/account";
+                                                    } catch (error) {
+                                                        //window.location.reload();
+                                                        console.log(error)
+                                                    }
+                                                });
 
 
-                                    }
+                                        }
 
-                                    $("#add-twitch").hide();
-                                    $("#twitch-container").removeClass("d-none");
-                                    $("#streamer-url").html(`<a target="_blank" href="https://www.playnft.io/streamers/?${streamerID}">https://www.playnft.io/streamers/?${streamerID}</a>`)
-                                },
-                            });
+                                        $("#add-twitch").hide();
+                                        $("#twitch-container").removeClass("d-none");
+                                        $("#streamer-url").html(`<a target="_blank" href="http://playnft.io/s/?${streamerName}">http://playnft.io/s/?${streamerName}</a>`)
+                                    },
+                                });
 
-                        },
-                        error: function (error) {
-                            console.info(error);
-                        },
-                    });
+                            },
+                            error: function (error) {
+                                console.info(error);
+                            },
+                        });
+                    }
                 }
             }
 

@@ -493,6 +493,7 @@ class Modals extends HTMLElement {
                 <form id="streamers-nfts-form" action="#" method="post">
                 <input type="hidden" name="streamers_nft_id" id="streamers_nft_id" class="form-control" />
                 <input type="hidden" name="streamer_id" id="streamer_id" class="form-control" />
+                <input type="hidden" name="service_id" id="service_id" class="form-control" />
                 <div class="modal-body">
                     <div class="container">
                     <div class="gy-4">
@@ -509,7 +510,7 @@ class Modals extends HTMLElement {
                         <div class="col-md-6 mb-3">
                         <label for="streamers_nft_icon" class="form-label">Upload image</label>
                         <input class="form-control" type="file" name="streamers_nft_icon" id="streamers_nft_icon"
-                            accept=".png" required>
+                            accept=".png">
                         </div>
 
                         <div class="col-md-6 form-floating mb-3">
@@ -575,7 +576,7 @@ class Modals extends HTMLElement {
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Purchase Twitch Token</h3>
+                        <h3 class="modal-title">Purchase NFT</h3>
                     </div>
                     <div class="modal-body" style="text-align: center;">
                         <p><img id="twitch_token_picture" style="width: 50%;" src=""></p>

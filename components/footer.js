@@ -44,8 +44,7 @@ class Footer extends HTMLElement {
 
             <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>PlayNFT</span></strong>. All Rights Reserved<br>
-                2250 NW 11th Ave Unit 1P, Miami, FL 33192
+                &copy; Copyright <strong><span>PlayNFT</span></strong>. All Rights Reserved
             </div>
             </div>
         </footer>

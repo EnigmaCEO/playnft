@@ -8,11 +8,14 @@ var gameID = "";
 var contentName = "";
 var contentID = "";
 var streamerID = "";
+var streamerName = "";
+var serviceID = "twitch";
 var chainID = "enj";
+var buyerID = "";
 var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
 var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
 var CHAINS = { eth: 1, avalanche: 43114, polygon: 137, heco: 128, near: 1313161554 };
-var CURRENCY = {enj: 'JENJ', stx: 'STX'};
+var CURRENCY = { enj: 'JENJ', stx: 'STX', solana: 'SOL' };
 
 var simplified_abi = [
     {
@@ -76,9 +79,11 @@ const execute = async () => {
     console.log(MoralisUser)
     console.log(window.location.pathname)
     if (MoralisUser != null) {
-        if (window.location.pathname == "/account/") {
-            let username = MoralisUser.get("username")
-            if (username) $("#account-username").html(username)
+        let username = MoralisUser.get("username")
+        if (username) $("#account-username").html(username)
+        console.log(username)
+
+        if (window.location.pathname.includes("/account/")) {
 
             $("#account-container").removeClass("d-none");
             let ethAddress = MoralisUser.get("ethAddress")
@@ -90,21 +95,33 @@ const execute = async () => {
             let twitchID = MoralisUser.get("twitchID")
             if (twitchID && twitchID != "") {
                 console.log(twitchID)
+                streamerName = MoralisUser.get("twitchName")
                 streamerID = twitchID;
-            } else {
-                if (streamerID) {
-                    MoralisUser.set("twitchID", streamerID)
-                    MoralisUser.save();
+
+                if (streamerName) {
+                    $("#add-twitch").hide();
+                    $("#streamer-url").html(`<a target="_blank" href="http://playnft.io/s/?${streamerName}">http://playnft.io/s/?${streamerName}</a>`)
+                    $("#twitch-container").removeClass("d-none");
+                    GetTwitchBalance()
                 }
             }
 
-            if (streamerID) {
-                MoralisUser.set("twitchID", streamerID)
-                MoralisUser.save();
-                $("#add-twitch").hide();
-                $("#streamer-url").html(`<a target="_blank" href="https://www.playnft.io/streamers/?${streamerID}">https://www.playnft.io/streamers/?${streamerID}</a>`)
-                $("#twitch-container").removeClass("d-none");
-                GetTwitchBalance()
+            let youtubeID = MoralisUser.get("youtubeID")
+            if (youtubeID && youtubeID != "") {
+                console.log(youtubeID)
+                streamerName = MoralisUser.get("youtubeName")
+                streamerID = youtubeID;
+
+                if (streamerName && streamerName != 'Google User') {
+                    $("#add-youtube").hide();
+                    $("#youtube-url").html(`<a target="_blank" href="http://playnft.io/y/?${streamerName}">http://playnft.io/y/?${streamerName}</a>`)
+                    $("#youtube-container").removeClass("d-none");
+                    GetTwitchBalance()
+                }
+            }
+
+            if (!twitchID && !youtubeID) {
+                $(".paypal_email").hide();
             }
 
             let paypalID = MoralisUser.get("paypalID")
@@ -112,17 +129,13 @@ const execute = async () => {
 
         }
 
-        if (window.location.pathname == "/twitch/") {
-            let twitchID = MoralisUser.get("twitchID")
-            if (twitchID && twitchID != "") {
-                console.log(twitchID)
-                buyerID = twitchID;
+        if (window.location.pathname.includes("/nfts/")) {
+            buyerID = username;
 
-                GetTwitchInventory()
-            }
+            GetTwitchInventory();
         }
 
-        if (window.location.pathname == "/streamers/") {
+        if (window.location.pathname.includes("/s/")) {
             let twitchID = MoralisUser.get("twitchID")
             if (twitchID && twitchID != "") {
                 console.log(twitchID)
@@ -133,9 +146,23 @@ const execute = async () => {
             }
         }
 
+        if (window.location.pathname.includes("/y/")) {
+            let youtubeID = MoralisUser.get("youtubeID")
+            if (youtubeID && youtubeID != "") {
+                console.log(youtubeID)
+                streamerID = youtubeID;
+
+                $(".pricing").hide();
+                $(".token-purchase").show();
+            }
+        }
+
         $("#header_account").removeClass("d-none");
     } else {
-        if (window.location.pathname == "/account/") {
+        console.log("no playnft user")
+
+        if (window.location.pathname.includes("/account/")) {
+
             $("#registration-container").removeClass("d-none");
         }
 
@@ -906,7 +933,7 @@ async function getCreatorsNFTs(chain, address) {
                 await r.json().then(async function (data) {
                     console.log("Data: " + JSON.stringify(data));
                     var nfts = data;
-                    
+
                     for await (let item of nfts) {
                         console.log(item)
                         if (item.token.metadata && item.balance > 0) {
@@ -938,10 +965,10 @@ async function getCreatorsNFTs(chain, address) {
                     var nfts = data.results;
                     var nftArray = [];
 
-                    for(let item of nfts) {
+                    for (let item of nfts) {
 
                         console.log(item)
-                        if(!item.tx.contract_call) continue;
+                        if (!item.tx.contract_call) continue;
 
                         if (item.tx.sender_address.toLowerCase() == address.toLowerCase()) {
                             if (!nftArray.includes(item.asset_identifier)) {
@@ -950,7 +977,7 @@ async function getCreatorsNFTs(chain, address) {
                                 continue;
                             }
                         }
-                        
+
                         let contract_address = item.tx.contract_call.contract_id.split('.')[0]
                         let contract_id = item.tx.contract_call.contract_id.split('.')[1]
                         let token_metadata = null;
@@ -1474,6 +1501,7 @@ $(document).ready(function () {
         if (chain == "tezos") {
             $("#creators-wallet-tezos").show();
         }
+
     });
 
 
@@ -2158,7 +2186,7 @@ $(document).ready(function () {
                         var status = "Offline"
                         if (item.status == "1") status = "Live"
 
-                        let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                        let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost] / 100.0, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                         $("#streamers-nfts-template")
                             .tmpl(game_content)
                             .appendTo("#streamers-nfts");
@@ -2485,12 +2513,12 @@ $(document).on("click", "li", function () {
                 if (response) {
                     response.forEach(function (item) {
 
-                        $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
+                        $("#creators-review-cost").html("To complete the purchase send exactly <b>" + item.cryptoPrice + " " + CURRENCY[chainID] + "</b> ($" + item.cost + ")</p><p>To: <b>" + item.cryptoWallet + "</b></p><p>From your wallet: <b>" + item.buyerWallet + "</b></p>");
                         $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                         $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                         $("#creators-review-name").html(_name)
 
-                        
+
                         if (item.cost > 35 && chainID == "near") {
                             $("#onramper-purchase-button").html("Pay with NEAR");
                             let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
@@ -2550,13 +2578,13 @@ $(document).on("click", "li", function () {
                 if (response) {
                     response.forEach(function (item) {
 
-                        $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
-                
+                        $("#creators-review-cost").html("To complete the purchase send exactly <b>" + item.cryptoPrice + " " + CURRENCY[chainID] + "</b> ($" + item.cost + ")</p><p>To: <b>" + item.cryptoWallet + "</b></p><p>From your wallet: <b>" + item.buyerWallet + "</b></p>");
+
                         $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                         $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                         $("#creators-review-name").html(_name)
 
-                        
+
                         if (item.cost > 35 && chainID == "near") {
                             $("#onramper-purchase-button").html("Pay with NEAR");
                             let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
@@ -2727,13 +2755,13 @@ $(document).on("click", "#gamers-content-select", function () {
 
             response.forEach(function (item) {
 
-                $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
-                        
+                $("#creators-review-cost").html("To complete the purchase send exactly <b>" + item.cryptoPrice + " " + CURRENCY[chainID] + "</b> ($" + item.cost + ")</p><p>To: <b>" + item.cryptoWallet + "</b></p><p>From your wallet: <b>" + item.buyerWallet + "</b></p>");
+
                 $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                 $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                 $("#creators-review-name").html(_name)
 
-                
+
                 if (item.cost > 35 && chainID == "near") {
                     $("#onramper-purchase-button").html("Pay with NEAR");
                     let contextData = { amount1: item.cost, invoice: item.orderId, item_number: _contentId, custom: item.code }
@@ -2835,7 +2863,7 @@ $(document).on("click", "#creators-content-select", function () {
     let _index = tokenIndex;
     let _mode = "creators";
 
-    if(_index != 0) {
+    if (_index != 0) {
         _mode = "gamers"
     }
 
@@ -2859,8 +2887,8 @@ $(document).on("click", "#creators-content-select", function () {
             response.forEach(function (item) {
 
 
-                $("#creators-review-cost").html("To complete the purchase send exactly <b>"+ item.cryptoPrice +" "+CURRENCY[chainID]+"</b> ($" + item.cost +")</p><p>To: <b>"+item.cryptoWallet+"</b></p><p>From your wallet: <b>"+item.buyerWallet+"</b></p>");
-                        
+                $("#creators-review-cost").html("To complete the purchase send exactly <b>" + item.cryptoPrice + " " + CURRENCY[chainID] + "</b> ($" + item.cost + ")</p><p>To: <b>" + item.cryptoWallet + "</b></p><p>From your wallet: <b>" + item.buyerWallet + "</b></p>");
+
                 $('#creators-review-token').html('<img src="' + tokenImage + '"/>')
                 $('#creators-review-icon').html('<img src="https://playnft.s3.amazonaws.com/' + publisherID + '/' + _gameId + '/' + _contentId + '/icon.png"/>')
                 $("#creators-review-name").html(_name)
@@ -3006,18 +3034,21 @@ $(document).on("click", "#onramper-purchase-button", function () {
 })
 
 
-
-
-
-
-
 $(document).on("click", "#login-streamers", function () {
     let clientID = "bugcm9v8dm9e2d4wp7u9l3hsnd5plo"
     let redirectSite = location.protocol + "//" + location.host
-    let state = window.btoa(encodeURIComponent(escape(new Date().toDateString())));
-
+    let state = 'twitch|' + window.btoa(encodeURIComponent(escape(new Date().toDateString())));
 
     location = 'https://id.twitch.tv/oauth2/authorize?response_type=token+id_token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=openid%20user:read:email&state=' + state + '&claims={"id_token":{"email":null,"email_verified":null},"userinfo":{"email":null,"email_verified":null,"picture":null, "preferred_username":null}}';
+
+});
+
+$(document).on("click", "#login-youtube", function () {
+    let clientID = "395370270279-i95j3msppjm0grdm1142fdj2noe9u1ib.apps.googleusercontent.com"
+    let redirectSite = location.protocol + "//" + location.host
+    let state = 'youtube|' + window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+
+    location = 'https://accounts.google.com/o/oauth2/v2/auth?response_type=token&client_id=' + clientID + '&redirect_uri=' + redirectSite + '&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&state=' + state + '&include_granted_scopes=true';
 
 });
 
@@ -3194,7 +3225,8 @@ $(document).on('show.bs.modal', '#streamers-nfts-modal', function (event) {
     if (gameStatus) modal.find('#streamers_nft_status').val(gameStatus)
     modal.find('#streamers_nft_id').val(Id)
     modal.find('#streamer_id').val(streamerID)
-    if (gameCost) modal.find('#streamers_nft_cost').val(TIERS[gameCost*100])
+    modal.find('#service_id').val(serviceID)
+    if (gameCost) modal.find('#streamers_nft_cost').val(TIERS[gameCost * 100])
 })
 
 $(document).on('show.bs.modal', '#purchase-content-modal', function (event) {
@@ -3222,7 +3254,7 @@ $(document).on('show.bs.modal', '#purchase-twitch-modal', function (event) {
     let id = button.data('contentid');
     let streamerid = button.data('streamerid');
     let streamername = button.data('streamername');
-    let buyerid = streamerID;
+    let buyerid = MoralisUser.get("username");
 
     let modal = $(this)
 
@@ -3251,8 +3283,22 @@ function openTab(tabId) {
     tab.show();
 
     if (tabId == "#nav-streamers-review") { // set the streamer storefront url
-        $("#storefront_url").attr("href", "https://www.playnft.io/streamers/?" + streamerID)
-        $("#storefront_url").html("https://www.playnft.io/streamers/?" + streamerID)
+
+        let mode = "s";
+        let id = streamerName;
+
+        if (serviceID == "youtube") {
+            mode = "y"
+            id = streamerName;
+        }
+
+        if (serviceID == "tiktok") {
+            mode = "t"
+        }
+
+        $("#storefront_url").attr("href", "http://playnft.io/" + mode + "/?" + id)
+        $("#storefront_url").html("http://playnft.io/" + mode + "/?" + id)
+
     }
 
 }
@@ -3414,7 +3460,7 @@ function deleteNFT(event, elem) {
                         var status = "Offline"
                         if (item.status == "1") status = "Live"
 
-                        let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost], status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
+                        let game_content = { id: item.id, name: item.name, cost: PRICES[item.cost] / 100.0, status: item.status, status_text: status, minted: item.minted, supply: item.supply, description: item.description, streamerId: streamerID };
                         $("#streamers-nfts-template")
                             .tmpl(game_content)
                             .appendTo("#streamers-nfts");

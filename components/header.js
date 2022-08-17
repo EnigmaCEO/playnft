@@ -20,7 +20,7 @@ class Header extends HTMLElement {
                             <li id="header_account" class="dropdown d-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
                                 <li><a class="nav-link" href="/account/">Dashboard</a></li>
-                                <li><a class="nav-link" href="/twitch/">Twitch Tokens</a></li>
+                                <li><a class="nav-link" href="/nfts/">NFT Inventory</a></li>
                                 <li><a class="nav-link" href="javascript:LogOut()">Log Out</a></li>
                                 </ul>
                             </li>
@@ -48,7 +48,7 @@ class Header extends HTMLElement {
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
                     <li class="dropdown"><a href="#"><span>Utility Marketplace</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                        <li><a class="nav-link" href="/streamers/">Twitch Streamers</a></li>
+                        <li><a class="nav-link" href="/creators/">Content Creators</a></li>
                         <li><a class="nav-link" href="/games/">Blockchain Games</a></li>
                         <li><a class="nav-link" href="/collections/">NFT Collections</a></li>
                         </ul>
@@ -60,7 +60,7 @@ class Header extends HTMLElement {
                     <li id="header_account" class="dropdown d-none"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                         <li><a class="nav-link" href="/account/">Dashboard</a></li>
-                        <li><a class="nav-link" href="/twitch/">Twitch Tokens</a></li>
+                        <li><a class="nav-link" href="/nfts/">NFT Inventory</a></li>
                         <li><a class="nav-link" href="javascript:LogOut()">Log Out</a></li>
                         </ul>
                     </li>

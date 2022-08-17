@@ -8,7 +8,7 @@ class ServicesStreamers extends HTMLElement {
         <section id="section-streamers" class="gamers">
       <div class="container">
         <header class="section-header">
-          <h2>Twitch Streamers</h2>
+          <h2>Content Creators</h2>
           <p>Create NFTs</p>
         </header>
 
@@ -17,7 +17,7 @@ class ServicesStreamers extends HTMLElement {
             <div class="connecting-line"></div>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item active">
-                <a title="1. Twitch Login" class="nav-link" id="nav-streamers-login" role="tab" data-bs-toggle="tab"
+                <a title="1. Social Login" class="nav-link" id="nav-streamers-login" role="tab" data-bs-toggle="tab"
                   aria-controls="streamers-login" href="#list-streamers-login">
                   <span class="round-tab">
                     <i class="fas fa-user-tie" style="font-size: 3.7vh"></i>
@@ -54,13 +54,18 @@ class ServicesStreamers extends HTMLElement {
               <div class="tab-pane fade show active" id="list-streamers-login" role="tabpanel"
                 aria-labelledby="nav-streamers-login">
                 <div class="col-lg-12">
-                  <h4>Streamer Login</h4>
+                  <h4>Creator Login</h4>
 
                   <div class="row gy-4 text-center">
                     <div class="pricing">
                       <div class="price"></div>
 
                       <br /><a href="#" class="btn-buy" id="login-streamers">Authenticate Twitch Account</a>
+                    </div>
+                    <div class="pricing">
+                      <div class="price"></div>
+
+                      <br /><a href="#" class="btn-buy" id="login-youtube">Authenticate YouTube Account</a>
                     </div>
                   </div>
                 </div>
@@ -69,7 +74,7 @@ class ServicesStreamers extends HTMLElement {
                 <div class="col-md-12">
                   <div class="panel panel-primary" id="streamers-nfts-panel">
                     <div class="panel-heading">
-                      <h4>Create NFTs</h4>
+                      <h4>NFT Inventory</h4>
                     </div>
                     <div style="text-align: end; padding-bottom: 20px;">
                       <button id="streamers-new-nfts" type="submit" data-bs-toggle="modal"
@@ -111,7 +116,7 @@ class ServicesStreamers extends HTMLElement {
                   <div class="panel panel-primary" id="streamers-review-panel">
                     <div class="panel-heading">
                       <h4>NFT Distribution Storefront</h4>
-                      <p class="section-header">Add your stronfront URL to your Twitch profile or share in the chat during a stream to start distributing your NFTs.</p>
+                      <p class="section-header">Share your storefront URL to start distributing your NFTs.</p>
                     </div>
                     <div class="panel-body">
                       <div class="flex-shrink-0 text-center">
