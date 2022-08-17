@@ -436,6 +436,7 @@
                 streamerID = data.items[0].id;
                 let name = data.items[0].snippet.customUrl;
                 let picture = data.items[0].snippet.thumbnails.medium.url;
+                name = name.replace(/^([@]*)/g, '')
                 streamerName = name;
 
                 let formData = { streamer_id: streamerID, streamer_name: name, streamer_email: '', streamer_picture: picture, mode: "streamer", service: service };
