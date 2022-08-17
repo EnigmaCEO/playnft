@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>PlayNFT - The Playground for your NFTs</title>
+    <meta content="" name="description" />
+
+    <meta content="nft" name="keywords" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NTBHF6SC72"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NTBHF6SC72');
+</script>
+
+
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon" />
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="https://kit.fontawesome.com/0a0492e97d.js" crossorigin="anonymous"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=Afublr47iUx9od__o9lROJup9U0wx74gtOgqlGi-xPG8hGRUggDp1497DSQTMaAN9hP5FspYXTg9bZu0"></script>
+
+    <script src="https://cdn.tiny.cloud/1/doicvbneaya0gerwmrc6gn0ei4uw3vsk4znmslowgfwri44v/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis-v1@latest/dist/moralis.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false
+        });
+    </script>
+
+    <!-- Page Components -->
+    <script src="../components/header.js" type="text/javascript"></script>
+    <script src="../components/footer.js" type="text/javascript"></script>
+    <script src="../components/modals.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header-component alternate_header="true"></header-component>
+    <!-- End Header -->
+
+    <div class="row spacer">&nbsp;</div>
+    <main id="main">
+
+        <!-- ======= Creators Section ======= -->
+        <section id="section-streamers" class="gamers">
+            <div class="container text-center">
+
+                <header class="section-header">
+                    <h2>Content Creators</h2>
+                    <p id="streamer_name">Collect NFTs from your favorite Creators.</p>
+                </header>
+                <form id="creators-form" action="#" method="post">
+
+                    <div class="gy-4">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="creators-chain"
+                                id="creators-chain-twitch" value="streamer" checked>
+                            <label class="form-check-label" for="creators-chain-twitch"><i
+                                    class="fa fa-twitch creator-icon"></i> </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="creators-chain"
+                                id="creators-chain-youtube" value="youtuber">
+                            <label class="form-check-label" for="creators-chain-youtube"><i
+                                    class="fa fa-youtube creator-icon"></i></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="creators-chain"
+                                id="creators-chain-tiktok" value="tiktoker">
+                            <label class="form-check-label" for="creators-chain-tiktok"><i
+                                    class="fa-brands fa-tiktok creator-icon"></i></label>
+                        </div>
+                    </div>
+                </form>
+                <div class="row spacer-20">&nbsp;</div>
+                <div id="streamer_list" class="card-deck" style="display:flex;flex-wrap: wrap;justify-content: center;">
+                </div>
+                <div id="youtuber_list" class="card-deck" style="display:none;flex-wrap: wrap;justify-content: center;">
+                </div>
+                <div id="tiktoker_list" class="card-deck" style="display:none;flex-wrap: wrap;justify-content: center;">
+                    <div>
+                        <h5>(Coming Soon!)</h5>
+                    </div>
+                </div>
+        </section>
+        <!-- ======= End Streamers Section ======= -->
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer-component></footer-component>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <modals-component></modals-component>
+
+    <!-- Vendor JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/purecounter/purecounter.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/playnft.js"></script>
+
+    <script>
+        function showStreamers() {
+            $.ajax({
+                url:
+                    "https://api.playnft.io/getstreamerlist",
+                type: 'GET',
+                crossDomain: true,
+                data: {},
+                success: function (data) {
+                    console.info(data);
+                    let response = jQuery.parseJSON(data);
+                    console.info(jQuery.parseJSON(response[0]));
+                    $("#streamer_list").empty();
+                    $("#youtuber_list").empty();
+
+                    jQuery.parseJSON(response[0]).forEach(function (val) {
+                        if (!val.id) return;
+                        if (val.nfts == null) val.nfts = 0;
+                        let game_content = { id: val.id, name: val.name, picture: val.picture, nfts: val.nfts };
+                        $("#streamers-template")
+                            .tmpl(game_content)
+                            .appendTo("#streamer_list");
+
+                    });
+
+                    jQuery.parseJSON(response[1]).forEach(function (val) {
+                        if (!val.id) return;
+                        if (val.name == "Google User") return;
+                        if (val.nfts == null) val.nfts = 0;
+                        let game_content = { id: val.id, name: val.name, picture: val.picture, nfts: val.nfts };
+                        $("#youtubers-template")
+                            .tmpl(game_content)
+                            .appendTo("#youtuber_list");
+
+                    });
+
+                },
+                error: function (data) {
+                    console.info(data);
+                }
+
+            });
+        }
+
+        $(document).ready(function () {
+            $("#creators-chain-twitch").prop("checked", true);
+            showStreamers();
+
+            $("input[name='creators-chain']").change(function () {
+                var chain = $('input[name="creators-chain"]:checked').val();
+
+                $("#streamer_list").hide();
+                $("#youtuber_list").hide();
+                $("#tiktoker_list").hide();
+                if (chain == "streamer") {
+                    $("#streamer_list").show();
+                }
+                if (chain == "youtuber") {
+                    $("#youtuber_list").show();
+                }
+                if (chain == "tiktoker") {
+                    $("#tiktoker_list").show();
+                }
+            });
+        });
+
+
+    </script>
+
+    <script id="streamers-template" type="text/x-jquery-tmpl">
+        <div class="card" style="width:250px;margin: 10px;">
+            <img class="card-img-top" src="${picture}" alt="${name}"  onError="this.onerror=null;this.src='/assets/img/twitch-v2.svg';">
+            <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <p class="card-text">${nfts} Tokens</p>
+            <p class="card-text">
+                <button style="width:90%;margin-bottom:10px;background-color:green" type="submit" onclick="window.location.assign('/s/?${name}')">View Tokens</button>
+                <button style="width:90%;" type="submit" onclick="window.open('https://www.twitch.tv/${name}')">Visit Channel <i class="ri-external-link-fill"></i></button></p>
+            </div>
+        </div>
+    </script>
+
+    <script id="youtubers-template" type="text/x-jquery-tmpl">
+        <div class="card" style="width:250px;margin: 10px;">
+            <img class="card-img-top" src="${picture}" alt="${name}"  onError="this.onerror=null;this.src='/assets/img/twitch-v2.svg';">
+            <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <p class="card-text">${nfts} Tokens</p>
+            <p class="card-text">
+                <button style="width:90%;margin-bottom:10px;background-color:green" type="submit" onclick="window.location.assign('/y/?${name}')">View Tokens</button>
+                <button style="width:90%;" type="submit" onclick="window.open('https://www.youtube.com/c/${name}')">Visit Channel <i class="ri-external-link-fill"></i></button></p>
+            </div>
+        </div>
+    </script>
+
+
+</html>
