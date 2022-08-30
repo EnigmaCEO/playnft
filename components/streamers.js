@@ -10,9 +10,9 @@ class Streamers extends HTMLElement {
             <div class="container" data-aos="fade-up">
 
             <header class="section-header">
-                <h2>Streamers</h2>
-                <p>Collect Tokens from your favorite Twitch Streamers.</p><br/>
-                <span><button type="submit" onclick="window.location.assign('/streamers/')">View All</button></span>
+                <h2>Creators</h2>
+                <p>Collect NFTs from your favorite Content Creators.</p><br/>
+                <span><button type="submit" onclick="window.location.assign('/creators/')">View All</button></span>
             </header>
 
             <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="200">

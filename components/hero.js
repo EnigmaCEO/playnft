@@ -31,9 +31,9 @@ class Hero extends HTMLElement {
                             </div>
                         </div>
                         <div class="row justify-content-md-center">
-                            <div class="col stats" onclick="location.href='/streamers/';">
-                            <p style="font-size:calc(100% + 1vw);color: #012970;">264</p>
-                            <p style="font-size:calc(100% + 0vw)">Twitch Streamers</p>
+                            <div class="col stats" onclick="location.href='/creators/';">
+                            <p style="font-size:calc(100% + 1vw);color: #012970;">462</p>
+                            <p style="font-size:calc(100% + 0vw)">Content Creators</p>
                             </div>
                             <div class="col stats" onclick="location.href='/games/';">
                             <p style="font-size:calc(100% + 1vw);color: #012970;">10</p>
@@ -46,7 +46,7 @@ class Hero extends HTMLElement {
                             <p style="font-size:calc(100% + 0vw)">NFT Collections</p>
                             </div>
                             <div class="col stats">
-                            <p style="font-size:calc(100% + 1vw);color: #012970;">$15,654</p>
+                            <p style="font-size:calc(100% + 1vw);color: #012970;">$17,332</p>
                             <p style="font-size:calc(100% + 0vw)">Transaction Volume</p>
                             </div>
                         </div>

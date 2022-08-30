@@ -1501,6 +1501,10 @@ $(document).ready(function () {
         if (chain == "tezos") {
             $("#creators-wallet-tezos").show();
         }
+        if (chain == "telos") {
+            $("#creators-wallet-telos").show();
+            $('#creators-walletAddressTelos').prop('required', true);
+        }
 
     });
 
@@ -3250,7 +3254,7 @@ $(document).on('show.bs.modal', '#purchase-twitch-modal', function (event) {
     let picture = button.data('picture');
     let name = button.data('name');
     let description = button.data('description');
-    let cost = button.data('cost');
+    let cost = button.data('cost')+0.5;
     let id = button.data('contentid');
     let streamerid = button.data('streamerid');
     let streamername = button.data('streamername');
