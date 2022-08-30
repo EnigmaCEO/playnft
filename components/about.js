@@ -21,15 +21,16 @@ class About extends HTMLElement {
                         </p>
                         <p>
                             Current blockchains supported:<br>
-                            <img style="width:50px" src="assets/img/enjin-coin-enj-logo.svg" alt="Enjin" />
-                            <img style="width:50px" src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" />
-                            <img style="width:50px" src="assets/img/heco-logo.svg" alt="Heco" />
-                            <img style="width:50px" src="assets/img/polygon-matic-logo.svg" alt="Polygon" />
-                            <img style="width:50px" src="assets/img/velas-vlx-logo.svg" alt="Velas" />
-                            <img style="width:50px" src="assets/img/near-protocol-near-logo.svg" alt="NEAR Protocol" />
-                            <img style="width:50px" src="assets/img/solana-sol-logo.svg" alt="Solana" />
-                            <img style="height:50px" src="assets/img/tezos-xtz-logo.svg" alt="Tezos" />
-                            <img style="width:50px" src="assets/img/stacks-stx-logo.svg" alt="Stacks" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/enjin-coin-enj-logo.svg" alt="Enjin" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/avalanche-avax-logo.svg" alt="Avalanche" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/heco-logo.svg" alt="Heco" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/polygon-matic-logo.svg" alt="Polygon" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/velas-vlx-logo.svg" alt="Velas" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/near-protocol-near-logo.svg" alt="NEAR Protocol" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/solana-sol-logo.svg" alt="Solana" />
+                            <img style="height:50px;padding-bottom: 10px" src="assets/img/tezos-xtz-logo.svg" alt="Tezos" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/stacks-stx-logo.svg" alt="Stacks" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/telos.svg" alt="Telos" />
                         </p>
                     </div>
                 </div>
