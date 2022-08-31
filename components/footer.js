@@ -44,7 +44,8 @@ class Footer extends HTMLElement {
 
             <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>PlayNFT</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>PlayNFT</span></strong>. All Rights Reserved<br>
+                <a href="/tos.html">Terms of Service</a> | <a href="/privacy.html">Privacy Policy</a>
             </div>
             </div>
         </footer>
