@@ -108,6 +108,12 @@ class ServicesCreators extends HTMLElement {
                         <label class="form-check-label" for="creators-chain-stx"><img style="height:50px;padding-bottom: 10px;"
                             src="/assets/img/stacks-stx-logo.svg" alt="Stacks" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-eth"
+                          value="eth">
+                        <label class="form-check-label" for="creators-chain-eth"><img style="height:50px;padding-bottom: 10px;"
+                            src="/assets/img/ethereum-eth-logo.svg" alt="Ethereum" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -208,6 +214,17 @@ class ServicesCreators extends HTMLElement {
                       </div>
                       <div class="col-md-6 text-end">
                         
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-eth">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressEth" id="creators-walletAddressEth"
+                          class="form-control wallet-address" placeholder="Ethereum Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="creators-eth-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
@@ -409,6 +426,12 @@ class ServicesCreators extends HTMLElement {
                         <label class="form-check-label" for="creators-chain-stx"><img style="height:50px;padding-bottom: 10px;"
                             src="/assets/img/stacks-stx-logo.svg" alt="Stacks" /></label>
                       </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="creators-chain" id="creators-chain-eth"
+                          value="eth">
+                        <label class="form-check-label" for="creators-chain-eth"><img style="height:50px;padding-bottom: 10px;"
+                            src="/assets/img/ethereum-eth-logo.svg" alt="Ethereum" /></label>
+                      </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>
                     <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -509,6 +532,17 @@ class ServicesCreators extends HTMLElement {
                       </div>
                       <div class="col-md-6 text-end">
                         
+                      </div>
+                    </div>
+                    <div class="row gy-4 chain-wallet" id="creators-wallet-eth">
+                      <div class="col-md-6">
+                        <input type="text" name="walletAddressEth" id="creators-walletAddressEth"
+                          class="form-control wallet-address" placeholder="Ethereum Wallet Address" required />
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <button id="creators-eth-wallet-connect" class="btn btn-primary" type="button">
+                          Connect with Metamask
+                        </button>
                       </div>
                     </div>
                     <div class="row spacer-20">&nbsp;</div>

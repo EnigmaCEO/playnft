@@ -42,7 +42,7 @@ class Hero extends HTMLElement {
                         </div>
                         <div class="row justify-content-md-center">
                             <div class="col stats" onclick="location.href='/collections/';">
-                            <p style="font-size:calc(100% + 1vw);color: #012970;">71</p>
+                            <p style="font-size:calc(100% + 1vw);color: #012970;">81</p>
                             <p style="font-size:calc(100% + 0vw)">NFT Collections</p>
                             </div>
                             <div class="col stats">

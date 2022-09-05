@@ -15,7 +15,7 @@ var buyerID = "";
 var TIERS = { 99: 'tier1', 199: 'tier2', 299: 'tier3', 399: 'tier4', 499: 'tier5', 599: 'tier6', 699: 'tier7', 799: 'tier8', 899: 'tier9', 999: 'tier10' };
 var PRICES = { tier1: 99, tier2: 199, tier3: 299, tier4: 399, tier5: 499, tier6: 599, tier7: 699, tier8: 799, tier9: 899, tier10: 999 };
 var CHAINS = { eth: 1, avalanche: 43114, polygon: 137, heco: 128, near: 1313161554 };
-var CURRENCY = { enj: 'JENJ', stx: 'STX', solana: 'SOL' };
+var CURRENCY = { enj: 'JENJ', stx: 'STX', solana: 'SOL', eth: 'ETH' };
 
 var simplified_abi = [
     {
@@ -547,7 +547,7 @@ async function getCreatorsNFTs(chain, address) {
                 })
         }
 
-        if (chain == "avalanche" || chain == "polygon") {
+        if (chain == "avalanche" || chain == "polygon" || chain == "eth") {
             let options = { chain: chain, address: address };
             const tokenMetadata = await Moralis.Web3API.account.getNFTs(options).then(async function (details) {
                 console.log(details.result)
@@ -1036,7 +1036,7 @@ async function getCreatorsNFTs(chain, address) {
 
                             if (item.tx.sender_address.toLowerCase() == address.toLowerCase()) {
 
-                                await fetch('https://stacks-node-api.testnet.stacks.co/extended/v1/tokens/nft/mints?limit=1&asset_identifier=' + item.asset_identifier).then(response => response.json())
+                                await fetch('https://stacks-node-api.mainnet.stacks.co/extended/v1/tokens/nft/mints?limit=1&asset_identifier=' + item.asset_identifier).then(response => response.json())
                                     .then(data => { totalSupply = data.total; });
 
                                 let token_content = { tokenId: item.tx.tx_id, tokenName: token_metadata.name, tokenImage: image.replace("ipfs://", "https://ipfs.io/ipfs/").replace('ipfs/ipfs', 'ipfs'), tokenIndex: 0, tokenSupply: totalSupply };
@@ -1205,6 +1205,9 @@ async function moralisLogin(chain) {
     }
     if (chain == "near") {
         await AddNEARNetwork();
+    }
+    if (chain == "eth") {
+        await Moralis.switchNetwork(CHAINS[chain]);
     }
 
     let user = Moralis.User.current();
@@ -1405,6 +1408,18 @@ $(document).ready(function () {
 
     });
 
+    $("#creators-eth-wallet-connect").click(function () {
+        moralisLogin("eth").then(function (address) {
+            console.log(address)
+            if (address) {
+                $("#creators-walletAddressEth").val(address);
+            } else {
+
+            }
+        });
+
+    });
+
     $(".chain-wallet").hide();
     $('.wallet-address').prop('required', false)
     $("#gamers-wallet-enj").show();
@@ -1504,6 +1519,9 @@ $(document).ready(function () {
         if (chain == "telos") {
             $("#creators-wallet-telos").show();
             $('#creators-walletAddressTelos').prop('required', true);
+        }
+        if (chain == "eth") {
+            $("#creators-wallet-eth").show();
         }
 
     });
@@ -1786,6 +1804,14 @@ $(document).ready(function () {
             $("#creators-nfts").empty();
 
             getCreatorsNFTs("stx", walletID)
+
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "eth") {
+            walletID = $('#creators-walletAddressEth').val();
+            $("#creators-nfts").empty();
+
+            getCreatorsNFTs("eth", walletID)
 
         }
     });
