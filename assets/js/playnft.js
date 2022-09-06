@@ -1133,6 +1133,46 @@ async function AddPolygonNetwork() {
     await Moralis.switchNetwork(chainId);
 }
 
+async function AddEvmosNetwork() {
+    const chainId = 9001;
+    const chainName = "Evmos Mainnet";
+    const currencyName = "EVMOS";
+    const currencySymbol = "EVMOS";
+    const rpcUrl = "https://eth.bd.evmos.org:8545/";
+    const blockExplorerUrl = "https://mintscan.io/evmos";
+
+    await Moralis.addNetwork(
+        chainId,
+        chainName,
+        currencyName,
+        currencySymbol,
+        rpcUrl,
+        blockExplorerUrl
+    );
+
+    await Moralis.switchNetwork(chainId);
+}
+
+async function AddTlosNetwork() {
+    const chainId = 41;
+    const chainName = "TLOS Mainnet";
+    const currencyName = "TLOS";
+    const currencySymbol = "TLOS";
+    const rpcUrl = "https://testnet.telos.net/evm";
+    const blockExplorerUrl = "https://testnet.teloscan.io/";
+
+    await Moralis.addNetwork(
+        chainId,
+        chainName,
+        currencyName,
+        currencySymbol,
+        rpcUrl,
+        blockExplorerUrl
+    );
+
+    await Moralis.switchNetwork(chainId);
+}
+
 async function AddVelasNetwork() {
     const chainId = 106;
     const chainName = "Velas";
@@ -1208,6 +1248,12 @@ async function moralisLogin(chain) {
     }
     if (chain == "eth") {
         await Moralis.switchNetwork(CHAINS[chain]);
+    }
+    if (chain == "evmos") {
+        await AddEvmosNetwork();
+    }
+    if (chain == "tlos") {
+        await AddTlosNetwork();
     }
 
     let user = Moralis.User.current();
@@ -1413,6 +1459,33 @@ $(document).ready(function () {
             console.log(address)
             if (address) {
                 $("#creators-walletAddressEth").val(address);
+                $("#twitch-walletAddressEth").val(address);
+            } else {
+
+            }
+        });
+
+    });
+
+    $("#creators-evmos-wallet-connect").click(function () {
+        moralisLogin("evmos").then(function (address) {
+            console.log(address)
+            if (address) {
+                $("#creators-walletAddressEvmos").val(address);
+                $("#twitch-walletAddressEvmos").val(address);
+            } else {
+
+            }
+        });
+
+    });
+
+    $("#creators-tlos-wallet-connect").click(function () {
+        moralisLogin("tlos").then(function (address) {
+            console.log(address)
+            if (address) {
+                $("#creators-walletAddressTelos").val(address);
+                $("#twitch-walletAddressTelos").val(address);
             } else {
 
             }
@@ -1522,6 +1595,9 @@ $(document).ready(function () {
         }
         if (chain == "eth") {
             $("#creators-wallet-eth").show();
+        }
+        if (chain == "evmos") {
+            $("#creators-wallet-evmos").show();
         }
 
     });

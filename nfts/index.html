@@ -181,6 +181,20 @@
                                                         style="width:50px;padding-bottom: 10px;"
                                                         src="/assets/img/telos.svg" alt="Telos" /></label>
                                             </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="creators-chain"
+                                                    id="creators-chain-eth" value="eth">
+                                                <label class="form-check-label" for="creators-chain-eth"><img
+                                                        style="height:50px;padding-bottom: 10px;"
+                                                        src="/assets/img/ethereum-eth-logo.svg" alt="Ethereum" /></label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="creators-chain"
+                                                    id="creators-chain-evmos" value="evmos">
+                                                <label class="form-check-label" for="creators-chain-evmos"><img
+                                                        style="width:50px;padding-bottom: 10px;"
+                                                        src="/assets/img/evmos.svg" alt="Evmos" /></label>
+                                            </div>
                                         </div>
                                         <div class="row spacer-20">&nbsp;</div>
                                         <div class="row gy-4 chain-wallet" id="creators-wallet-enj">
@@ -221,7 +235,33 @@
                                                     placeholder="Telos Wallet Address" required />
                                             </div>
                                             <div class="col-md-6 text-end">
-
+                                                <button id="creators-tlos-wallet-connect" class="btn btn-primary" type="button">
+                                                    Connect with Metamask
+                                                  </button>
+                                            </div>
+                                        </div>
+                                        <div class="row gy-4 chain-wallet" id="creators-wallet-eth">
+                                            <div class="col-md-6">
+                                                <input type="text" name="walletAddressEth"
+                                                    id="twitch-walletAddressEth" class="form-control wallet-address"
+                                                    placeholder="Ethereum Wallet Address" required />
+                                            </div>
+                                            <div class="col-md-6 text-end">
+                                                <button id="creators-eth-wallet-connect" class="btn btn-primary" type="button">
+                                                    Connect with Metamask
+                                                  </button>
+                                            </div>
+                                        </div>
+                                        <div class="row gy-4 chain-wallet" id="creators-wallet-evmos">
+                                            <div class="col-md-6">
+                                                <input type="text" name="walletAddressEvmos"
+                                                    id="twitch-walletAddressEvmos" class="form-control wallet-address"
+                                                    placeholder="Evmos Wallet Address" required />
+                                            </div>
+                                            <div class="col-md-6 text-end">
+                                                <button id="creators-evmos-wallet-connect" class="btn btn-primary" type="button">
+                                                    Connect with Metamask
+                                                  </button>
                                             </div>
                                         </div>
                                         <div class="row spacer-20">&nbsp;</div>
@@ -372,6 +412,14 @@
             walletID = $('#twitch-walletAddressTelos').val();
         }
 
+        if ($('input[name="creators-chain"]:checked').val() == "eth") {
+            walletID = $('#twitch-walletAddressEth').val();
+        }
+
+        if ($('input[name="creators-chain"]:checked').val() == "evmos") {
+            walletID = $('#twitch-walletAddressEvmos').val();
+        }
+
         let formData = { transactionId: transactionID, streamerId: streamerID, wallet: walletID, buyerId: buyerID, chain: chainID };
         console.log(formData)
         $.ajax({
@@ -447,6 +495,8 @@
                         if (item.chain == "stx") chain = "Stacks";
                         if (item.chain == "solana") chain = "Solana";
                         if (item.chain == "telos") chain = "Telos";
+                        if (item.chain == "eth") chain = "Ethereum";
+                        if (item.chain == "evmos") chain = "Evmos";
                     }
 
                     let game_content = { id: item.id, transactionId: item.transactionId, name: item.name, date: dateString, streamer: item.streamer, streamerId: item.streamerId, supply: item.supply, claimed: item.claimed, chain: chain };
