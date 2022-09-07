@@ -20,6 +20,14 @@
         gtag('config', 'G-NTBHF6SC72');
     </script>
 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5ZHRQDP');</script>
+<!-- End Google Tag Manager -->
+
 
     <!-- Favicons -->
     <link href="../assets/img/favicon.png" rel="icon" />
@@ -68,6 +76,10 @@
 </head>
 
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZHRQDP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <!-- ======= Header ======= -->
     <header-component alternate_header="true"></header-component>
     <!-- End Header -->
@@ -101,9 +113,9 @@
                             <img src="/assets/img/youtube.svg">
                             <p style="font-size:calc(100% + 0.5vw)">Connect with YouTube</p>
                         </div>
-                        <div class="col-4 register-buttons" onclick="">
+                        <div class="col-4 register-buttons" onclick="TikTokLogin()">
                             <img src="/assets/img/tiktok.svg">
-                            <p style="font-size:calc(100% + 0.5vw)">Connect with TikTok<br>(Coming Soon!)</p>
+                            <p style="font-size:calc(100% + 0.5vw)">Connect with TikTok</p>
                         </div>
                     </div>
                 </div>
@@ -365,6 +377,15 @@
 
         }
 
+        async function TikTokLogin() {
+            let clientID = "awil4aoneqyrebd9"
+            let redirectSite = location.protocol + "//" + location.host + '/account'
+            let state = 'tiktok|' + window.btoa(encodeURIComponent(escape(new Date().toDateString())));
+
+            location = 'https://www.tiktok.com/auth/authorize/?client_key=' + clientID + '&scope=user.info.basic&response_type=code&redirect_uri=' + redirectSite + '&state=' + state;
+
+        }
+
         function GetTwitchBalance() {
             $("#streamer-balance").html('$0.00')
             $("#youtube-balance").html('$0.00')
@@ -396,6 +417,11 @@
         $(document).on("click", "#register-youtube", function (e) {
             e.preventDefault();
             YoutubeLogin();
+        });
+
+        $(document).on("click", "#register-tiktok", function (e) {
+            e.preventDefault();
+            TikTokLogin();
         });
 
         $("#account-edit-form").on("submit", async function (e) {
