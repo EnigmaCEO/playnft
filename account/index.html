@@ -594,11 +594,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                                 location = location.protocol + "//" + location.host + "/account";
                                             })
                                                 .catch(async function () {
-                                                    console.log("Login Failed");
+                                                    console.log("Login Failed - " + streamerID);
                                                     let user = new Moralis.User();
-                                                    user.set("username", username);
-                                                    user.set("password", streamerID);
-                                                    user.set("email", streamerEmail);
+                                                    user.set("username", streamerID);
+                                                    user.set("password", username);
+                                                    //user.set("email", streamerEmail);
                                                     user.set("twitchID", streamerID);
                                                     user.set("twitchName", streamerName);
 
