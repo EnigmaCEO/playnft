@@ -33,6 +33,7 @@ class About extends HTMLElement {
                             <img style="width:50px;padding-bottom: 10px" src="assets/img/telos.svg" alt="Telos" />
                             <img style="height:50px;padding-bottom: 10px" src="assets/img/ethereum-eth-logo.svg" alt="Ethereum" />
                             <img style="width:50px;padding-bottom: 10px" src="assets/img/evmos.svg" alt="EVMOS" />
+                            <img style="width:50px;padding-bottom: 10px" src="assets/img/tron.svg" alt="Tron" />
                         </p>
                     </div>
                 </div>

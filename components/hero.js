@@ -9,13 +9,13 @@ class Hero extends HTMLElement {
             <div class="container">
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center">
-                <h1 data-aos="fade-up">Do More With Your NFTs</h1>
+                <h1 data-aos="fade-up">Multi-chain NFTs</h1>
                 <h2 data-aos="fade-up" data-aos-delay="400">
-                PlayNFT is a utility marketplace connecting NFT creators, collectors, and games.
+                PlayNFT is a tool for Content Creators to create NFTs with game utility.
                 </h2>
                 <div data-aos="fade-up" data-aos-delay="600">
                     <div class="text-center text-lg-start">
-                    <a href="#services"
+                    <a href="#" id="start-streamers"
                         class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                         <span>Get Started</span>
                         <i class="bi bi-arrow-right"></i>
@@ -32,7 +32,7 @@ class Hero extends HTMLElement {
                         </div>
                         <div class="row justify-content-md-center">
                             <div class="col stats" onclick="location.href='/creators/';">
-                            <p style="font-size:calc(100% + 1vw);color: #012970;">462</p>
+                            <p style="font-size:calc(100% + 1vw);color: #012970;">554</p>
                             <p style="font-size:calc(100% + 0vw)">Content Creators</p>
                             </div>
                             <div class="col stats" onclick="location.href='/games/';">

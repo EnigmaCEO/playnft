@@ -31,7 +31,7 @@ class Services extends HTMLElement {
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-box green">
-                    <i class="ri-sd-card-line icon"></i>
+                    <i class="fa-solid fa-sd-card icon"></i>
                     <h3>NFT Utility</h3>
                     <p>
                         Increase the value of your NFTs and Collections by linking them to our blockchain games to unlock special content.
@@ -46,7 +46,7 @@ class Services extends HTMLElement {
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-box orange">
-                    <i class="ri-code-s-slash-line icon"></i>
+                    <i class="fa-solid fa-code icon"></i>
                     <h3>Game Developers</h3>
                     <p>
                         List your in-game unlockable items and rewards to NFT holders.

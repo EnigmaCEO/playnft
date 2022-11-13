@@ -1255,6 +1255,9 @@ async function moralisLogin(chain) {
     if (chain == "tlos") {
         await AddTlosNetwork();
     }
+    if (chain == "tron") {
+        await AddEvmosNetwork();
+    }
 
     let user = Moralis.User.current();
     console.log(chain)
@@ -1480,6 +1483,19 @@ $(document).ready(function () {
 
     });
 
+    $("#creators-tron-wallet-connect").click(function () {
+        moralisLogin("tron").then(function (address) {
+            console.log(address)
+            if (address) {
+                $("#creators-walletAddressTron").val(address);
+                $("#twitch-walletAddressTron").val(address);
+            } else {
+
+            }
+        });
+
+    });
+
     $("#creators-tlos-wallet-connect").click(function () {
         moralisLogin("tlos").then(function (address) {
             console.log(address)
@@ -1599,6 +1615,9 @@ $(document).ready(function () {
         if (chain == "evmos") {
             $("#creators-wallet-evmos").show();
         }
+        if (chain == "tron") {
+            $("#creators-wallet-tron").show();
+        }
 
     });
 
@@ -1620,6 +1639,11 @@ $(document).ready(function () {
     });
 
     $("#service-streamers").click(function () {
+        hideSections();
+        $("#section-streamers").show();
+    });
+
+    $("#start-streamers").click(function () {
         hideSections();
         $("#section-streamers").show();
     });
