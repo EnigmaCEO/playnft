@@ -100,7 +100,7 @@ const execute = async () => {
 
                 if (streamerName) {
                     $("#add-twitch").hide();
-                    $("#streamer-url").html(`<a target="_blank" href="http://playnft.io/s/?${streamerName}">http://playnft.io/s/?${streamerName}</a>`)
+                    $("#streamer-url").html(`<a target="_blank" href="https://www.playnft.io/s/?${streamerName}">https://www.playnft.io/s/?${streamerName}</a>`)
                     $("#twitch-container").removeClass("d-none");
                     GetTwitchBalance()
                 }
@@ -114,7 +114,7 @@ const execute = async () => {
 
                 if (streamerName && streamerName != 'Google User') {
                     $("#add-youtube").hide();
-                    $("#youtube-url").html(`<a target="_blank" href="http://playnft.io/y/?${streamerName}">http://playnft.io/y/?${streamerName}</a>`)
+                    $("#youtube-url").html(`<a target="_blank" href="https://www.playnft.io/y/?${streamerName}">https://www.playnft.io/y/?${streamerName}</a>`)
                     $("#youtube-container").removeClass("d-none");
                     GetTwitchBalance()
                 }
