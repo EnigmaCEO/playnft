@@ -55,7 +55,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     referrerpolicy="origin"></script>
 
   <script src="https://unpkg.com/moralis-v1@latest/dist/moralis.min.js"></script>
-  <script src='https://unpkg.com/xrpl@2.1.0-beta.1' defer></script>
+  <script src='https://unpkg.com/xrpl@latest' defer></script>
 
   <script>
     tinymce.init({
@@ -165,7 +165,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           />
         </div>
         <div class="flex-grow-1 ms-3">
+          {{if tokenIndex != 0 }}
           <strong>${tokenName} #${tokenIndex}</strong>
+          {{/if}}
+          {{if tokenIndex == 0 }}
+          <strong>${tokenName}</strong>
+          {{/if}}
           <p>ID: ${tokenId}</p>
           <span id="verify-${tokenId}" class="verify-token"></span>
           <div class="actions">

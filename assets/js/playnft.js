@@ -676,7 +676,7 @@ async function getCreatorsNFTs(chain, address) {
 
         if (chain == "xrp") {
             const PUBLIC_SERVER = "wss://xrplcluster.com/"
-            const client = new xrpl.Client("wss://xls20-sandbox.rippletest.net:51233")
+            const client = new xrpl.Client(PUBLIC_SERVER)
             await client.connect()
 
             const data = await client.request({
@@ -690,19 +690,29 @@ async function getCreatorsNFTs(chain, address) {
 
                 console.log(item)
                 if (item.URI == "") continue;
-                if (item.Issuer.toLowerCase() != address.toLowerCase()) continue;
-
+                
                 let meta = xrpl.convertHexToString(item.URI)
-                $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                await $.ajax({ url: "https://api.playnft.io/getmeta", type: "POST", crossDomain: true, data: JSON.stringify({ itemURI: meta }), dataType: "json", contentType: "application/json" }).done(function (metaData) {
+                    console.log(metaData)
                     let data = jQuery.parseJSON(metaData);
                     console.log(data)
 
-                    tokenSupply = 1;
-                    let token_content = { tokenId: item.TokenID, tokenName: data.name, tokenImage: data.image, tokenIndex: 0, tokenSupply: 1 };
+                    let image = data.image;
+                    if(!image.includes("://"))
+                        image = "https://ipfs.io/ipfs/" + data.image;
 
-                    $("#creators-token-template")
+                    tokenSupply = 1;
+                    let token_content = { tokenId: item.NFTokenID, tokenName: data.name, tokenImage: image, tokenIndex: 0, tokenSupply: 1 };
+
+                    if (item.Issuer.toLowerCase() != address.toLowerCase()) {
+                        $("#token-template")
                         .tmpl(token_content)
                         .appendTo("#creators-nfts");
+                    } else {
+                        $("#creators-token-template")
+                        .tmpl(token_content)
+                        .appendTo("#creators-nfts");
+                    }
                 })
             }
 
